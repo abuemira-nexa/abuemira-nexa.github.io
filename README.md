@@ -1,185 +1,156 @@
-# Mohamed Essam Abu Emira — Professional Portfolio
+<div align="center">
 
-**Live Demo (GitHub Pages):** https://abuemiraerp.github.io  
-**Live Demo (Vercel):** https://abuemira-nexa.vercel.app *(after deploy)*
+<a href="https://abuemira-nexa.github.io">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=700&size=26&duration=3000&pause=800&color=714B67&center=true&vCenter=true&width=700&height=60&lines=Mohamed+Essam+Abu+Emira;COO+%26+Co-Founder+%40+Nexa+Solutions;Odoo+ERP+Project+Manager+%7C+v12%E2%80%93v18;LinkedIn+Top+ERP+Voice+%F0%9F%8F%86+2024" alt="Typing SVG" />
+</a>
 
-> **COO & Co-Founder @ Nexa Solutions** · Odoo Project Manager · ERP Operations Manager · Financial Manager  
-> Egypt & Saudi Arabia · 8+ Years · 60+ Projects · 40+ Certifications · LinkedIn Top ERP Voice
+<br/>
+
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-abuemira--nexa.github.io-714B67?style=for-the-badge)](https://abuemira-nexa.github.io)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/abuemira/)
+[![Nexa Solutions](https://img.shields.io/badge/Nexa_Solutions-017E84?style=for-the-badge&logo=vercel&logoColor=white)](https://www.nexa-solutions.com)
+[![Book a Call](https://img.shields.io/badge/Book_a_Call-006BFF?style=for-the-badge&logo=googlecalendar&logoColor=white)](https://calendly.com/abuemira/30min)
+
+</div>
 
 ---
 
-## 📋 About This Project
+## 📌 About This Repository
 
-A fully self-contained, single-file professional portfolio website with **zero dependencies** — no npm, no build tools, no frameworks. Just pure HTML, CSS, and vanilla JavaScript.
+This is the source code for the **official professional portfolio** of **Mohamed Essam Abu Emira** — COO & Co-Founder of Nexa Solutions, Odoo ERP Project Manager, Financial Manager, and LinkedIn Top ERP Voice 2024.
 
-### ✨ Features
+> ⚡ **Zero-dependency** · Pure HTML + CSS + Vanilla JS · Self-contained single file · No npm · No build tools
 
-| Section | Details |
+---
+
+## 🔴 Live Demo
+
+```
+https://abuemira-nexa.github.io
+```
+
+---
+
+## ✨ Portfolio Sections
+
+| # | Section | Details |
+|---|---|---|
+| 1 | 🧑 **Hero** | Photo, title, phone, badges, Calendly CTA |
+| 2 | 📊 **Stats Bar** | 10+ years · 60+ projects · 50+ certs · 28+ recommendations |
+| 3 | 🏢 **Nexa Solutions** | Company profile, dual offices (Riyadh + New Cairo), COO role |
+| 4 | 🛠 **Services** | 9 service cards with direct booking links |
+| 5 | 💼 **Experience** | 7 career roles — full timeline from 2013 to present |
+| 6 | 🗂 **Projects** | 31 filterable ERP projects by industry |
+| 7 | 🎓 **Certifications** | 14 verified certifications with live URLs |
+| 8 | 💬 **Testimonials** | 6 real client & peer recommendations |
+| 9 | 🎓 **Education** | Cairo University · Missouri State University |
+| 10 | 📞 **Contact** | Phone · Email · LinkedIn · Upwork · Mostaql · Calendly |
+
+---
+
+## 📁 Repository Structure
+
+```
+abuemira-nexa.github.io/
+├── index.html        ← Complete portfolio (~200KB, fully self-contained)
+├── vercel.json       ← Vercel CDN deployment config
+├── .gitignore        ← Git ignore rules
+└── README.md         ← This file
+```
+
+---
+
+## 🚀 Deployment
+
+### GitHub Pages (Primary)
+
+| Step | Action |
 |---|---|
-| 🧑 Hero | Real photo, phone number, badges, Calendly CTA |
-| 📊 Stats bar | 8+ years · 60+ projects · 40+ certs · 28+ recommendations |
-| 🏢 Nexa Solutions | Full company profile, offices (Riyadh + New Cairo), COO role |
-| 🛠 Services | 9 service cards with booking links |
-| 💼 Experience | 7 roles — full timeline from 2013 to present |
-| 🗂 Projects | 31 filterable ERP projects (Construction, Food, Retail, Gov, etc.) |
-| 🎓 Certifications | 14 clickable certs with live verification URLs |
-| 💬 Testimonials | 6 real recommendations |
-| 🎓 Education | Cairo University + Missouri State University |
-| 📞 Contact | Phone, Email, LinkedIn, Upwork, Mostaql, Calendly |
+| 1 | Push `index.html` to the `main` branch |
+| 2 | Go to **Settings → Pages** |
+| 3 | Source: **Deploy from branch** · Branch: `main` · Folder: `/root` |
+| 4 | Save → live in **60–90 seconds** at `https://abuemira-nexa.github.io` |
 
----
-
-## 📁 File Structure
-
-```
-abuemira-portfolio/
-├── index.html      ← Complete site (self-contained, ~200KB)
-├── vercel.json     ← Vercel deployment configuration
-├── .gitignore      ← Git ignore rules
-└── README.md       ← This file
-```
-
----
-
-## 🚀 Deploy to GitHub Pages
-
-### Step 1 — Create GitHub Repository
-
-1. Go to [github.com](https://github.com) → sign in
-2. Click **"New repository"** (top right **+** button)
-3. Repository name: **`abuemiraerp.github.io`**
-   > ⚠️ Must match your GitHub username exactly
-4. Visibility: **Public**
-5. Click **"Create repository"**
-
-### Step 2 — Upload Files
-
-**Option A — Web Upload (easiest, no Git needed):**
-1. On your new empty repo page, click **"uploading an existing file"**
-2. Drag and drop: `index.html`, `vercel.json`, `.gitignore`, `README.md`
-3. Scroll down → add commit message: `"Initial portfolio deployment"`
-4. Click **"Commit changes"**
-
-**Option B — Git CLI:**
-```bash
-# Clone your new empty repo
-git clone https://github.com/abuemiraerp/abuemiraerp.github.io
-cd abuemiraerp.github.io
-
-# Copy all 4 files from this zip into the folder, then:
-git add .
-git commit -m "Initial portfolio deployment"
-git push origin main
-```
-
-### Step 3 — Enable GitHub Pages
-
-1. Go to your repo → **Settings** tab (top menu)
-2. Left sidebar → **Pages**
-3. Under **"Source"** → select **"Deploy from a branch"**
-4. Branch: **`main`** · Folder: **`/ (root)`**
-5. Click **Save**
-
-### Step 4 — Go Live ✅
-
-Wait **60–90 seconds**, then visit:
-
-```
-https://abuemiraerp.github.io
-```
-
----
-
-## ⚡ Deploy to Vercel
-
-Vercel gives you a faster CDN, better performance, and a custom `.vercel.app` URL in addition to GitHub Pages.
-
-### Step 1 — Push to GitHub first
-
-Complete the GitHub steps above before Vercel deployment.
-
-### Step 2 — Connect Vercel
-
-1. Go to [vercel.com](https://vercel.com) → **Sign up / Log in** with your GitHub account
-2. Click **"Add New Project"**
-3. Click **"Import Git Repository"**
-4. Find and select **`abuemiraerp.github.io`**
-5. Click **"Import"**
-
-### Step 3 — Configure Project
-
-In the Vercel project setup screen:
-
-| Setting | Value |
-|---|---|
-| **Framework Preset** | Other |
-| **Root Directory** | `.` (leave empty / default) |
-| **Build Command** | *(leave empty)* |
-| **Output Directory** | `.` (leave empty / default) |
-| **Install Command** | *(leave empty)* |
-
-Click **"Deploy"**
-
-### Step 4 — Go Live ✅
-
-Vercel deploys in ~30 seconds. Your site will be live at:
-
-```
-https://abuemira-portfolio.vercel.app
-```
-
-You can also add a **custom domain** (e.g., `abuemira.com`) in:  
-Vercel Dashboard → Your Project → **Settings → Domains**
-
----
-
-## 🔄 Auto-Deploy on Every Update
-
-Once connected, **every time you push to GitHub, Vercel auto-deploys** within seconds. No manual steps needed.
+### Vercel (Mirror — Faster CDN)
 
 ```bash
-# Edit index.html, then:
+# After pushing to GitHub:
+# 1. Go to vercel.com → Import Git Repository
+# 2. Select this repo
+# 3. Framework: Other | Build Command: (empty) | Output: (empty)
+# 4. Deploy → live in ~30 seconds
+```
+
+### Auto-Deploy on Update
+
+```bash
 git add index.html
-git commit -m "Updated certifications"
+git commit -m "Update: added new project / certification"
 git push origin main
-# → Vercel auto-deploys within ~30 seconds ✅
+# ✅ GitHub Pages and Vercel both auto-deploy
 ```
 
 ---
 
-## ✏️ How to Update Content
+## ✏️ Updating Content
 
-Open `index.html` in any text editor (VS Code recommended). Search for:
+Open `index.html` in **VS Code** or any editor. Use `Ctrl+F` to find:
 
-| What to update | Search for |
+| What to Update | Search String |
 |---|---|
-| Phone number | `+20 100 506 1349` |
-| Email | `abuemira91@gmail.com` |
-| Calendly booking link | `calendly.com/abuemira` |
-| Nexa office details | `<!-- NEXA SECTION -->` |
-| Add new project | Find `<!-- PROJECTS -->` → copy a `.proj-card` div |
-| Add new certificate | Find `<!-- CERTIFICATIONS -->` section |
-| Change teal color | `--teal:#017E84` in `:root` CSS |
-| Change gold color | `--gold:#d4a843` in `:root` CSS |
+| 📞 Phone number | `+20 100 506 1349` |
+| ✉️ Email address | `abuemira91@gmail.com` |
+| 📅 Calendly link | `calendly.com/abuemira` |
+| 🏢 Nexa office info | `<!-- NEXA SECTION -->` |
+| ➕ Add new project | `<!-- PROJECTS -->` → duplicate a `.proj-card` div |
+| ➕ Add certification | `<!-- CERTIFICATIONS -->` section |
+| 🎨 Primary purple | `--purple: #714B67` in `:root` |
+| 🎨 Action teal | `--teal: #017E84` in `:root` |
+| 🎨 Gold accent | `--gold: #d4a843` in `:root` |
 
 ---
 
-## 🌐 Useful Links
+## 🎨 Design System
+
+| Token | Value | Usage |
+|---|---|---|
+| Enterprise Purple | `#714B67` | Primary brand, headings, badges |
+| Action Teal | `#017E84` | CTAs, highlights, secondary brand |
+| Gold Accent | `#d4a843` | Awards, stars, highlights |
+| Font | Poppins + Inter | Headings + body |
+
+> Colors sourced from the official [Odoo Brand Assets](https://www.odoo.com/page/brand-assets)
+
+---
+
+## 🌐 Links
 
 | Resource | URL |
 |---|---|
-| LinkedIn | https://linkedin.com/in/abuemira |
-| GitHub Portfolio | https://abuemiraerp.github.io |
-| Calendly | https://calendly.com/abuemira/30min |
-| Upwork | https://www.upwork.com/freelancers/~01670332eb77159714 |
-| Mostaql | https://mostaql.com/u/m_abuemira |
-| Nexa Solutions | https://www.nexa-solutions.com |
+| 🌐 Portfolio | https://abuemira-nexa.github.io |
+| 🏢 Nexa Solutions | https://www.nexa-solutions.com |
+| 💼 LinkedIn | https://linkedin.com/in/abuemira |
+| 📅 Book a Call | https://calendly.com/abuemira/30min |
+| 💻 Upwork | https://www.upwork.com/freelancers/~01670332eb77159714 |
+| 🛒 Mostaql | https://mostaql.com/u/m_abuemira |
+| 🛒 Khamsat | https://khamsat.com/user/محمد-عصام-ابوعميرة/reviews |
+| ▶️ YouTube | https://www.youtube.com/@OdooWithAbuemira/ |
 
 ---
 
 ## 📞 Contact
 
-**Mohamed Essam Abu Emira**  
-📍 Kirdasa, Giza, Egypt  
-📞 +20 100 506 1349  
-✉️ abuemira91@gmail.com
+<div align="center">
+
+**Mohamed Essam Abu Emira**
+
+📍 Kirdasa, Giza, Egypt &nbsp;|&nbsp; 🏢 Riyadh, Saudi Arabia  
+📞 [+20 100 506 1349](tel:+201005061349) &nbsp;|&nbsp; ✉️ [abuemira91@gmail.com](mailto:abuemira91@gmail.com)
+
+</div>
+
+---
+
+<div align="center">
+<sub>Built with ❤️ using the official <a href="https://www.odoo.com/page/brand-assets">Odoo brand colors</a> · Enterprise Purple <code>#714B67</code> · Action Teal <code>#017E84</code></sub>
+</div>
