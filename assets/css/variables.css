@@ -1,0 +1,82 @@
+/* ============================================================
+   Mohamed Essam Abu Emira — Design Tokens / CSS Variables
+   Author  : Mohamed Essam Abu Emira
+   Version : 4.0
+
+   Usage:
+     Import this file first, then style.css, then responsive.css
+     <link rel="stylesheet" href="assets/css/variables.css">
+     <link rel="stylesheet" href="assets/css/style.css">
+     <link rel="stylesheet" href="assets/css/responsive.css">
+   ============================================================ */
+
+:root {
+
+  /* ── Brand Colors ── */
+  --teal:           #017E84;   /* primary accent — Odoo teal */
+  --teal-dark:      #015a5e;   /* hover / dark shade */
+  --teal-mid:       #029fa7;   /* mid tone */
+  --teal-light:     #e6f4f5;   /* light background tint */
+
+  --navy:           #0d1b2e;   /* dark background */
+  --navy-700:       #1a2f4a;
+  --navy-600:       #1e3a5f;
+  --navy-500:       #1d5091;
+
+  --gold:           #d4a843;   /* CTA / highlight gold */
+  --gold-lt:        #f5d98a;   /* light gold for dark backgrounds */
+
+  /* ── Neutrals ── */
+  --white:          #ffffff;
+  --gray-50:        #f8fafc;
+  --gray-100:       #f1f5f9;
+  --gray-200:       #e2e8f0;
+  --gray-400:       #94a3b8;
+  --gray-600:       #475569;
+  --gray-800:       #1e293b;
+  --text:           #0f172a;
+
+  /* ── Border Radius ── */
+  --r:              12px;      /* default radius */
+  --rl:             18px;      /* large radius (cards) */
+  --pill:           999px;     /* full pill */
+
+  /* ── Shadows ── */
+  --sh:             0 4px 24px rgba(13, 27, 46, 0.09);
+  --sh-lg:          0 14px 52px rgba(13, 27, 46, 0.18);
+
+  /* ── Typography ── */
+  --font-sans:      'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-heading:   'Sora', system-ui, sans-serif;
+  --font-mono:      'JetBrains Mono', 'Courier New', monospace;
+
+  --text-xs:        11px;
+  --text-sm:        13px;
+  --text-base:      15px;
+  --text-lg:        17px;
+  --text-xl:        20px;
+  --text-2xl:       24px;
+  --text-3xl:       28px;
+  --text-4xl:       36px;
+
+  /* ── Spacing ── */
+  --space-1:        4px;
+  --space-2:        8px;
+  --space-3:        12px;
+  --space-4:        16px;
+  --space-5:        20px;
+  --space-6:        24px;
+  --space-8:        32px;
+  --space-10:       40px;
+  --space-12:       48px;
+  --space-16:       64px;
+
+  /* ── Transitions ── */
+  --transition:     all 0.2s ease;
+  --transition-slow: all 0.4s ease;
+
+  /* ── Z-index layers ── */
+  --z-nav:          200;
+  --z-modal:        300;
+  --z-tooltip:      400;
+}
