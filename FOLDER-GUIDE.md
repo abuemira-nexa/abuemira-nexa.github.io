@@ -253,8 +253,8 @@ If you want to self-host fonts instead of using Google Fonts CDN, place the `.wo
 
 | Platform | URL | Deploy time |
 |---|---|---|
-| GitHub Pages | `https://abuemiraerp.github.io` | ~60–90 sec |
-| Vercel | `https://abuemira-portfolio.vercel.app` | ~30 sec |
+| GitHub Pages | `https://abuemira-nexa.github.io` | ~60–90 sec |
+| Vercel | `https://https://abuemira-nexa.vercel.app` | ~30 sec |
 
 See `README.md` for full step-by-step deployment instructions.
 
