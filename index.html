@@ -49,7 +49,7 @@ html{scroll-behavior:smooth}
 [data-lang="ar"] .exp-line{padding-left:0;padding-right:30px}
 [data-lang="ar"] .exp-line::before{left:auto;right:6px}
 [data-lang="ar"] .exp-dot{left:auto;right:-27px}
-[data-lang="ar"] .exp-top{flex-direction:row-reverse}
+[data-lang="ar"] .exp-top{direction:rtl}
 [data-lang="ar"] .exp-top-inner{flex-direction:row-reverse}
 [data-lang="ar"] .exp-bullets li{flex-direction:row-reverse}
 [data-lang="ar"] .exp-tags{flex-direction:row-reverse;justify-content:flex-end}
@@ -67,9 +67,13 @@ html{scroll-behavior:smooth}
 [data-lang="ar"] .filter-bar{flex-direction:row-reverse;justify-content:flex-end}
 [data-lang="ar"] .proj-card{direction:rtl;text-align:right}
 [data-lang="ar"] .contact-wrap{direction:rtl}
-[data-lang="ar"] .c-row{flex-direction:row-reverse}
+[data-lang="ar"] .c-row{direction:rtl}
+[data-lang="ar"] .c-lbl{text-align:right}
+[data-lang="ar"] .c-val{text-align:right}
 [data-lang="ar"] .avail-list{padding-right:0}
-[data-lang="ar"] .avail-list li{flex-direction:row-reverse}
+[data-lang="ar"] .avail-list li{flex-direction:row-reverse;justify-content:flex-end}
+[data-lang="ar"] .avail-list li::before{display:none}
+[data-lang="ar"] .avail-list li::after{content:"✓";color:var(--gold);font-weight:700;flex-shrink:0}
 [data-lang="ar"] .soc-row{flex-direction:row-reverse;justify-content:flex-end}
 [data-lang="ar"] .form-grid{direction:rtl}
 [data-lang="ar"] .cs-kpis{flex-direction:row-reverse}
@@ -91,7 +95,7 @@ html{scroll-behavior:smooth}
 [data-lang="ar"] .award-row{direction:rtl}
 [data-lang="ar"] .stats-inner{direction:rtl}
 [data-lang="ar"] input,[data-lang="ar"] textarea,[data-lang="ar"] select{text-align:right;direction:rtl}
-[data-lang="ar"] .phone-hl{flex-direction:row-reverse}
+[data-lang="ar"] .phone-hl{direction:rtl}
 [data-lang="ar"] .exp-nexa-tag{flex-direction:row-reverse}
 [data-lang="ar"] .current-badge{flex-direction:row-reverse}
 [data-lang="ar"] .hero-photo-wrap{direction:rtl}
@@ -355,7 +359,7 @@ img{display:block;max-width:100%}
 .c-row:last-child{border-bottom:none}
 .c-ico{width:36px;height:36px;border-radius:9px;background:var(--teal-light);border:1px solid rgba(1,126,132,.2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
 .c-lbl{font-size:10px;color:var(--gray-400);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
-.c-val{font-size:13px;font-weight:700;color:var(--text)}
+.c-val{font-size:13px;font-weight:700;color:var(--text);direction:ltr;unicode-bidi:isolate;text-align:left}
 .c-val a{color:var(--teal)}
 .contact-cta{background:linear-gradient(140deg,var(--navy),var(--navy-700));border-radius:var(--rl);padding:30px;display:flex;flex-direction:column;gap:22px}
 .contact-cta h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
@@ -504,10 +508,8 @@ img{transition:opacity .3s ease}
 [data-lang="ar"] .exp-line::before{left:auto;right:6px}
 [data-lang="ar"] .exp-dot{left:auto;right:-27px}
 [data-lang="ar"] .hl-item{border-left:none;border-right:3px solid var(--teal)}
-[data-lang="ar"] .kpi-row{flex-direction:row}
 [data-lang="ar"] .footer-inner{flex-direction:row-reverse}
 [data-lang="ar"] .stats-inner{direction:rtl}
-[data-lang="ar"] .c-row{flex-direction:row}
 </style>
 
 <script type="application/ld+json">
@@ -660,7 +662,7 @@ img{transition:opacity .3s ease}
         <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--rl);padding:18px;margin-top:16px;">
           <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:11px;">Tools & Platforms</div>
           <div class="tool-wrap">
-            <span class="tool-chip" style="background:var(--teal-light);color:var(--teal);border-color:rgba(1,126,132,.2);">Odoo 12–18</span>
+            <span class="tool-chip" style="background:var(--teal-light);color:var(--teal);border-color:rgba(1,126,132,.2);">Odoo 12–19</span>
             <span class="tool-chip">Odoo.sh</span><span class="tool-chip">Odoo Studio</span><span class="tool-chip">Python</span><span class="tool-chip">JIRA</span><span class="tool-chip">Trello</span><span class="tool-chip">Todoist</span><span class="tool-chip">Excel</span><span class="tool-chip">PostgreSQL</span><span class="tool-chip">Shopify API</span><span class="tool-chip">eZee PMS</span><span class="tool-chip">MS Office</span>
           </div>
         </div>
@@ -1126,7 +1128,7 @@ img{transition:opacity .3s ease}
           <span style="font-size:22px;">📞</span>
           <div>
             <div style="font-size:10px;color:var(--teal);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;">Phone / WhatsApp</div>
-            <div class="phone-num">+20 100 506 1349</div>
+            <div class="phone-num" style="direction:ltr;unicode-bidi:isolate;">+20 100 506 1349</div>
           </div>
         </div>
         <div class="c-row"><div class="c-ico">✉️</div><div><div class="c-lbl">Email (Personal)</div><div class="c-val"><a href="mailto:abuemira91@gmail.com">abuemira91@gmail.com</a></div></div></div>
@@ -1427,19 +1429,19 @@ document.addEventListener("DOMContentLoaded", () => {
       ['#about','About','عنّي'],['#nexa','Nexa','نيكسا'],['#industries','Industries','القطاعات'],
       ['#services','Services','الخدمات'],['#experience','Experience','الخبرة'],
       ['#projects','Projects','المشاريع'],['#certifications','Certifications','الشهادات'],
-      ['#testimonials','Reviews','التوصيات'],['#contact','Contact','تواصل'],
+      ['#testimonials','Reviews','آراء العملاء'],['#contact','Contact','تواصل'],
       ['#case-studies','Cases','دراسات'],['#blog','Blog','مقالات'],
     ],
     secs: [
-      ['about',        'About Me',           'عنّي',           'Turning Business Complexity into <span>ERP Clarity</span>',       'نحوّل التعقيد إلى <span>وضوح ERP</span>'],
+      ['about',        'About Me',           'عنّي',           'Turning Business Complexity into <span>ERP Clarity</span>',       'أحوّل تحديات أعمالك إلى <span>نتائج قابلة للقياس</span>'],
       ['industries',   'Coverage',           'النطاق',         'Industries <span>Served</span>',                                   'القطاعات <span>المخدومة</span>'],
       ['services',     'What I Do',          'ماذا أفعل',      'Professional <span>Services</span>',                               'الخدمات <span>المهنية</span>'],
       ['experience',   'Career Path',        'المسار المهني',  'Professional <span>Experience</span>',                             'الخبرة <span>المهنية</span>'],
       ['projects',     'Portfolio',          'الأعمال',        'ERP Projects <span>Delivered</span>',                              'مشاريع ERP <span>المنجزة</span>'],
       ['certifications','Credentials',       'المؤهلات',       'Certifications & <span>Recognition</span>',                        'الشهادات <span>والتقدير</span>'],
-      ['testimonials', '28+ Recommendations','28+ توصية',      'What Clients & Colleagues <span>Say</span>',                       'ما يقوله العملاء <span>والزملاء</span>'],
+      ['testimonials', '28+ Recommendations','28+ توصية',      'What Clients & Colleagues <span>Say</span>',                       'ماذا يقول عملاؤنا <span>وشركاؤنا</span>'],
       ['education',    'Education',          'التعليم',        'Academic <span>Background</span>',                                 'الخلفية <span>الأكاديمية</span>'],
-      ['contact',      'Get in Touch',       'تواصل معي',      "Let's Work <span>Together</span>",                                 'لنعمل <span>معاً</span>'],
+      ['contact',      'Get in Touch',       'تواصل معي',      "Let's Work <span>Together</span>",                                 'هل أنت مستعد؟ — <span>تحدث معي اليوم</span>'],
       ['case-studies', 'Deep Dives',         'دراسات معمقة',   'Featured <span>Case Studies</span>',                               'دراسات حالة <span>مختارة</span>'],
       ['blog',         'Thought Leadership', 'مقالات مهنية',   'Latest <span>Articles</span>',                                     'أحدث <span>المقالات</span>'],
     ]
@@ -1461,7 +1463,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const el = navLinksDiv.querySelector(`a[href="${href}"]`);
       if (el && !el.classList.contains('nav-cta')) el.textContent = AR ? ar : en;
     });
-    t(navLinksDiv.querySelector('.nav-cta'), '📅 Book Meeting', '📅 احجز اجتماعاً');
+    t(navLinksDiv.querySelector('.nav-cta'), '📅 Book Meeting', '📅 احجز استشارة مجانية');
 
     /* ── SECTION TAGS + TITLES ── */
     i18n.secs.forEach(([id, tEn, tAr, hEn, hAr]) => {
@@ -1474,10 +1476,10 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ── HERO ── */
     t(document.querySelector('.hero-subtitle'),
       'Odoo Project Manager · ERP Operations Manager · COO & Co-Founder @ Nexa Solutions · Financial Manager · Product Owner',
-      'مدير مشاريع أودو · مدير عمليات ERP · المدير التشغيل وشريك مؤسس   نيكسيا تكنولوجي · المدير المالي · مدير المنتج');
+      'أحوّل تعقيدات أعمالك إلى نظام ERP يعمل لصالحك — 10+ سنوات، 79+ مشروعاً ناجحاً في مصر والخليج | مؤسس مشارك @ نيكسا تكنولوجي');
     const hBtns = document.querySelectorAll('.hero-btns a');
-    t(hBtns[0], '📅 Schedule a Meeting', '📅 احجز اجتماعاً');
-    t(hBtns[1], '↓ Download CV',         '↓ تحميل السيرة الذاتية');
+    t(hBtns[0], '📅 Schedule a Meeting', '📅 احجز استشارة مجانية');
+    t(hBtns[1], '↓ Download CV',         '↓ حمّل ملفي المهني');
 
     /* ── ABOUT — KPIs ── */
     const kpiL = document.querySelectorAll('.kpi-l');
@@ -1486,7 +1488,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ── ABOUT — highlights ── */
     const hlT = document.querySelectorAll('.hl-body strong');
-    [['COO & Co-Founder — Nexa Solutions','المدير التشغيل ووشريك مؤسس نيكسا تكنولوجي'],
+    [['COO & Co-Founder — Nexa Solutions','المدير التنفيذي ومؤسس مشارك — نيكسا تكنولوجي'],
      ['Measurable ERP Operations Impact','تأثير ERP ملموس وقابل للقياس'],
      ['Multi-Market Delivery','تسليم متعدد الأسواق']]
       .forEach(([en,ar],i) => t(hlT[i], en, ar));
@@ -1530,7 +1532,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const svcD = [
       ['ERP Operations Management','إدارة عمليات ERP',
        'Full operational management of ERP projects — planning, team coordination, scope control, UAT, go-live, and ongoing support. Aligned with business goals.',
-       'إدارة تشغيلية كاملة لمشاريع ERP — التخطيط، تنسيق الفريق، ضبط النطاق، UAT، التشغيل الفعلي والدعم المستمر.'],
+       'أتولى الإشراف الكامل على مشروع نظام ERP من أول يوم حتى ما بعد التشغيل — حتى يعمل فريقك بلا أخطاء وبلا توقف.'],
       ['Odoo ERP Consulting','استشارات أودو ERP',
        'Deployment, configuration, and GAP analysis across Odoo v12–v18. From requirements gathering to functional specs and go-live delivery.',
        'نشر وتهيئة وتحليل فجوات أودو v12–v18. من جمع المتطلبات إلى المواصفات الوظيفية والتسليم النهائي.'],
@@ -1542,16 +1544,16 @@ document.addEventListener("DOMContentLoaded", () => {
        'تخصيصات أودو ستوديو وتكاملات — شوبيفاي، eZee PMS، بوابات الدفع وتطوير وحدات مخصصة.'],
       ['Data Migration','ترحيل البيانات',
        'Secure and accurate migration from SAP, ONYX PRO, OpenCart, and legacy systems to Odoo. Full data integrity guaranteed throughout.',
-       'ترحيل آمن ودقيق من SAP وONYX PRO وOpenCart والأنظمة القديمة إلى أودو. ضمان كامل لسلامة البيانات.'],
+       'تاريخ شركتك وبياناتها تنتقل إلى أودو بدون فقد ولا أخطاء — ولا توقف في العمل أثناء الانتقال.'],
       ['Training & Support','التدريب والدعم',
        'Comprehensive end-user and admin training, system documentation, and ongoing technical support after go-live.',
-       'تدريب شامل للمستخدمين والمسؤولين، توثيق النظام، ودعم تقني مستمر بعد التشغيل الفعلي.'],
+       'فريقك يعمل باحتراف على النظام من اليوم الأول — تدريب عملي، توثيق واضح، ودعم مستمر بعد التشغيل.'],
       ['Financial Reporting & Audit','التقارير المالية والمراجعة',
        'Internal and external audit support, compliance checks, and custom KPI dashboards built directly inside Odoo.',
        'دعم التدقيق الداخلي والخارجي، فحوصات الامتثال، ولوحات KPI مخصصة مبنية مباشرة داخل أودو.'],
       ['Business Process Optimization','تحسين العمليات التجارية',
        'Process mapping, reengineering, and Odoo best practices — measurable cost reduction and operational efficiency gains.',
-       'رسم الخرائط وإعادة هندسة العمليات وأفضل ممارسات أودو — تقليل التكاليف وتحسين الكفاءة التشغيلية.'],
+       'نحلل طريقة عمل شركتك ونُعيد تصميمها لتكون أسرع وأقل تكلفة — مع توثيق كامل وأفضل ممارسات أودو.'],
       ['Bookkeeping & Tax Services','المحاسبة والخدمات الضريبية',
        'Daily journal entries, bank reconciliation, payroll, and tax compliance — all integrated within Odoo Accounting for clean financials.',
        'قيود يومية، مطابقة بنكية، رواتب وامتثال ضريبي — كل ذلك مدمج داخل محاسبة أودو.'],
@@ -1560,40 +1562,40 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!svcD[i]) return;
       t(card.querySelector('.svc-title'), svcD[i][0], svcD[i][1]);
       t(card.querySelector('.svc-desc'),  svcD[i][2], svcD[i][3]);
-      t(card.querySelector('.svc-link'),  'Book Consultation →', '← احجز استشارة');
+      t(card.querySelector('.svc-link'),  'Book Consultation →', '← ابدأ مشروعك معي');
     });
 
     /* ── CONTACT INFO ── */
-    t(document.querySelector('.contact-info > div:first-child'), 'Contact Information', 'معلومات التواصل');
+    t(document.querySelector('.contact-info > div:first-child'), 'Contact Information', 'وسائل التواصل معي');
     t(document.querySelector('.phone-hl > div > div:first-child'), 'Phone / WhatsApp', 'الهاتف / واتساب');
     const cLbl = document.querySelectorAll('.c-lbl');
     [['Email (Personal)','البريد الشخصي'],['Email (Nexa)','بريد نيكسا'],['Location','الموقع'],
-     ['LinkedIn','لينكد إن'],['Portfolio','الملف المهني'],['Book a Meeting','احجز اجتماعاً'],
-     ['Upwork','أبورك'],['Mostaql — مستقل','مستقل'],['خمسات — Khamsat','خمسات']]
+     ['LinkedIn','لينكد إن'],['Portfolio','الملف المهني'],['Book a Meeting','احجز موعداً'],
+     ['Upwork','Upwork'],['Mostaql — مستقل','مستقل'],['خمسات — Khamsat','خمسات']]
       .forEach(([en,ar],i) => t(cLbl[i], en, ar));
 
     /* ── CONTACT CTA ── */
-    t(document.querySelector('.contact-cta h3'), 'Available For', 'متاح لـ');
+    t(document.querySelector('.contact-cta h3'), 'Available For', 'أستطيع مساعدتك في');
     t(document.querySelector('.contact-cta > div > p'),
       'Open to consulting engagements, full-time ERP roles, and freelance projects — across Egypt, Saudi Arabia, and the GCC region.',
-      'متاح للمشاركة في مشاريع استشارية، أدوار ERP بدوام كامل، وأعمال حرة — في مصر والسعودية ودول الخليج.');
+      'سواء كنت تحتاج تطبيق نظام ERP كامل، أو استشارة لتحسين نظامك الحالي، أو دعم مالي متخصص — أنا هنا لك في مصر والخليج.');
     const avL = document.querySelectorAll('.avail-list li');
-    [['Odoo ERP Full Implementations','تطبيقات أودو ERP الكاملة'],
-     ['ERP Operations Management','إدارة عمليات ERP'],
+    [['Odoo ERP Full Implementations','تطبيق أودو ERP بشكل كامل'],
+     ['ERP Operations Management','إدارة عمليات نظام ERP'],
      ['Financial Management Consulting','استشارات الإدارة المالية'],
-     ['ERP Customization & Integration','تخصيص وتكامل ERP'],
-     ['Data Migration & Upgrade Projects','مشاريع ترحيل وترقية البيانات'],
-     ['Training & Post-Go-Live Support','التدريب والدعم بعد التشغيل'],
-     ['Business Process Optimization','تحسين العمليات التجارية'],
-     ['Remote & On-site Engagements','عمل عن بُعد وحضوري']]
+     ['ERP Customization & Integration','تخصيص وتكامل نظام ERP'],
+     ['Data Migration & Upgrade Projects','ترحيل البيانات وترقية الأنظمة'],
+     ['Training & Post-Go-Live Support','التدريب والدعم بعد التشغيل الفعلي'],
+     ['Business Process Optimization','تحسين وإعادة هندسة العمليات'],
+     ['Remote & On-site Engagements','عمل عن بُعد أو حضوري حسب الحاجة']]
       .forEach(([en,ar],i) => t(avL[i], en, ar));
-    t(document.querySelector('.contact-cta .btn-gold'), '📅 Book a Free 30-Min Consultation', '📅 احجز استشارة مجانية 30 دقيقة');
+    t(document.querySelector('.contact-cta .btn-gold'), '📅 Book a Free 30-Min Consultation', '📅 احجز استشارة مجانية — 30 دقيقة');
 
     /* ── CONTACT FORM ── */
     t(document.getElementById('cf-title'), 'Send a Message', 'أرسل رسالة');
     t(document.getElementById('cf-sub'),
       "Fill the form below and I'll respond within 24 hours",
-      'أرسل تفاصيل مشروعك — سأرد خلال ٢٤ ساعة');
+      'أخبرني عن تحدياتك — سأرد عليك خلال 24 ساعة بحل مناسب');
     [['cf-name','Full Name','الاسم الكامل'],['cf-email','Email','البريد الإلكتروني'],
      ['cf-phone','Phone / WhatsApp','الهاتف / واتساب'],['cf-service','Service','الخدمة المطلوبة'],
      ['cf-msg','Message','الرسالة']]
@@ -1603,15 +1605,15 @@ document.addEventListener("DOMContentLoaded", () => {
     tp(document.getElementById('cf-msg'),   'Tell me about your project, timeline, and requirements...', 'أخبرني عن مشروعك ومتطلباتك وجدولك الزمني...');
     t(document.getElementById('cf-svc-ph'), 'Select a service...', 'اختر الخدمة...');
     const cfBtn = document.getElementById('cfSubmit');
-    if (cfBtn && !cfBtn.disabled) t(cfBtn, '✉️ Send Message', '✉️ إرسال الرسالة');
+    if (cfBtn && !cfBtn.disabled) t(cfBtn, '✉️ Send Message', '✉️ أرسل طلبك الآن');
     t(document.getElementById('formSuccess'),
       "✅ Message sent successfully! I'll be in touch soon.",
-      '✅ تم الإرسال بنجاح! سأتواصل معك قريباً.');
+      '✅ تم الإرسال بنجاح! سأتواصل معك خلال 24 ساعة.');
 
     /* ── FOOTER ── */
     t(document.querySelector('.footer-text'),
       '© 2026 Mohamed Abu Emira · Odoo Project Manager & ERP Operations Manager · COO @ Nexa Solutions · Egypt & GCC',
-      '© 2026 محمد أبو عميرة · مدير مشاريع أودو ومدير عمليات ERP · المدير التنفيذي @ نيكسا · مصر والخليج');
+      '© 2026 محمد أبو عميرة — استشاري ERP وأودو | مؤسس مشارك @ نيكسا تكنولوجي | مصر والخليج');
   }
   /* ── EXTENDED i18n: all missing sections ── */
   function applyLangExtended(lang) {
@@ -1634,18 +1636,6 @@ document.addEventListener("DOMContentLoaded", () => {
      ['Recommendations','توصية مهنية']]
       .forEach(([en,ar],i) => t(statLbls[i], en, ar));
 
-    // /* ── ABOUT TEXT ── */
-    // const aboutPs = document.querySelectorAll('.about-text p');
-    // if (aboutPs[0]) tH(aboutPs[0], aboutPs[0].innerHTML,
-    //   AR ? 'مدير مشاريع أودو ومدير عمليات ERP بخبرة تمتد لأكثر من <strong>10 سنوات</strong> في تطبيق وتهيئة وتحسين أنظمة ERP من الألف إلى الياء. شارك في تأسيس <strong>نيكسا تكنولوجي</strong> بصفة مدير المشاريع وحوّلها إلى شريك رسمي معتمد من أودو بحضور متنامٍ في مصر والمملكة العربية السعودية ودول الخليج.'
-    //   : aboutPs[0].innerHTML);
-    // if (aboutPs[1]) tH(aboutPs[1], aboutPs[1].innerHTML,
-    //   AR ? 'قدرة مُثبتة على ترجمة الأهداف التجارية والمالية المعقدة إلى حلول أودو قابلة للتطوير. قيادة ناجحة لأكثر من <strong>79 مشروع ERP</strong> في قطاعات البناء والتصنيع والأغذية والمشروبات والتجزئة والحكومة والعقارات — مع خبرة عميقة في تحليل متطلبات الأعمال وتحليل الفجوات وإعادة هندسة العمليات وترحيل البيانات وتهيئة متعدد الشركات والعملات ودعم ما بعد التشغيل.'
-    //   : aboutPs[1].innerHTML);
-    // if (aboutPs[2]) t(aboutPs[2],
-    //   'Fluent in Arabic and English. Based in Egypt — actively serving clients across Egypt, Saudi Arabia, UAE and the wider GCC market.',
-    //   'إتقان تام للغتين العربية والإنجليزية. مقيم في مصر — مع خدمة نشطة للعملاء في مصر والسعودية والإمارات ودول الخليج.');
-
     /* ── ABOUT HIGHLIGHTS ── */
     const hlSpans = document.querySelectorAll('.hl-body span');
     [['Scaled an Official Odoo Partner from inception — defining strategy, service portfolio, and go-to-market positioning. Led 30+ projects across Egypt and Saudi Arabia since 2024.',
@@ -1665,7 +1655,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nexaQuote = document.querySelector('.nexa-section > .container > p[style]');
     if (nexaQuote) t(nexaQuote,
       '"At NEXA, we transform potential into performance. With deep expertise and proven success, we deliver ERP solutions that drive businesses forward — Your future starts with NEXA."',
-      AR ? '"في نيكسا، نحوّل الإمكانات إلى إنجازات. بخبرة عميقة وسجل حافل بالنجاح، نقدم حلول ERP تدفع الأعمال إلى الأمام — مستقبلك يبدأ مع نيكسا."'
+      AR ? '"نيكسا تكنولوجي لا تبيع برنامجاً — تبني معك نظاماً يحل مشاكل اليوم ويستوعب نمو الغد. شركاؤنا يرون الفرق من أول 90 يوماً."'
          : '"At NEXA, we transform potential into performance. With deep expertise and proven success, we deliver ERP solutions that drive businesses forward — Your future starts with NEXA."');
     const nexaBadges = document.querySelectorAll('.nx-badge');
     [['COO & Co-Founder','المدير التنفيذي ومؤسس الشركة'],
@@ -1678,7 +1668,7 @@ document.addEventListener("DOMContentLoaded", () => {
       t(nxCards[0].querySelector('h4'), '🏢 About Nexa Solutions', '🏢 عن نيكسا تكنولوجي');
       const nxP = nxCards[0].querySelector('p');
       t(nxP, 'A forward-thinking software company specializing in Odoo ERP. Founded by seasoned professionals with deep expertise across MENA industries.',
-        AR ? 'شركة برمجيات متقدمة متخصصة في أودو ERP. أسسها محترفون ذوو خبرة عميقة في قطاعات منطقة الشرق الأوسط وشمال أفريقيا.' : 'A forward-thinking software company specializing in Odoo ERP.');
+        AR ? 'نيكسا تكنولوجي شركة متخصصة في تطبيق وتطوير أودو ERP — أسسها فريق من المحترفين الذين نفّذوا بأنفسهم أكثر من 79 مشروعاً عبر 15 قطاعاً في مصر والخليج.' : 'A forward-thinking software company specializing in Odoo ERP.');
       const nxLi = nxCards[0].querySelectorAll('li');
       [['Tailored ERP solutions for client efficiency','حلول ERP مُخصصة لتعظيم كفاءة العملاء'],
        ['Digital transformation leadership','قيادة مسيرة التحول الرقمي'],
@@ -1704,7 +1694,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .forEach(([en,ar],i) => { if(nxStatLbls[i]) t(nxStatLbls[i], en, ar); });
     }
     if (nxCards[2]) {
-      t(nxCards[2].querySelector('h4'), '📍 Nexa Offices', '📍 مكاتب نيكسا');
+      t(nxCards[2].querySelector('h4'), '📍 Nexa Offices', '📍 مكاتب نيكسا تكنولوجي');
       const officeNames = nxCards[2].querySelectorAll('.nx-office-name');
       t(officeNames[0], 'Saudi Arabia — Riyadh', 'المملكة العربية السعودية — الرياض');
       t(officeNames[1], 'Egypt — New Cairo', 'مصر — القاهرة الجديدة');
@@ -1955,7 +1945,7 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ── FOOTER ── */
     const footerLinks = document.querySelectorAll('.footer-links a');
     [['LinkedIn','لينكد إن'],['Nexa Solutions','نيكسا تكنولوجي'],
-     ['Portfolio','الملف المهني'],['Blog','المدونة'],['Book Meeting','احجز اجتماعاً']]
+     ['Portfolio','الملف المهني'],['Blog','المدونة'],['Book Meeting','احجز استشارة مجانية']]
       .forEach(([en,ar],i) => { if(footerLinks[i]) t(footerLinks[i], en, ar); });
 
     /* ── NAV CONTROLS (dynamically added) ── */
@@ -2005,7 +1995,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ── CONTACT INFO UPWORK/MOSTAQL VALS ── */
     const upworkEl = document.querySelector('.c-val a[href*="upwork"]');
-    if (upworkEl) t(upworkEl, 'Hire on Upwork ↗', AR ? 'تعيين على Upwork ↗' : 'Hire on Upwork ↗');
+    if (upworkEl) t(upworkEl, 'Hire on Upwork ↗', AR ? 'تعاقد معي عبر Upwork ←' : 'Hire on Upwork ↗');
 
     /* ── TAGS in experience ── */
     document.querySelectorAll('.exp-item').forEach(item => {
@@ -2103,6 +2093,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const newLang = document.documentElement.getAttribute('data-lang') === 'ar' ? 'en' : 'ar';
     applyLang(newLang);
     applyLangExtended(newLang);
+    if (typeof updateFixedBtnPos === 'function') updateFixedBtnPos();
   });
 
   /* ══ PROJECT FILTER ══ */
@@ -2145,6 +2136,13 @@ document.addEventListener("DOMContentLoaded", () => {
   scrollBtn.innerHTML = "↑"; scrollBtn.title = "Back to top";
   Object.assign(scrollBtn.style, {position:"fixed",bottom:"28px",right:"28px",width:"44px",height:"44px",borderRadius:"50%",background:"var(--teal)",color:"#fff",border:"none",fontSize:"18px",fontWeight:"700",cursor:"pointer",boxShadow:"0 4px 16px rgba(1,126,132,.4)",opacity:"0",transform:"translateY(12px)",transition:"all .25s",zIndex:"999"});
   document.body.appendChild(scrollBtn);
+  function updateFixedBtnPos() {
+    const isAR = document.documentElement.getAttribute('data-lang') === 'ar';
+    scrollBtn.style.right = isAR ? 'auto' : '28px';
+    scrollBtn.style.left  = isAR ? '28px' : 'auto';
+    waBtn.style.right = isAR ? 'auto' : '24px';
+    waBtn.style.left  = isAR ? '24px' : 'auto';
+  }
   window.addEventListener("scroll", () => { const s = window.scrollY>400; scrollBtn.style.opacity=s?"1":"0"; scrollBtn.style.transform=s?"translateY(0)":"translateY(12px)"; });
   scrollBtn.addEventListener("click", () => window.scrollTo({top:0,behavior:"smooth"}));
 
@@ -2156,6 +2154,7 @@ document.addEventListener("DOMContentLoaded", () => {
   waBtn.addEventListener("mouseenter",()=>waBtn.style.transform="scale(1.1)");
   waBtn.addEventListener("mouseleave",()=>waBtn.style.transform="scale(1)");
   document.body.appendChild(waBtn);
+  updateFixedBtnPos();
 
   /* ══ STAT COUNTER ══ */
   const statNums = document.querySelectorAll(".stat-n");
