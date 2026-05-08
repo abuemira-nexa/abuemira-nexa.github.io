@@ -1634,17 +1634,17 @@ document.addEventListener("DOMContentLoaded", () => {
      ['Recommendations','توصية مهنية']]
       .forEach(([en,ar],i) => t(statLbls[i], en, ar));
 
-    /* ── ABOUT TEXT ── */
-    const aboutPs = document.querySelectorAll('.about-text p');
-    if (aboutPs[0]) tH(aboutPs[0], aboutPs[0].innerHTML,
-      AR ? 'مدير مشاريع أودو ومدير عمليات ERP بخبرة تمتد لأكثر من <strong>10 سنوات</strong> في تطبيق وتهيئة وتحسين أنظمة ERP من الألف إلى الياء. شارك في تأسيس <strong>نيكسا تكنولوجي</strong> بصفة مدير المشاريع وحوّلها إلى شريك رسمي معتمد من أودو بحضور متنامٍ في مصر والمملكة العربية السعودية ودول الخليج.'
-      : aboutPs[0].innerHTML);
-    if (aboutPs[1]) tH(aboutPs[1], aboutPs[1].innerHTML,
-      AR ? 'قدرة مُثبتة على ترجمة الأهداف التجارية والمالية المعقدة إلى حلول أودو قابلة للتطوير. قيادة ناجحة لأكثر من <strong>79 مشروع ERP</strong> في قطاعات البناء والتصنيع والأغذية والمشروبات والتجزئة والحكومة والعقارات — مع خبرة عميقة في تحليل متطلبات الأعمال وتحليل الفجوات وإعادة هندسة العمليات وترحيل البيانات وتهيئة متعدد الشركات والعملات ودعم ما بعد التشغيل.'
-      : aboutPs[1].innerHTML);
-    if (aboutPs[2]) t(aboutPs[2],
-      'Fluent in Arabic and English. Based in Egypt — actively serving clients across Egypt, Saudi Arabia, UAE and the wider GCC market.',
-      'إتقان تام للغتين العربية والإنجليزية. مقيم في مصر — مع خدمة نشطة للعملاء في مصر والسعودية والإمارات ودول الخليج.');
+    // /* ── ABOUT TEXT ── */
+    // const aboutPs = document.querySelectorAll('.about-text p');
+    // if (aboutPs[0]) tH(aboutPs[0], aboutPs[0].innerHTML,
+    //   AR ? 'مدير مشاريع أودو ومدير عمليات ERP بخبرة تمتد لأكثر من <strong>10 سنوات</strong> في تطبيق وتهيئة وتحسين أنظمة ERP من الألف إلى الياء. شارك في تأسيس <strong>نيكسا تكنولوجي</strong> بصفة مدير المشاريع وحوّلها إلى شريك رسمي معتمد من أودو بحضور متنامٍ في مصر والمملكة العربية السعودية ودول الخليج.'
+    //   : aboutPs[0].innerHTML);
+    // if (aboutPs[1]) tH(aboutPs[1], aboutPs[1].innerHTML,
+    //   AR ? 'قدرة مُثبتة على ترجمة الأهداف التجارية والمالية المعقدة إلى حلول أودو قابلة للتطوير. قيادة ناجحة لأكثر من <strong>79 مشروع ERP</strong> في قطاعات البناء والتصنيع والأغذية والمشروبات والتجزئة والحكومة والعقارات — مع خبرة عميقة في تحليل متطلبات الأعمال وتحليل الفجوات وإعادة هندسة العمليات وترحيل البيانات وتهيئة متعدد الشركات والعملات ودعم ما بعد التشغيل.'
+    //   : aboutPs[1].innerHTML);
+    // if (aboutPs[2]) t(aboutPs[2],
+    //   'Fluent in Arabic and English. Based in Egypt — actively serving clients across Egypt, Saudi Arabia, UAE and the wider GCC market.',
+    //   'إتقان تام للغتين العربية والإنجليزية. مقيم في مصر — مع خدمة نشطة للعملاء في مصر والسعودية والإمارات ودول الخليج.');
 
     /* ── ABOUT HIGHLIGHTS ── */
     const hlSpans = document.querySelectorAll('.hl-body span');
