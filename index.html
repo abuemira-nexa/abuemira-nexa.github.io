@@ -1474,7 +1474,7 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ── HERO ── */
     t(document.querySelector('.hero-subtitle'),
       'Odoo Project Manager · ERP Operations Manager · COO & Co-Founder @ Nexa Solutions · Financial Manager · Product Owner',
-      'مدير مشاريع أودو · مدير عمليات ERP · المدير التنفيذي ومؤسس نيكسا سوليوشنز · المدير المالي · مالك المنتج');
+      'مدير مشاريع أودو · مدير عمليات ERP · المدير التشغيل وشريك مؤسس   نيكسيا تكنولوجي · المدير المالي · مدير المنتج');
     const hBtns = document.querySelectorAll('.hero-btns a');
     t(hBtns[0], '📅 Schedule a Meeting', '📅 احجز اجتماعاً');
     t(hBtns[1], '↓ Download CV',         '↓ تحميل السيرة الذاتية');
@@ -1486,7 +1486,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ── ABOUT — highlights ── */
     const hlT = document.querySelectorAll('.hl-body strong');
-    [['COO & Co-Founder — Nexa Solutions','المدير التنفيذي ومؤسس نيكسا سوليوشنز'],
+    [['COO & Co-Founder — Nexa Solutions','المدير التشغيل ووشريك مؤسس نيكسا تكنولوجي'],
      ['Measurable ERP Operations Impact','تأثير ERP ملموس وقابل للقياس'],
      ['Multi-Market Delivery','تسليم متعدد الأسواق']]
       .forEach(([en,ar],i) => t(hlT[i], en, ar));
@@ -1637,7 +1637,7 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ── ABOUT TEXT ── */
     const aboutPs = document.querySelectorAll('.about-text p');
     if (aboutPs[0]) tH(aboutPs[0], aboutPs[0].innerHTML,
-      AR ? 'مدير مشاريع أودو ومدير عمليات ERP بخبرة تمتد لأكثر من <strong>10 سنوات</strong> في تطبيق وتهيئة وتحسين أنظمة ERP من الألف إلى الياء. شارك في تأسيس <strong>نيكسا سوليوشنز</strong> بصفة مدير تنفيذي، وحوّلها إلى شريك رسمي معتمد من أودو بحضور متنامٍ في مصر والمملكة العربية السعودية ودول الخليج.'
+      AR ? 'مدير مشاريع أودو ومدير عمليات ERP بخبرة تمتد لأكثر من <strong>10 سنوات</strong> في تطبيق وتهيئة وتحسين أنظمة ERP من الألف إلى الياء. شارك في تأسيس <strong>نيكسا تكنولوجي</strong> بصفة مدير المشاريع وحوّلها إلى شريك رسمي معتمد من أودو بحضور متنامٍ في مصر والمملكة العربية السعودية ودول الخليج.'
       : aboutPs[0].innerHTML);
     if (aboutPs[1]) tH(aboutPs[1], aboutPs[1].innerHTML,
       AR ? 'قدرة مُثبتة على ترجمة الأهداف التجارية والمالية المعقدة إلى حلول أودو قابلة للتطوير. قيادة ناجحة لأكثر من <strong>79 مشروع ERP</strong> في قطاعات البناء والتصنيع والأغذية والمشروبات والتجزئة والحكومة والعقارات — مع خبرة عميقة في تحليل متطلبات الأعمال وتحليل الفجوات وإعادة هندسة العمليات وترحيل البيانات وتهيئة متعدد الشركات والعملات ودعم ما بعد التشغيل.'
@@ -1675,7 +1675,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .forEach(([en,ar],i) => { if(nexaBadges[i]) t(nexaBadges[i], en, ar); });
     const nxCards = document.querySelectorAll('.nx-card');
     if (nxCards[0]) {
-      t(nxCards[0].querySelector('h4'), '🏢 About Nexa Solutions', '🏢 عن نيكسا سوليوشنز');
+      t(nxCards[0].querySelector('h4'), '🏢 About Nexa Solutions', '🏢 عن نيكسا تكنولوجي');
       const nxP = nxCards[0].querySelector('p');
       t(nxP, 'A forward-thinking software company specializing in Odoo ERP. Founded by seasoned professionals with deep expertise across MENA industries.',
         AR ? 'شركة برمجيات متقدمة متخصصة في أودو ERP. أسسها محترفون ذوو خبرة عميقة في قطاعات منطقة الشرق الأوسط وشمال أفريقيا.' : 'A forward-thinking software company specializing in Odoo ERP.');
@@ -1688,7 +1688,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .forEach(([en,ar],i) => { if(nxLi[i]) t(nxLi[i], en, ar); });
     }
     if (nxCards[1]) {
-      t(nxCards[1].querySelector('h4'), '👔 My Role — COO & Co-Founder', '👔 دوري — مدير تنفيذي ومؤسس مشارك');
+      t(nxCards[1].querySelector('h4'), '👔 My Role — COO & Co-Founder', '👔 دوري — مدير العمليات ومؤسس مشارك');
       const nxRoleLi = nxCards[1].querySelectorAll('li');
       [['Co-founded and scaled Nexa into a recognised Odoo Partner','شاركت في تأسيس نيكسا وتطويرها إلى شريك أودو معترف به'],
        ['Defined corporate strategy, service portfolio & go-to-market','وضعت الاستراتيجية المؤسسية وحقيبة الخدمات وخطط دخول السوق'],
@@ -1724,11 +1724,11 @@ document.addEventListener("DOMContentLoaded", () => {
      ['Nov 2013 – Aug 2015','نوفمبر 2013 – أغسطس 2015']]
       .forEach(([en,ar],i) => { if(expDates[i]) t(expDates[i], en, ar); });
     [['COO (Chief Operating Officer) & Co-Founder','المدير التنفيذي (COO) ومؤسس مشارك'],
-     ['ERP Consultant | Product Owner','استشاري ERP | مالك المنتج'],
+     ['ERP Consultant | Product Owner','استشاري ERP | مدير المنتج'],
      ['Odoo Functional Consultant','استشاري أودو الوظيفي'],
      ['ERP Implementation Consultant','استشاري تطبيق ERP'],
-     ['Accountant Manager','مدير المحاسبة'],
-     ['Chief Accountant','رئيس محاسبين'],
+     ['Accountant Manager','مدير الحسابات'],
+     ['Chief Accountant','رئيس الحسابات'],
      ['General Accountant','محاسب عام']]
       .forEach(([en,ar],i) => { if(expRoles[i]) t(expRoles[i], en, ar); });
     const exp1Bullets = document.querySelectorAll('.exp-item:first-child .exp-bullets li');
@@ -1781,7 +1781,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const expNexaLabel = document.querySelector('.exp-nexa-label');
     if (expNexaLabel) tH(expNexaLabel,
       '<span class="silver-badge">🥈 Silver</span> Nexa Solutions — Official Odoo Partner',
-      AR ? '<span class="silver-badge">🥈 فضي</span> نيكسا سوليوشنز — شريك أودو الرسمي'
+      AR ? '<span class="silver-badge">🥈 فضي</span> نيكسا تكنولوجي — شريك أودو الرسمي'
          : '<span class="silver-badge">🥈 Silver</span> Nexa Solutions — Official Odoo Partner');
 
     /* ── PROJECTS FILTER ── */
@@ -1954,7 +1954,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ── FOOTER ── */
     const footerLinks = document.querySelectorAll('.footer-links a');
-    [['LinkedIn','لينكد إن'],['Nexa Solutions','نيكسا سوليوشنز'],
+    [['LinkedIn','لينكد إن'],['Nexa Solutions','نيكسا تكنولوجي'],
      ['Portfolio','الملف المهني'],['Blog','المدونة'],['Book Meeting','احجز اجتماعاً']]
       .forEach(([en,ar],i) => { if(footerLinks[i]) t(footerLinks[i], en, ar); });
 
@@ -1966,7 +1966,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     /* ── HERO BADGE ── */
-    t(document.querySelector('.hero-nexa-text'), 'COO @ Nexa Solutions', AR ? 'مدير تنفيذي @ نيكسا سوليوشنز' : 'COO @ Nexa Solutions');
+    t(document.querySelector('.hero-nexa-text'), 'COO @ Nexa Solutions', AR ? 'مدير تنفيذي @ نيكسا تكنولوجي' : 'COO @ Nexa Solutions');
     t(document.querySelector('.hero-nexa-sub'), 'Odoo Official Partner', AR ? 'شريك أودو الرسمي' : 'Odoo Official Partner');
 
     /* ── HERO META ── */
@@ -1985,9 +1985,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const rolePills = document.querySelectorAll('.role-pill');
     [['COO & Co-Founder','مدير تنفيذي ومؤسس مشارك'],
      ['Odoo Project Manager','مدير مشاريع أودو'],
-     ['ERP Operations Manager','مدير عمليات ERP'],
+     ['ERP Operations Manager','مدير المشاريع ERP'],
      ['Financial Manager','مدير مالي'],
-     ['Product Owner','مالك المنتج']]
+     ['Product Owner','مدير المنتج']]
       .forEach(([en,ar],i) => { if(rolePills[i]) t(rolePills[i], en, ar); });
 
     /* ── HERO BADGES ── */
