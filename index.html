@@ -16,9 +16,19 @@
 <!-- ══ 1. SEO ══ -->
 <meta name="robots" content="index, follow">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-<!-- ══ 7. Google Analytics GA4 ══ Replace G-XXXXXXXXXX with your Measurement ID from analytics.google.com/analytics/web -->
+<!-- ══ 7. Google Analytics GA4 ══
+     ACTION REQUIRED: Replace G-XXXXXXXXXX below with your real Measurement ID
+     from: analytics.google.com → Admin → Data Streams → Measurement ID
+     Example: G-ABC123XYZ9
+-->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments)}
+gtag('js',new Date());
+gtag('config','G-XXXXXXXXXX');
+// ↑ Replace BOTH instances of G-XXXXXXXXXX with your Measurement ID
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 <style>
@@ -114,7 +124,7 @@ a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 
 /* ── NAV ── */
-.nav{position:sticky;top:0;z-index:200;background:rgba(13,27,46,.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.07);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:62px}
+.nav{position:sticky;top:0;z-index:200;background:rgba(13,27,46,.95);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:62px;transition:background .3s,box-shadow .3s,border-color .3s}
 .nav-brand{display:flex;align-items:center;gap:11px;font-family:"Sora",sans-serif;font-size:15px;font-weight:700;color:#fff;letter-spacing:-.2px}
 .nav-brand-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;animation:pulse 2.5s infinite}
 .nav-photo{width:34px;height:34px;border-radius:50%;overflow:hidden;border:2px solid rgba(212,168,67,.55);flex-shrink:0}
@@ -258,6 +268,124 @@ img{display:block;max-width:100%}
 .svc-desc{font-size:12px;color:var(--gray-600);line-height:1.68}
 .svc-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--teal);margin-top:14px;transition:gap .18s}
 .svc-card:hover .svc-link{gap:9px}
+
+/* ── ROI CALCULATOR ── */
+.roi-section{background:linear-gradient(140deg,var(--navy) 0%,#0d2840 55%,#0a2030 100%);padding:72px 0;position:relative;overflow:hidden}
+.roi-section::before{content:"";position:absolute;top:-120px;right:-80px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(1,126,132,.16) 0%,transparent 68%);pointer-events:none}
+.roi-section::after{content:"";position:absolute;bottom:-80px;left:-60px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,.07) 0%,transparent 70%);pointer-events:none}
+.roi-inner{max-width:1100px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
+.roi-header{text-align:center;margin-bottom:48px}
+.roi-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:rgba(212,168,67,.12);padding:5px 14px;border-radius:20px;margin-bottom:12px;border:1px solid rgba(212,168,67,.28)}
+.roi-title{font-family:"Sora",sans-serif;font-size:clamp(22px,3.5vw,34px);font-weight:800;color:#fff;letter-spacing:-.4px;line-height:1.2;margin-bottom:10px}
+.roi-title span{color:var(--teal-mid)}
+.roi-sub{font-size:14px;color:rgba(255,255,255,.55);max-width:520px;margin:0 auto;line-height:1.65}
+.roi-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.roi-inputs{display:flex;flex-direction:column;gap:0}
+.roi-input-group{padding:18px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.roi-input-group:last-child{border-bottom:none}
+.roi-label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.roi-lbl{font-size:13px;font-weight:600;color:rgba(255,255,255,.85)}
+.roi-lbl-hint{font-size:11px;color:rgba(255,255,255,.38)}
+.roi-val-badge{font-family:"Sora",sans-serif;font-size:14px;font-weight:800;color:var(--gold);background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.25);border-radius:8px;padding:3px 12px;min-width:60px;text-align:center;transition:all .2s}
+.roi-slider{width:100%;height:5px;border-radius:3px;outline:none;border:none;background:rgba(255,255,255,.12);cursor:pointer;-webkit-appearance:none}
+.roi-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 0 0 4px rgba(212,168,67,.18);transition:box-shadow .2s}
+.roi-slider::-webkit-slider-thumb:hover{box-shadow:0 0 0 7px rgba(212,168,67,.25)}
+.roi-slider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--gold);cursor:pointer;border:none;box-shadow:0 0 0 4px rgba(212,168,67,.18)}
+.roi-results{position:sticky;top:80px}
+.roi-result-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:32px;backdrop-filter:blur(8px)}
+.roi-result-header{text-align:center;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.roi-result-lbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px}
+.roi-result-num{font-family:"Sora",sans-serif;font-size:clamp(36px,5vw,56px);font-weight:800;color:var(--gold);line-height:1;letter-spacing:-.5px;transition:all .35s}
+.roi-result-unit{font-size:16px;font-weight:600;color:rgba(212,168,67,.65);margin-left:4px}
+.roi-result-sub{font-size:12px;color:rgba(255,255,255,.4);margin-top:6px}
+.roi-breakdown{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.roi-bk-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,255,255,.04);border-radius:10px;border:1px solid rgba(255,255,255,.06);transition:border-color .2s}
+.roi-bk-row:hover{border-color:rgba(1,126,132,.3)}
+.roi-bk-lbl{font-size:12px;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:8px}
+.roi-bk-icon{font-size:14px;width:22px;text-align:center}
+.roi-bk-val{font-family:"Sora",sans-serif;font-size:13px;font-weight:700;color:var(--teal-mid)}
+.roi-bar-wrap{margin-bottom:6px}
+.roi-bar-track{height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;margin-top:5px}
+.roi-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--teal-dark),var(--teal-mid));transition:width .5s cubic-bezier(.4,0,.2,1)}
+.roi-cta-wrap{display:flex;flex-direction:column;gap:10px}
+.roi-cta-main{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--gold);color:var(--navy);font-family:"Sora",sans-serif;font-size:14px;font-weight:700;padding:14px 24px;border-radius:12px;text-decoration:none;transition:all .2s;border:none;cursor:pointer;width:100%}
+.roi-cta-main:hover{background:var(--gold-lt);transform:translateY(-1px);box-shadow:0 6px 24px rgba(212,168,67,.3)}
+.roi-cta-sec{display:flex;align-items:center;justify-content:center;gap:6px;background:transparent;color:rgba(255,255,255,.65);font-size:12px;font-weight:600;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.14);text-decoration:none;transition:all .2s;cursor:pointer;width:100%}
+.roi-cta-sec:hover{background:rgba(255,255,255,.06);color:#fff}
+.roi-disclaimer{font-size:10px;color:rgba(255,255,255,.25);text-align:center;margin-top:14px;line-height:1.5}
+.roi-industry-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.roi-ind-btn{font-size:11px;font-weight:600;padding:5px 13px;border-radius:20px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:rgba(255,255,255,.65);cursor:pointer;transition:all .2s}
+.roi-ind-btn.active{border-color:var(--teal-mid);background:rgba(1,126,132,.2);color:var(--teal-mid)}
+@media(max-width:900px){.roi-grid{grid-template-columns:1fr}.roi-results{position:static}}
+@media(max-width:600px){.roi-inner{padding:0 20px}}
+
+/* ── TRUST BADGES BAR ── */
+.trust-bar{background:var(--white);border-bottom:1px solid var(--gray-200);padding:18px 0;overflow:hidden}
+.trust-bar-inner{max-width:1100px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center}
+.trust-item{display:flex;align-items:center;gap:9px;padding:6px 22px;border-right:1px solid var(--gray-200);font-size:12px;font-weight:700;color:var(--gray-600)}
+.trust-item:last-child{border-right:none}
+.trust-item-ico{font-size:16px;flex-shrink:0}
+.trust-item-text{line-height:1.3}
+.trust-item-sub{font-size:10px;color:var(--gray-400);font-weight:500}
+[data-theme="dark"] .trust-bar{background:var(--white);border-color:var(--gray-200)}
+@media(max-width:900px){.trust-bar-inner{gap:0;padding:0 16px}.trust-item{padding:8px 14px;font-size:11px}}
+@media(max-width:600px){.trust-item{padding:7px 10px;font-size:10px;border-right:none;border-bottom:1px solid var(--gray-200)}}
+
+/* ── ENHANCED FOOTER ── */
+.footer-v2{background:var(--navy);padding:64px 0 0;border-top:1px solid rgba(255,255,255,.06)}
+.footer-v2-inner{max-width:1100px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1.6fr 1fr 1fr 1.4fr;gap:40px;margin-bottom:48px}
+.fv2-brand-logo{width:52px;height:52px;border-radius:12px;overflow:hidden;border:2px solid rgba(1,126,132,.4);margin-bottom:14px;background:var(--white)}
+.fv2-brand-logo img{width:100%;height:100%;object-fit:contain}
+.fv2-brand-name{font-family:"Sora",sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:4px}
+.fv2-brand-name span{color:var(--gold)}
+.fv2-brand-sub{font-size:12px;color:rgba(255,255,255,.4);line-height:1.55;margin-bottom:18px;max-width:240px}
+.fv2-social{display:flex;gap:8px;flex-wrap:wrap}
+.fv2-soc-btn{width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:all .2s;text-decoration:none;color:#fff;flex-shrink:0}
+.fv2-soc-btn:hover{background:var(--teal);border-color:var(--teal);transform:translateY(-2px)}
+.fv2-soc-btn svg{width:16px;height:16px;fill:currentColor}
+.fv2-col-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:16px}
+.fv2-links{display:flex;flex-direction:column;gap:9px;list-style:none}
+.fv2-links a{font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .18s;display:flex;align-items:center;gap:6px}
+.fv2-links a:hover{color:var(--teal-mid)}
+.fv2-links a::before{content:"→";font-size:10px;color:var(--teal-mid);opacity:0;transition:opacity .18s;flex-shrink:0}
+.fv2-links a:hover::before{opacity:1}
+.fv2-contact-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:11px}
+.fv2-contact-ico{width:32px;height:32px;border-radius:8px;background:rgba(1,126,132,.15);border:1px solid rgba(1,126,132,.25);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.fv2-contact-lbl{font-size:10px;color:rgba(255,255,255,.35);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.fv2-contact-val{font-size:12px;color:rgba(255,255,255,.7);font-weight:600}
+.fv2-contact-val a{color:rgba(255,255,255,.7);text-decoration:none;transition:color .18s}
+.fv2-contact-val a:hover{color:var(--teal-mid)}
+.fv2-bottom{border-top:1px solid rgba(255,255,255,.06);padding:18px 40px;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.fv2-copyright{font-size:11px;color:rgba(255,255,255,.28)}
+.fv2-bottom-links{display:flex;gap:20px}
+.fv2-bottom-links a{font-size:11px;color:rgba(255,255,255,.28);text-decoration:none;transition:color .18s}
+.fv2-bottom-links a:hover{color:var(--gold)}
+.fv2-nexa-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(1,126,132,.12);border:1px solid rgba(1,126,132,.25);border-radius:6px;padding:3px 10px;font-size:10px;font-weight:700;color:var(--teal-mid)}
+@media(max-width:900px){
+  .footer-v2-inner{grid-template-columns:1fr 1fr;gap:28px}
+  .fv2-bottom{padding:18px 20px}
+  .footer-v2-inner{padding:0 20px}
+}
+@media(max-width:600px){
+  .footer-v2-inner{grid-template-columns:1fr}
+  .fv2-social{flex-wrap:wrap}
+}
+
+/* ── MOBILE FLOATING CTA ── */
+.mob-cta-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:990;background:rgba(13,27,46,.97);backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,.1);padding:10px 16px;gap:9px}
+.mob-cta-bar a{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px;font-weight:700;padding:12px;border-radius:10px;text-decoration:none;transition:all .2s}
+.mob-cta-call{background:rgba(1,126,132,.18);color:var(--teal-mid);border:1px solid rgba(1,126,132,.3)}
+.mob-cta-call:hover{background:var(--teal);color:#fff}
+.mob-cta-book{background:var(--gold);color:var(--navy)}
+.mob-cta-book:hover{background:var(--gold-lt)}
+@media(max-width:900px){.mob-cta-bar{display:flex}}
+
+/* ── ENHANCED SERVICES ── */
+.svc-popular{position:absolute;top:-1px;right:20px;background:var(--teal);color:#fff;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:0 0 8px 8px}
+.svc-card{position:relative}
+.svc-meta{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.svc-meta-tag{font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;background:var(--gray-100);color:var(--gray-600);border:1px solid var(--gray-200)}
+.svc-meta-tag.highlight{background:var(--teal-light);color:var(--teal);border-color:rgba(1,126,132,.2)}
 
 /* ── EXPERIENCE ── */
 .exp-line{display:flex;flex-direction:column;position:relative;padding-left:30px}
@@ -590,6 +718,9 @@ img{transition:opacity .3s ease}
 [data-theme="dark"] .cs-modal{background:#111d2e}
 [data-theme="dark"] .cs-section-title{border-color:#1a2e47}
 [data-theme="dark"] .cs-hl-item{background:#0c1522}
+[data-theme="dark"] .hl-item{background:#0c1522;border-left-color:var(--teal-mid)}
+[data-theme="dark"] .hl-body strong{color:#d8e5f0}
+[data-theme="dark"] .hl-body span{color:#8fa8c2}
 [data-theme="dark"] .cs-modal-btns{border-color:#1a2e47}
 [data-theme="dark"] .cs-outcome{background:rgba(1,126,132,.08);border-color:rgba(1,126,132,.2)}
 [data-lang="ar"] .cs-hl-item{border-left:none;border-right:3px solid var(--teal)}
@@ -799,6 +930,61 @@ img{transition:opacity .3s ease}
     <div class="stat"><div class="stat-n">15+</div><div class="stat-l">Industries Served</div></div>
     <div class="stat"><div class="stat-n">40+</div><div class="stat-l">Certifications</div></div>
     <div class="stat"><div class="stat-n">28+</div><div class="stat-l">Recommendations</div></div>
+  </div>
+</div>
+
+<!-- TRUST BADGES BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item">
+      <div class="trust-item-ico">🟣</div>
+      <div>
+        <div>Odoo Official Partner</div>
+        <div class="trust-item-sub">Certified Implementation Partner</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-item-ico">🎓</div>
+      <div>
+        <div>Odoo 16 · 17 · 18 Certified</div>
+        <div class="trust-item-sub">Functional Certification · Active</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-item-ico">📋</div>
+      <div>
+        <div>Google PM Certified</div>
+        <div class="trust-item-sub">Project Management Professional</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-item-ico">🔵</div>
+      <div>
+        <div>IBM IT Project Manager</div>
+        <div class="trust-item-sub">IT & Technology Leadership</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-item-ico">🏦</div>
+      <div>
+        <div>McKinsey Forward</div>
+        <div class="trust-item-sub">Executive Leadership Program</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-item-ico">📊</div>
+      <div>
+        <div>Certified Financial Analyst</div>
+        <div class="trust-item-sub">Finance & ERP Accounting</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-item-ico">⭐</div>
+      <div>
+        <div>LinkedIn Top ERP Voice</div>
+        <div class="trust-item-sub">500+ Professional Network</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -2915,19 +3101,486 @@ img{transition:opacity .3s ease}
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-logo-row">
-      <div class="footer-nexa-logo"><img src="./assets/img/nexa.gif" alt="Nexa"></div>
-      <div class="footer-text">© 2026 Mohamed Abu Emira · Odoo Project Manager & ERP Operations Manager · COO @ Nexa Solutions · Egypt & GCC</div>
+<!-- ROI CALCULATOR — Powered by Odoo Official ROI Analysis Template -->
+<style>
+/* ── ROI V2 ENHANCED STYLES ── */
+.roi-step-tabs{display:flex;gap:6px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:20px}
+.roi-step-tab{flex:1;padding:10px 6px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;text-align:center;line-height:1.3}
+.roi-step-tab.active{background:rgba(1,126,132,.25);border-color:rgba(1,126,132,.5);color:var(--teal-mid)}
+.roi-step-tab span{display:block;font-size:16px;margin-bottom:3px}
+.roi-dept-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.roi-dept-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 12px;cursor:pointer;transition:all .2s;position:relative}
+.roi-dept-card.active{border-color:rgba(1,126,132,.5);background:rgba(1,126,132,.12)}
+.roi-dept-card input[type=checkbox]{position:absolute;top:10px;right:10px;accent-color:var(--teal-mid);width:14px;height:14px}
+.roi-dept-name{font-size:12px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:2px;display:flex;align-items:center;gap:6px}
+.roi-dept-eff{font-size:10px;color:var(--teal-mid);font-weight:600}
+.roi-5yr-chart{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:18px}
+.roi-yr-bar-wrap{display:flex;flex-direction:column;align-items:center;gap:5px}
+.roi-yr-bar-outer{width:100%;height:80px;background:rgba(255,255,255,.05);border-radius:6px;display:flex;align-items:flex-end;overflow:hidden;position:relative}
+.roi-yr-bar-neg{width:100%;background:rgba(239,68,68,.35);border-radius:6px;transition:height .6s cubic-bezier(.4,0,.2,1)}
+.roi-yr-bar-pos{width:100%;background:linear-gradient(180deg,var(--teal-mid),var(--teal-dark));border-radius:6px;transition:height .6s cubic-bezier(.4,0,.2,1)}
+.roi-yr-label{font-size:9px;font-weight:700;color:rgba(255,255,255,.4)}
+.roi-yr-val{font-size:10px;font-weight:700;color:var(--teal-mid)}
+.roi-dept-savings-list{display:flex;flex-direction:column;gap:6px;margin-top:12px;max-height:200px;overflow-y:auto}
+.roi-dept-savings-row{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid rgba(255,255,255,.06)}
+.roi-dept-savings-name{font-size:11px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:7px}
+.roi-dept-savings-val{font-size:11px;font-weight:700;color:var(--teal-mid)}
+.roi-dept-eff-badge{font-size:9px;padding:1px 6px;border-radius:8px;background:rgba(1,126,132,.2);color:var(--teal-mid);font-weight:600}
+</style>
+
+<section class="roi-section" id="roi">
+  <div class="roi-inner">
+    <div class="roi-header">
+      <div class="roi-tag">💰 Odoo ROI Calculator · مبني على بيانات 79+ مشروع حقيقي</div>
+      <h2 class="roi-title">Calculate Your <span>Real Odoo ROI</span></h2>
+      <p class="roi-sub">Based on Odoo's official ROI Analysis methodology — the same tool used with real clients. Select your departments and business profile to get an accurate projection.</p>
     </div>
-    <div class="footer-links">
+
+    <div class="roi-grid">
+      <!-- LEFT: INPUTS -->
+      <div class="roi-inputs">
+
+        <!-- STEP TABS -->
+        <div class="roi-step-tabs">
+          <div class="roi-step-tab active" id="roiTab1" onclick="roiSwitchTab(1)"><span>👤</span>Profile</div>
+          <div class="roi-step-tab" id="roiTab2" onclick="roiSwitchTab(2)"><span>🏢</span>Departments</div>
+          <div class="roi-step-tab" id="roiTab3" onclick="roiSwitchTab(3)"><span>📊</span>Investment</div>
+        </div>
+
+        <!-- TAB 1: PROFILE -->
+        <div id="roiPanel1">
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">👥 Total Employees</span>
+              <span class="roi-val-badge" id="roiEmpVal">50</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiEmp" min="5" max="500" value="50" step="5" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>5</span><span>500+</span></div>
+          </div>
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">💵 Avg. Annual Salary / Employee (USD)</span>
+              <span class="roi-val-badge" id="roiSalVal">$50K</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiSal" min="10000" max="150000" value="50000" step="5000" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$10K</span><span>$150K</span></div>
+          </div>
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">📦 Annual Revenue (USD)</span>
+              <span class="roi-val-badge" id="roiRevVal">$5M</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiRev" min="500000" max="50000000" value="5000000" step="500000" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$500K</span><span>$50M+</span></div>
+          </div>
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">💾 Current Software Annual Cost</span>
+              <span class="roi-val-badge" id="roiSwVal">$100K</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiSw" min="0" max="500000" value="100000" step="10000" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$0</span><span>$500K</span></div>
+          </div>
+          <button onclick="roiSwitchTab(2)" style="width:100%;margin-top:8px;padding:11px;border-radius:10px;border:1px solid rgba(1,126,132,.4);background:rgba(1,126,132,.15);color:var(--teal-mid);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">Next: Select Departments →</button>
+        </div>
+
+        <!-- TAB 2: DEPARTMENTS — efficiency rates from Excel template -->
+        <div id="roiPanel2" style="display:none">
+          <p style="font-size:11px;color:rgba(255,255,255,.45);margin-bottom:12px;">Select the departments Odoo will cover. Efficiency rates are from real Odoo client benchmarks.</p>
+          <div class="roi-dept-grid" id="roiDeptGrid">
+            <!-- Injected by JS -->
+          </div>
+          <button onclick="roiSwitchTab(3)" style="width:100%;margin-top:8px;padding:11px;border-radius:10px;border:1px solid rgba(1,126,132,.4);background:rgba(1,126,132,.15);color:var(--teal-mid);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">Next: Set Investment →</button>
+        </div>
+
+        <!-- TAB 3: INVESTMENT -->
+        <div id="roiPanel3" style="display:none">
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">🔧 Implementation Budget (USD)</span>
+              <span class="roi-val-badge" id="roiImplVal">$35K</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiImpl" min="5000" max="300000" value="35000" step="5000" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$5K</span><span>$300K</span></div>
+          </div>
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">📱 Odoo Subscription / Year</span>
+              <span class="roi-val-badge" id="roiSubVal">$40K</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiSub" min="3000" max="200000" value="40000" step="3000" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$3K</span><span>$200K</span></div>
+          </div>
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">🛠️ Annual Support / Consulting</span>
+              <span class="roi-val-badge" id="roiSuppVal">$10K</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiSupp" min="0" max="100000" value="10000" step="5000" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$0</span><span>$100K</span></div>
+          </div>
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">🧑‍💼 Internal Staff Time (USD equiv.)</span>
+              <span class="roi-val-badge" id="roiStaffVal">$50K</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiStaff" min="0" max="200000" value="50000" step="10000" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$0</span><span>$200K</span></div>
+          </div>
+          <button onclick="roiSwitchTab(1)" style="width:100%;margin-top:8px;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">← Back to Profile</button>
+        </div>
+      </div>
+
+      <!-- RIGHT: RESULTS -->
+      <div class="roi-results">
+        <div class="roi-result-card">
+          <div class="roi-result-header">
+            <div class="roi-result-lbl">Estimated Annual Savings</div>
+            <div class="roi-result-num" id="roiSavings">—<span class="roi-result-unit">/yr</span></div>
+            <div class="roi-result-sub" id="roiSubline">Select departments to calculate</div>
+          </div>
+
+          <!-- Department savings breakdown -->
+          <div style="margin-bottom:16px">
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">Savings by Department</div>
+            <div class="roi-dept-savings-list" id="roiDeptSavingsList">
+              <div style="font-size:11px;color:rgba(255,255,255,.3);text-align:center;padding:16px;">Select departments in Tab 2</div>
+            </div>
+          </div>
+
+          <!-- Key metrics -->
+          <div class="roi-breakdown">
+            <div class="roi-bk-row" style="background:rgba(212,168,67,.06);border-color:rgba(212,168,67,.2);">
+              <span class="roi-bk-lbl"><span class="roi-bk-icon">📅</span>Payback Period</span>
+              <span class="roi-bk-val" style="color:var(--gold)" id="bkPayback">—</span>
+            </div>
+            <div class="roi-bk-row" style="background:rgba(1,126,132,.06);border-color:rgba(1,126,132,.2);">
+              <span class="roi-bk-lbl"><span class="roi-bk-icon">📈</span>3-Year ROI</span>
+              <span class="roi-bk-val" style="color:var(--teal-mid)" id="bkRoi3">—</span>
+            </div>
+            <div class="roi-bk-row">
+              <span class="roi-bk-lbl"><span class="roi-bk-icon">💰</span>Net Value (Y1–Y3)</span>
+              <span class="roi-bk-val" id="bkNet3">—</span>
+            </div>
+            <div class="roi-bk-row">
+              <span class="roi-bk-lbl"><span class="roi-bk-icon">🔄</span>Software Cost Savings</span>
+              <span class="roi-bk-val" id="bkSwSave">—</span>
+            </div>
+          </div>
+
+          <!-- 5-Year bar chart -->
+          <div style="margin-top:18px;margin-bottom:16px">
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">5-Year Cumulative Net Cash Flow</div>
+            <div class="roi-5yr-chart" id="roi5yrChart">
+              <!-- injected by JS -->
+            </div>
+          </div>
+
+          <div class="roi-cta-wrap">
+            <a href="https://calendly.com/abuemira/30min" target="_blank" class="roi-cta-main">📅 Get My Free ERP ROI Assessment</a>
+            <a href="https://wa.me/201005061349" target="_blank" class="roi-cta-sec">💬 Discuss Full Analysis on WhatsApp</a>
+          </div>
+          <p class="roi-disclaimer">* Methodology from Odoo's official ROI Analysis Template. Efficiency rates benchmarked across 79+ real implementations by Nexa Solutions. Results vary by scope and complexity.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ══ ROI CALCULATOR V2 — Odoo Official Benchmark Data ══
+   Efficiency rates sourced directly from Odoo ROI Analysis Template (R-Savings sheet)
+   Department FTE efficiency rates are real measured averages from client implementations
+*/
+const ROI_DEPTS = [
+  { id:'inventory',    icon:'📦', name:'Inventory',        fte:8,  eff:0.21,  desc:'Receiving, picking, adjustments, reporting' },
+  { id:'manufacturing',icon:'🏭', name:'Manufacturing',    fte:5,  eff:0.118, desc:'Planning, quality, time tracking, traceability' },
+  { id:'purchase',     icon:'🛒', name:'Purchase',         fte:3,  eff:0.27,  desc:'RfQ, follow-ups, vendor management' },
+  { id:'finance',      icon:'💰', name:'Finance',          fte:7,  eff:0.183, desc:'Invoicing, bank sync, reporting, reconciliation' },
+  { id:'sales',        icon:'📈', name:'Sales & CRM',      fte:2,  eff:0.41,  desc:'Lead management, quotes, order generation' },
+  { id:'hr',           icon:'👥', name:'Human Resources',  fte:5,  eff:0.29,  desc:'Attendance, payroll, leaves, onboarding' },
+  { id:'services',     icon:'🔧', name:'Services',         fte:9,  eff:0.258, desc:'Field service, timesheets, project billing' },
+  { id:'marketing',    icon:'📣', name:'Marketing',        fte:1,  eff:0.153, desc:'Campaigns, leads, content, performance' },
+];
+
+/* Software subscription savings basis */
+const SW_SAVINGS_RATIO = 0.7; // Odoo replaces ~70% of current software costs on average
+
+let roiActiveTab = 1;
+let roiDeptSelection = { inventory: true, finance: true, sales: true, hr: true }; // defaults
+
+function roiSwitchTab(n) {
+  roiActiveTab = n;
+  [1,2,3].forEach(i => {
+    document.getElementById('roiPanel' + i).style.display = i === n ? '' : 'none';
+    document.getElementById('roiTab' + i).classList.toggle('active', i === n);
+  });
+  roiCalc();
+}
+
+function roiBuildDeptGrid() {
+  const grid = document.getElementById('roiDeptGrid');
+  grid.innerHTML = ROI_DEPTS.map(d => `
+    <div class="roi-dept-card ${roiDeptSelection[d.id] ? 'active' : ''}" id="dc_${d.id}" onclick="roiToggleDept('${d.id}')">
+      <input type="checkbox" ${roiDeptSelection[d.id] ? 'checked' : ''} onclick="event.stopPropagation();roiToggleDept('${d.id}')">
+      <div class="roi-dept-name">${d.icon} ${d.name}</div>
+      <div class="roi-dept-eff">Efficiency gain: <strong>${Math.round(d.eff*100)}%</strong></div>
+      <div style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;line-height:1.3">${d.desc}</div>
+    </div>`).join('');
+}
+
+function roiToggleDept(id) {
+  roiDeptSelection[id] = !roiDeptSelection[id];
+  const card = document.getElementById('dc_' + id);
+  if (card) {
+    card.classList.toggle('active', roiDeptSelection[id]);
+    const cb = card.querySelector('input');
+    if (cb) cb.checked = roiDeptSelection[id];
+  }
+  roiCalc();
+}
+
+function fmtUSD(n) {
+  if (Math.abs(n) >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
+  if (Math.abs(n) >= 1000) return (n < 0 ? '-$' : '$') + (Math.abs(n)/1000).toFixed(0) + 'K';
+  return '$' + Math.round(n).toLocaleString();
+}
+
+function roiCalc() {
+  const emp    = parseInt(document.getElementById('roiEmp').value);
+  const sal    = parseInt(document.getElementById('roiSal').value);       // annual salary per emp
+  const rev    = parseInt(document.getElementById('roiRev').value);
+  const sw     = parseInt(document.getElementById('roiSw').value);        // current software cost
+  const impl   = parseInt(document.getElementById('roiImpl').value);
+  const sub    = parseInt(document.getElementById('roiSub').value);       // odoo subscription/yr
+  const supp   = parseInt(document.getElementById('roiSupp').value);
+  const staff  = parseInt(document.getElementById('roiStaff').value);
+
+  // Update display labels
+  document.getElementById('roiEmpVal').textContent  = emp;
+  document.getElementById('roiSalVal').textContent  = '$' + (sal/1000).toFixed(0) + 'K';
+  document.getElementById('roiRevVal').textContent  = fmtUSD(rev);
+  document.getElementById('roiSwVal').textContent   = fmtUSD(sw);
+  document.getElementById('roiImplVal').textContent = fmtUSD(impl);
+  document.getElementById('roiSubVal').textContent  = fmtUSD(sub);
+  document.getElementById('roiSuppVal').textContent = fmtUSD(supp);
+  document.getElementById('roiStaffVal').textContent= fmtUSD(staff);
+
+  // Total annual FTE cost pool (all employees)
+  const totalFTEcost = emp * sal;
+
+  // Calculate savings per selected department using Odoo benchmark efficiency rates
+  const selectedDepts = ROI_DEPTS.filter(d => roiDeptSelection[d.id]);
+  let totalSavings = 0;
+  const deptSavings = [];
+
+  selectedDepts.forEach(d => {
+    // Scale FTE proportionally to company size (template uses 50 FTE baseline)
+    const scaledFTE = (d.fte / 50) * emp;
+    const deptFTEcost = scaledFTE * sal;
+    const savings = Math.round(deptFTEcost * d.eff);
+    totalSavings += savings;
+    deptSavings.push({ ...d, savings, scaledFTE: Math.round(scaledFTE * 10) / 10 });
+  });
+
+  // Software replacement savings (Odoo replaces legacy tools)
+  const swSavings = Math.round(sw * SW_SAVINGS_RATIO);
+  totalSavings += swSavings;
+
+  // Year 1 cost (implementation + first year subscription + support + staff)
+  const y1cost = impl + sub + supp + staff;
+  // Recurring annual cost (years 2+)
+  const recurringCost = sub + supp;
+  // Year 1 net (savings ramp up to 75% in Y1)
+  const y1savings = Math.round(totalSavings * 0.75);
+
+  // 5-year cash flows (Odoo template pattern: Y1 ramp, Y2-5 full)
+  const cashFlows = [
+    y1savings - y1cost,
+    totalSavings - recurringCost,
+    totalSavings - recurringCost,
+    totalSavings - recurringCost,
+    totalSavings - recurringCost,
+  ];
+
+  // Cumulative
+  const cumulative = [];
+  let cum = 0;
+  cashFlows.forEach(cf => { cum += cf; cumulative.push(cum); });
+
+  // Payback
+  const totalInvest = impl + staff;
+  let paybackMonths = null;
+  if (totalSavings > 0) {
+    const annualNet = totalSavings - recurringCost;
+    if (y1savings > y1cost) {
+      paybackMonths = Math.max(6, Math.round((y1cost / y1savings) * 12));
+    } else {
+      paybackMonths = 12 + Math.round(((y1cost - y1savings) / annualNet) * 12);
+    }
+  }
+
+  // 3-yr ROI
+  const net3 = cumulative[2];
+  const invest3 = y1cost + recurringCost * 2;
+  const roi3 = invest3 > 0 ? Math.round((net3 / invest3) * 100) : 0;
+
+  // ── UPDATE DOM ──
+  document.getElementById('roiSavings').innerHTML = fmtUSD(totalSavings) + '<span class="roi-result-unit">/yr</span>';
+  document.getElementById('roiSubline').textContent =
+    selectedDepts.length + ' dept' + (selectedDepts.length !== 1 ? 's' : '') + ' · ' +
+    emp + ' employees · ' + Math.round(totalSavings / (emp * sal) * 100) + '% FTE efficiency gain';
+
+  document.getElementById('bkPayback').textContent = paybackMonths
+    ? (paybackMonths < 12 ? paybackMonths + ' months' : (paybackMonths/12).toFixed(1) + ' years')
+    : '—';
+  document.getElementById('bkRoi3').textContent = roi3 > 0 ? roi3 + '%' : '—';
+  document.getElementById('bkNet3').textContent = fmtUSD(net3);
+  document.getElementById('bkSwSave').textContent = swSavings > 0 ? fmtUSD(swSavings) + '/yr' : '$0/yr';
+
+  // ── DEPT SAVINGS LIST ──
+  const list = document.getElementById('roiDeptSavingsList');
+  if (deptSavings.length === 0) {
+    list.innerHTML = '<div style="font-size:11px;color:rgba(255,255,255,.3);text-align:center;padding:16px;">Select departments in Tab 2</div>';
+  } else {
+    const maxS = Math.max(...deptSavings.map(d => d.savings));
+    list.innerHTML = [...deptSavings]
+      .sort((a,b) => b.savings - a.savings)
+      .map(d => `
+        <div class="roi-dept-savings-row">
+          <span class="roi-dept-savings-name">${d.icon} ${d.name}
+            <span class="roi-dept-eff-badge">${Math.round(d.eff*100)}% eff.</span>
+          </span>
+          <span class="roi-dept-savings-val">${fmtUSD(d.savings)}</span>
+        </div>
+        <div style="padding:0 6px 4px"><div class="roi-bar-track"><div class="roi-bar-fill" style="width:${Math.round((d.savings/maxS)*100)}%"></div></div></div>
+      `).join('') +
+      (swSavings > 0 ? `
+        <div class="roi-dept-savings-row" style="border-color:rgba(212,168,67,.2)">
+          <span class="roi-dept-savings-name">💾 Software Replacement</span>
+          <span class="roi-dept-savings-val" style="color:var(--gold)">${fmtUSD(swSavings)}</span>
+        </div>` : '');
+  }
+
+  // ── 5-YEAR CHART ──
+  const chart = document.getElementById('roi5yrChart');
+  const maxAbs = Math.max(...cumulative.map(Math.abs), 1);
+  chart.innerHTML = cumulative.map((val, i) => {
+    const isNeg = val < 0;
+    const pct = Math.round((Math.abs(val) / maxAbs) * 100);
+    return `<div class="roi-yr-bar-wrap">
+      <div class="roi-yr-val" style="color:${isNeg ? '#f87171' : 'var(--teal-mid)'}">${fmtUSD(val)}</div>
+      <div class="roi-yr-bar-outer">
+        <div class="${isNeg ? 'roi-yr-bar-neg' : 'roi-yr-bar-pos'}" style="height:${pct}%"></div>
+      </div>
+      <div class="roi-yr-label">Year ${i+1}</div>
+    </div>`;
+  }).join('');
+}
+
+// Init
+roiBuildDeptGrid();
+document.addEventListener('DOMContentLoaded', () => { roiBuildDeptGrid(); roiCalc(); });
+</script>
+
+<!-- FOOTER V2 — Professional 4-Column -->
+<footer class="footer-v2">
+  <div class="footer-v2-inner">
+    <!-- Col 1: Brand -->
+    <div>
+      <div class="fv2-brand-logo"><img src="./assets/img/nexa.gif" alt="Nexa Solutions"></div>
+      <div class="fv2-brand-name">Mohamed <span>Abu Emira</span></div>
+      <div class="fv2-brand-sub">COO & Co-Founder @ Nexa Solutions · Odoo Official Partner · 10+ Years ERP Experience across Egypt & GCC</div>
+      <div class="fv2-social">
+        <a href="https://linkedin.com/in/abuemira" target="_blank" class="fv2-soc-btn" title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://wa.me/201005061349" target="_blank" class="fv2-soc-btn" title="WhatsApp" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="https://medium.com/@abuemira" target="_blank" class="fv2-soc-btn" title="Medium Blog" aria-label="Medium">
+          <svg viewBox="0 0 24 24"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+        </a>
+        <a href="https://github.com/abuemira-nexa" target="_blank" class="fv2-soc-btn" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="https://www.nexa-solutions.com" target="_blank" class="fv2-soc-btn" title="Nexa Solutions" aria-label="Nexa Solutions">
+          <span style="font-size:14px;font-weight:800;font-family:'Sora',sans-serif;">N</span>
+        </a>
+      </div>
+      <div style="margin-top:16px">
+        <div class="fv2-nexa-badge">🟣 Odoo Official Partner · Nexa Solutions</div>
+      </div>
+    </div>
+    <!-- Col 2: Quick Links -->
+    <div>
+      <div class="fv2-col-title">Quick Links</div>
+      <ul class="fv2-links">
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#nexa">Nexa Solutions</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#roi">ROI Calculator</a></li>
+        <li><a href="#blog">Blog</a></li>
+      </ul>
+    </div>
+    <!-- Col 3: Services -->
+    <div>
+      <div class="fv2-col-title">Services</div>
+      <ul class="fv2-links">
+        <li><a href="#services">Odoo Implementation</a></li>
+        <li><a href="#services">ERP Project Management</a></li>
+        <li><a href="#services">Business Analysis & GAP</a></li>
+        <li><a href="#services">Data Migration</a></li>
+        <li><a href="#services">Financial Module Setup</a></li>
+        <li><a href="#services">Post Go-Live Support</a></li>
+        <li><a href="#services">Odoo Training</a></li>
+        <li><a href="https://www.nexa-solutions.com" target="_blank">Nexa Solutions ↗</a></li>
+      </ul>
+    </div>
+    <!-- Col 4: Contact -->
+    <div>
+      <div class="fv2-col-title">Get In Touch</div>
+      <div class="fv2-contact-row">
+        <div class="fv2-contact-ico">📞</div>
+        <div>
+          <div class="fv2-contact-lbl">Phone / WhatsApp</div>
+          <div class="fv2-contact-val"><a href="tel:+201005061349">+20 100 506 1349</a></div>
+        </div>
+      </div>
+      <div class="fv2-contact-row">
+        <div class="fv2-contact-ico">✉️</div>
+        <div>
+          <div class="fv2-contact-lbl">Email</div>
+          <div class="fv2-contact-val"><a href="mailto:abuemira@nexa-solutions.com">abuemira@nexa-solutions.com</a></div>
+        </div>
+      </div>
+      <div class="fv2-contact-row">
+        <div class="fv2-contact-ico">📍</div>
+        <div>
+          <div class="fv2-contact-lbl">Location</div>
+          <div class="fv2-contact-val">Giza, Egypt · Serving Egypt & GCC</div>
+        </div>
+      </div>
+      <div class="fv2-contact-row">
+        <div class="fv2-contact-ico">🌐</div>
+        <div>
+          <div class="fv2-contact-lbl">Portfolio</div>
+          <div class="fv2-contact-val"><a href="https://mohamedabuemira.github.io" target="_blank">mohamedabuemira.github.io ↗</a></div>
+        </div>
+      </div>
+      <a href="https://calendly.com/abuemira/30min" target="_blank" class="btn-gold" style="margin-top:16px;font-size:12px;padding:10px 18px;border-radius:10px;">📅 Book Free Consultation</a>
+    </div>
+  </div>
+  <div class="fv2-bottom">
+    <div class="fv2-copyright">© 2026 Mohamed Essam Abu Emira · COO @ Nexa Solutions · All rights reserved</div>
+    <div class="fv2-bottom-links">
       <a href="https://linkedin.com/in/abuemira" target="_blank">LinkedIn</a>
       <a href="https://www.nexa-solutions.com" target="_blank">Nexa Solutions</a>
-      <a href="https://mohamedabuemira.github.io" target="_blank">Portfolio</a>
-      <a href="https://medium.com/@abuemira" target="_blank">Blog</a>
-      <a href="https://calendly.com/abuemira/30min" target="_blank">Book Meeting</a>
+      <a href="#roi">ROI Calculator</a>
+      <a href="#contact">Contact</a>
     </div>
   </div>
 </footer>
@@ -2961,7 +3614,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* Add nav links for new sections */
   const navLinksDiv = document.querySelector('.nav-links');
   const ctaLink = navLinksDiv.querySelector('.nav-cta');
-  ['#blog:Blog'].forEach(pair => {
+  ['#blog:Blog','#roi:ROI Calc'].forEach(pair => {
     const [href, txt] = pair.split(':');
     const a = document.createElement('a'); a.href = href; a.textContent = txt;
     navLinksDiv.insertBefore(a, ctaLink);
@@ -3788,28 +4441,245 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.appendChild(waBtn);
   updateFixedBtnPos();
 
+  /* ══ SCROLL REVEAL (enhanced with stagger) ══ */
+  const revealEls = document.querySelectorAll(".cs-card,.svc-card,.test-card,.exp-card,.nx-card,.blog-card,.proj-card,.cert-card");
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach((e, idx) => {
+      if (e.isIntersecting) {
+        setTimeout(() => {
+          e.target.style.opacity = "1";
+          e.target.style.transform = "translateY(0)";
+        }, (Array.from(revealEls).indexOf(e.target) % 4) * 80);
+        revObs.unobserve(e.target);
+      }
+    });
+  }, {threshold: .07});
+  revealEls.forEach(el => {
+    el.style.opacity = "0";
+    el.style.transform = "translateY(22px)";
+    el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+    revObs.observe(el);
+  });
+
   /* ══ STAT COUNTER ══ */
   const statNums = document.querySelectorAll(".stat-n");
   const countUp = el => { const t=parseInt(el.textContent.replace(/\D/g,""),10),s=el.textContent.replace(/[0-9]/g,""); if(isNaN(t))return; let c=0; const step=Math.max(1,Math.floor(t/40)),tim=setInterval(()=>{c=Math.min(c+step,t);el.textContent=c+s;if(c>=t)clearInterval(tim);},30); };
   const stObs = new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){statNums.forEach(countUp);stObs.disconnect();}});},{threshold:.5});
   const statsBar=document.querySelector(".stats-bar"); if(statsBar)stObs.observe(statsBar);
 
-  /* ══ MOBILE NAV ══ */
-  const navLinksEl=document.querySelector(".nav-links");
-  const hamburger=document.createElement("button");
-  hamburger.innerHTML="☰";
-  Object.assign(hamburger.style,{display:"none",background:"transparent",border:"none",color:"#fff",fontSize:"22px",cursor:"pointer",padding:"6px"});
-  navEl.insertBefore(hamburger, ctrls);
-  const mq=window.matchMedia("(max-width:900px)");
-  const handleMQ=e=>{if(e.matches){hamburger.style.display="block";navLinksEl.style.display="none";navLinksEl.style.cssText="display:none;position:absolute;top:62px;left:0;right:0;background:rgba(13,27,46,.98);padding:16px 24px;flex-direction:column;gap:4px;z-index:199;";}else{hamburger.style.display="none";navLinksEl.style.cssText="";}};
-  mq.addEventListener("change",handleMQ); handleMQ(mq);
-  hamburger.addEventListener("click",()=>{const o=navLinksEl.style.display==="flex";navLinksEl.style.display=o?"none":"flex";hamburger.innerHTML=o?"☰":"✕";});
-  navLinksEl.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{if(mq.matches){navLinksEl.style.display="none";hamburger.innerHTML="☰";}}));
+  /* ══ MOBILE NAV — Professional Slide-in Drawer ══ */
+  const navLinksEl = document.querySelector(".nav-links");
+  const mq = window.matchMedia("(max-width:900px)");
 
-  /* ══ SCROLL REVEAL ══ */
-  const revealEls=document.querySelectorAll("#pg .cs-card,.svc-card,.cert-hl,.test-card,.exp-card,.ind-card,.nx-card,.blog-card");
-  const revObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity="1";e.target.style.transform="translateY(0)";revObs.unobserve(e.target);}});},{threshold:.08});
-  revealEls.forEach(el=>{el.style.opacity="0";el.style.transform="translateY(18px)";el.style.transition="opacity 0.45s ease, transform 0.45s ease";revObs.observe(el);});
+  /* Inject drawer styles */
+  const drawerStyle = document.createElement('style');
+  drawerStyle.textContent = `
+    #mobDrawerOverlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:998;opacity:0;pointer-events:none;transition:opacity .3s}
+    #mobDrawerOverlay.open{opacity:1;pointer-events:all}
+    #mobDrawer{position:fixed;top:0;left:0;bottom:0;width:min(320px,85vw);background:linear-gradient(160deg,#0d1b2e 0%,#0d2a40 100%);z-index:999;transform:translateX(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;border-right:1px solid rgba(255,255,255,.07)}
+    #mobDrawer.open{transform:translateX(0)}
+    .mob-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .mob-drawer-brand{display:flex;align-items:center;gap:10px;font-family:"Sora",sans-serif;font-size:14px;font-weight:700;color:#fff}
+    .mob-drawer-photo{width:36px;height:36px;border-radius:50%;overflow:hidden;border:2px solid rgba(212,168,67,.5);flex-shrink:0}
+    .mob-drawer-photo img{width:100%;height:100%;object-fit:cover}
+    .mob-close-btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}
+    .mob-close-btn:hover{background:rgba(255,255,255,.2)}
+    .mob-drawer-nav{padding:12px 0}
+    .mob-drawer-nav a{display:flex;align-items:center;gap:12px;padding:13px 22px;font-size:15px;font-weight:600;color:rgba(255,255,255,.75);border-left:3px solid transparent;transition:all .2s;text-decoration:none}
+    .mob-drawer-nav a:hover,.mob-drawer-nav a.active-link{color:#fff;background:rgba(255,255,255,.06);border-left-color:var(--teal)}
+    .mob-drawer-nav a .mob-nav-icon{font-size:16px;width:20px;text-align:center;flex-shrink:0}
+    .mob-drawer-cta{margin:16px 20px 0;background:var(--gold);color:var(--navy);font-weight:700;border-radius:10px;padding:13px;text-align:center;display:block;font-size:14px;text-decoration:none;transition:all .2s}
+    .mob-drawer-cta:hover{background:var(--gold-lt)}
+    .mob-drawer-footer{padding:20px 22px;border-top:1px solid rgba(255,255,255,.08);margin-top:12px}
+    .mob-drawer-contact a{display:block;font-size:12px;color:rgba(255,255,255,.5);margin-bottom:5px;text-decoration:none}
+    .mob-drawer-contact a:hover{color:var(--teal-mid)}
+    .hamburger-btn{display:none;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);border-radius:8px;color:#fff;font-size:18px;cursor:pointer;padding:6px 10px;transition:background .2s;line-height:1;flex-shrink:0}
+    .hamburger-btn:hover{background:rgba(255,255,255,.18)}
+    @media(max-width:900px){.hamburger-btn{display:flex;align-items:center;justify-content:center}}
+  `;
+  document.head.appendChild(drawerStyle);
+
+  /* Build overlay */
+  const overlay = document.createElement('div');
+  overlay.id = 'mobDrawerOverlay';
+  document.body.appendChild(overlay);
+
+  /* Build drawer */
+  const drawer = document.createElement('div');
+  drawer.id = 'mobDrawer';
+  const navItems = [
+    {href:'#roi',icon:'💰',label:'ROI Calc'},
+    {href:'#about',icon:'👤',label:'About'},
+    {href:'#nexa',icon:'🏢',label:'Nexa'},
+    {href:'#services',icon:'⚙️',label:'Services'},
+    {href:'#experience',icon:'💼',label:'Experience'},
+    {href:'#projects',icon:'📁',label:'Projects'},
+    {href:'#clients',icon:'🤝',label:'Clients'},
+    {href:'#testimonials',icon:'⭐',label:'Reviews'},
+    {href:'#certifications',icon:'🎓',label:'Certifications'},
+    {href:'#contact',icon:'✉️',label:'Contact'},
+  ];
+  drawer.innerHTML = `
+    <div class="mob-drawer-header">
+      <div class="mob-drawer-brand">
+        <div class="mob-drawer-photo"><img src="./assets/img/abu-emira.jpg" alt="Mohamed Abu Emira"></div>
+        <div><div style="font-size:13px;font-weight:700;color:#fff">Mohamed Abu Emira</div><div style="font-size:10px;color:rgba(255,255,255,.45);margin-top:1px">COO @ Nexa Solutions</div></div>
+      </div>
+      <button class="mob-close-btn" id="mobCloseBtn">✕</button>
+    </div>
+    <nav class="mob-drawer-nav">
+      ${navItems.map(n=>`<a href="${n.href}"><span class="mob-nav-icon">${n.icon}</span>${n.label}</a>`).join('')}
+    </nav>
+    <a href="https://calendly.com/abuemira/30min" target="_blank" class="mob-drawer-cta">📅 Book Free Consultation</a>
+    <div class="mob-drawer-footer">
+      <div class="mob-drawer-contact">
+        <a href="tel:+201005061349">📞 +20 100 506 1349</a>
+        <a href="mailto:abuemira@nexa-solutions.com">✉️ abuemira@nexa-solutions.com</a>
+        <a href="https://linkedin.com/in/abuemira" target="_blank">🔗 linkedin.com/in/abuemira</a>
+      </div>
+    </div>`;
+  document.body.appendChild(drawer);
+
+  /* Build hamburger button */
+  const hamburger = document.createElement('button');
+  hamburger.className = 'hamburger-btn';
+  hamburger.innerHTML = '☰';
+  hamburger.setAttribute('aria-label', 'Open menu');
+  navEl.insertBefore(hamburger, ctrls);
+
+  /* Open/close functions */
+  function openDrawer() {
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    hamburger.innerHTML = '✕';
+  }
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    hamburger.innerHTML = '☰';
+  }
+
+  hamburger.addEventListener('click', () => drawer.classList.contains('open') ? closeDrawer() : openDrawer());
+  overlay.addEventListener('click', closeDrawer);
+  document.getElementById('mobCloseBtn').addEventListener('click', closeDrawer);
+  drawer.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', () => setTimeout(closeDrawer, 120)));
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeDrawer(); });
+
+  /* Handle resize */
+  const handleMQ = e => { if (!e.matches) closeDrawer(); };
+  mq.addEventListener('change', handleMQ);
+
+  /* ══ SCROLL PROGRESS BAR ══ */
+  const progressBar = document.createElement('div');
+  progressBar.id = 'scrollProgress';
+  const pbStyle = document.createElement('style');
+  pbStyle.textContent = `
+    #scrollProgress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));z-index:9999;width:0%;transition:width .1s linear;border-radius:0 2px 2px 0}
+    /* ── GLASSMORPHISM NAV on scroll ── */
+    .nav.scrolled{background:rgba(13,27,46,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:rgba(255,255,255,.12);box-shadow:0 4px 30px rgba(0,0,0,.3)}
+    /* ── AVAILABILITY BADGE ── */
+    .avail-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.35);border-radius:30px;padding:6px 14px;font-size:12px;font-weight:700;color:#22c55e;margin-bottom:16px;animation:badge-pulse 3s ease-in-out infinite}
+    .avail-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:dot-blink 1.4s ease-in-out infinite}
+    @keyframes badge-pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.15)}60%{box-shadow:0 0 0 6px rgba(34,197,94,0)}}
+    @keyframes dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
+    /* ── TYPING CURSOR ── */
+    .typing-cursor{display:inline-block;width:3px;height:.85em;background:var(--gold);border-radius:2px;margin-left:2px;vertical-align:middle;animation:cur-blink .85s steps(1) infinite}
+    @keyframes cur-blink{0%,100%{opacity:1}50%{opacity:0}}
+    /* ── SCROLL INDICATOR ── */
+    .scroll-indicator{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;color:rgba(255,255,255,.35);font-size:10px;font-weight:600;letter-spacing:.08em;animation:scroll-bob 2.2s ease-in-out infinite}
+    .scroll-indicator svg{animation:scroll-arrow 1.6s ease-in-out infinite}
+    @keyframes scroll-bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+    @keyframes scroll-arrow{0%,100%{opacity:.35}50%{opacity:.9}}
+    @media(max-width:900px){.scroll-indicator{display:none}}
+    /* ── ENHANCED HOVER on stat cards ── */
+    .stat{transition:background .2s,box-shadow .2s;cursor:default}
+    .stat:hover{background:var(--teal-light);box-shadow:inset 0 -3px 0 var(--teal)}
+    /* ── SECTION REVEAL (broader) ── */
+    .section-reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+    .section-reveal.visible{opacity:1;transform:translateY(0)}
+  `;
+  document.head.appendChild(pbStyle);
+  document.body.appendChild(progressBar);
+
+  window.addEventListener('scroll', () => {
+    const s = document.documentElement.scrollTop;
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    progressBar.style.width = (s / h * 100) + '%';
+    navEl.classList.toggle('scrolled', s > 60);
+  }, {passive: true});
+
+  /* ══ AVAILABILITY BADGE + TYPING ANIMATION ══ */
+  const heroName = document.querySelector('.hero-name');
+  if (heroName) {
+    /* Insert availability badge above name */
+    const badge = document.createElement('div');
+    badge.className = 'avail-badge';
+    badge.innerHTML = '<span class="avail-dot"></span>Available for New Projects · متاح لمشاريع جديدة';
+    heroName.parentElement.insertBefore(badge, heroName);
+  }
+
+  /* Typing animation for hero subtitle */
+  const heroSubtitle = document.querySelector('.hero-subtitle');
+  if (heroSubtitle) {
+    const roles = [
+      'Odoo Project Manager',
+      'ERP Operations Manager',
+      'COO & Co-Founder @ Nexa',
+      'Financial Manager',
+      'Product Owner',
+    ];
+    const isAR = document.documentElement.getAttribute('data-lang') === 'ar';
+    const rolesAR = [
+      'مدير مشاريع أودو',
+      'مدير عمليات ERP',
+      'المدير التنفيذي ومؤسس مشارك',
+      'مدير مالي',
+      'مالك المنتج',
+    ];
+    const list = isAR ? rolesAR : roles;
+    let ri = 0, ci = 0, deleting = false;
+    const cursor = document.createElement('span');
+    cursor.className = 'typing-cursor';
+    const typingSpan = document.createElement('span');
+    heroSubtitle.textContent = '';
+    heroSubtitle.appendChild(typingSpan);
+    heroSubtitle.appendChild(cursor);
+
+    function typeStep() {
+      const word = list[ri];
+      if (!deleting) {
+        typingSpan.textContent = word.slice(0, ci + 1);
+        ci++;
+        if (ci === word.length) { deleting = true; setTimeout(typeStep, 1800); return; }
+        setTimeout(typeStep, 70);
+      } else {
+        typingSpan.textContent = word.slice(0, ci - 1);
+        ci--;
+        if (ci === 0) { deleting = false; ri = (ri + 1) % list.length; setTimeout(typeStep, 300); return; }
+        setTimeout(typeStep, 38);
+      }
+    }
+    setTimeout(typeStep, 900);
+  }
+
+  /* ══ SCROLL INDICATOR IN HERO ══ */
+  const heroSection = document.querySelector('.hero');
+  if (heroSection) {
+    heroSection.style.position = 'relative';
+    const scrollInd = document.createElement('div');
+    scrollInd.className = 'scroll-indicator';
+    scrollInd.innerHTML = `SCROLL<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>`;
+    heroSection.appendChild(scrollInd);
+  }
+
+  /* ══ SECTION REVEAL OBSERVER (expanded elements) ══ */
+  const broadReveal = document.querySelectorAll('.sec-title,.sec-tag,.kpi,.hl-item,.why-card,.ind-card,.edu-card,.cert-hl,.award-card,.nx-stat');
+  const broadObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); broadObs.unobserve(e.target); }});
+  }, {threshold: 0.12});
+  broadReveal.forEach(el => { el.classList.add('section-reveal'); broadObs.observe(el); });
 
   /* ══ CASE STUDY MODAL ══ */
   const csData = {
