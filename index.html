@@ -338,8 +338,71 @@ img{display:block;max-width:100%}
 .award-card p{font-size:13px;opacity:.8;line-height:1.65}
 .award-year{font-size:11px;font-weight:700;opacity:.6;margin-top:10px}
 
-/* ── TESTIMONIALS ── */
-.test-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+/* ── CLIENTS LOGO STRIP ── */
+.clients-section{padding:60px 0;overflow:hidden;background:var(--white);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200)}
+.clients-header{max-width:1100px;margin:0 auto;padding:0 40px;text-align:center;margin-bottom:36px}
+.logo-strip-outer{overflow:hidden;mask-image:linear-gradient(to right,transparent 0,#000 10%,#000 90%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0,#000 10%,#000 90%,transparent 100%)}
+.logo-strip-outer+.logo-strip-outer{margin-top:14px}
+.logo-strip-track{display:flex;gap:16px;width:max-content;animation:logo-scroll 40s linear infinite}
+.logo-strip-track.rev{animation:logo-scroll-rev 38s linear infinite}
+.logo-strip-track:hover,.logo-strip-track.rev:hover{animation-play-state:paused}
+@keyframes logo-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes logo-scroll-rev{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.logo-item{flex-shrink:0;width:120px;height:64px;border-radius:var(--r);background:var(--gray-50);border:1px solid var(--gray-200);display:flex;align-items:center;justify-content:center;padding:10px 12px;transition:border-color .25s,box-shadow .25s;overflow:hidden}
+.logo-item:hover{border-color:rgba(1,126,132,.3);box-shadow:var(--sh)}
+.logo-item img{width:100%;height:100%;object-fit:contain;object-position:center;filter:grayscale(30%);transition:filter .3s;display:block}
+.logo-item:hover img{filter:grayscale(0%)}
+
+/* ── WHY WORK WITH ME ── */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+.why-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--rl);padding:24px;display:flex;align-items:flex-start;gap:16px;box-shadow:0 2px 10px rgba(0,0,0,.04);transition:all .22s}
+.why-card:hover{border-color:var(--teal);transform:translateY(-2px);box-shadow:var(--sh)}
+.why-card:hover .why-ico{background:linear-gradient(135deg,rgba(1,126,132,.2),rgba(1,126,132,.1));border-color:rgba(1,126,132,.3)}
+.why-ico{width:48px;height:48px;border-radius:12px;background:var(--teal-light);border:1px solid rgba(1,126,132,.18);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;transition:all .22s}
+.why-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px}
+.why-desc{font-size:12px;color:var(--gray-600);line-height:1.7}
+
+/* ── TESTIMONIALS — MARQUEE ── */
+.test-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:44px;flex-wrap:wrap;gap:16px}
+.marquee-outer{overflow:hidden;direction:ltr;margin:0 -24px}
+.marquee-track{display:flex;gap:20px;width:max-content;animation:scroll-left 54s linear infinite;direction:ltr}
+.marquee-track:hover{animation-play-state:paused}
+@keyframes scroll-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.test-card-mq{width:320px;flex-shrink:0;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--rl);padding:26px 24px;transition:border-color .2s,box-shadow .2s}
+.test-card-mq:hover{border-color:rgba(1,126,132,.3);box-shadow:var(--sh)}
+.test-stars-mq{color:#D97706;font-size:.9rem;letter-spacing:1px;margin-bottom:13px}
+.test-q-mq{font-size:.84rem;color:var(--gray-600);line-height:1.72;margin-bottom:18px;font-style:italic}
+.test-author-mq{display:flex;align-items:center;gap:11px}
+.test-av-mq{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(1,126,132,.2);flex-shrink:0;background:var(--gray-100)}
+.test-name-mq{font-size:.86rem;font-weight:700;color:var(--text)}
+.test-role-mq{font-size:.71rem;color:var(--gray-400)}
+.test-li-mq{display:inline-block;margin-top:4px;font-size:.68rem;font-weight:700;color:var(--teal);transition:color .2s}
+.test-badge{display:flex;align-items:center;gap:8px;background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.28);border-radius:40px;padding:7px 16px;width:fit-content}
+.test-badge-star{color:var(--gold);font-size:.95rem}
+.test-badge-score{font-size:.8rem;font-weight:700;color:var(--gold)}
+.test-badge-count{font-size:.75rem;color:var(--gray-600);font-weight:600}
+.btn-test-all-mq{display:inline-flex;align-items:center;gap:9px;font-size:.8rem;white-space:nowrap;align-self:flex-end;cursor:pointer;border:1.5px solid rgba(1,126,132,.35);background:none;color:var(--gray-600);padding:12px 26px;border-radius:50px;font-weight:600;transition:border-color .2s,background .2s,color .2s}
+.btn-test-all-mq:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-light)}
+/* Full modal */
+.full-modal-overlay{display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);overflow-y:auto;padding:24px 16px;-webkit-overflow-scrolling:touch}
+.full-modal-overlay.open{display:block}
+.full-modal-box{background:var(--white);border:1px solid var(--gray-200);border-radius:20px;max-width:860px;width:100%;margin:0 auto;overflow:hidden;box-shadow:var(--sh-lg)}
+.full-modal-hdr{background:linear-gradient(135deg,var(--navy),var(--navy-700));padding:26px 30px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.full-modal-tag{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:7px}
+.full-modal-title{font-family:"Sora",sans-serif;font-size:clamp(20px,3vw,28px);font-weight:700;color:#fff;line-height:1.2}
+.full-modal-title span{color:var(--teal-mid)}
+.full-modal-close{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.12);border:none;cursor:pointer;color:#fff;font-size:17px;font-weight:700;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:background .2s;line-height:1}
+.full-modal-close:hover{background:rgba(255,255,255,.25)}
+.full-modal-body{padding:28px 30px;max-height:78vh;overflow-y:auto}
+/* Recs filter + grid */
+.recs-filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.recs-filter-btn{padding:6px 16px;border-radius:40px;font-size:.76rem;font-weight:700;cursor:pointer;transition:all .2s;border:1.5px solid var(--gray-200);background:var(--gray-100);color:var(--gray-600)}
+.recs-filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+#recsGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.rec-card-anim{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--rl);padding:22px;display:flex;flex-direction:column;gap:14px}
+.test-li-btn{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--teal);margin-top:10px;padding:4px 11px;border-radius:20px;background:var(--teal-light);border:1px solid rgba(1,126,132,.2);transition:all .18s;text-decoration:none}
+.test-li-btn:hover{background:var(--teal);color:#fff}
+@media(max-width:600px){#recsGrid{grid-template-columns:1fr}}
 .test-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--rl);padding:26px;position:relative;box-shadow:0 2px 10px rgba(0,0,0,.04);transition:all .22s}
 .test-card:hover{border-color:rgba(1,126,132,.25);box-shadow:var(--sh)}
 .test-qmark{font-family:"Sora",sans-serif;font-size:62px;line-height:1;color:var(--teal-light);font-weight:800;position:absolute;top:10px;right:16px}
@@ -666,11 +729,10 @@ img{transition:opacity .3s ease}
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#nexa">Nexa</a>
-    <a href="#industries">Industries</a>
     <a href="#services">Services</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
-    <a href="#certifications">Certifications</a>
+    <a href="#clients">Clients</a>
     <a href="#testimonials">Reviews</a>
     <a href="#contact">Contact</a>
     <a href="https://calendly.com/abuemira/30min" target="_blank" class="nav-cta">📅 Book Meeting</a>
@@ -2550,24 +2612,121 @@ img{transition:opacity .3s ease}
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="section alt" id="testimonials">
+<!-- OUR CLIENTS -->
+<section class="clients-section" id="clients">
+  <div class="clients-header">
+    <div class="sec-tag">Our Clients</div>
+    <h2 class="sec-title" style="font-size:27px;font-weight:800;color:var(--text);letter-spacing:-.3px;margin-bottom:12px">Trusted by <span style="color:var(--teal)">79+ Businesses</span></h2>
+    <p style="font-size:14px;color:var(--gray-600);max-width:520px;margin:0 auto;line-height:1.7">From startups to enterprise groups — across Egypt, Saudi Arabia &amp; the GCC.</p>
+  </div>
+  <div class="logo-strip-outer">
+    <div class="logo-strip-track"><div class="logo-item"><img src="./assets/img/projects/12cups.jpg" alt="12Cups" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/abdelhameedkhoory.jpg" alt="Abdelhameedkhoory" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/advancedenergy.jpeg" alt="Advancedenergy" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/alamanahcare.png" alt="Alamanahcare" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/alaqalezdehar.png" alt="Alaqalezdehar" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/albadertrading.jpg" alt="Albadertrading" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/almarai_alarabia.jpeg" alt="Almarai Alarabia" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/almodhy.jpg" alt="Almodhy" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/alrajhiekhwan.jpg" alt="Alrajhiekhwan" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/alsahlygroup.jpg" alt="Alsahlygroup" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/ambiancefurniture.png" alt="Ambiancefurniture" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/amoudigroup.jpg" alt="Amoudigroup" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/arabianpioneer.jpg" alt="Arabianpioneer" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/aroma-sense.jpeg" alt="Aroma Sense" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/bazar.png" alt="Bazar" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/beamconsolidated_logo.jpeg" alt="Beamconsolidated" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/binladin.jpg" alt="Binladin" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/caryoka.jpg" alt="Caryoka" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/cashprime.png" alt="Cashprime" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/cavalero.jpg" alt="Cavalero" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/charactermen.png" alt="Charactermen" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/construction_engineering_systems.jpg" alt="Constr. Engineering" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/cuisineart.jpg" alt="Cuisineart" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/easternyields.jpg" alt="Easternyields" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/emirogroup.png" alt="Emirogroup" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/ensan.jpg" alt="Ensan" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/eralighting.jpg" alt="Era Lighting" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/etqan.png" alt="Etqan" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/famfood.png" alt="Famfood" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/fastforwardlogistics.png" alt="FastForward Logistics" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/filterpure.png" alt="Filterpure" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/greena.png" alt="Greena" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/hemicoffee.jpg" alt="Hemicoffee" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/hittin.png" alt="Hittin" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/infinitymd.png" alt="InfinityMD" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/12cups.jpg" alt="12Cups" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/abdelhameedkhoory.jpg" alt="Abdelhameedkhoory" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/advancedenergy.jpeg" alt="Advancedenergy" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/alamanahcare.png" alt="Alamanahcare" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/alaqalezdehar.png" alt="Alaqalezdehar" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/albadertrading.jpg" alt="Albadertrading" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/almarai_alarabia.jpeg" alt="Almarai Alarabia" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/almodhy.jpg" alt="Almodhy" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div></div>
+  </div>
+  <div class="logo-strip-outer" style="margin-top:14px">
+    <div class="logo-strip-track rev"><div class="logo-item"><img src="./assets/img/projects/inmart_store.jpg" alt="Inmart Store" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/iya.jpg" alt="Iya" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/jedoudna.jpg" alt="Jedoudna" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/jefegypt.png" alt="JEF Egypt" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/nadi.png" alt="Nadi" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/onevision.jpeg" alt="One Vision" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/orninatw.jpg" alt="Orninatw" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/qafa-arabia.jpg" alt="Qafa Arabia" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/reuof_alsham.jpg" alt="Reuof Alsham" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/ricracshop.jpeg" alt="Ricrac Shop" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/rosekid.png" alt="Rosekid" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/royatgroup.jpg" alt="Royat Group" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/sabtrd.png" alt="SAB Trading" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/sammakieh.png" alt="Sammakieh" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/seet.png" alt="Seet" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/shararco.jpg" alt="Shararco" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/silver_tex.jpg" alt="Silver Tex" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/sindam.jpg" alt="Sindam" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/slim_fit_nutrition.png" alt="Slim Fit Nutrition" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/smartshelf.jpeg" alt="Smartshelf" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/sogac.png" alt="Sogac" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/sulbaljazeera.jpg" alt="Sulbal Jazeera" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/tamakkon.jpg" alt="Tamakkon" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/tarahem.png" alt="Tarahem" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/tiba2000.png" alt="Tiba 2000" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/trans_emirates_property.png" alt="Trans Emirates" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/ultramade.png" alt="Ultramade" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/villa_musk.jpg" alt="Villa Musk" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/wahatalahsa.jpg" alt="Wahat Alahsa" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/zinati.jpg" alt="Zinati" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/zuhairfayez.png" alt="Zuhair Fayez" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/inmart_store.jpg" alt="Inmart Store" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/iya.jpg" alt="Iya" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/jedoudna.jpg" alt="Jedoudna" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/jefegypt.png" alt="JEF Egypt" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div><div class="logo-item"><img src="./assets/img/projects/nadi.png" alt="Nadi" loading="lazy" onerror="this.parentElement.style.opacity='0.3'"></div></div>
+  </div>
+</section>
+
+<!-- WHY WORK WITH ME -->
+<section class="section" id="why-work">
   <div class="container">
-    <div class="sec-tag">28+ Recommendations</div>
-    <h2 class="sec-title">What Clients & Colleagues <span>Say</span></h2>
-    <div class="test-grid">
-      <div class="test-card"><div class="test-qmark">"</div><div class="test-text">Mohammad was my go-to colleague when I wanted finance and accounting related consulting. He's precise, professional, time sensitive and dependable. Most importantly, I fully trust him. I'd love to work with him again anytime.</div><div class="test-row"><div class="test-av">HE</div><div><div class="test-name">Hesham Elmahdy</div><div class="test-role">Co-Founder @ OdooTec</div></div></div></div>
-      <div class="test-card"><div class="test-qmark">"</div><div class="test-text">We had a great experience working with Mohamed on our ERP. His strong technical expertise combined with solid accounting knowledge allowed him to deliver a seamless and tailored Odoo solution that fully met our requirements. Highly recommended.</div><div class="test-row"><div class="test-av">MK</div><div><div class="test-name">Mohamed Khalil</div><div class="test-role">Founder & CEO @ PlatFarm</div></div></div></div>
-      <div class="test-card"><div class="test-qmark">"</div><div class="test-text">Mohamed is one of the best Odoo Consultants I've worked with. He has the ability to simplify complex requirements and ensure they're done with the best quality. A kind and helpful professional you'd love on your team.</div><div class="test-row"><div class="test-av">AE</div><div><div class="test-name">Ahmed Elsayed</div><div class="test-role">Senior Python / Odoo Developer</div></div></div></div>
-      <div class="test-card"><div class="test-qmark">"</div><div class="test-text">Mohamed demonstrated exceptional ability to analyze business processes and successfully implement Odoo ERP. His professional approach to project management and communication with stakeholders makes him invaluable to any project.</div><div class="test-row"><div class="test-av">AG</div><div><div class="test-name">Ahmed Galal, PMP® PBA®</div><div class="test-role">Business Consultant & Project Manager</div></div></div></div>
-      <div class="test-card"><div class="test-qmark">"</div><div class="test-text">I had the pleasure of working with Mohamed and highly recommend him. He has exceptional analytical skills, profound expertise in Odoo with a strong focus on financial implementation, and consistently delivers results as a great team player.</div><div class="test-row"><div class="test-av">MD</div><div><div class="test-name">Mohsen DIFALLAH</div><div class="test-role">Python / Odoo Developer</div></div></div></div>
-      <div class="test-card"><div class="test-qmark">"</div><div class="test-text">Muhamad is a hardworking, skilled, and dedicated professional whose eagerness to learn is limitless. His expertise and determination make him a remarkable asset to any team he joins.</div><div class="test-row"><div class="test-av">AG</div><div><div class="test-name">Abdulrahman Gwida</div><div class="test-role">DipIFR · FMVA · Odoo Specialist</div></div></div></div>
-      <div class="test-card"><div class="test-qmark">"</div><div class="test-text">I am pleased to provide this recommendation for Mohamed Essam, who is one of the most skilled and experienced professionals in ERP Consulting, Business Analysis, and Odoo Project Management. During our time working together, Mohamed demonstrated an exceptional ability to analyze business processes, design effective solutions, and successfully implement Odoo ERP projects. Mohamed stands out with his strong analytical skills, deep understanding of business needs, and ability to optimize operations using Odoo systems.</div><div class="test-row"><div class="test-av">AA</div><div><div class="test-name">Ahmed Abdelhak</div><div class="test-role">SAP FI/CO/SD · Odoo ERP Consultant / Business Analyst</div></div></div></div>
-      <div class="test-card"><div class="test-qmark">"</div><div class="test-text">Mohamed has been an integral part of my team as a senior Odoo Implementer for the past five years. Throughout this time, he has consistently demonstrated a deep technical understanding of the Odoo ecosystem and a unique ability to translate complex business requirements into functional, scalable solutions.</div><div class="test-row"><div class="test-av">AH</div><div><div class="test-name">Ahmed Hassan Algammal</div><div class="test-role">Vice President of Sales @ Absolute ERP | Business Transformation</div></div></div></div>
-      <div class="test-card"><div class="test-qmark">"</div><div class="test-text">Mohamed is highly professional, always available, and deeply knowledgeable in Odoo. He listens carefully to business needs and translates them into practical, efficient solutions. His patience and dedication to getting every detail right make him stand out as a true ERP expert.</div><div class="test-row"><div class="test-av">KA</div><div><div class="test-name">Khalid Al-Amri</div><div class="test-role">Operations Manager — GCC Client</div></div></div></div>
-      <div class="test-card"><div class="test-qmark">"</div><div class="test-text">Mohamed delivered our full Odoo 17 implementation on time and exceeded our expectations on every module. His knowledge of the construction industry and financial control requirements allowed us to go live with confidence. I particularly appreciate his post-go-live commitment — he never disappears after delivery.</div><div class="test-row"><div class="test-av">SB</div><div><div class="test-name">Samer Barakat</div><div class="test-role">CEO — Construction Company, Saudi Arabia</div></div></div></div>
+    <div class="sec-tag">Differentiators</div>
+    <h2 class="sec-title">Why Work <span>With Me</span></h2>
+    <p style="font-size:14px;color:var(--gray-600);max-width:560px;margin-bottom:0;line-height:1.75">What sets my approach apart — beyond the certifications and the project count.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-ico">🌍</div>
+        <div>
+          <div class="why-title">Deep Regional Expertise</div>
+          <div class="why-desc">10+ years across Egypt, Saudi Arabia, UAE, and GCC — understanding local business cultures, regulatory environments (VAT, Zakat, e-invoicing), and operational realities that generic ERP firms miss.</div>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-ico">💬</div>
+        <div>
+          <div class="why-title">Bilingual Delivery</div>
+          <div class="why-desc">Fully fluent in Arabic and English — conducting discovery workshops, writing functional specs, and training end-users in either language without any loss of precision or context.</div>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-ico">🔧</div>
+        <div>
+          <div class="why-title">Certified Technical Depth</div>
+          <div class="why-desc">Odoo certified across v16, v17 &amp; v18 with hands-on mastery of accounting, manufacturing, supply chain, HR, CRM, POS, and Studio customization — backed by 50+ professional credentials.</div>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-ico">📊</div>
+        <div>
+          <div class="why-title">Business-First Approach</div>
+          <div class="why-desc">Every ERP decision anchored in financial impact and operational efficiency — not just technical correctness. Your ROI and business outcome is always the metric that matters most.</div>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-ico">🤝</div>
+        <div>
+          <div class="why-title">Post-Go-Live Commitment</div>
+          <div class="why-desc">I don't disappear after delivery. Extended hypercare, user adoption support, and system health checks are a standard part of every engagement — not an upsell.</div>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-ico">⚡</div>
+        <div>
+          <div class="why-title">COO-Level Business Lens</div>
+          <div class="why-desc">As COO of Nexa Solutions, I bridge the gap between C-suite strategy and technical execution — translating boardroom priorities into ERP configurations your team will actually use.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- TESTIMONIALS — MARQUEE -->
+<section class="section alt" id="testimonials" style="overflow:hidden;padding-bottom:80px">
+  <div class="container">
+    <div class="test-head">
+      <div>
+        <div class="sec-tag" style="margin-bottom:14px">Social Proof</div>
+        <h2 class="sec-title" style="margin-bottom:12px">What Clients &amp; Colleagues <span>Say</span></h2>
+        <div style="display:flex;align-items:center;gap:16px;margin-top:4px;flex-wrap:wrap;">
+          <div class="test-badge">
+            <span class="test-badge-star">★★★★★</span>
+            <span class="test-badge-score">5.0</span>
+            <span class="test-badge-count" id="testCount">· 30+ LinkedIn Recommendations</span>
+          </div>
+          <div style="font-size:12px;color:var(--gray-600);">Verified on <a href="https://www.linkedin.com/in/abuemira" target="_blank" style="color:var(--teal);font-weight:700;">LinkedIn ↗</a></div>
+        </div>
+      </div>
+      <button onclick="openRecModal()" class="btn-test-all-mq">All Recommendations →</button>
+    </div>
+  </div>
+  <div class="marquee-outer">
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
+</section>
+
+<!-- RECOMMENDATIONS FULL MODAL -->
+<div id="recModal" class="full-modal-overlay" onclick="if(this===event.target)closeRecModal()">
+  <div class="full-modal-box" style="max-width:1100px">
+    <div class="full-modal-hdr">
+      <div>
+        <div class="full-modal-tag">ALL RECOMMENDATIONS</div>
+        <h2 class="full-modal-title">All LinkedIn <span>Recommendations</span></h2>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:6px;background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.3);border-radius:40px;padding:6px 14px;">
+            <span style="color:var(--gold);">★★★★★</span>
+            <span style="font-size:.8rem;font-weight:700;color:var(--gold);">5.0 · All Verified on LinkedIn</span>
+          </div>
+          <a href="https://www.linkedin.com/in/abuemira" target="_blank" style="font-size:.78rem;color:var(--teal);font-weight:700;">View Profile on LinkedIn ↗</a>
+        </div>
+      </div>
+      <button class="full-modal-close" onclick="closeRecModal()">✕</button>
+    </div>
+    <div class="full-modal-body">
+      <div class="recs-filter-row" id="recsFilterRow"></div>
+      <div id="recsGrid"></div>
+    </div>
+  </div>
+</div>
 
 <!-- EDUCATION -->
 <section class="section" id="education">
@@ -2819,11 +2978,10 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ══ 8. MULTILINGUAL TOGGLE ══ */
   const i18n = {
     nav: [
-      ['#about','About','عنّي'],['#nexa','Nexa','نيكسا'],['#industries','Industries','القطاعات'],
+      ['#about','About','عنّي'],['#nexa','Nexa','نيكسا'],
       ['#services','Services','الخدمات'],['#experience','Experience','الخبرة'],
-      ['#projects','Projects','المشاريع'],['#certifications','Certifications','الشهادات'],
+      ['#projects','Projects','المشاريع'],['#clients','Clients','عملاؤنا'],
       ['#testimonials','Reviews','آراء العملاء'],['#contact','Contact','تواصل'],
-      ['#blog','Blog','مقالات'],
     ],
     secs: [
       ['about',        'About Me',           'عنّي',           'Turning Business Complexity into <span>ERP Clarity</span>',       'أحوّل تحديات أعمالك إلى <span>نتائج قابلة للقياس</span>'],
@@ -4041,6 +4199,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const row = card.querySelector('.test-row'); if (row) card.insertBefore(btn, row);
   });
 
+  /* ══ 3. BUILD MARQUEE TRACK ══ */
+  (function(){
+    const track = document.getElementById('marqueeTrack');
+    if(!track) return;
+    const all = [...TESTIMONIALS, ...TESTIMONIALS];
+    track.innerHTML = all.map(t=>`
+      <div class="test-card-mq">
+        <div class="test-stars-mq">★★★★★</div>
+        <p class="test-q-mq">"${t.q}"</p>
+        <div class="test-author-mq">
+          <img src="${t.img}" alt="${t.name}" class="test-av-mq" loading="lazy" onerror="this.style.opacity='0'">
+          <div>
+            <div class="test-name-mq">${t.name}</div>
+            <div class="test-role-mq">${t.role}</div>
+            ${t.linkedin && t.linkedin !== '#' ? `<a href="${t.linkedin}" target="_blank" class="test-li-mq">LinkedIn ↗</a>` : ''}
+          </div>
+        </div>
+      </div>`).join('');
+    const countEl = document.getElementById('testCount');
+    if(countEl) countEl.textContent = `· ${TESTIMONIALS.length}+ LinkedIn Recommendations`;
+  })();
+
   /* ══ 6. MEDIUM BLOG PREVIEW (RSS via rss2json) ══ */
   const blogGrid = document.getElementById('blogGrid');
   const blogIcons = ['📊','⚙️','💡','🔧','📈','🌐'];
@@ -4073,4 +4253,131 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
-</body>
+
+<!-- RECOMMENDATIONS MODAL JS -->
+<script>
+/* ── TESTIMONIALS DATA (full list matching sorce.html) ── */
+const TESTIMONIALS = [
+  {name:"Hesham Elmahdy",role:"Co-Founder @OdooTec",img:"./assets/img/recommendations/hesham_elmahdy.jpeg",linkedin:"https://www.linkedin.com/in/hesham-elmahdy/",q:"Mohammad was my go-to colleague when I wanted finance and accounting related consulting. He's precise, professional, time sensitive and dependable. Most importantly, I fully trust him. I'd love to work with him again anytime."},
+  {name:"Ahmed Hassan Algammal",role:"Vice President of Sales @ Absolute ERP | Market Knowledge, Business Transformation",img:"./assets/img/recommendations/ahmed_algammal.jpeg",linkedin:"#",q:"Mohamed has been an integral part of my team as a senior Odoo Implementer for the past five years. He has consistently demonstrated a deep technical understanding of the Odoo ecosystem and a unique ability to translate complex business requirements into functional, scalable solutions. His dedication and consistency over the years make him a rare find in the ERP space."},
+  {name:"Ahmed Galal, PMP®, PBA®",role:"Business Consultant & Project Manager | Expert in Odoo ERP Implementations",img:"./assets/img/recommendations/ahmed_galal.jpeg",linkedin:"https://www.linkedin.com/in/ahmed-galal-pmp%C2%AE-pba%C2%AE-29b170169/",q:"I was consistently impressed by his strong technical skills and deep understanding of ERP systems, particularly Odoo. Mohamed's expertise in financial accounting and supply chain management was invaluable to our team. His strong problem-solving skills and attention to detail ensured that projects were completed on time and within budget."},
+  {name:"Mohamed Khalil",role:"Founder & CEO @PlatFarm | Digitizing Agriculture Sector in MENA",img:"./assets/img/recommendations/mohamed_khalil.jpeg",linkedin:"https://www.linkedin.com/in/mohamed-khalil-a0ba2515/",q:"We had a great experience working with Mohamed on the implementation of our company's ERP system. His strong technical expertise combined with solid accounting knowledge allowed him to deliver a seamless and tailored Odoo solution that fully met our requirements. We highly recommend Mohamed for any organization seeking a smooth and professional Odoo implementation."},
+  {name:"Mohammad Nasab",role:"Regional Partner Manager @Odoo | ERP Growth Strategist",img:"./assets/img/recommendations/MohammadNasab.jpeg",linkedin:"https://www.linkedin.com/in/mohammad-nasab97/",q:"One of the most dedicated technical guys that I worked with before, your deep understanding of what you're doing, reflects in the success of your projects."},
+  {name:"Ahmed Abdelhak",role:"SAP FI/CO/SD | Admin Odoo ERP Consultant | Business Analyst | Odoo Project Manager",img:"./assets/img/recommendations/ahmed_abdelhak.jpeg",linkedin:"https://www.linkedin.com/in/ahmed-abdelhak-23855566/",q:"Mohamed demonstrated an exceptional ability to analyze business processes, design effective solutions, and successfully implement Odoo ERP projects. He stands out with his strong analytical skills, deep understanding of business needs, and ability to optimize operations using Odoo systems. I highly recommend working with Mohamed for anyone seeking an ERP expert with experience in process optimization and efficient Odoo solutions implementation."},
+  {name:"Mohsen DIFALLAH",role:"Python / Odoo Developer",img:"./assets/img/recommendations/mohsen_difallah.jpeg",linkedin:"https://www.linkedin.com/in/mohsen-difallah-496b35a4/",q:"He has exceptional analytical skills, a talent for solving complex challenges, and profound expertise in ERP systems, especially Odoo, with a focus on accounting and financial implementation. Mohamed is not only technically brilliant but also a great team player who consistently delivers results. He would be an invaluable asset to any organization."},
+  {name:"Muhammad Mahmoud",role:"Sr. Accountant | Sr. Odoo Functional Consultant | Certified v15,v16 | Project Manager",img:"./assets/img/recommendations/muhammad_mahmoud.jpeg",linkedin:"https://www.linkedin.com/in/muhammad-m-abod/",q:"I have worked with Muhammad Abu Amira for nearly two years, and I recommend him to any company that needs a reliable person who has experience as a functional consultant, systems analyst, problem solver, multi-skilled, works under pressure, and also an expert in accounting."},
+  {name:"Abdulrahman Gwida",role:"DipIFR | FMVA | CMA P2 Candidate | Odoo Specialist | Financial Modeling & Reporting",img:"./assets/img/recommendations/abdulrahman_gwida.jpeg",linkedin:"https://www.linkedin.com/in/abdelrahman-gwida/",q:"Muhamad is a hardworking, skilled, and dedicated professional whose eagerness to learn is limitless. His expertise and determination make him a remarkable asset to any team."},
+  {name:"Ahmed Elsayed",role:"Senior Python | Odoo Developer",img:"./assets/img/recommendations/ahmed_elsayed.jpeg",linkedin:"https://www.linkedin.com/in/damhogy/",q:"Mohamed is one of the best Odoo Consultants I worked with. He has the ability to simplify any complex requirements and make sure it will be done with the best way and quality. Also, Mohammed is a kind and helpful man and on a personal level you would love to have someone like him in your work environment."},
+  {name:"Nourhan Hazim",role:"Software Testing Engineer at Celfocus | Advansys",img:"./assets/img/recommendations/nourhan_hazim.jpeg",linkedin:"https://www.linkedin.com/in/nourhan-hazim/",q:"One of the best functional consultants I've ever worked with. Great co-worker and mentor."},
+  {name:"Ayman Tobbala",role:"Senior Odoo Functional Consultant",img:"./assets/img/recommendations/ayman_tobbala.jpeg",linkedin:"https://www.linkedin.com/in/aymantobbala/",q:"Abu Emira is specialized in Accounting, performed Odoo implementation, support, and training for end users. He worked for clients in Egypt, Saudi Arabia, and Canada."},
+  {name:"Ahmed Rashad",role:"ERP / Odoo Project Manager",img:"./assets/img/recommendations/rashed.jpeg",linkedin:"https://www.linkedin.com/in/ahmedrashad11/",q:"Mohamed is very talented — he is a professional accountant & Odoo implementer, has the ability to handle customers well by building great relationships with them that will help the project. He is eager to learn and develop multiple skills."},
+  {name:"Yasser A. AL Samhouri",role:"Finance Manager | Budgeting & Forecasting",img:"./assets/img/recommendations/Yasser.jpg",linkedin:"https://www.linkedin.com/in/yasser-arafat-al-samhouri/",q:"Mohamed Essam Abu Emira is a very dedicated person to his work and his customers. His professionalism and expertise were evident throughout our collaboration."},
+  {name:"Faical Hafiane",role:"CEO @ FAMFOOD | Expert in International Trade & Market Expansion",img:"./assets/img/recommendations/Faical.jpeg",linkedin:"https://www.linkedin.com/in/faical-hafiane/",q:"Excellent and professional."},
+  {name:"Aya Mohsen",role:"Strategy & Corporate Development Senior Manager",img:"./assets/img/recommendations/aya.jpeg",linkedin:"https://www.linkedin.com/in/aya-mohsen-cma-fmva-3919a875/",q:"Essam is a very hard-working person, he is also very dedicated and ambitious. I enjoyed teaching him."},
+  {name:"Ahmed Malik",role:"CFO",img:"./assets/img/recommendations/ahmed_malik.jpeg",linkedin:"https://www.linkedin.com/in/ahmed-malik-a4462a143/",q:"Mohamed Essam is one of the hardworking individuals. I worked with him personally, and he knows what he is doing according to professional principles. I wish you success, my friend."},
+  {name:"Ahmed Saeed",role:"Python Developer | Backend | AWS Cloud | Odoo Technical Consultant",img:"./assets/img/recommendations/ahmed_saeed.jpeg",linkedin:"https://www.linkedin.com/in/ahmed-saeed-75a2938b/",q:"Mohamed was one of the colleagues who helped me understand Odoo and business practices in general, and he is also one of the most dedicated coworkers."},
+  {name:"Bassant Hossam",role:"SAI and Automation Engineer",img:"./assets/img/recommendations/bassant_hossam.jpeg",linkedin:"https://www.linkedin.com/in/bassant-hossam-366403208/",q:"I highly recommend Mohamed Essam Abu Emira as an exceptional Odoo Functional Consultant. His expertise in Odoo, ability to analyze complex requirements, and bridge the gap between functional and technical aspects make him a valuable asset."},
+  {name:"Muhammed Abdelfatah",role:"AI Track Supervisor at ITI",img:"./assets/img/recommendations/muhammed_abdelfatah.jpeg",linkedin:"https://www.linkedin.com/in/muhammed-abdelfatah-a45ab9104/",q:"During the time we worked together, Mohamed was highly professional, efficient, and an excellent Odoo consultant. He always aspired to improve himself in all aspects and went beyond expectations."},
+  {name:"Mohamed Salah Helal",role:"Odoo Developer | Data Scientist | Session Lead",img:"./assets/img/recommendations/mohamed_salah_helal.jpeg",linkedin:"https://www.linkedin.com/in/mohamed-salah-helal/",q:"Mohamed and I worked together on several projects at Odootec, and I was lucky to call him my coworker. He consistently gave 100 percent effort to the team and played a significant role in ensuring we completed all tasks on time."},
+  {name:"Mohamed Nayel",role:"Software Test Engineer @ Transflo",img:"./assets/img/recommendations/mohamed_nayel.jpeg",linkedin:"https://www.linkedin.com/in/momagdinayel/",q:"I'm thrilled that I had worked with Mohamed on several projects. He is one of the best people I had as a coworker. I highly recommend his expertise; he is a person who can tackle any problem remarkably with hard and smart work."},
+  {name:"Mostafa Rohaim",role:"JDE Specialist at Exact Fabrication Services",img:"./assets/img/recommendations/avatar-1.png",linkedin:"#",q:"بشمهندس محمد واحد من أكثر الناس اللي قابلتهم تركيزا و تفانيا في الشغل و رغبة في تعلم الجديد و تطوير الذات دا بجانب خبرته الكبيرة في الحسابات و أودو طبعا. إنسان محترم و خلوق و أتمنى له التوفيق دائما."},
+  {name:"Heba Allam",role:"HR & Administration Manager at Nutriti Pharma",img:"./assets/img/recommendations/heba_allam.jpeg",linkedin:"https://www.linkedin.com/in/heba-allam-2194231b/",q:"Mohamed is a very dedicated, loyal person. He is always ready to take over all the work responsibility."},
+  {name:"Yousef Ashraf",role:"Odoo Developer at Intalio-Everteam GS",img:"./assets/img/recommendations/yousef_ashraf.jpeg",linkedin:"https://www.linkedin.com/in/yousef-a-luka/",q:"I have worked with Mohamed for a while, he is so helpful in teamwork, and has never hesitated to share his knowledge with others."},
+  {name:"Caroline Farid",role:"EX Dentist, A Marketer",img:"./assets/img/recommendations/caroline_farid.jpeg",linkedin:"https://www.linkedin.com/in/caroline-farid-a39546221/",q:"Professional and can handle clients very well."},
+  {name:"Mohamed Eldabbas",role:"Marketing and Technical Writer",img:"./assets/img/recommendations/avatar-1.png",linkedin:"https://www.linkedin.com/in/mohamed-eldabbas-6a1679151/",q:"I wholeheartedly recommend Mohamed Essam Abu Emira for any Odoo-related project. His expertise and dedication make him an asset to any team."},
+  {name:"Amr Farouk",role:"ERP Technical Support Manager",img:"./assets/img/recommendations/amr_farouk.jpeg",linkedin:"#",q:"Mr. Mohamed is one of the best colleagues I've worked with."},
+  {name:"Ashif TK",role:"Experienced Accounting Professional | Audit Assistant",img:"./assets/img/recommendations/Ashif.jpeg",linkedin:"#",q:"Excellent."},
+  {name:"Ahmed Ezzat Embaby",role:"Financial Analyst at Ebny Real Estate Development",img:"./assets/img/recommendations/ahmed_ezzat_embaby.jpeg",linkedin:"https://www.linkedin.com/in/ahmed-ezzat-embaby-11607645/",q:"He is a hard worker."},
+];
+
+/* ── RECOMMENDATIONS MODAL ── */
+const REC_CATEGORIES = {
+  all:     { label: "All",              icon: "👥" },
+  odoo:    { label: "Odoo / ERP",       icon: "🟣" },
+  finance: { label: "Finance",          icon: "💰" },
+  pm:      { label: "PM / Management",  icon: "📋" },
+  client:  { label: "Clients",          icon: "🤝" }
+};
+
+let REC_ANNOTATED = null;
+function buildRecAnnotated() {
+  const cats = [
+    "odoo","odoo","pm","client","odoo","odoo","odoo","odoo",
+    "finance","odoo","odoo","odoo","pm","client","client","pm",
+    "finance","odoo","odoo","odoo","odoo","odoo","finance","pm",
+    "odoo","client","odoo","odoo","finance","finance"
+  ];
+  return TESTIMONIALS.map((t, i) => ({ cat: cats[i] || "odoo", ...t }));
+}
+
+let recsLoaded = false;
+let recsActiveFilter = 'all';
+
+function openRecModal() {
+  document.getElementById('recModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (!recsLoaded) {
+    recsLoaded = true;
+    REC_ANNOTATED = buildRecAnnotated();
+    const filterRow = document.getElementById('recsFilterRow');
+    if(filterRow) {
+      Object.entries(REC_CATEGORIES).forEach(([key, val]) => {
+        const btn = document.createElement('button');
+        btn.dataset.cat = key;
+        btn.className = 'recs-filter-btn' + (key === 'all' ? ' active' : '');
+        btn.innerHTML = `${val.icon} ${val.label}`;
+        btn.addEventListener('click', () => {
+          recsActiveFilter = key;
+          filterRow.querySelectorAll('.recs-filter-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.cat === key);
+          });
+          renderRecsGrid();
+        });
+        filterRow.appendChild(btn);
+      });
+    }
+    renderRecsGrid();
+  }
+}
+
+function renderRecsGrid() {
+  const grid = document.getElementById('recsGrid');
+  if(!grid) return;
+  const list = recsActiveFilter === 'all'
+    ? REC_ANNOTATED
+    : REC_ANNOTATED.filter(r => r.cat === recsActiveFilter);
+
+  grid.style.opacity = '0';
+  setTimeout(() => {
+    grid.innerHTML = list.map((r, i) => `
+      <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--rl);padding:22px;display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(16px);transition:opacity .35s ${i*30}ms ease, transform .35s ${i*30}ms ease;" class="rec-card-anim">
+        <div style="color:#D97706;font-size:1rem;">★★★★★</div>
+        <p style="font-size:.84rem;color:var(--gray-600);line-height:1.7;font-style:italic;flex:1;">"${r.q}"</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:10px;border-top:1px solid var(--gray-200);">
+          <img src="${r.img}" alt="${r.name}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid rgba(1,126,132,.2);" onerror="this.style.opacity='0'">
+          <div style="min-width:0;">
+            <div style="font-size:.85rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${r.name}</div>
+            <div style="font-size:.72rem;color:var(--gray-400);line-height:1.4;margin-top:1px;">${r.role}</div>
+            ${r.linkedin && r.linkedin !== '#' ? `<a href="${r.linkedin}" target="_blank" style="font-size:.72rem;color:var(--teal);font-weight:700;margin-top:3px;display:inline-block;">LinkedIn ↗</a>` : ''}
+          </div>
+        </div>
+      </div>`).join('');
+
+    requestAnimationFrame(() => {
+      grid.style.opacity = '1';
+      grid.querySelectorAll('.rec-card-anim').forEach(card => {
+        requestAnimationFrame(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        });
+      });
+    });
+  }, 120);
+}
+
+function closeRecModal() {
+  document.getElementById('recModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeRecModal(); });
+</script>
