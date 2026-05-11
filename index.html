@@ -863,8 +863,9 @@ img{transition:opacity .3s ease}
     <a href="#services">Services</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
+    <a href="#roi">ROI Calc</a>
+    <a href="#roi-report">ROI Report</a>
     <a href="#clients">Clients</a>
-    <a href="#testimonials">Reviews</a>
     <a href="#contact">Contact</a>
     <a href="https://calendly.com/abuemira/30min" target="_blank" class="nav-cta">📅 Book Meeting</a>
   </div>
@@ -3027,7 +3028,7 @@ img{transition:opacity .3s ease}
     <div class="contact-form">
       <h3 id="cf-title" style="font-size:16px;font-weight:700;font-family:Sora,sans-serif;margin-bottom:4px;">Send a Message</h3>
       <p id="cf-sub" style="font-size:12px;color:var(--gray-400);margin-bottom:20px;">Fill the form below and I'll respond within 24 hours</p>
-      <form id="contactForm" action="https://formspree.io/f/mojrkqng" method="POST">
+      <form id="contactForm" action="https://formspree.io/f/mkoyknjp" method="POST">
         <input type="hidden" name="_replyto" value="abuemira91@gmail.com">
         <input type="hidden" name="_subject" value="🚀 New Portfolio Inquiry — Mohamed Abu Emira">
         <input type="text" name="_gotcha" style="display:none">
@@ -3101,6 +3102,574 @@ img{transition:opacity .3s ease}
   </div>
 </section>
 
+<!-- ══ ROI REPORT SECTION ══ -->
+<style>
+/* ROI Report Section */
+.roi-report-section{background:var(--white);padding:72px 0;border-top:1px solid var(--gray-200)}
+.roi-report-card{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--rl);overflow:hidden;box-shadow:var(--sh)}
+.roi-report-header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-700) 100%);padding:36px 40px;position:relative;overflow:hidden}
+.roi-report-header::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(1,126,132,.2) 0%,transparent 70%)}
+.roi-report-logo-row{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.roi-report-logo-box{width:48px;height:48px;border-radius:10px;background:rgba(1,126,132,.25);border:1px solid rgba(1,126,132,.5);display:flex;align-items:center;justify-content:center;font-size:22px}
+.roi-report-title-box h3{font-family:"Sora",sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:2px}
+.roi-report-title-box p{font-size:12px;color:rgba(255,255,255,.5)}
+.roi-report-meta{display:flex;flex-wrap:wrap;gap:10px}
+.roi-report-meta-pill{font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.75)}
+.roi-report-body{padding:36px 40px}
+.roi-report-exec{background:var(--teal-light);border:1px solid rgba(1,126,132,.2);border-radius:var(--r);padding:24px;margin-bottom:32px;border-left:4px solid var(--teal)}
+.roi-report-exec h4{font-family:"Sora",sans-serif;font-size:15px;font-weight:800;color:var(--teal-dark);margin-bottom:10px}
+.roi-report-exec p{font-size:13px;color:var(--gray-600);line-height:1.8}
+.roi-report-kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px}
+.roi-report-kpi{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r);padding:18px;text-align:center;border-top:3px solid var(--teal)}
+.roi-report-kpi-n{font-family:"Sora",sans-serif;font-size:26px;font-weight:800;color:var(--teal);line-height:1}
+.roi-report-kpi-l{font-size:11px;color:var(--gray-600);margin-top:5px;font-weight:600;line-height:1.4}
+.roi-report-section-title{font-family:"Sora",sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.roi-report-section-title::after{content:"";flex:1;height:1px;background:var(--gray-200)}
+.roi-report-benefits-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px}
+.roi-report-benefit{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r);padding:16px 18px;display:flex;gap:12px;align-items:flex-start}
+.roi-report-benefit-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+.roi-report-benefit-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.roi-report-benefit-desc{font-size:12px;color:var(--gray-600);line-height:1.6}
+.roi-report-benefit-stat{display:inline-block;margin-top:6px;font-size:11px;font-weight:700;color:var(--teal);background:var(--teal-light);padding:2px 10px;border-radius:10px}
+.roi-report-timeline{display:flex;gap:0;margin-bottom:32px}
+.roi-report-yr{flex:1;border:1px solid var(--gray-200);border-right:none;padding:16px;text-align:center;background:var(--white)}
+.roi-report-yr:last-child{border-right:1px solid var(--gray-200);border-radius:0 var(--r) var(--r) 0}
+.roi-report-yr:first-child{border-radius:var(--r) 0 0 var(--r)}
+.roi-report-yr-label{font-size:10px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.roi-report-yr-val{font-family:"Sora",sans-serif;font-size:18px;font-weight:800;color:var(--teal);line-height:1}
+.roi-report-yr-val.neg{color:#ef4444}
+.roi-report-yr-sub{font-size:10px;color:var(--gray-400);margin-top:3px}
+.roi-report-challenges{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.roi-report-challenge{background:#fffbeb;border:1px solid #fde68a;border-radius:var(--r);padding:14px 16px;display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--gray-800)}
+.roi-report-challenge span{font-size:16px;flex-shrink:0}
+.roi-report-footer{background:var(--navy);border-radius:0 0 var(--rl) var(--rl);padding:24px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.roi-report-footer-text{font-size:12px;color:rgba(255,255,255,.5);line-height:1.6}
+.roi-report-footer-text strong{color:rgba(255,255,255,.85);display:block;margin-bottom:3px}
+.roi-report-footer-btns{display:flex;gap:10px}
+@media(max-width:768px){
+  .roi-report-kpi-row{grid-template-columns:1fr 1fr}
+  .roi-report-benefits-grid{grid-template-columns:1fr}
+  .roi-report-timeline{flex-wrap:wrap}
+  .roi-report-yr{flex:calc(50% - 6px);border-right:1px solid var(--gray-200);border-radius:var(--r);margin-bottom:6px}
+  .roi-report-body,.roi-report-header{padding:24px 20px}
+  .roi-report-footer{padding:20px}
+}
+
+/* ROI Email Modal */
+.roi-email-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+.roi-email-overlay.open{opacity:1;pointer-events:all}
+.roi-email-modal{background:#fff;border-radius:20px;width:100%;max-width:520px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.25);transform:translateY(20px);transition:transform .3s}
+.roi-email-overlay.open .roi-email-modal{transform:translateY(0)}
+.roi-email-modal-hdr{background:linear-gradient(135deg,var(--navy),var(--navy-700));padding:28px 32px;position:relative}
+.roi-email-modal-hdr h3{font-family:"Sora",sans-serif;font-size:18px;font-weight:800;color:#fff;margin-bottom:4px}
+.roi-email-modal-hdr p{font-size:12px;color:rgba(255,255,255,.5)}
+.roi-email-modal-close{position:absolute;top:16px;right:18px;background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.7);font-size:16px;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.roi-email-modal-close:hover{background:rgba(255,255,255,.2);color:#fff}
+.roi-email-modal-body{padding:28px 32px}
+.roi-email-field{margin-bottom:16px}
+.roi-email-field label{display:block;font-size:12px;font-weight:700;color:var(--gray-600);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
+.roi-email-field input,.roi-email-field textarea,.roi-email-field select{width:100%;padding:11px 14px;border:1px solid var(--gray-200);border-radius:10px;font-size:13px;color:var(--text);font-family:"Plus Jakarta Sans",sans-serif;background:var(--gray-50);transition:border-color .2s;outline:none}
+.roi-email-field input:focus,.roi-email-field textarea:focus,.roi-email-field select:focus{border-color:var(--teal);background:#fff}
+.roi-email-field textarea{min-height:80px;resize:vertical}
+.roi-email-preview-toggle{font-size:12px;color:var(--teal);font-weight:700;cursor:pointer;border:none;background:none;padding:0;margin-bottom:12px;display:flex;align-items:center;gap:5px}
+.roi-email-preview-box{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px;padding:16px;font-size:12px;color:var(--gray-600);line-height:1.75;max-height:220px;overflow-y:auto;margin-bottom:16px;display:none}
+.roi-email-preview-box.show{display:block}
+.roi-email-send-btn{width:100%;padding:14px;background:var(--teal);color:#fff;border:none;border-radius:12px;font-family:"Sora",sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.roi-email-send-btn:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(1,126,132,.3)}
+.roi-email-send-btn:disabled{background:var(--gray-400);transform:none;box-shadow:none;cursor:not-allowed}
+.roi-email-success{display:none;text-align:center;padding:20px 0}
+.roi-email-success .roi-es-icon{font-size:48px;margin-bottom:12px}
+.roi-email-success h4{font-family:"Sora",sans-serif;font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px}
+.roi-email-success p{font-size:13px;color:var(--gray-600)}
+.roi-email-note{font-size:11px;color:var(--gray-400);text-align:center;margin-top:10px;line-height:1.5}
+</style>
+
+<!-- ROI REPORT SECTION -->
+<section class="roi-report-section" id="roi-report">
+  <div class="container">
+    <div class="sec-tag">📄 ROI Analysis Report</div>
+    <h2 class="sec-title">Odoo ERP <span>ROI Report</span></h2>
+    <p style="font-size:14px;color:var(--gray-600);max-width:600px;margin-bottom:32px;line-height:1.75">A comprehensive, data-backed Return on Investment analysis for Odoo ERP — based on 79+ real implementations across Egypt &amp; GCC. Use the calculator above to personalise this report, then email it directly to your customer.</p>
+
+    <div class="roi-report-card">
+      <!-- REPORT HEADER -->
+      <div class="roi-report-header">
+        <div class="roi-report-logo-row">
+          <div class="roi-report-logo-box">📊</div>
+          <div class="roi-report-title-box">
+            <h3>Odoo ERP — Return on Investment Analysis</h3>
+            <p>Prepared by Nexa Solutions · Mohamed Essam Abu Emira, COO &amp; Odoo Project Manager</p>
+          </div>
+        </div>
+        <div class="roi-report-meta">
+          <span class="roi-report-meta-pill">📅 <span id="reportDate"></span></span>
+          <span class="roi-report-meta-pill">🏢 Based on 79+ Live Projects</span>
+          <span class="roi-report-meta-pill">🌍 Egypt &amp; GCC Region</span>
+          <span class="roi-report-meta-pill">✅ Odoo Official Methodology</span>
+        </div>
+      </div>
+
+      <!-- REPORT BODY -->
+      <div class="roi-report-body">
+
+        <!-- EXECUTIVE SUMMARY -->
+        <div class="roi-report-exec">
+          <h4>📋 Executive Summary</h4>
+          <p>Odoo ERP delivers measurable, compounding ROI by consolidating fragmented systems into a single integrated platform. Across 79+ implementations managed by Nexa Solutions, clients in manufacturing, trading, retail, construction, and services have achieved <strong>15%–60% efficiency gains</strong> per department within the first year. The average payback period is <strong>12–18 months</strong>, with a 3-year ROI ranging from <strong>180% to 420%</strong> depending on company size, number of users, and modules deployed. Odoo's open-source foundation eliminates per-module licensing fees, drastically reducing total cost of ownership versus legacy ERP platforms.</p>
+        </div>
+
+        <!-- KEY METRICS (dynamic from calculator) -->
+        <p class="roi-report-section-title">📈 Your Estimated ROI Snapshot</p>
+        <div class="roi-report-kpi-row" id="reportKpiRow">
+          <div class="roi-report-kpi">
+            <div class="roi-report-kpi-n" id="rptSavings">—</div>
+            <div class="roi-report-kpi-l">Est. Annual Savings</div>
+          </div>
+          <div class="roi-report-kpi">
+            <div class="roi-report-kpi-n" id="rptPayback">—</div>
+            <div class="roi-report-kpi-l">Payback Period</div>
+          </div>
+          <div class="roi-report-kpi">
+            <div class="roi-report-kpi-n" id="rptRoi3">—</div>
+            <div class="roi-report-kpi-l">3-Year ROI</div>
+          </div>
+          <div class="roi-report-kpi">
+            <div class="roi-report-kpi-n" id="rptNet3">—</div>
+            <div class="roi-report-kpi-l">Net Value Y1–Y3</div>
+          </div>
+        </div>
+        <p style="font-size:11px;color:var(--gray-400);margin-top:-20px;margin-bottom:32px;">↑ Use the ROI Calculator above and these figures will update automatically.</p>
+
+        <!-- QUANTIFIABLE BENEFITS -->
+        <p class="roi-report-section-title">💡 Key Quantifiable Benefits</p>
+        <div class="roi-report-benefits-grid">
+          <div class="roi-report-benefit">
+            <div class="roi-report-benefit-icon">📦</div>
+            <div>
+              <div class="roi-report-benefit-title">Inventory Optimisation</div>
+              <div class="roi-report-benefit-desc">Real-time stock visibility eliminates manual counts, reduces dead stock, and cuts warehouse labour. Automated replenishment prevents both stockouts and overstocking.</div>
+              <div class="roi-report-benefit-stat">↓ 21% FTE Time · ↓ 15–30% Inventory Cost</div>
+            </div>
+          </div>
+          <div class="roi-report-benefit">
+            <div class="roi-report-benefit-icon">💰</div>
+            <div>
+              <div class="roi-report-benefit-title">Finance &amp; Accounting Automation</div>
+              <div class="roi-report-benefit-desc">Automated bank reconciliation, e-invoicing (compliant with Egypt ITDA &amp; KSA ZATCA), and real-time P&amp;L eliminate month-end backlogs and manual errors.</div>
+              <div class="roi-report-benefit-stat">↓ 18.3% FTE Time · Month-close in &lt;3 Days</div>
+            </div>
+          </div>
+          <div class="roi-report-benefit">
+            <div class="roi-report-benefit-icon">📈</div>
+            <div>
+              <div class="roi-report-benefit-title">Sales &amp; CRM Acceleration</div>
+              <div class="roi-report-benefit-desc">Integrated CRM-to-invoice pipeline eliminates re-keying. Automated follow-ups and quotation templates shorten sales cycles and increase win rates.</div>
+              <div class="roi-report-benefit-stat">↓ 41% FTE Time · ↑ Lead Conversion Rate</div>
+            </div>
+          </div>
+          <div class="roi-report-benefit">
+            <div class="roi-report-benefit-icon">🛒</div>
+            <div>
+              <div class="roi-report-benefit-title">Purchase &amp; Procurement Control</div>
+              <div class="roi-report-benefit-desc">3-way matching (PO, receipt, invoice), automated vendor RfQ, and approval workflows eliminate maverick spending and reduce procurement cycle time by up to 40%.</div>
+              <div class="roi-report-benefit-stat">↓ 27% FTE Time · ↓ 10–20% Procurement Cost</div>
+            </div>
+          </div>
+          <div class="roi-report-benefit">
+            <div class="roi-report-benefit-icon">🏭</div>
+            <div>
+              <div class="roi-report-benefit-title">Manufacturing &amp; Production</div>
+              <div class="roi-report-benefit-desc">BOM-driven production orders, real-time WIP tracking, and quality checkpoints reduce material waste, rework, and scrap rates significantly.</div>
+              <div class="roi-report-benefit-stat">↓ 11.8% FTE Time · ↓ 60% Waste (F&amp;B)</div>
+            </div>
+          </div>
+          <div class="roi-report-benefit">
+            <div class="roi-report-benefit-icon">👥</div>
+            <div>
+              <div class="roi-report-benefit-title">HR &amp; Payroll Automation</div>
+              <div class="roi-report-benefit-desc">Integrated attendance, leave, and payroll processing eliminates manual salary computation, reduces payroll errors, and ensures statutory compliance across GCC jurisdictions.</div>
+              <div class="roi-report-benefit-stat">↓ 6% FTE Time · 100% Payroll Automation</div>
+            </div>
+          </div>
+          <div class="roi-report-benefit">
+            <div class="roi-report-benefit-icon">🔗</div>
+            <div>
+              <div class="roi-report-benefit-title">IT Consolidation &amp; Cost Reduction</div>
+              <div class="roi-report-benefit-desc">Replacing 5–10 point solutions with one platform eliminates redundant SaaS licences, integration maintenance, and inter-system data errors — freeing IT budget for value-add work.</div>
+              <div class="roi-report-benefit-stat">↓ 40–70% Software Licence Spend</div>
+            </div>
+          </div>
+          <div class="roi-report-benefit">
+            <div class="roi-report-benefit-icon">📊</div>
+            <div>
+              <div class="roi-report-benefit-title">Real-Time Business Intelligence</div>
+              <div class="roi-report-benefit-desc">Live dashboards, scheduled reports, and drill-down analytics give management instant visibility into KPIs — enabling faster, data-driven decisions without waiting for manual reporting cycles.</div>
+              <div class="roi-report-benefit-stat">Reporting Time ↓ 45–80% · Live KPIs</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5-YEAR PROJECTION -->
+        <p class="roi-report-section-title">📅 5-Year Financial Projection (Industry Benchmark)</p>
+        <div class="roi-report-timeline">
+          <div class="roi-report-yr">
+            <div class="roi-report-yr-label">Year 0</div>
+            <div class="roi-report-yr-val neg">– Investment</div>
+            <div class="roi-report-yr-sub">Implementation + Licensing</div>
+          </div>
+          <div class="roi-report-yr">
+            <div class="roi-report-yr-label">Year 1</div>
+            <div class="roi-report-yr-val">Break-Even</div>
+            <div class="roi-report-yr-sub">Savings offset costs</div>
+          </div>
+          <div class="roi-report-yr">
+            <div class="roi-report-yr-label">Year 2</div>
+            <div class="roi-report-yr-val">+180%</div>
+            <div class="roi-report-yr-sub">Avg. cumulative ROI</div>
+          </div>
+          <div class="roi-report-yr">
+            <div class="roi-report-yr-label">Year 3</div>
+            <div class="roi-report-yr-val">+300%</div>
+            <div class="roi-report-yr-sub">Compounding gains</div>
+          </div>
+          <div class="roi-report-yr">
+            <div class="roi-report-yr-label">Year 5</div>
+            <div class="roi-report-yr-val">+500%</div>
+            <div class="roi-report-yr-sub">Full optimisation</div>
+          </div>
+        </div>
+
+        <!-- IMPLEMENTATION CONSIDERATIONS -->
+        <p class="roi-report-section-title" style="margin-top:32px;">⚠️ Key Success Factors &amp; Considerations</p>
+        <div class="roi-report-challenges">
+          <div class="roi-report-challenge"><span>🎯</span><div><strong>Scope Definition:</strong> A clear GAP/ROI Analysis before implementation reduces scope creep and protects ROI. This is why Nexa Solutions runs a structured ROI workshop as the first project phase — 80% of clients who complete it convert to full projects.</div></div>
+          <div class="roi-report-challenge"><span>👥</span><div><strong>Change Management:</strong> User adoption is the #1 ROI killer. Dedicated training, key-user programs, and post-go-live hypercare ensure the system is actually used — translating theoretical savings into real results.</div></div>
+          <div class="roi-report-challenge"><span>🔄</span><div><strong>Data Migration Quality:</strong> Clean historical data migration is critical. Budget adequate time for cleansing master data (customers, vendors, products) before go-live to avoid operational disruption.</div></div>
+          <div class="roi-report-challenge"><span>📐</span><div><strong>Customisation Balance:</strong> Minimise custom development. Odoo's out-of-the-box functionality covers 80%+ of standard business processes. Excessive customisation inflates costs and complicates future upgrades.</div></div>
+        </div>
+
+        <!-- CONCLUSION -->
+        <div class="roi-report-exec" style="background:#f0fdf4;border-color:#bbf7d0;border-left-color:#22c55e;">
+          <h4 style="color:#166534;">✅ Conclusion &amp; Next Step</h4>
+          <p>Odoo ERP represents one of the highest-ROI technology investments available to mid-market businesses today. With implementation costs 60–80% lower than SAP or Oracle, and a unified platform replacing dozens of point solutions, the financial case is compelling across every industry vertical. The Nexa Solutions team has delivered 79+ successful implementations with an 80% project conversion rate from ROI Analysis to signed project. We recommend scheduling a complimentary 30-minute ROI assessment to model the specific numbers for your business.</p>
+        </div>
+
+        <!-- EMAIL REPORT CTA -->
+        <div style="text-align:center;margin-top:28px;padding-top:24px;border-top:1px solid var(--gray-200)">
+          <p style="font-size:14px;color:var(--gray-600);margin-bottom:16px;">Ready to share this analysis with your customer or management team?</p>
+          <button onclick="openRoiEmailModal()" class="btn-gold" style="display:inline-flex;align-items:center;gap:8px;font-size:14px;">📧 Email Full ROI Report to Customer</button>
+        </div>
+      </div>
+
+      <!-- REPORT FOOTER -->
+      <div class="roi-report-footer">
+        <div class="roi-report-footer-text">
+          <strong>Mohamed Essam Abu Emira · COO &amp; Co-Founder, Nexa Solutions</strong>
+          Odoo 16·17·18 Certified · Google PM Certified · LinkedIn Top ERP Voice · 79+ Projects Delivered
+        </div>
+        <div class="roi-report-footer-btns">
+          <a href="https://calendly.com/abuemira/30min" target="_blank" class="btn-gold" style="font-size:12px;padding:10px 18px;">📅 Book Free Consultation</a>
+          <a href="https://wa.me/201005061349" target="_blank" class="btn-ghost" style="font-size:12px;padding:10px 18px;">💬 WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI EMAIL MODAL -->
+<div class="roi-email-overlay" id="roiEmailModal" role="dialog" aria-modal="true">
+  <div class="roi-email-modal">
+    <div class="roi-email-modal-hdr">
+      <button class="roi-email-modal-close" onclick="closeRoiEmailModal()" aria-label="Close">✕</button>
+      <h3>📧 Email ROI Report to Customer</h3>
+      <p>Generate and send a personalised Odoo ERP ROI report via email</p>
+    </div>
+    <div class="roi-email-modal-body" id="roiEmailModalBody">
+      <div class="roi-email-field">
+        <label>Customer Name</label>
+        <input type="text" id="emailCustomerName" placeholder="e.g. Ahmed Al-Rashidi" required>
+      </div>
+      <div class="roi-email-field">
+        <label>Customer Email</label>
+        <input type="email" id="emailCustomerEmail" placeholder="customer@company.com" required>
+      </div>
+      <div class="roi-email-field">
+        <label>Company Name</label>
+        <input type="text" id="emailCompanyName" placeholder="e.g. Al-Rashidi Trading LLC">
+      </div>
+      <div class="roi-email-field">
+        <label>Industry / Sector</label>
+        <select id="emailIndustry">
+          <option value="General Business">General Business</option>
+          <option value="Manufacturing">Manufacturing</option>
+          <option value="Trading & Distribution">Trading &amp; Distribution</option>
+          <option value="Food & Beverage">Food &amp; Beverage</option>
+          <option value="Retail & E-Commerce">Retail &amp; E-Commerce</option>
+          <option value="Construction & Real Estate">Construction &amp; Real Estate</option>
+          <option value="Healthcare & Pharma">Healthcare &amp; Pharma</option>
+          <option value="Logistics & Transport">Logistics &amp; Transport</option>
+          <option value="Services & Consulting">Services &amp; Consulting</option>
+        </select>
+      </div>
+      <div class="roi-email-field">
+        <label>Personal Note (optional)</label>
+        <textarea id="emailNote" placeholder="e.g. 'Following our meeting today, here is the full ROI analysis we discussed...'"></textarea>
+      </div>
+      <button class="roi-email-preview-toggle" onclick="toggleEmailPreview(this)">👁 Preview Email Content</button>
+      <div class="roi-email-preview-box" id="roiEmailPreviewBox"></div>
+      <button class="roi-email-send-btn" id="roiEmailSendBtn" onclick="sendRoiEmail()">
+        📧 Send ROI Report
+      </button>
+      <p class="roi-email-note">The report will be sent via Formspree to the customer email address. A copy is forwarded to abuemira@nexa-solutions.com.</p>
+    </div>
+    <div class="roi-email-success" id="roiEmailSuccess">
+      <div class="roi-es-icon">✅</div>
+      <h4>Report Sent Successfully!</h4>
+      <p id="roiEmailSuccessMsg">The ROI report has been emailed to your customer.</p>
+      <button onclick="closeRoiEmailModal()" style="margin-top:16px;padding:10px 24px;background:var(--teal);color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:13px;">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ══ ROI REPORT DATE ══ */
+document.addEventListener('DOMContentLoaded', function() {
+  const el = document.getElementById('reportDate');
+  if (el) el.textContent = new Date().toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'});
+});
+
+/* ══ SYNC ROI CALCULATOR RESULTS TO REPORT ══ */
+function syncReportKpis(savings, payback, roi3, net3) {
+  const fmt = (n) => n >= 1000000 ? '$' + (n/1000000).toFixed(1) + 'M' : '$' + Math.round(n/1000).toFixed(0) + 'K';
+  const s = document.getElementById('rptSavings');
+  const p = document.getElementById('rptPayback');
+  const r = document.getElementById('rptRoi3');
+  const n = document.getElementById('rptNet3');
+  if (s) s.textContent = savings ? fmt(savings) + '/yr' : '—';
+  if (p) p.textContent = payback || '—';
+  if (r) r.textContent = roi3 ? roi3 + '%' : '—';
+  if (n) n.textContent = net3 ? fmt(net3) : '—';
+}
+
+/* ══ ROI EMAIL MODAL ══ */
+function openRoiEmailModal() {
+  document.getElementById('roiEmailModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Reset to form view
+  document.getElementById('roiEmailModalBody').style.display = '';
+  document.getElementById('roiEmailSuccess').style.display = 'none';
+  // Sync industry selection from calculator
+  const activeInd = document.querySelector('#roiIndustryPills .roi-ind-btn.active');
+  if (activeInd) {
+    const indText = activeInd.textContent.trim().replace(/^[^\w]+/, '');
+    const sel = document.getElementById('emailIndustry');
+    if (sel) {
+      for (let i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].value.toLowerCase().includes(indText.toLowerCase().split(' ')[0])) {
+          sel.selectedIndex = i; break;
+        }
+      }
+    }
+  }
+}
+
+function closeRoiEmailModal() {
+  document.getElementById('roiEmailModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('roiEmailModal').addEventListener('click', function(e) {
+  if (e.target === this) closeRoiEmailModal();
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeRoiEmailModal();
+});
+
+function buildEmailBody() {
+  const name = document.getElementById('emailCustomerName').value || 'Valued Customer';
+  const company = document.getElementById('emailCompanyName').value || 'Your Company';
+  const industry = document.getElementById('emailIndustry').value;
+  const note = document.getElementById('emailNote').value;
+
+  // Get live ROI data from calculator if available
+  const savingsEl = document.getElementById('roiSavings');
+  const paybackEl = document.getElementById('bkPayback');
+  const roi3El = document.getElementById('bkRoi3');
+  const net3El = document.getElementById('bkNet3');
+  const savings = savingsEl ? savingsEl.textContent.replace(/[^\d$KMB\/yr\.]/g,'').trim() : 'To be calculated';
+  const payback = paybackEl ? paybackEl.textContent : 'To be calculated';
+  const roi3 = roi3El ? roi3El.textContent : 'To be calculated';
+  const net3 = net3El ? net3El.textContent : 'To be calculated';
+
+  return `Dear ${name},
+
+${note ? note + '\n\n' : ''}Thank you for your interest in Odoo ERP for ${company}. Please find below your personalised Return on Investment (ROI) Analysis, prepared by Nexa Solutions.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ODOO ERP — ROI ANALYSIS REPORT
+Prepared by: Mohamed Essam Abu Emira
+COO & Co-Founder, Nexa Solutions
+Date: ${new Date().toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'})}
+Industry: ${industry}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 YOUR ESTIMATED ROI SNAPSHOT
+• Annual Savings: ${savings}
+• Payback Period: ${payback}
+• 3-Year ROI: ${roi3}
+• Net Value (Y1–Y3): ${net3}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 EXECUTIVE SUMMARY
+
+Odoo ERP delivers measurable, compounding ROI by consolidating fragmented systems into a single integrated platform. Based on 79+ real implementations managed by Nexa Solutions across Egypt and the GCC, clients achieve:
+
+• 15%–60% efficiency gains per department within Year 1
+• Average payback period: 12–18 months
+• 3-Year cumulative ROI: 180% – 420%
+• 40–70% reduction in software licensing costs
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 KEY QUANTIFIABLE BENEFITS
+
+1. INVENTORY OPTIMISATION
+   ↓ 21% FTE Time · ↓ 15–30% Inventory Holding Cost
+   Real-time stock visibility eliminates manual counts and reduces dead stock.
+
+2. FINANCE & ACCOUNTING AUTOMATION
+   ↓ 18.3% FTE Time · Month-close in under 3 days
+   Automated bank reconciliation, e-invoicing (Egypt ITDA / KSA ZATCA compliant).
+
+3. SALES & CRM ACCELERATION
+   ↓ 41% FTE Time · ↑ Lead Conversion Rate
+   Integrated CRM-to-invoice pipeline eliminates re-keying and shortens sales cycles.
+
+4. PURCHASE & PROCUREMENT CONTROL
+   ↓ 27% FTE Time · ↓ 10–20% Procurement Cost
+   3-way matching and automated approval workflows eliminate maverick spending.
+
+5. MANUFACTURING & PRODUCTION
+   ↓ 11.8% FTE Time · ↓ 60% Waste (F&B sector)
+   BOM-driven production, real-time WIP tracking, quality checkpoints.
+
+6. HR & PAYROLL AUTOMATION
+   ↓ 6% FTE Time · 100% Payroll Automation
+   Integrated attendance, leave, and payroll — GCC compliant.
+
+7. IT CONSOLIDATION
+   ↓ 40–70% Software Licence Spend
+   Replace 5–10 point solutions with one unified platform.
+
+8. REAL-TIME BUSINESS INTELLIGENCE
+   Reporting Time ↓ 45–80% · Live KPI Dashboards
+   Instant management visibility — no waiting for manual reporting cycles.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📅 5-YEAR FINANCIAL PROJECTION (Benchmark)
+
+Year 0:  – Initial Investment (Implementation + Licensing)
+Year 1:  Break-Even (savings offset costs)
+Year 2:  +180% Cumulative ROI
+Year 3:  +300% Compounding gains
+Year 5:  +500% Full optimisation
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️ KEY SUCCESS FACTORS
+
+• Scope Definition: A structured GAP/ROI Analysis before implementation protects your ROI investment. 80% of Nexa Solutions clients who complete this phase proceed to full implementation.
+• Change Management: Dedicated key-user training and hypercare ensure actual adoption — translating theoretical savings into real results.
+• Data Migration Quality: Clean master data (customers, vendors, products) is critical for a smooth go-live.
+• Customisation Balance: Minimise custom development. Odoo covers 80%+ of standard processes out-of-the-box.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ RECOMMENDED NEXT STEP
+
+Schedule a complimentary 30-minute ROI Assessment call to model the specific numbers for ${company} and receive a detailed implementation roadmap.
+
+📅 Book here: https://calendly.com/abuemira/30min
+💬 WhatsApp: +20 100 506 1349
+📧 Email: abuemira@nexa-solutions.com
+🌐 Portfolio: https://abuemira-nexa.github.io
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Mohamed Essam Abu Emira
+COO & Co-Founder | Nexa Solutions
+Odoo 16·17·18 Certified · Google PM Certified
+LinkedIn Top ERP Voice · 79+ Projects Delivered`;
+}
+
+function toggleEmailPreview(btn) {
+  const box = document.getElementById('roiEmailPreviewBox');
+  const showing = box.classList.contains('show');
+  if (!showing) {
+    box.textContent = buildEmailBody();
+    box.classList.add('show');
+    btn.textContent = '▲ Hide Preview';
+  } else {
+    box.classList.remove('show');
+    btn.textContent = '👁 Preview Email Content';
+  }
+}
+
+async function sendRoiEmail() {
+  const customerName = document.getElementById('emailCustomerName').value.trim();
+  const customerEmail = document.getElementById('emailCustomerEmail').value.trim();
+  if (!customerName || !customerEmail) {
+    alert('Please enter the customer name and email address.');
+    return;
+  }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(customerEmail)) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+
+  const btn = document.getElementById('roiEmailSendBtn');
+  btn.disabled = true;
+  btn.innerHTML = '⏳ Sending...';
+
+  const company = document.getElementById('emailCompanyName').value.trim() || 'Not specified';
+  const industry = document.getElementById('emailIndustry').value;
+  const emailBody = buildEmailBody();
+
+  const formData = new FormData();
+  formData.append('_replyto', customerEmail);
+  formData.append('_subject', `📊 Odoo ERP ROI Analysis Report — ${company} (${new Date().toLocaleDateString('en-GB')})`);
+  formData.append('name', customerName);
+  formData.append('email', customerEmail);
+  formData.append('company', company);
+  formData.append('industry', industry);
+  formData.append('service', 'ROI Report — Customer Email');
+  formData.append('message', emailBody);
+  formData.append('_cc', customerEmail);
+
+  try {
+    const res = await fetch('https://formspree.io/f/mkoyknjp', { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
+    if (res.ok) {
+      document.getElementById('roiEmailModalBody').style.display = 'none';
+      const successDiv = document.getElementById('roiEmailSuccess');
+      successDiv.style.display = 'block';
+      document.getElementById('roiEmailSuccessMsg').textContent = `ROI report successfully emailed to ${customerEmail}. A copy has been sent to abuemira@nexa-solutions.com.`;
+    } else {
+      const data = await res.json();
+      alert('Error sending email: ' + (data.error || 'Unknown error. Please try again.'));
+      btn.disabled = false;
+      btn.innerHTML = '📧 Send ROI Report';
+    }
+  } catch (err) {
+    alert('Network error. Please check your connection and try again.');
+    btn.disabled = false;
+    btn.innerHTML = '📧 Send ROI Report';
+  }
+}
+</script>
+
 <!-- ROI CALCULATOR — Powered by Odoo Official ROI Analysis Template -->
 <style>
 /* ── ROI V2 ENHANCED STYLES ── */
@@ -3126,6 +3695,7 @@ img{transition:opacity .3s ease}
 .roi-dept-savings-name{font-size:11px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:7px}
 .roi-dept-savings-val{font-size:11px;font-weight:700;color:var(--teal-mid)}
 .roi-dept-eff-badge{font-size:9px;padding:1px 6px;border-radius:8px;background:rgba(1,126,132,.2);color:var(--teal-mid);font-weight:600}
+#roiIndustryMultBadge{transition:transform .2s cubic-bezier(.34,1.56,.64,1),background .2s}
 </style>
 
 <section class="roi-section" id="roi">
@@ -3149,6 +3719,30 @@ img{transition:opacity .3s ease}
 
         <!-- TAB 1: PROFILE -->
         <div id="roiPanel1">
+
+          <!-- INDUSTRY SECTOR SELECTOR -->
+          <div class="roi-input-group" style="border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:18px;margin-bottom:0">
+            <div class="roi-label-row" style="margin-bottom:12px">
+              <span class="roi-lbl">🏭 Industry Sector</span>
+              <span style="font-size:10px;color:rgba(255,255,255,.35)">affects efficiency multiplier</span>
+            </div>
+            <div class="roi-industry-row" id="roiIndustryPills">
+              <button class="roi-ind-btn active" data-ind="manufacturing"    data-mult="1.15" onclick="roiSelectIndustry(this)">🏭 Manufacturing</button>
+              <button class="roi-ind-btn"         data-ind="construction"    data-mult="1.10" onclick="roiSelectIndustry(this)">🏗️ Construction</button>
+              <button class="roi-ind-btn"         data-ind="retail_fnb"      data-mult="1.12" onclick="roiSelectIndustry(this)">🛍️ Retail &amp; F&amp;B</button>
+              <button class="roi-ind-btn"         data-ind="logistics"       data-mult="1.08" onclick="roiSelectIndustry(this)">🚛 Logistics</button>
+              <button class="roi-ind-btn"         data-ind="services"        data-mult="1.05" onclick="roiSelectIndustry(this)">💼 Services</button>
+              <button class="roi-ind-btn"         data-ind="real_estate"     data-mult="1.07" onclick="roiSelectIndustry(this)">🏢 Real Estate</button>
+              <button class="roi-ind-btn"         data-ind="trading"         data-mult="1.09" onclick="roiSelectIndustry(this)">📦 Trading &amp; Dist.</button>
+              <button class="roi-ind-btn"         data-ind="healthcare"      data-mult="1.06" onclick="roiSelectIndustry(this)">🏥 Healthcare</button>
+            </div>
+            <div id="roiIndustryBadge" style="margin-top:10px;display:flex;align-items:center;gap:8px">
+              <span style="font-size:10px;color:rgba(255,255,255,.35)">Efficiency multiplier:</span>
+              <span id="roiIndustryMultBadge" style="font-size:12px;font-weight:800;color:var(--gold);background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.28);border-radius:8px;padding:2px 10px;">×1.15</span>
+              <span id="roiIndustryDesc" style="font-size:10px;color:rgba(255,255,255,.38);font-style:italic;">Higher complexity → greater Odoo gains</span>
+            </div>
+          </div>
+
           <div class="roi-input-group">
             <div class="roi-label-row">
               <span class="roi-lbl">👥 Total Employees</span>
@@ -3278,6 +3872,7 @@ img{transition:opacity .3s ease}
 
           <div class="roi-cta-wrap">
             <a href="https://calendly.com/abuemira/30min" target="_blank" class="roi-cta-main">📅 Get My Free ERP ROI Assessment</a>
+            <button onclick="openRoiEmailModal()" class="roi-cta-main" style="background:var(--teal);color:#fff;margin-top:0;">📧 Email Full ROI Report to Customer</button>
             <a href="https://wa.me/201005061349" target="_blank" class="roi-cta-sec">💬 Discuss Full Analysis on WhatsApp</a>
           </div>
           <p class="roi-disclaimer">* Methodology from Odoo's official ROI Analysis Template. Efficiency rates benchmarked across 79+ real implementations by Nexa Solutions. Results vary by scope and complexity.</p>
@@ -3346,6 +3941,34 @@ function fmtUSD(n) {
   return '$' + Math.round(n).toLocaleString();
 }
 
+// ── INDUSTRY MULTIPLIER ──
+const ROI_INDUSTRY_META = {
+  manufacturing: { mult: 1.15, desc: 'Complex ops → higher Odoo gains' },
+  construction:  { mult: 1.10, desc: 'Project tracking & cost control gains' },
+  retail_fnb:    { mult: 1.12, desc: 'POS + inventory + waste reduction' },
+  logistics:     { mult: 1.08, desc: 'Route & delivery optimisation gains' },
+  services:      { mult: 1.05, desc: 'Billing & project automation gains' },
+  real_estate:   { mult: 1.07, desc: 'Property & contract management gains' },
+  trading:       { mult: 1.09, desc: 'Purchase-to-sale cycle compression' },
+  healthcare:    { mult: 1.06, desc: 'Compliance & scheduling automation' },
+};
+let roiIndustryMult = 1.15; // default: Manufacturing
+
+function roiSelectIndustry(btn) {
+  document.querySelectorAll('#roiIndustryPills .roi-ind-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const ind = btn.dataset.ind;
+  const meta = ROI_INDUSTRY_META[ind] || { mult: 1.0, desc: '' };
+  roiIndustryMult = meta.mult;
+  const multBadge = document.getElementById('roiIndustryMultBadge');
+  const descEl = document.getElementById('roiIndustryDesc');
+  if (multBadge) multBadge.textContent = '×' + meta.mult.toFixed(2);
+  if (descEl) descEl.textContent = meta.desc;
+  // Flash the multiplier badge
+  if (multBadge) { multBadge.style.transform = 'scale(1.25)'; setTimeout(() => { multBadge.style.transform = 'scale(1)'; }, 200); }
+  roiCalc();
+}
+
 function roiCalc() {
   const emp    = parseInt(document.getElementById('roiEmp').value);
   const sal    = parseInt(document.getElementById('roiSal').value);       // annual salary per emp
@@ -3378,7 +4001,8 @@ function roiCalc() {
     // Scale FTE proportionally to company size (template uses 50 FTE baseline)
     const scaledFTE = (d.fte / 50) * emp;
     const deptFTEcost = scaledFTE * sal;
-    const savings = Math.round(deptFTEcost * d.eff);
+    // Apply industry efficiency multiplier
+    const savings = Math.round(deptFTEcost * d.eff * (roiIndustryMult || 1.0));
     totalSavings += savings;
     deptSavings.push({ ...d, savings, scaledFTE: Math.round(scaledFTE * 10) / 10 });
   });
@@ -3429,7 +4053,8 @@ function roiCalc() {
   document.getElementById('roiSavings').innerHTML = fmtUSD(totalSavings) + '<span class="roi-result-unit">/yr</span>';
   document.getElementById('roiSubline').textContent =
     selectedDepts.length + ' dept' + (selectedDepts.length !== 1 ? 's' : '') + ' · ' +
-    emp + ' employees · ' + Math.round(totalSavings / (emp * sal) * 100) + '% FTE efficiency gain';
+    emp + ' employees · ' + Math.round(totalSavings / (emp * sal) * 100) + '% FTE efficiency gain' +
+    (roiIndustryMult && roiIndustryMult !== 1 ? ' · ×' + roiIndustryMult.toFixed(2) + ' industry boost' : '');
 
   document.getElementById('bkPayback').textContent = paybackMonths
     ? (paybackMonths < 12 ? paybackMonths + ' months' : (paybackMonths/12).toFixed(1) + ' years')
@@ -3476,6 +4101,14 @@ function roiCalc() {
       <div class="roi-yr-label">Year ${i+1}</div>
     </div>`;
   }).join('');
+
+  // ── SYNC TO ROI REPORT SECTION ──
+  const paybackText = paybackMonths
+    ? (paybackMonths < 12 ? paybackMonths + ' months' : (paybackMonths/12).toFixed(1) + ' yrs')
+    : null;
+  if (typeof syncReportKpis === 'function') {
+    syncReportKpis(totalSavings > 0 ? totalSavings : null, paybackText, roi3 > 0 ? roi3 : null, net3 !== 0 ? net3 : null);
+  }
 }
 
 // Init
