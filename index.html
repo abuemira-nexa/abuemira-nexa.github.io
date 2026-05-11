@@ -863,8 +863,6 @@ img{transition:opacity .3s ease}
     <a href="#services">Services</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
-    <a href="#roi">ROI Calc</a>
-    <a href="#roi-report">ROI Report</a>
     <a href="#clients">Clients</a>
     <a href="#contact">Contact</a>
     <a href="https://calendly.com/abuemira/30min" target="_blank" class="nav-cta">📅 Book Meeting</a>
@@ -3023,15 +3021,15 @@ img{transition:opacity .3s ease}
       </div>
     </div>
 
-    <!-- FIX 3: Contact Form (Formspree) -->
-    <!-- ⚠️  Replace YOUR_FORM_ID with your actual Formspree ID from formspree.io/forms -->
+    <!-- Contact Form (Web3Forms) -->
     <div class="contact-form">
       <h3 id="cf-title" style="font-size:16px;font-weight:700;font-family:Sora,sans-serif;margin-bottom:4px;">Send a Message</h3>
       <p id="cf-sub" style="font-size:12px;color:var(--gray-400);margin-bottom:20px;">Fill the form below and I'll respond within 24 hours</p>
-      <form id="contactForm" action="https://formspree.io/f/mkoyknjp" method="POST">
-        <input type="hidden" name="_replyto" value="abuemira91@gmail.com">
-        <input type="hidden" name="_subject" value="🚀 New Portfolio Inquiry — Mohamed Abu Emira">
-        <input type="text" name="_gotcha" style="display:none">
+      <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="44d65de7-def8-4eaa-a67e-c303a9f539f4">
+        <input type="hidden" name="subject" value="🚀 New Portfolio Inquiry — Mohamed Abu Emira">
+        <input type="hidden" name="from_name" value="Mohamed Abu Emira Portfolio">
+        <input type="checkbox" name="botcheck" style="display:none">
         <div class="form-grid">
           <div class="form-field">
             <label for="cf-name">Full Name</label>
@@ -3089,18 +3087,190 @@ img{transition:opacity .3s ease}
 
 
 <!-- BLOG PREVIEW -->
-<section class="section alt" id="blog">
-  <div class="container">
-    <div class="sec-tag">Thought Leadership</div>
-    <h2 class="sec-title">Latest <span>Articles</span></h2>
-    <div class="blog-grid" id="blogGrid">
-      <div class="blog-ph" id="blogLoading">⏳ Loading latest articles from Medium...</div>
+<section class="roi-section" id="roi">
+  <div class="roi-inner">
+    <div class="roi-header">
+      <div class="roi-tag">💰 Odoo ROI Calculator · مبني على بيانات 79+ مشروع حقيقي</div>
+      <h2 class="roi-title">Calculate Your <span>Real Odoo ROI</span></h2>
+      <p class="roi-sub">Based on Odoo's official ROI Analysis methodology — the same tool used with real clients. Select your departments and business profile to get an accurate projection.</p>
     </div>
-    <div style="text-align:center;margin-top:26px;">
-      <a href="https://medium.com/@abuemira" target="_blank" class="btn-gold" style="display:inline-flex;">✍️ View All Articles on Medium →</a>
+
+    <div class="roi-grid">
+      <!-- LEFT: INPUTS -->
+      <div class="roi-inputs">
+
+        <!-- STEP TABS -->
+        <div class="roi-step-tabs">
+          <div class="roi-step-tab active" id="roiTab1" onclick="roiSwitchTab(1)"><span>👤</span>Profile</div>
+          <div class="roi-step-tab" id="roiTab2" onclick="roiSwitchTab(2)"><span>🏢</span>Departments</div>
+          <div class="roi-step-tab" id="roiTab3" onclick="roiSwitchTab(3)"><span>📊</span>Investment</div>
+        </div>
+
+        <!-- TAB 1: PROFILE -->
+        <div id="roiPanel1">
+
+          <!-- INDUSTRY SECTOR SELECTOR -->
+          <div class="roi-input-group" style="border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:18px;margin-bottom:0">
+            <div class="roi-label-row" style="margin-bottom:12px">
+              <span class="roi-lbl">🏭 Industry Sector</span>
+              <span style="font-size:10px;color:rgba(255,255,255,.35)">affects efficiency multiplier</span>
+            </div>
+            <div class="roi-industry-row" id="roiIndustryPills">
+              <button class="roi-ind-btn active" data-ind="manufacturing"    data-mult="1.15" onclick="roiSelectIndustry(this)">🏭 Manufacturing</button>
+              <button class="roi-ind-btn"         data-ind="construction"    data-mult="1.10" onclick="roiSelectIndustry(this)">🏗️ Construction</button>
+              <button class="roi-ind-btn"         data-ind="retail_fnb"      data-mult="1.12" onclick="roiSelectIndustry(this)">🛍️ Retail &amp; F&amp;B</button>
+              <button class="roi-ind-btn"         data-ind="logistics"       data-mult="1.08" onclick="roiSelectIndustry(this)">🚛 Logistics</button>
+              <button class="roi-ind-btn"         data-ind="services"        data-mult="1.05" onclick="roiSelectIndustry(this)">💼 Services</button>
+              <button class="roi-ind-btn"         data-ind="real_estate"     data-mult="1.07" onclick="roiSelectIndustry(this)">🏢 Real Estate</button>
+              <button class="roi-ind-btn"         data-ind="trading"         data-mult="1.09" onclick="roiSelectIndustry(this)">📦 Trading &amp; Dist.</button>
+              <button class="roi-ind-btn"         data-ind="healthcare"      data-mult="1.06" onclick="roiSelectIndustry(this)">🏥 Healthcare</button>
+            </div>
+            <div id="roiIndustryBadge" style="margin-top:10px;display:flex;align-items:center;gap:8px">
+              <span style="font-size:10px;color:rgba(255,255,255,.35)">Efficiency multiplier:</span>
+              <span id="roiIndustryMultBadge" style="font-size:12px;font-weight:800;color:var(--gold);background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.28);border-radius:8px;padding:2px 10px;">×1.15</span>
+              <span id="roiIndustryDesc" style="font-size:10px;color:rgba(255,255,255,.38);font-style:italic;">Higher complexity → greater Odoo gains</span>
+            </div>
+          </div>
+
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">👥 Total Employees</span>
+              <span class="roi-val-badge" id="roiEmpVal">50</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiEmp" min="5" max="500" value="50" step="5" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>5</span><span>500+</span></div>
+          </div>
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">💵 Avg. Annual Salary / Employee (USD)</span>
+              <span class="roi-val-badge" id="roiSalVal">$50K</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiSal" min="10000" max="150000" value="50000" step="5000" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$10K</span><span>$150K</span></div>
+          </div>
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">📦 Annual Revenue (USD)</span>
+              <span class="roi-val-badge" id="roiRevVal">$5M</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiRev" min="500000" max="50000000" value="5000000" step="500000" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$500K</span><span>$50M+</span></div>
+          </div>
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">💾 Current Software Annual Cost</span>
+              <span class="roi-val-badge" id="roiSwVal">$100K</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiSw" min="0" max="500000" value="100000" step="10000" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$0</span><span>$500K</span></div>
+          </div>
+          <button onclick="roiSwitchTab(2)" style="width:100%;margin-top:8px;padding:11px;border-radius:10px;border:1px solid rgba(1,126,132,.4);background:rgba(1,126,132,.15);color:var(--teal-mid);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">Next: Select Departments →</button>
+        </div>
+
+        <!-- TAB 2: DEPARTMENTS — efficiency rates from Excel template -->
+        <div id="roiPanel2" style="display:none">
+          <p style="font-size:11px;color:rgba(255,255,255,.45);margin-bottom:12px;">Select the departments Odoo will cover. Efficiency rates are from real Odoo client benchmarks.</p>
+          <div class="roi-dept-grid" id="roiDeptGrid">
+            <!-- Injected by JS -->
+          </div>
+          <button onclick="roiSwitchTab(3)" style="width:100%;margin-top:8px;padding:11px;border-radius:10px;border:1px solid rgba(1,126,132,.4);background:rgba(1,126,132,.15);color:var(--teal-mid);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">Next: Set Investment →</button>
+        </div>
+
+        <!-- TAB 3: INVESTMENT -->
+        <div id="roiPanel3" style="display:none">
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">🔧 Implementation Budget (USD)</span>
+              <span class="roi-val-badge" id="roiImplVal">$35K</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiImpl" min="5000" max="300000" value="35000" step="5000" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$5K</span><span>$300K</span></div>
+          </div>
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">📱 Odoo Subscription / Year</span>
+              <span class="roi-val-badge" id="roiSubVal">$40K</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiSub" min="3000" max="200000" value="40000" step="3000" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$3K</span><span>$200K</span></div>
+          </div>
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">🛠️ Annual Support / Consulting</span>
+              <span class="roi-val-badge" id="roiSuppVal">$10K</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiSupp" min="0" max="100000" value="10000" step="5000" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$0</span><span>$100K</span></div>
+          </div>
+          <div class="roi-input-group">
+            <div class="roi-label-row">
+              <span class="roi-lbl">🧑‍💼 Internal Staff Time (USD equiv.)</span>
+              <span class="roi-val-badge" id="roiStaffVal">$50K</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiStaff" min="0" max="200000" value="50000" step="10000" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$0</span><span>$200K</span></div>
+          </div>
+          <button onclick="roiSwitchTab(1)" style="width:100%;margin-top:8px;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">← Back to Profile</button>
+        </div>
+      </div>
+
+      <!-- RIGHT: RESULTS -->
+      <div class="roi-results">
+        <div class="roi-result-card">
+          <div class="roi-result-header">
+            <div class="roi-result-lbl">Estimated Annual Savings</div>
+            <div class="roi-result-num" id="roiSavings">—<span class="roi-result-unit">/yr</span></div>
+            <div class="roi-result-sub" id="roiSubline">Select departments to calculate</div>
+          </div>
+
+          <!-- Department savings breakdown -->
+          <div style="margin-bottom:16px">
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">Savings by Department</div>
+            <div class="roi-dept-savings-list" id="roiDeptSavingsList">
+              <div style="font-size:11px;color:rgba(255,255,255,.3);text-align:center;padding:16px;">Select departments in Tab 2</div>
+            </div>
+          </div>
+
+          <!-- Key metrics -->
+          <div class="roi-breakdown">
+            <div class="roi-bk-row" style="background:rgba(212,168,67,.06);border-color:rgba(212,168,67,.2);">
+              <span class="roi-bk-lbl"><span class="roi-bk-icon">📅</span>Payback Period</span>
+              <span class="roi-bk-val" style="color:var(--gold)" id="bkPayback">—</span>
+            </div>
+            <div class="roi-bk-row" style="background:rgba(1,126,132,.06);border-color:rgba(1,126,132,.2);">
+              <span class="roi-bk-lbl"><span class="roi-bk-icon">📈</span>3-Year ROI</span>
+              <span class="roi-bk-val" style="color:var(--teal-mid)" id="bkRoi3">—</span>
+            </div>
+            <div class="roi-bk-row">
+              <span class="roi-bk-lbl"><span class="roi-bk-icon">💰</span>Net Value (Y1–Y3)</span>
+              <span class="roi-bk-val" id="bkNet3">—</span>
+            </div>
+            <div class="roi-bk-row">
+              <span class="roi-bk-lbl"><span class="roi-bk-icon">🔄</span>Software Cost Savings</span>
+              <span class="roi-bk-val" id="bkSwSave">—</span>
+            </div>
+          </div>
+
+          <!-- 5-Year bar chart -->
+          <div style="margin-top:18px;margin-bottom:16px">
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">5-Year Cumulative Net Cash Flow</div>
+            <div class="roi-5yr-chart" id="roi5yrChart">
+              <!-- injected by JS -->
+            </div>
+          </div>
+
+          <div class="roi-cta-wrap">
+            <a href="https://calendly.com/abuemira/30min" target="_blank" class="roi-cta-main">📅 Get My Free ERP ROI Assessment</a>
+            <button onclick="openRoiEmailModal()" class="roi-cta-main" style="background:var(--teal);color:#fff;margin-top:0;">📧 Email Full ROI Report to Customer</button>
+            <a href="https://wa.me/201005061349" target="_blank" class="roi-cta-sec">💬 Discuss Full Analysis on WhatsApp</a>
+          </div>
+          <p class="roi-disclaimer">* Methodology from Odoo's official ROI Analysis Template. Efficiency rates benchmarked across 79+ real implementations by Nexa Solutions. Results vary by scope and complexity.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
 
 <!-- ══ ROI REPORT SECTION ══ -->
 <style>
@@ -3353,12 +3523,6 @@ img{transition:opacity .3s ease}
           <h4 style="color:#166534;">✅ Conclusion &amp; Next Step</h4>
           <p>Odoo ERP represents one of the highest-ROI technology investments available to mid-market businesses today. With implementation costs 60–80% lower than SAP or Oracle, and a unified platform replacing dozens of point solutions, the financial case is compelling across every industry vertical. The Nexa Solutions team has delivered 79+ successful implementations with an 80% project conversion rate from ROI Analysis to signed project. We recommend scheduling a complimentary 30-minute ROI assessment to model the specific numbers for your business.</p>
         </div>
-
-        <!-- EMAIL REPORT CTA -->
-        <div style="text-align:center;margin-top:28px;padding-top:24px;border-top:1px solid var(--gray-200)">
-          <p style="font-size:14px;color:var(--gray-600);margin-bottom:16px;">Ready to share this analysis with your customer or management team?</p>
-          <button onclick="openRoiEmailModal()" class="btn-gold" style="display:inline-flex;align-items:center;gap:8px;font-size:14px;">📧 Email Full ROI Report to Customer</button>
-        </div>
       </div>
 
       <!-- REPORT FOOTER -->
@@ -3375,6 +3539,7 @@ img{transition:opacity .3s ease}
     </div>
   </div>
 </section>
+
 
 <!-- ROI EMAIL MODAL -->
 <div class="roi-email-overlay" id="roiEmailModal" role="dialog" aria-modal="true">
@@ -3823,20 +3988,28 @@ async function sendRoiEmail() {
     ? `📊 تقرير ROI أودو ERP — ${company} · توفير: ${savings} · عائد 3س: ${roi3} (${new Date().toLocaleDateString('ar-EG')})`
     : `📊 Odoo ERP ROI Analysis — ${company} · Savings: ${savings} · 3Y ROI: ${roi3} (${new Date().toLocaleDateString('en-GB')})`;
 
-  const formData = new FormData();
-  formData.append('_replyto', customerEmail);
-  formData.append('_subject', subjectLine);
-  formData.append('name', customerName);
-  formData.append('email', customerEmail);
-  formData.append('company', company);
-  formData.append('industry', industry);
-  formData.append('service', 'ROI Report — Customer Email');
-  formData.append('message', emailBody);
-  formData.append('_cc', customerEmail);
+  const payload = {
+    access_key: '44d65de7-def8-4eaa-a67e-c303a9f539f4',
+    subject: subjectLine,
+    from_name: 'Mohamed Abu Emira — Nexa Solutions',
+    replyto: customerEmail,
+    to_email: customerEmail,
+    name: customerName,
+    email: customerEmail,
+    company: company,
+    industry: industry,
+    service: 'ROI Report — Customer Email',
+    message: emailBody
+  };
 
   try {
-    const res = await fetch('https://formspree.io/f/mkoyknjp', { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
-    if (res.ok) {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (data.success) {
       document.getElementById('roiEmailModalBody').style.display = 'none';
       const successDiv = document.getElementById('roiEmailSuccess');
       successDiv.style.display = 'block';
@@ -3844,8 +4017,7 @@ async function sendRoiEmail() {
         ? `تم إرسال تقرير ROI المخصص بنجاح إلى ${customerEmail}. نسخة أُرسلت إلى abuemira@nexa-solutions.com.`
         : `Personalised ROI report successfully emailed to ${customerEmail}. A copy has been sent to abuemira@nexa-solutions.com.`;
     } else {
-      const data = await res.json();
-      alert((AR ? 'خطأ في الإرسال: ' : 'Error sending email: ') + (data.error || (AR ? 'خطأ غير معروف، يرجى المحاولة مجدداً.' : 'Unknown error. Please try again.')));
+      alert((AR ? 'خطأ في الإرسال: ' : 'Error sending email: ') + (data.message || (AR ? 'خطأ غير معروف، يرجى المحاولة مجدداً.' : 'Unknown error. Please try again.')));
       btn.disabled = false;
       btn.innerHTML = AR ? '📧 إرسال تقرير ROI' : '📧 Send ROI Report';
     }
@@ -3885,186 +4057,15 @@ async function sendRoiEmail() {
 #roiIndustryMultBadge{transition:transform .2s cubic-bezier(.34,1.56,.64,1),background .2s}
 </style>
 
-<section class="roi-section" id="roi">
-  <div class="roi-inner">
-    <div class="roi-header">
-      <div class="roi-tag">💰 Odoo ROI Calculator · مبني على بيانات 79+ مشروع حقيقي</div>
-      <h2 class="roi-title">Calculate Your <span>Real Odoo ROI</span></h2>
-      <p class="roi-sub">Based on Odoo's official ROI Analysis methodology — the same tool used with real clients. Select your departments and business profile to get an accurate projection.</p>
+<section class="section alt" id="blog">
+  <div class="container">
+    <div class="sec-tag">Thought Leadership</div>
+    <h2 class="sec-title">Latest <span>Articles</span></h2>
+    <div class="blog-grid" id="blogGrid">
+      <div class="blog-ph" id="blogLoading">⏳ Loading latest articles from Medium...</div>
     </div>
-
-    <div class="roi-grid">
-      <!-- LEFT: INPUTS -->
-      <div class="roi-inputs">
-
-        <!-- STEP TABS -->
-        <div class="roi-step-tabs">
-          <div class="roi-step-tab active" id="roiTab1" onclick="roiSwitchTab(1)"><span>👤</span>Profile</div>
-          <div class="roi-step-tab" id="roiTab2" onclick="roiSwitchTab(2)"><span>🏢</span>Departments</div>
-          <div class="roi-step-tab" id="roiTab3" onclick="roiSwitchTab(3)"><span>📊</span>Investment</div>
-        </div>
-
-        <!-- TAB 1: PROFILE -->
-        <div id="roiPanel1">
-
-          <!-- INDUSTRY SECTOR SELECTOR -->
-          <div class="roi-input-group" style="border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:18px;margin-bottom:0">
-            <div class="roi-label-row" style="margin-bottom:12px">
-              <span class="roi-lbl">🏭 Industry Sector</span>
-              <span style="font-size:10px;color:rgba(255,255,255,.35)">affects efficiency multiplier</span>
-            </div>
-            <div class="roi-industry-row" id="roiIndustryPills">
-              <button class="roi-ind-btn active" data-ind="manufacturing"    data-mult="1.15" onclick="roiSelectIndustry(this)">🏭 Manufacturing</button>
-              <button class="roi-ind-btn"         data-ind="construction"    data-mult="1.10" onclick="roiSelectIndustry(this)">🏗️ Construction</button>
-              <button class="roi-ind-btn"         data-ind="retail_fnb"      data-mult="1.12" onclick="roiSelectIndustry(this)">🛍️ Retail &amp; F&amp;B</button>
-              <button class="roi-ind-btn"         data-ind="logistics"       data-mult="1.08" onclick="roiSelectIndustry(this)">🚛 Logistics</button>
-              <button class="roi-ind-btn"         data-ind="services"        data-mult="1.05" onclick="roiSelectIndustry(this)">💼 Services</button>
-              <button class="roi-ind-btn"         data-ind="real_estate"     data-mult="1.07" onclick="roiSelectIndustry(this)">🏢 Real Estate</button>
-              <button class="roi-ind-btn"         data-ind="trading"         data-mult="1.09" onclick="roiSelectIndustry(this)">📦 Trading &amp; Dist.</button>
-              <button class="roi-ind-btn"         data-ind="healthcare"      data-mult="1.06" onclick="roiSelectIndustry(this)">🏥 Healthcare</button>
-            </div>
-            <div id="roiIndustryBadge" style="margin-top:10px;display:flex;align-items:center;gap:8px">
-              <span style="font-size:10px;color:rgba(255,255,255,.35)">Efficiency multiplier:</span>
-              <span id="roiIndustryMultBadge" style="font-size:12px;font-weight:800;color:var(--gold);background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.28);border-radius:8px;padding:2px 10px;">×1.15</span>
-              <span id="roiIndustryDesc" style="font-size:10px;color:rgba(255,255,255,.38);font-style:italic;">Higher complexity → greater Odoo gains</span>
-            </div>
-          </div>
-
-          <div class="roi-input-group">
-            <div class="roi-label-row">
-              <span class="roi-lbl">👥 Total Employees</span>
-              <span class="roi-val-badge" id="roiEmpVal">50</span>
-            </div>
-            <input type="range" class="roi-slider" id="roiEmp" min="5" max="500" value="50" step="5" oninput="roiCalc()">
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>5</span><span>500+</span></div>
-          </div>
-          <div class="roi-input-group">
-            <div class="roi-label-row">
-              <span class="roi-lbl">💵 Avg. Annual Salary / Employee (USD)</span>
-              <span class="roi-val-badge" id="roiSalVal">$50K</span>
-            </div>
-            <input type="range" class="roi-slider" id="roiSal" min="10000" max="150000" value="50000" step="5000" oninput="roiCalc()">
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$10K</span><span>$150K</span></div>
-          </div>
-          <div class="roi-input-group">
-            <div class="roi-label-row">
-              <span class="roi-lbl">📦 Annual Revenue (USD)</span>
-              <span class="roi-val-badge" id="roiRevVal">$5M</span>
-            </div>
-            <input type="range" class="roi-slider" id="roiRev" min="500000" max="50000000" value="5000000" step="500000" oninput="roiCalc()">
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$500K</span><span>$50M+</span></div>
-          </div>
-          <div class="roi-input-group">
-            <div class="roi-label-row">
-              <span class="roi-lbl">💾 Current Software Annual Cost</span>
-              <span class="roi-val-badge" id="roiSwVal">$100K</span>
-            </div>
-            <input type="range" class="roi-slider" id="roiSw" min="0" max="500000" value="100000" step="10000" oninput="roiCalc()">
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$0</span><span>$500K</span></div>
-          </div>
-          <button onclick="roiSwitchTab(2)" style="width:100%;margin-top:8px;padding:11px;border-radius:10px;border:1px solid rgba(1,126,132,.4);background:rgba(1,126,132,.15);color:var(--teal-mid);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">Next: Select Departments →</button>
-        </div>
-
-        <!-- TAB 2: DEPARTMENTS — efficiency rates from Excel template -->
-        <div id="roiPanel2" style="display:none">
-          <p style="font-size:11px;color:rgba(255,255,255,.45);margin-bottom:12px;">Select the departments Odoo will cover. Efficiency rates are from real Odoo client benchmarks.</p>
-          <div class="roi-dept-grid" id="roiDeptGrid">
-            <!-- Injected by JS -->
-          </div>
-          <button onclick="roiSwitchTab(3)" style="width:100%;margin-top:8px;padding:11px;border-radius:10px;border:1px solid rgba(1,126,132,.4);background:rgba(1,126,132,.15);color:var(--teal-mid);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">Next: Set Investment →</button>
-        </div>
-
-        <!-- TAB 3: INVESTMENT -->
-        <div id="roiPanel3" style="display:none">
-          <div class="roi-input-group">
-            <div class="roi-label-row">
-              <span class="roi-lbl">🔧 Implementation Budget (USD)</span>
-              <span class="roi-val-badge" id="roiImplVal">$35K</span>
-            </div>
-            <input type="range" class="roi-slider" id="roiImpl" min="5000" max="300000" value="35000" step="5000" oninput="roiCalc()">
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$5K</span><span>$300K</span></div>
-          </div>
-          <div class="roi-input-group">
-            <div class="roi-label-row">
-              <span class="roi-lbl">📱 Odoo Subscription / Year</span>
-              <span class="roi-val-badge" id="roiSubVal">$40K</span>
-            </div>
-            <input type="range" class="roi-slider" id="roiSub" min="3000" max="200000" value="40000" step="3000" oninput="roiCalc()">
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$3K</span><span>$200K</span></div>
-          </div>
-          <div class="roi-input-group">
-            <div class="roi-label-row">
-              <span class="roi-lbl">🛠️ Annual Support / Consulting</span>
-              <span class="roi-val-badge" id="roiSuppVal">$10K</span>
-            </div>
-            <input type="range" class="roi-slider" id="roiSupp" min="0" max="100000" value="10000" step="5000" oninput="roiCalc()">
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$0</span><span>$100K</span></div>
-          </div>
-          <div class="roi-input-group">
-            <div class="roi-label-row">
-              <span class="roi-lbl">🧑‍💼 Internal Staff Time (USD equiv.)</span>
-              <span class="roi-val-badge" id="roiStaffVal">$50K</span>
-            </div>
-            <input type="range" class="roi-slider" id="roiStaff" min="0" max="200000" value="50000" step="10000" oninput="roiCalc()">
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$0</span><span>$200K</span></div>
-          </div>
-          <button onclick="roiSwitchTab(1)" style="width:100%;margin-top:8px;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">← Back to Profile</button>
-        </div>
-      </div>
-
-      <!-- RIGHT: RESULTS -->
-      <div class="roi-results">
-        <div class="roi-result-card">
-          <div class="roi-result-header">
-            <div class="roi-result-lbl">Estimated Annual Savings</div>
-            <div class="roi-result-num" id="roiSavings">—<span class="roi-result-unit">/yr</span></div>
-            <div class="roi-result-sub" id="roiSubline">Select departments to calculate</div>
-          </div>
-
-          <!-- Department savings breakdown -->
-          <div style="margin-bottom:16px">
-            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">Savings by Department</div>
-            <div class="roi-dept-savings-list" id="roiDeptSavingsList">
-              <div style="font-size:11px;color:rgba(255,255,255,.3);text-align:center;padding:16px;">Select departments in Tab 2</div>
-            </div>
-          </div>
-
-          <!-- Key metrics -->
-          <div class="roi-breakdown">
-            <div class="roi-bk-row" style="background:rgba(212,168,67,.06);border-color:rgba(212,168,67,.2);">
-              <span class="roi-bk-lbl"><span class="roi-bk-icon">📅</span>Payback Period</span>
-              <span class="roi-bk-val" style="color:var(--gold)" id="bkPayback">—</span>
-            </div>
-            <div class="roi-bk-row" style="background:rgba(1,126,132,.06);border-color:rgba(1,126,132,.2);">
-              <span class="roi-bk-lbl"><span class="roi-bk-icon">📈</span>3-Year ROI</span>
-              <span class="roi-bk-val" style="color:var(--teal-mid)" id="bkRoi3">—</span>
-            </div>
-            <div class="roi-bk-row">
-              <span class="roi-bk-lbl"><span class="roi-bk-icon">💰</span>Net Value (Y1–Y3)</span>
-              <span class="roi-bk-val" id="bkNet3">—</span>
-            </div>
-            <div class="roi-bk-row">
-              <span class="roi-bk-lbl"><span class="roi-bk-icon">🔄</span>Software Cost Savings</span>
-              <span class="roi-bk-val" id="bkSwSave">—</span>
-            </div>
-          </div>
-
-          <!-- 5-Year bar chart -->
-          <div style="margin-top:18px;margin-bottom:16px">
-            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">5-Year Cumulative Net Cash Flow</div>
-            <div class="roi-5yr-chart" id="roi5yrChart">
-              <!-- injected by JS -->
-            </div>
-          </div>
-
-          <div class="roi-cta-wrap">
-            <a href="https://calendly.com/abuemira/30min" target="_blank" class="roi-cta-main">📅 Get My Free ERP ROI Assessment</a>
-            <button onclick="openRoiEmailModal()" class="roi-cta-main" style="background:var(--teal);color:#fff;margin-top:0;">📧 Email Full ROI Report to Customer</button>
-            <a href="https://wa.me/201005061349" target="_blank" class="roi-cta-sec">💬 Discuss Full Analysis on WhatsApp</a>
-          </div>
-          <p class="roi-disclaimer">* Methodology from Odoo's official ROI Analysis Template. Efficiency rates benchmarked across 79+ real implementations by Nexa Solutions. Results vary by scope and complexity.</p>
-        </div>
-      </div>
+    <div style="text-align:center;margin-top:26px;">
+      <a href="https://medium.com/@abuemira" target="_blank" class="btn-gold" style="display:inline-flex;">✍️ View All Articles on Medium →</a>
     </div>
   </div>
 </section>
@@ -4434,7 +4435,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* Add nav links for new sections */
   const navLinksDiv = document.querySelector('.nav-links');
   const ctaLink = navLinksDiv.querySelector('.nav-cta');
-  ['#blog:Blog','#roi:ROI Calc'].forEach(pair => {
+  ['#roi:ROI Calc','#roi-report:ROI Report','#blog:Blog'].forEach(pair => {
     const [href, txt] = pair.split(':');
     const a = document.createElement('a'); a.href = href; a.textContent = txt;
     navLinksDiv.insertBefore(a, ctaLink);
