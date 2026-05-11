@@ -3487,40 +3487,216 @@ document.addEventListener('keydown', function(e) {
 });
 
 function buildEmailBody() {
-  const name = document.getElementById('emailCustomerName').value || 'Valued Customer';
-  const company = document.getElementById('emailCompanyName').value || 'Your Company';
-  const industry = document.getElementById('emailIndustry').value;
-  const note = document.getElementById('emailNote').value;
+  const AR = document.documentElement.getAttribute('data-lang') === 'ar';
+  const name    = document.getElementById('emailCustomerName').value  || (AR ? 'عميلنا العزيز' : 'Valued Customer');
+  const company = document.getElementById('emailCompanyName').value   || (AR ? 'شركتكم' : 'Your Company');
+  const industry= document.getElementById('emailIndustry').value;
+  const note    = document.getElementById('emailNote').value;
 
-  // Get live ROI data from calculator if available
-  const savingsEl = document.getElementById('roiSavings');
-  const paybackEl = document.getElementById('bkPayback');
-  const roi3El = document.getElementById('bkRoi3');
-  const net3El = document.getElementById('bkNet3');
-  const savings = savingsEl ? savingsEl.textContent.replace(/[^\d$KMB\/yr\.]/g,'').trim() : 'To be calculated';
-  const payback = paybackEl ? paybackEl.textContent : 'To be calculated';
-  const roi3 = roi3El ? roi3El.textContent : 'To be calculated';
-  const net3 = net3El ? net3El.textContent : 'To be calculated';
+  /* ── READ ALL LIVE CALCULATOR VALUES ── */
+  const empVal  = parseInt(document.getElementById('roiEmp')?.value)   || 0;
+  const salVal  = parseInt(document.getElementById('roiSal')?.value)   || 0;
+  const revVal  = parseInt(document.getElementById('roiRev')?.value)   || 0;
+  const swVal   = parseInt(document.getElementById('roiSw')?.value)    || 0;
+  const implVal = parseInt(document.getElementById('roiImpl')?.value)  || 0;
+  const subVal  = parseInt(document.getElementById('roiSub')?.value)   || 0;
+  const suppVal = parseInt(document.getElementById('roiSupp')?.value)  || 0;
+  const staffVal= parseInt(document.getElementById('roiStaff')?.value) || 0;
 
+  /* ── READ LIVE RESULTS FROM DOM ── */
+  const getVal = id => { const el = document.getElementById(id); return el ? el.textContent.trim() : '—'; };
+  const savings  = getVal('roiSavings').replace(/<[^>]+>/g,'').trim();
+  const payback  = getVal('bkPayback');
+  const roi3     = getVal('bkRoi3');
+  const net3     = getVal('bkNet3');
+  const swSave   = getVal('bkSwSave');
+  const subline  = getVal('roiSubline');
+
+  /* ── READ SELECTED DEPARTMENTS ── */
+  const selectedDeptRows = [];
+  document.querySelectorAll('.roi-dept-savings-row').forEach(row => {
+    const nameEl = row.querySelector('.roi-dept-savings-name');
+    const valEl  = row.querySelector('.roi-dept-savings-val');
+    if (nameEl && valEl) {
+      const dname = nameEl.textContent.replace(/\d+%.*eff\./,'').trim();
+      selectedDeptRows.push(`  • ${dname}: ${valEl.textContent.trim()}`);
+    }
+  });
+
+  /* ── READ SELECTED INDUSTRY ── */
+  const activeInd = document.querySelector('#roiIndustryPills .roi-ind-btn.active');
+  const industryName = activeInd ? activeInd.textContent.trim() : industry;
+  const industryMult = document.getElementById('roiIndustryMultBadge')?.textContent?.trim() || '';
+
+  /* ── HELPERS ── */
+  const fmtNum = n => n >= 1000000 ? '$' + (n/1000000).toFixed(1) + 'M' : n >= 1000 ? '$' + (n/1000).toFixed(0) + 'K' : '$' + n;
+  const DATE   = new Date().toLocaleDateString(AR ? 'ar-EG' : 'en-GB', {day:'numeric', month:'long', year:'numeric'});
+  const LINE   = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
+
+  /* ══════════════════════════════════════════
+     BUILD ARABIC EMAIL
+  ══════════════════════════════════════════ */
+  if (AR) {
+    return `السيد/السيدة ${name}،
+
+${note ? note + '\n\n' : ''}شكراً لاهتمامكم بأودو ERP لـ ${company}. نرفق أدناه تحليل العائد على الاستثمار المخصص لمؤسستكم، أعدّه محمد عصام أبو عميرة من نيكسا تكنولوجي.
+
+${LINE}
+أودو ERP — تقرير تحليل العائد على الاستثمار
+أعدّه: محمد عصام أبو عميرة
+المدير التنفيذي ومؤسس مشارك، نيكسا تكنولوجي
+التاريخ: ${DATE}
+القطاع الصناعي: ${industryName}
+${LINE}
+
+📊 ملف الشركة (البيانات المُدخلة في الحاسبة)
+• عدد الموظفين: ${empVal}
+• متوسط الراتب السنوي: ${fmtNum(salVal)} لكل موظف
+• الإيرادات السنوية: ${fmtNum(revVal)}
+• التكلفة السنوية للبرمجيات الحالية: ${fmtNum(swVal)}
+• ميزانية التطبيق: ${fmtNum(implVal)}
+• اشتراك أودو / سنة: ${fmtNum(subVal)}
+• الدعم والاستشارة السنوية: ${fmtNum(suppVal)}
+• وقت الفريق الداخلي (مكافئ): ${fmtNum(staffVal)}
+• معامل كفاءة القطاع: ${industryMult}
+
+${LINE}
+
+💰 ملخص نتائج العائد على الاستثمار
+${subline ? '(' + subline + ')' : ''}
+
+• التوفير السنوي المتوقع: ${savings}
+• فترة الاسترداد: ${payback}
+• عائد الاستثمار لـ 3 سنوات: ${roi3}
+• صافي القيمة (س1–س3): ${net3}
+• توفير تكلفة البرمجيات: ${swSave}
+
+${selectedDeptRows.length > 0 ? `التوفير حسب القسم:\n${selectedDeptRows.join('\n')}` : ''}
+
+${LINE}
+
+📋 الملخص التنفيذي
+
+يحقق أودو ERP عائداً متراكماً وقابلاً للقياس بتوحيد الأنظمة المتفرقة في منصة واحدة متكاملة. عبر 79+ تطبيقاً أدارتها نيكسا تكنولوجي في مصر والخليج، حقق العملاء في التصنيع والتجارة والتجزئة والمقاولات والخدمات:
+
+• مكاسب كفاءة تتراوح بين 15% و60% لكل قسم خلال السنة الأولى
+• متوسط فترة الاسترداد: 12–18 شهراً
+• عائد استثمار تراكمي لـ 3 سنوات: 180% – 420%
+• تخفيض 40–70% في تكاليف تراخيص البرمجيات
+
+${LINE}
+
+💡 الفوائد الرئيسية القابلة للقياس
+
+1. إدارة المخزون
+   ↓ 21% وقت الموظفين · ↓ 15–30% تكلفة المخزون
+   الرؤية الفورية للمخزون تُلغي الجرد اليدوي وتُقلّل البضاعة الراكدة.
+
+2. أتمتة المالية والمحاسبة
+   ↓ 18.3% وقت الموظفين · إغلاق الشهر في أقل من 3 أيام
+   مطابقة بنكية آلية، فوترة إلكترونية (متوافقة مع هيئة الضرائب المصرية وهيئة الزكاة السعودية).
+
+3. تسريع المبيعات وإدارة العملاء
+   ↓ 41% وقت الموظفين · ↑ معدل تحويل العملاء
+   خط أنابيب متكامل من إدارة العملاء حتى الفاتورة يُقصّر دورات البيع.
+
+4. ضبط المشتريات والتدبير
+   ↓ 27% وقت الموظفين · ↓ 10–20% تكلفة المشتريات
+   مطابقة ثلاثية الاتجاه وسير موافقات آلية تُلغيان الإنفاق غير المصرّح.
+
+5. التصنيع والإنتاج
+   ↓ 11.8% وقت الموظفين · ↓ 60% هدر (قطاع الغذاء والمشروبات)
+   أوامر إنتاج مستندة لقائمة المواد وتتبع الإنتاج فورياً.
+
+6. أتمتة الموارد البشرية والرواتب
+   ↓ 6% وقت الموظفين · 100% أتمتة الرواتب
+   حضور وإجازات ورواتب متكاملة — متوافقة مع دول الخليج.
+
+7. توحيد تقنية المعلومات وخفض التكاليف
+   ↓ 40–70% تكلفة تراخيص البرمجيات
+   منصة واحدة تحلّ محل 5–10 برامج منفصلة.
+
+8. ذكاء الأعمال في الوقت الفعلي
+   وقت التقارير ↓ 45–80% · مؤشرات حية
+   رؤية فورية للإدارة — بدون انتظار دورات التقارير اليدوية.
+
+${LINE}
+
+📅 التوقعات المالية لـ 5 سنوات (المتوسط الصناعي)
+
+السنة 0:  – الاستثمار الأولي (التطبيق + الاشتراك)
+السنة 1:  نقطة التعادل (التوفير يُعوّض التكاليف)
+السنة 2:  +180% عائد تراكمي
+السنة 3:  +300% مكاسب متراكمة
+السنة 5:  +500% تحسين مكتمل
+
+${LINE}
+
+⚠️ عوامل النجاح الرئيسية
+
+• تحديد النطاق: تحليل واضح للفجوات قبل التطبيق يحمي عائد الاستثمار. 80% من عملاء نيكسا الذين يُكملون هذه المرحلة يتحولون إلى مشاريع كاملة.
+• إدارة التغيير: التدريب المتخصص والرعاية المكثفة بعد التشغيل تضمن الاستخدام الفعلي للنظام.
+• جودة ترحيل البيانات: البيانات الرئيسية النظيفة (عملاء، موردون، منتجات) حيوية لتشغيل سلس.
+• توازن التخصيص: الوظائف الجاهزة في أودو تغطي 80%+ من العمليات القياسية — التخصيص الزائد يرفع التكاليف.
+
+${LINE}
+
+✅ الخطوة التالية الموصى بها
+
+نوصي بجدولة استشارة مجانية لمدة 30 دقيقة لنُصمّم أرقاماً دقيقة مخصصة لـ ${company}.
+
+📅 احجز هنا: https://calendly.com/abuemira/30min
+💬 واتساب: +20 100 506 1349
+📧 البريد: abuemira@nexa-solutions.com
+🌐 الموقع: https://abuemira-nexa.github.io
+
+${LINE}
+محمد عصام أبو عميرة
+المدير التنفيذي ومؤسس مشارك | نيكسا تكنولوجي
+معتمد أودو 16·17·18 · معتمد إدارة المشاريع من جوجل
+أفضل صوت ERP على لينكد إن · 79+ مشروع مُنجز`;
+  }
+
+  /* ══════════════════════════════════════════
+     BUILD ENGLISH EMAIL
+  ══════════════════════════════════════════ */
   return `Dear ${name},
 
 ${note ? note + '\n\n' : ''}Thank you for your interest in Odoo ERP for ${company}. Please find below your personalised Return on Investment (ROI) Analysis, prepared by Nexa Solutions.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${LINE}
 ODOO ERP — ROI ANALYSIS REPORT
 Prepared by: Mohamed Essam Abu Emira
 COO & Co-Founder, Nexa Solutions
-Date: ${new Date().toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'})}
-Industry: ${industry}
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Date: ${DATE}
+Industry: ${industryName}
+${LINE}
 
-📊 YOUR ESTIMATED ROI SNAPSHOT
-• Annual Savings: ${savings}
+📊 COMPANY PROFILE (Calculator Inputs)
+• Total Employees: ${empVal}
+• Avg. Annual Salary per Employee: ${fmtNum(salVal)}
+• Annual Revenue: ${fmtNum(revVal)}
+• Current Software Annual Cost: ${fmtNum(swVal)}
+• Implementation Budget: ${fmtNum(implVal)}
+• Odoo Subscription / Year: ${fmtNum(subVal)}
+• Annual Support / Consulting: ${fmtNum(suppVal)}
+• Internal Staff Time (equiv.): ${fmtNum(staffVal)}
+• Industry Efficiency Multiplier: ${industryMult}
+
+${LINE}
+
+💰 YOUR PERSONALISED ROI RESULTS
+${subline ? '(' + subline + ')' : ''}
+
+• Estimated Annual Savings: ${savings}
 • Payback Period: ${payback}
 • 3-Year ROI: ${roi3}
 • Net Value (Y1–Y3): ${net3}
+• Software Cost Savings: ${swSave}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${selectedDeptRows.length > 0 ? `Savings by Department:\n${selectedDeptRows.join('\n')}` : ''}
+
+${LINE}
 
 📋 EXECUTIVE SUMMARY
 
@@ -3531,7 +3707,7 @@ Odoo ERP delivers measurable, compounding ROI by consolidating fragmented system
 • 3-Year cumulative ROI: 180% – 420%
 • 40–70% reduction in software licensing costs
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${LINE}
 
 💡 KEY QUANTIFIABLE BENEFITS
 
@@ -3567,7 +3743,7 @@ Odoo ERP delivers measurable, compounding ROI by consolidating fragmented system
    Reporting Time ↓ 45–80% · Live KPI Dashboards
    Instant management visibility — no waiting for manual reporting cycles.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${LINE}
 
 📅 5-YEAR FINANCIAL PROJECTION (Benchmark)
 
@@ -3577,7 +3753,7 @@ Year 2:  +180% Cumulative ROI
 Year 3:  +300% Compounding gains
 Year 5:  +500% Full optimisation
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${LINE}
 
 ⚠️ KEY SUCCESS FACTORS
 
@@ -3586,7 +3762,7 @@ Year 5:  +500% Full optimisation
 • Data Migration Quality: Clean master data (customers, vendors, products) is critical for a smooth go-live.
 • Customisation Balance: Minimise custom development. Odoo covers 80%+ of standard processes out-of-the-box.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${LINE}
 
 ✅ RECOMMENDED NEXT STEP
 
@@ -3597,7 +3773,7 @@ Schedule a complimentary 30-minute ROI Assessment call to model the specific num
 📧 Email: abuemira@nexa-solutions.com
 🌐 Portfolio: https://abuemira-nexa.github.io
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${LINE}
 Mohamed Essam Abu Emira
 COO & Co-Founder | Nexa Solutions
 Odoo 16·17·18 Certified · Google PM Certified
@@ -3605,42 +3781,51 @@ LinkedIn Top ERP Voice · 79+ Projects Delivered`;
 }
 
 function toggleEmailPreview(btn) {
+  const AR = document.documentElement.getAttribute('data-lang') === 'ar';
   const box = document.getElementById('roiEmailPreviewBox');
   const showing = box.classList.contains('show');
   if (!showing) {
     box.textContent = buildEmailBody();
     box.classList.add('show');
-    btn.textContent = '▲ Hide Preview';
+    btn.textContent = AR ? '▲ إخفاء المعاينة' : '▲ Hide Preview';
   } else {
     box.classList.remove('show');
-    btn.textContent = '👁 Preview Email Content';
+    btn.textContent = AR ? '👁 معاينة محتوى البريد' : '👁 Preview Email Content';
   }
 }
 
 async function sendRoiEmail() {
+  const AR = document.documentElement.getAttribute('data-lang') === 'ar';
   const customerName = document.getElementById('emailCustomerName').value.trim();
   const customerEmail = document.getElementById('emailCustomerEmail').value.trim();
   if (!customerName || !customerEmail) {
-    alert('Please enter the customer name and email address.');
+    alert(AR ? 'يرجى إدخال اسم العميل وعنوان بريده الإلكتروني.' : 'Please enter the customer name and email address.');
     return;
   }
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(customerEmail)) {
-    alert('Please enter a valid email address.');
+    alert(AR ? 'يرجى إدخال عنوان بريد إلكتروني صحيح.' : 'Please enter a valid email address.');
     return;
   }
 
   const btn = document.getElementById('roiEmailSendBtn');
   btn.disabled = true;
-  btn.innerHTML = '⏳ Sending...';
+  btn.innerHTML = AR ? '⏳ جارٍ الإرسال...' : '⏳ Sending...';
 
-  const company = document.getElementById('emailCompanyName').value.trim() || 'Not specified';
+  const company = document.getElementById('emailCompanyName').value.trim() || (AR ? 'غير محدد' : 'Not specified');
   const industry = document.getElementById('emailIndustry').value;
   const emailBody = buildEmailBody();
 
+  // Build subject line with key numbers
+  const savings = document.getElementById('roiSavings')?.textContent.replace(/<[^>]+>/g,'').trim() || '—';
+  const roi3 = document.getElementById('bkRoi3')?.textContent.trim() || '—';
+  const subjectLine = AR
+    ? `📊 تقرير ROI أودو ERP — ${company} · توفير: ${savings} · عائد 3س: ${roi3} (${new Date().toLocaleDateString('ar-EG')})`
+    : `📊 Odoo ERP ROI Analysis — ${company} · Savings: ${savings} · 3Y ROI: ${roi3} (${new Date().toLocaleDateString('en-GB')})`;
+
   const formData = new FormData();
   formData.append('_replyto', customerEmail);
-  formData.append('_subject', `📊 Odoo ERP ROI Analysis Report — ${company} (${new Date().toLocaleDateString('en-GB')})`);
+  formData.append('_subject', subjectLine);
   formData.append('name', customerName);
   formData.append('email', customerEmail);
   formData.append('company', company);
@@ -3655,17 +3840,19 @@ async function sendRoiEmail() {
       document.getElementById('roiEmailModalBody').style.display = 'none';
       const successDiv = document.getElementById('roiEmailSuccess');
       successDiv.style.display = 'block';
-      document.getElementById('roiEmailSuccessMsg').textContent = `ROI report successfully emailed to ${customerEmail}. A copy has been sent to abuemira@nexa-solutions.com.`;
+      document.getElementById('roiEmailSuccessMsg').textContent = AR
+        ? `تم إرسال تقرير ROI المخصص بنجاح إلى ${customerEmail}. نسخة أُرسلت إلى abuemira@nexa-solutions.com.`
+        : `Personalised ROI report successfully emailed to ${customerEmail}. A copy has been sent to abuemira@nexa-solutions.com.`;
     } else {
       const data = await res.json();
-      alert('Error sending email: ' + (data.error || 'Unknown error. Please try again.'));
+      alert((AR ? 'خطأ في الإرسال: ' : 'Error sending email: ') + (data.error || (AR ? 'خطأ غير معروف، يرجى المحاولة مجدداً.' : 'Unknown error. Please try again.')));
       btn.disabled = false;
-      btn.innerHTML = '📧 Send ROI Report';
+      btn.innerHTML = AR ? '📧 إرسال تقرير ROI' : '📧 Send ROI Report';
     }
   } catch (err) {
-    alert('Network error. Please check your connection and try again.');
+    alert(AR ? 'خطأ في الشبكة. يرجى التحقق من اتصالك والمحاولة مجدداً.' : 'Network error. Please check your connection and try again.');
     btn.disabled = false;
-    btn.innerHTML = '📧 Send ROI Report';
+    btn.innerHTML = AR ? '📧 إرسال تقرير ROI' : '📧 Send ROI Report';
   }
 }
 </script>
@@ -4910,6 +5097,570 @@ document.addEventListener("DOMContentLoaded", () => {
         if (rev[sp.textContent.trim()]) sp.textContent = rev[sp.textContent.trim()];
       }
     });
+
+    /* ── ROI CALCULATOR ── */
+    // Header
+    const roiTag = document.querySelector('.roi-tag');
+    if (roiTag) roiTag.textContent = AR
+      ? '💰 حاسبة العائد على الاستثمار · مبنية على بيانات 79+ مشروع حقيقي'
+      : '💰 Odoo ROI Calculator · مبني على بيانات 79+ مشروع حقيقي';
+    const roiTitle = document.querySelector('.roi-title');
+    if (roiTitle) roiTitle.innerHTML = AR
+      ? 'احسب <span>عائدك الحقيقي</span> من أودو'
+      : 'Calculate Your <span>Real Odoo ROI</span>';
+    const roiSub = document.querySelector('.roi-sub');
+    if (roiSub) roiSub.textContent = AR
+      ? 'مبنية على منهجية تحليل ROI الرسمية من أودو — نفس الأداة المستخدمة مع العملاء الحقيقيين. اختر أقسامك وملفك التجاري للحصول على تقدير دقيق.'
+      : 'Based on Odoo\'s official ROI Analysis methodology — the same tool used with real clients. Select your departments and business profile to get an accurate projection.';
+
+    // Step tabs
+    const roiTab1 = document.getElementById('roiTab1');
+    const roiTab2 = document.getElementById('roiTab2');
+    const roiTab3 = document.getElementById('roiTab3');
+    if (roiTab1) roiTab1.innerHTML = AR ? '<span>👤</span>الملف' : '<span>👤</span>Profile';
+    if (roiTab2) roiTab2.innerHTML = AR ? '<span>🏢</span>الأقسام' : '<span>🏢</span>Departments';
+    if (roiTab3) roiTab3.innerHTML = AR ? '<span>📊</span>الاستثمار' : '<span>📊</span>Investment';
+
+    // Industry sector label
+    const roiIndustryLbl = document.querySelector('#roiPanel1 .roi-input-group:first-child .roi-lbl');
+    if (roiIndustryLbl) roiIndustryLbl.textContent = AR ? '🏭 القطاع الصناعي' : '🏭 Industry Sector';
+    const roiIndustrySubLbl = document.querySelector('#roiPanel1 .roi-input-group:first-child .roi-label-row span:last-child');
+    if (roiIndustrySubLbl && roiIndustrySubLbl.textContent.includes('affects')) {
+      roiIndustrySubLbl.textContent = AR ? 'يؤثر على معامل الكفاءة' : 'affects efficiency multiplier';
+    }
+
+    // Industry pills
+    const indPillMap = {
+      '🏭 Manufacturing':'🏭 التصنيع',
+      '🏗️ Construction':'🏗️ البناء',
+      '🛍️ Retail & F&B':'🛍️ التجزئة والمطاعم',
+      '🚛 Logistics':'🚛 اللوجستيات',
+      '💼 Services':'💼 الخدمات',
+      '🏢 Real Estate':'🏢 العقارات',
+      '📦 Trading & Dist.':'📦 التجارة والتوزيع',
+      '🏥 Healthcare':'🏥 الرعاية الصحية',
+    };
+    document.querySelectorAll('.roi-ind-btn').forEach(btn => {
+      const txt = btn.textContent.trim();
+      if (AR && indPillMap[txt]) btn.textContent = indPillMap[txt];
+      else if (!AR) {
+        const rev = Object.fromEntries(Object.entries(indPillMap).map(([k,v])=>[v,k]));
+        if (rev[txt]) btn.textContent = rev[txt];
+      }
+    });
+
+    // Efficiency multiplier label
+    const effSpan = document.querySelector('#roiIndustryBadge span:first-child');
+    if (effSpan) effSpan.textContent = AR ? 'معامل الكفاءة:' : 'Efficiency multiplier:';
+    const effDesc = document.getElementById('roiIndustryDesc');
+    if (effDesc) effDesc.textContent = AR ? 'تعقيد أعلى → مكاسب أكبر من أودو' : 'Higher complexity → greater Odoo gains';
+
+    // Profile input labels
+    const roiLbls = document.querySelectorAll('.roi-lbl');
+    [['👥 Total Employees','👥 إجمالي الموظفين'],
+     ['💵 Avg. Annual Salary / Employee (USD)','💵 متوسط الراتب السنوي / موظف (USD)'],
+     ['📦 Annual Revenue (USD)','📦 الإيرادات السنوية (USD)'],
+     ['💾 Current Software Annual Cost','💾 التكلفة السنوية للبرمجيات الحالية'],
+     ['🔧 Implementation Budget (USD)','🔧 ميزانية التطبيق (USD)'],
+     ['📱 Odoo Subscription / Year','📱 اشتراك أودو / سنة'],
+     ['🛠️ Annual Support / Consulting','🛠️ الدعم والاستشارة السنوية'],
+     ['🧑‍💼 Internal Staff Time (USD equiv.)','🧑‍💼 وقت الفريق الداخلي (مكافئ USD)'],
+    ].forEach(([en,ar]) => {
+      roiLbls.forEach(lbl => {
+        if (lbl.textContent.trim() === (AR ? en : ar)) lbl.textContent = AR ? ar : en;
+        else if (lbl.textContent.trim() === en && AR) lbl.textContent = ar;
+        else if (lbl.textContent.trim() === ar && !AR) lbl.textContent = en;
+      });
+    });
+
+    // Tab navigation buttons (Next/Back)
+    document.querySelectorAll('#roiPanel1 button, #roiPanel2 button, #roiPanel3 button').forEach(btn => {
+      const txt = btn.textContent.trim();
+      if (txt === 'Next: Select Departments →') btn.textContent = AR ? 'التالي: اختر الأقسام ←' : 'Next: Select Departments →';
+      else if (txt === 'Next: Set Investment →') btn.textContent = AR ? 'التالي: حدد الاستثمار ←' : 'Next: Set Investment →';
+      else if (txt === '← Back to Profile') btn.textContent = AR ? 'رجوع إلى الملف →' : '← Back to Profile';
+      else if (txt.includes('التالي: اختر') && !AR) btn.textContent = 'Next: Select Departments →';
+      else if (txt.includes('التالي: حدد') && !AR) btn.textContent = 'Next: Set Investment →';
+      else if (txt.includes('رجوع إلى') && !AR) btn.textContent = '← Back to Profile';
+    });
+
+    // Departments panel description
+    const deptDesc = document.querySelector('#roiPanel2 > p');
+    if (deptDesc) deptDesc.textContent = AR
+      ? 'اختر الأقسام التي سيغطيها أودو. معدلات الكفاءة مستخرجة من قياسات حقيقية لعملاء أودو.'
+      : 'Select the departments Odoo will cover. Efficiency rates are from real Odoo client benchmarks.';
+
+    // Results section
+    const roiSavLbl = document.querySelector('.roi-result-lbl');
+    if (roiSavLbl) roiSavLbl.textContent = AR ? 'التوفير السنوي المتوقع' : 'Estimated Annual Savings';
+
+    const roiSublineEl = document.getElementById('roiSubline');
+    if (roiSublineEl && roiSublineEl.textContent === 'Select departments to calculate')
+      roiSublineEl.textContent = AR ? 'اختر الأقسام للحساب' : 'Select departments to calculate';
+
+    // Savings by department label
+    const deptSavHdr = document.querySelector('.roi-result-card > div:nth-child(2) > div:first-child');
+    if (deptSavHdr && (deptSavHdr.textContent.includes('Savings by') || deptSavHdr.textContent.includes('التوفير حسب')))
+      deptSavHdr.textContent = AR ? 'التوفير حسب القسم' : 'Savings by Department';
+
+    // Key metrics labels
+    const bkRows = document.querySelectorAll('.roi-bk-lbl');
+    [['📅Payback Period','📅فترة الاسترداد'],
+     ['📈3-Year ROI','📈عائد الاستثمار 3 سنوات'],
+     ['💰Net Value (Y1–Y3)','💰صافي القيمة (س1–س3)'],
+     ['🔄Software Cost Savings','🔄توفير تكلفة البرمجيات'],
+    ].forEach(([en, ar]) => {
+      bkRows.forEach(row => {
+        const cleanText = row.textContent.replace(/\s+/g,'').replace(/[📅📈💰🔄]/g,'');
+        const cleanEn = en.replace(/[📅📈💰🔄]/g,'').trim();
+        const cleanAr = ar.replace(/[📅📈💰🔄]/g,'').trim();
+        if (row.textContent.includes(cleanEn) && AR) {
+          const icon = row.querySelector('.roi-bk-icon');
+          if (icon) { const ic = icon.textContent; icon.textContent = ic; row.lastChild.textContent = ar.replace(/[📅📈💰🔄]/g,'').trim(); }
+        }
+      });
+    });
+
+    // 5-year chart label
+    const chart5yrLbl = document.querySelector('.roi-result-card > div:nth-child(4) > div:first-child');
+    if (chart5yrLbl && (chart5yrLbl.textContent.includes('5-Year') || chart5yrLbl.textContent.includes('5 سنوات')))
+      chart5yrLbl.textContent = AR ? 'صافي التدفق النقدي التراكمي — 5 سنوات' : '5-Year Cumulative Net Cash Flow';
+
+    // ROI CTA buttons
+    const roiCtaMain = document.querySelectorAll('.roi-cta-main');
+    roiCtaMain.forEach(btn => {
+      if (btn.textContent.includes('Get My Free ERP ROI Assessment') || btn.textContent.includes('تقييم مجاني')) {
+        btn.textContent = AR ? '📅 احصل على تقييم ROI مجاني لـ ERP' : '📅 Get My Free ERP ROI Assessment';
+      } else if (btn.textContent.includes('Email Full ROI Report') || btn.textContent.includes('إرسال تقرير')) {
+        btn.textContent = AR ? '📧 إرسال تقرير ROI الكامل للعميل' : '📧 Email Full ROI Report to Customer';
+      }
+    });
+    const roiCtaSec = document.querySelector('.roi-cta-sec');
+    if (roiCtaSec) roiCtaSec.textContent = AR
+      ? '💬 ناقش التحليل الكامل على واتساب'
+      : '💬 Discuss Full Analysis on WhatsApp';
+    const roiDisclaimer = document.querySelector('.roi-disclaimer');
+    if (roiDisclaimer) roiDisclaimer.textContent = AR
+      ? '* المنهجية مستندة إلى قالب تحليل ROI الرسمي من أودو. معدلات الكفاءة مقاسة عبر 79+ تطبيق حقيقي من نيكسا تكنولوجي. النتائج تتفاوت بحسب النطاق والتعقيد.'
+      : '* Methodology from Odoo\'s official ROI Analysis Template. Efficiency rates benchmarked across 79+ real implementations by Nexa Solutions. Results vary by scope and complexity.';
+
+    /* ── ROI DEPARTMENT NAMES (dynamically built) ── */
+    const roiDeptNameMap = {
+      'Inventory':'المخزون','Manufacturing':'التصنيع','Purchase':'المشتريات',
+      'Finance':'المالية','Sales & CRM':'المبيعات وإدارة العلاقات','Human Resources':'الموارد البشرية',
+      'Services':'الخدمات','Marketing':'التسويق',
+    };
+    document.querySelectorAll('.roi-dept-name').forEach(el => {
+      const emoji = el.textContent.trim().split(' ')[0];
+      const name = el.textContent.trim().replace(emoji,'').trim();
+      if (AR && roiDeptNameMap[name]) el.textContent = emoji + ' ' + roiDeptNameMap[name];
+      else if (!AR) {
+        const rev = Object.fromEntries(Object.entries(roiDeptNameMap).map(([k,v])=>[v,k]));
+        if (rev[name]) el.textContent = emoji + ' ' + rev[name];
+      }
+    });
+    const deptEffLabel = document.querySelectorAll('.roi-dept-eff');
+    deptEffLabel.forEach(el => {
+      if (el.textContent.includes('Efficiency gain:')) {
+        const pct = el.querySelector('strong') ? el.querySelector('strong').textContent : '';
+        el.innerHTML = AR ? `كفاءة أعلى: <strong>${pct}</strong>` : `Efficiency gain: <strong>${pct}</strong>`;
+      } else if (el.textContent.includes('كفاءة أعلى:') && !AR) {
+        const pct = el.querySelector('strong') ? el.querySelector('strong').textContent : '';
+        el.innerHTML = `Efficiency gain: <strong>${pct}</strong>`;
+      }
+    });
+
+    /* ── RECOMMENDATIONS MODAL ── */
+    const recModalTitle = document.querySelector('#recModal .full-modal-title');
+    if (recModalTitle) recModalTitle.innerHTML = AR
+      ? '28+ <span>توصية مهنية</span>'
+      : '28+ <span>Professional Recommendations</span>';
+    const recModalTag = document.querySelector('#recModal .full-modal-tag');
+    if (recModalTag) recModalTag.textContent = AR ? 'توصيات LinkedIn' : 'LinkedIn Recommendations';
+
+    // Recommendations categories filter
+    if (typeof REC_CATEGORIES !== 'undefined') {
+      const catLabelsAr = { all:'الكل', odoo:'أودو / ERP', finance:'المالية', pm:'إدارة المشاريع', client:'العملاء' };
+      document.querySelectorAll('.recs-filter-btn').forEach(btn => {
+        const cat = btn.dataset.cat;
+        if (cat && catLabelsAr[cat]) {
+          const icon = btn.textContent.trim().split(' ')[0];
+          btn.innerHTML = AR
+            ? `${icon} ${catLabelsAr[cat]}`
+            : `${REC_CATEGORIES[cat]?.icon || icon} ${REC_CATEGORIES[cat]?.label || catLabelsAr[cat]}`;
+        }
+      });
+    }
+
+    /* ── MOBILE DRAWER (dynamically built) ── */
+    const mobDrawerBrand = document.querySelector('#mobDrawer .mob-drawer-brand > div > div:first-child');
+    if (mobDrawerBrand) mobDrawerBrand.textContent = AR ? 'محمد أبوعميرة' : 'Mohamed Abu Emira';
+    const mobDrawerSub = document.querySelector('#mobDrawer .mob-drawer-brand > div > div:last-child');
+    if (mobDrawerSub) mobDrawerSub.textContent = AR ? 'مدير تنفيذي @ نيكسا تكنولوجي' : 'COO @ Nexa Solutions';
+
+    const mobNavLabelMap = {
+      'ROI Calc':'حاسبة ROI','About':'عنّي','Nexa':'نيكسا',
+      'Services':'الخدمات','Experience':'الخبرة','Projects':'المشاريع',
+      'Clients':'عملاؤنا','Reviews':'آراء العملاء','Certifications':'الشهادات','Contact':'تواصل',
+      // Reverse
+      'حاسبة ROI':'ROI Calc','عنّي':'About','نيكسا':'Nexa',
+      'الخدمات':'Services','الخبرة':'Experience','المشاريع':'Projects',
+      'عملاؤنا':'Clients','آراء العملاء':'Reviews','الشهادات':'Certifications','تواصل':'Contact',
+    };
+    document.querySelectorAll('#mobDrawer .mob-drawer-nav a').forEach(a => {
+      const icon = a.querySelector('.mob-nav-icon');
+      if (!icon) return;
+      const labelNode = [...a.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+      if (labelNode) {
+        const cur = labelNode.textContent.trim();
+        if (AR && mobNavLabelMap[cur]) labelNode.textContent = mobNavLabelMap[cur];
+        else if (!AR && mobNavLabelMap[cur]) labelNode.textContent = mobNavLabelMap[cur];
+      }
+    });
+
+    const mobCta = document.querySelector('#mobDrawer .mob-drawer-cta');
+    if (mobCta) mobCta.textContent = AR ? '📅 احجز استشارة مجانية' : '📅 Book Free Consultation';
+
+    /* ── FOOTER V2 ── */
+    const fv2ColTitles = document.querySelectorAll('.fv2-col-title');
+    [['Quick Links','روابط سريعة'],['Navigate','تصفح'],['Services','الخدمات'],['Get In Touch','تواصل معنا']]
+      .forEach(([en,ar],i) => { if(fv2ColTitles[i]) t(fv2ColTitles[i], en, ar); });
+
+    // Footer navigation links
+    const fv2Links = document.querySelectorAll('.fv2-links a');
+    const fv2LinkMap = {
+      'About Me':'عنّي','Nexa Solutions Section':'قسم نيكسا','Services':'الخدمات',
+      'Experience':'الخبرة','Projects':'المشاريع','Clients':'عملاؤنا',
+      'Testimonials':'التوصيات','Contact':'تواصل','Certifications':'الشهادات',
+      'ROI Calculator':'حاسبة ROI','Blog':'المقالات',
+      'Odoo Implementation':'تطبيق أودو ERP','ERP Project Management':'إدارة مشاريع ERP',
+      'Business Analysis & GAP':'تحليل الأعمال والفجوات','Data Migration':'ترحيل البيانات',
+      'Financial Module Setup':'إعداد الوحدة المالية','Post Go-Live Support':'الدعم بعد التشغيل',
+      'Odoo Training':'تدريب أودو',
+    };
+    fv2Links.forEach(a => {
+      const txt = a.textContent.trim().replace(' ↗','');
+      if (AR && fv2LinkMap[txt]) a.textContent = fv2LinkMap[txt] + (a.textContent.includes('↗') ? ' ↗' : '');
+    });
+
+    // Footer contact labels
+    const fv2ContactLbls = document.querySelectorAll('.fv2-contact-lbl');
+    [['Phone / WhatsApp','الهاتف / واتساب'],['Email','البريد الإلكتروني'],
+     ['Location','الموقع'],['Portfolio','الملف المهني']]
+      .forEach(([en,ar],i) => { if(fv2ContactLbls[i]) t(fv2ContactLbls[i], en, ar); });
+
+    const fv2LocationVal = document.querySelector('.fv2-contact-val');
+    const fv2Vals = document.querySelectorAll('.fv2-contact-val');
+    fv2Vals.forEach(v => {
+      if (v.textContent.trim() === 'Giza, Egypt · Serving Egypt & GCC')
+        t(v, 'Giza, Egypt · Serving Egypt & GCC', AR ? 'الجيزة، مصر · أخدم مصر والخليج' : 'Giza, Egypt · Serving Egypt & GCC');
+    });
+
+    // Footer CTA button
+    const fv2Cta = document.querySelector('.fv2-footer-top .btn-gold, footer .btn-gold');
+    if (fv2Cta) t(fv2Cta, '📅 Book Free Consultation', AR ? '📅 احجز استشارة مجانية' : '📅 Book Free Consultation');
+
+    // Footer copyright
+    const fv2Copyright = document.querySelector('.fv2-copyright');
+    if (fv2Copyright) fv2Copyright.textContent = AR
+      ? '© 2026 محمد عصام أبو عميرة · مدير تنفيذي @ نيكسا تكنولوجي · جميع الحقوق محفوظة'
+      : '© 2026 Mohamed Essam Abu Emira · COO @ Nexa Solutions · All rights reserved';
+
+    // Footer bottom links
+    const fv2BottomLinks = document.querySelectorAll('.fv2-bottom-links a');
+    [['LinkedIn','لينكد إن'],['Nexa Solutions','نيكسا تكنولوجي'],['ROI Calculator','حاسبة ROI'],['Contact','تواصل']]
+      .forEach(([en,ar],i) => { if(fv2BottomLinks[i]) t(fv2BottomLinks[i], en, ar); });
+
+    /* ── SCROLL INDICATOR ── */
+    const scrollInd = document.querySelector('.scroll-indicator');
+    if (scrollInd) {
+      const scrollTxt = [...scrollInd.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+      if (scrollTxt) scrollTxt.textContent = AR ? 'مرر للأسفل' : 'SCROLL';
+    }
+
+    /* ── AVAILABILITY BADGE ── */
+    const availBadge = document.querySelector('.avail-badge');
+    if (availBadge) {
+      const dot = availBadge.querySelector('.avail-dot');
+      if (dot) {
+        const textNode = [...availBadge.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+        if (textNode) textNode.textContent = AR ? ' متاح للمشاريع الجديدة' : ' Available for New Projects';
+      }
+    }
+
+    /* ── CLIENTS SECTION ── */
+    const clientsSub = document.querySelector('#clients .container > p');
+    if (clientsSub) t(clientsSub,
+      'Trusted by 50+ organizations across Egypt, Saudi Arabia, UAE, Kuwait, Lebanon and Qatar — from SMEs to government institutions and enterprise groups.',
+      AR ? 'موثوق به من قِبَل 50+ مؤسسة في مصر والمملكة العربية السعودية والإمارات والكويت ولبنان وقطر — من الشركات الصغيرة إلى المؤسسات الحكومية والمجموعات الكبرى.'
+         : 'Trusted by 50+ organizations across Egypt, Saudi Arabia, UAE, Kuwait, Lebanon and Qatar — from SMEs to government institutions and enterprise groups.');
+
+    /* ── ROI EMAIL MODAL ── */
+    const roiEmailTitle = document.getElementById('roiEmailModalTitle');
+    if (roiEmailTitle) roiEmailTitle.textContent = AR ? '📧 إرسال تقرير ROI للعميل' : '📧 Send ROI Report to Client';
+
+    /* ── ROI REPORT SECTION ── */
+    // Section tag & title
+    const roiRptTag = document.querySelector('#roi-report .sec-tag');
+    if (roiRptTag) roiRptTag.textContent = AR ? '📄 تقرير تحليل العائد على الاستثمار' : '📄 ROI Analysis Report';
+    const roiRptTitle = document.querySelector('#roi-report .sec-title');
+    if (roiRptTitle) roiRptTitle.innerHTML = AR ? 'تقرير <span>ROI</span> أودو ERP' : 'Odoo ERP <span>ROI Report</span>';
+    const roiRptIntro = document.querySelector('#roi-report .container > p');
+    if (roiRptIntro) roiRptIntro.textContent = AR
+      ? 'تحليل شامل ومبني على بيانات حقيقية لعائد الاستثمار من أودو ERP — مستخرج من 79+ تطبيق في مصر والخليج. استخدم الحاسبة أعلاه لتخصيص هذا التقرير ثم أرسله مباشرة لعميلك.'
+      : 'A comprehensive, data-backed Return on Investment analysis for Odoo ERP — based on 79+ real implementations across Egypt & GCC. Use the calculator above to personalise this report, then email it directly to your customer.';
+
+    // Report card header
+    const roiRptH3 = document.querySelector('.roi-report-title-box h3');
+    if (roiRptH3) roiRptH3.textContent = AR
+      ? 'أودو ERP — تحليل العائد على الاستثمار'
+      : 'Odoo ERP — Return on Investment Analysis';
+    const roiRptSubP = document.querySelector('.roi-report-title-box p');
+    if (roiRptSubP) roiRptSubP.textContent = AR
+      ? 'أُعِدَّ بواسطة نيكسا تكنولوجي · محمد عصام أبو عميرة، مدير تنفيذي ومدير مشاريع أودو'
+      : 'Prepared by Nexa Solutions · Mohamed Essam Abu Emira, COO & Odoo Project Manager';
+
+    // Meta pills
+    const metaPills = document.querySelectorAll('.roi-report-meta-pill');
+    metaPills.forEach(pill => {
+      const txt = pill.textContent.trim();
+      if (txt.includes('Based on 79')) pill.innerHTML = AR ? '🏢 مبني على 79+ مشروع حقيقي' : '🏢 Based on 79+ Live Projects';
+      else if (txt.includes('Egypt') && txt.includes('GCC')) pill.innerHTML = AR ? '🌍 مصر ومنطقة الخليج' : '🌍 Egypt & GCC Region';
+      else if (txt.includes('Odoo Official')) pill.innerHTML = AR ? '✅ المنهجية الرسمية لأودو' : '✅ Odoo Official Methodology';
+    });
+
+    // Executive summary
+    const execH4 = document.querySelector('.roi-report-exec h4');
+    if (execH4 && (execH4.textContent.includes('Executive') || execH4.textContent.includes('الملخص')))
+      execH4.textContent = AR ? '📋 الملخص التنفيذي' : '📋 Executive Summary';
+    const execP = document.querySelector('.roi-report-exec p');
+    if (execP && (execP.textContent.includes('Odoo ERP delivers') || execP.textContent.includes('أودو ERP يحقق')))
+      execP.innerHTML = AR
+        ? 'يحقق أودو ERP عائداً متراكماً وقابلاً للقياس بتوحيد الأنظمة المتفرقة في منصة واحدة متكاملة. عبر 79+ تطبيقاً أدارتها نيكسا تكنولوجي، حقق العملاء في التصنيع والتجارة والتجزئة والمقاولات والخدمات <strong>مكاسب كفاءة بين 15%–60%</strong> لكل قسم خلال السنة الأولى. متوسط فترة الاسترداد <strong>12–18 شهراً</strong>، مع عائد استثمار لثلاث سنوات يتراوح بين <strong>180% و420%</strong> تبعاً لحجم الشركة وعدد المستخدمين والوحدات المُطبَّقة. الطبيعة مفتوحة المصدر لأودو تُلغي رسوم الترخيص لكل وحدة، مما يُقلّص تكلفة الملكية الإجمالية بشكل جذري مقارنة بمنصات ERP التقليدية.'
+        : 'Odoo ERP delivers measurable, compounding ROI by consolidating fragmented systems into a single integrated platform. Across 79+ implementations managed by Nexa Solutions, clients in manufacturing, trading, retail, construction, and services have achieved <strong>15%–60% efficiency gains</strong> per department within the first year. The average payback period is <strong>12–18 months</strong>, with a 3-year ROI ranging from <strong>180% to 420%</strong> depending on company size, number of users, and modules deployed. Odoo\'s open-source foundation eliminates per-module licensing fees, drastically reducing total cost of ownership versus legacy ERP platforms.';
+
+    // KPI snapshot title
+    const kpiSnapTitle = document.querySelector('.roi-report-section-title');
+    if (kpiSnapTitle && (kpiSnapTitle.textContent.includes('Estimated ROI') || kpiSnapTitle.textContent.includes('لمحة عن')))
+      kpiSnapTitle.textContent = AR ? '📈 لمحة عن عائد استثمارك المتوقع' : '📈 Your Estimated ROI Snapshot';
+
+    // KPI labels
+    const rptKpiLbls = document.querySelectorAll('.roi-report-kpi-l');
+    [['Est. Annual Savings','التوفير السنوي المتوقع'],
+     ['Payback Period','فترة الاسترداد'],
+     ['3-Year ROI','عائد 3 سنوات'],
+     ['Net Value Y1–Y3','صافي القيمة س1–س3']]
+      .forEach(([en,ar],i) => { if(rptKpiLbls[i]) t(rptKpiLbls[i], en, ar); });
+
+    // Calculator update note
+    const calcNote = document.querySelector('#roi-report p[style*="gray-400"]');
+    if (calcNote) calcNote.textContent = AR
+      ? '↑ استخدم حاسبة ROI أعلاه وستتحدث هذه الأرقام تلقائياً.'
+      : '↑ Use the ROI Calculator above and these figures will update automatically.';
+
+    // Benefits section title
+    const benefitsTitles = document.querySelectorAll('.roi-report-section-title');
+    benefitsTitles.forEach(t2 => {
+      if (t2.textContent.includes('Key Quantifiable') || t2.textContent.includes('الفوائد الرئيسية'))
+        t2.textContent = AR ? '💡 الفوائد الرئيسية القابلة للقياس' : '💡 Key Quantifiable Benefits';
+      if (t2.textContent.includes('5-Year Financial') || t2.textContent.includes('التوقعات المالية'))
+        t2.textContent = AR ? '📅 التوقعات المالية لـ 5 سنوات (المتوسط الصناعي)' : '📅 5-Year Financial Projection (Industry Benchmark)';
+      if (t2.textContent.includes('Key Success') || t2.textContent.includes('عوامل النجاح'))
+        t2.textContent = AR ? '⚠️ عوامل النجاح الرئيسية والاعتبارات المهمة' : '⚠️ Key Success Factors & Considerations';
+    });
+
+    // Benefits cards
+    const benefitData = [
+      ['Inventory Optimisation',
+       'Real-time stock visibility eliminates manual counts, reduces dead stock, and cuts warehouse labour. Automated replenishment prevents both stockouts and overstocking.',
+       '↓ 21% FTE Time · ↓ 15–30% Inventory Cost',
+       'تحسين إدارة المخزون',
+       'الرؤية الفورية للمخزون تُلغي الجرد اليدوي وتُقلّل البضاعة الراكدة وتخفض تكلفة عمالة المستودعات. التجديد الآلي يمنع نفاد المخزون والتخزين الزائد.',
+       '↓ 21% وقت الموظفين · ↓ 15–30% تكلفة المخزون'],
+      ['Finance & Accounting Automation',
+       'Automated bank reconciliation, e-invoicing (compliant with Egypt ITDA & KSA ZATCA), and real-time P&L eliminate month-end backlogs and manual errors.',
+       '↓ 18.3% FTE Time · Month-close in <3 Days',
+       'أتمتة المالية والمحاسبة',
+       'المطابقة البنكية الآلية والفوترة الإلكترونية (متوافقة مع هيئة الضرائب في مصر وهيئة الزكاة في السعودية) والأرباح والخسائر الفورية تُنهي التراكمات الشهرية والأخطاء اليدوية.',
+       '↓ 18.3% وقت الموظفين · إغلاق الشهر في أقل من 3 أيام'],
+      ['Sales & CRM Acceleration',
+       'Integrated CRM-to-invoice pipeline eliminates re-keying. Automated follow-ups and quotation templates shorten sales cycles and increase win rates.',
+       '↓ 41% FTE Time · ↑ Lead Conversion Rate',
+       'تسريع المبيعات وإدارة العملاء',
+       'خط أنابيب متكامل من إدارة العملاء حتى الفاتورة يُلغي إعادة الإدخال. المتابعة الآلية وقوالب عروض الأسعار تُقصّر دورات البيع وترفع نسب الإغلاق.',
+       '↓ 41% وقت الموظفين · ↑ معدل تحويل العملاء'],
+      ['Purchase & Procurement Control',
+       '3-way matching (PO, receipt, invoice), automated vendor RfQ, and approval workflows eliminate maverick spending and reduce procurement cycle time by up to 40%.',
+       '↓ 27% FTE Time · ↓ 10–20% Procurement Cost',
+       'ضبط المشتريات والتدبير',
+       'المطابقة الثلاثية (أمر شراء، استلام، فاتورة) وطلبات العروض الآلية وسير موافقات يُلغيان الإنفاق غير المصرّح وخفضا وقت دورة المشتريات 40%.',
+       '↓ 27% وقت الموظفين · ↓ 10–20% تكلفة المشتريات'],
+      ['Manufacturing & Production',
+       'BOM-driven production orders, real-time WIP tracking, and quality checkpoints reduce material waste, rework, and scrap rates significantly.',
+       '↓ 11.8% FTE Time · ↓ 60% Waste (F&B)',
+       'التصنيع والإنتاج',
+       'أوامر إنتاج مستندة إلى قائمة المواد وتتبع مرحلة الإنتاج فورياً ونقاط مراقبة الجودة تُقلّل هدر المواد وإعادة التصنيع والخردة بشكل ملحوظ.',
+       '↓ 11.8% وقت الموظفين · ↓ 60% هدر (غذاء ومشروبات)'],
+      ['HR & Payroll Automation',
+       'Integrated attendance, leave, and payroll processing eliminates manual salary computation, reduces payroll errors, and ensures statutory compliance across GCC jurisdictions.',
+       '↓ 6% FTE Time · 100% Payroll Automation',
+       'أتمتة الموارد البشرية والرواتب',
+       'الحضور والإجازات ومعالجة الرواتب المتكاملة تُلغي احتساب الرواتب اليدوي وتُقلّل الأخطاء وتضمن الامتثال القانوني عبر دول الخليج.',
+       '↓ 6% وقت الموظفين · 100% أتمتة الرواتب'],
+      ['IT Consolidation & Cost Reduction',
+       'Replacing 5–10 point solutions with one platform eliminates redundant SaaS licences, integration maintenance, and inter-system data errors — freeing IT budget for value-add work.',
+       '↓ 40–70% Software Licence Spend',
+       'توحيد تقنية المعلومات وخفض التكاليف',
+       'استبدال 5–10 برامج منفصلة بمنصة واحدة يُلغي تراخيص SaaS المتكررة وتكلفة التكاملات والأخطاء بين الأنظمة — ويُحرّر ميزانية تقنية المعلومات لأعمال ذات قيمة.',
+       '↓ 40–70% تكلفة تراخيص البرمجيات'],
+      ['Real-Time Business Intelligence',
+       'Live dashboards, scheduled reports, and drill-down analytics give management instant visibility into KPIs — enabling faster, data-driven decisions without waiting for manual reporting cycles.',
+       'Reporting Time ↓ 45–80% · Live KPIs',
+       'ذكاء الأعمال في الوقت الفعلي',
+       'لوحات مؤشرات حية وتقارير مجدولة وتحليلات تفصيلية تمنح الإدارة رؤية فورية لمؤشرات الأداء — تُمكّن من قرارات أسرع مبنية على البيانات دون انتظار دورات التقارير اليدوية.',
+       'وقت التقارير ↓ 45–80% · مؤشرات حية'],
+    ];
+    document.querySelectorAll('.roi-report-benefit').forEach((card, i) => {
+      if (!benefitData[i]) return;
+      const [enT,,enS,arT,arDesc,arS] = benefitData[i];
+      const titleEl = card.querySelector('.roi-report-benefit-title');
+      const descEl  = card.querySelector('.roi-report-benefit-desc');
+      const statEl  = card.querySelector('.roi-report-benefit-stat');
+      if (AR) {
+        if (titleEl) titleEl.textContent = arT;
+        if (descEl)  descEl.textContent  = arDesc;
+        if (statEl)  statEl.textContent  = arS;
+      } else {
+        if (titleEl) titleEl.textContent = enT;
+        if (descEl)  descEl.innerHTML    = benefitData[i][1];
+        if (statEl)  statEl.textContent  = enS;
+      }
+    });
+
+    // Timeline years
+    const yrData = [
+      ['Year 0','– Investment','Implementation + Licensing','السنة 0','– الاستثمار','التطبيق + الاشتراك'],
+      ['Year 1','Break-Even','Savings offset costs','السنة 1','نقطة التعادل','التوفير يُعوّض التكاليف'],
+      ['Year 2','+180%','Avg. cumulative ROI','السنة 2','+180%','متوسط العائد التراكمي'],
+      ['Year 3','+300%','Compounding gains','السنة 3','+300%','مكاسب متراكمة'],
+      ['Year 5','+500%','Full optimisation','السنة 5','+500%','تحسين مكتمل'],
+    ];
+    document.querySelectorAll('.roi-report-yr').forEach((yr, i) => {
+      if (!yrData[i]) return;
+      const lbl = yr.querySelector('.roi-report-yr-label');
+      const val = yr.querySelector('.roi-report-yr-val');
+      const sub = yr.querySelector('.roi-report-yr-sub');
+      if (AR) {
+        if (lbl) lbl.textContent = yrData[i][3];
+        if (val) val.textContent = yrData[i][4];
+        if (sub) sub.textContent = yrData[i][5];
+      } else {
+        if (lbl) lbl.textContent = yrData[i][0];
+        if (val) val.textContent = yrData[i][1];
+        if (sub) sub.textContent = yrData[i][2];
+      }
+    });
+
+    // Challenges/Success factors
+    const challengeData = [
+      ['<strong>Scope Definition:</strong> A clear GAP/ROI Analysis before implementation reduces scope creep and protects ROI. This is why Nexa Solutions runs a structured ROI workshop as the first project phase — 80% of clients who complete it convert to full projects.',
+       '<strong>تحديد النطاق:</strong> تحليل واضح للفجوات والعائد قبل التطبيق يُقلّل الزحف في النطاق ويحمي عائد الاستثمار. لذا تبدأ نيكسا تكنولوجي كل مشروع بورشة ROI منهجية — 80% من العملاء الذين يُكملونها يتحولون إلى مشاريع كاملة.'],
+      ['<strong>Change Management:</strong> User adoption is the #1 ROI killer. Dedicated training, key-user programs, and post-go-live hypercare ensure the system is actually used — translating theoretical savings into real results.',
+       '<strong>إدارة التغيير:</strong> تبني المستخدمين هو القاتل الأول لعائد الاستثمار. التدريب المتخصص وبرامج المستخدمين الرئيسيين والرعاية المكثفة بعد التشغيل تضمن استخدام النظام فعلياً — وتُحوّل التوفير النظري إلى نتائج حقيقية.'],
+      ['<strong>Data Migration Quality:</strong> Clean historical data migration is critical. Budget adequate time for cleansing master data (customers, vendors, products) before go-live to avoid operational disruption.',
+       '<strong>جودة ترحيل البيانات:</strong> ترحيل البيانات التاريخية بشكل نظيف أمر بالغ الأهمية. خصص وقتاً كافياً لتنظيف البيانات الرئيسية (العملاء، الموردون، المنتجات) قبل التشغيل تجنباً لأي اضطراب تشغيلي.'],
+      ['<strong>Customisation Balance:</strong> Minimise custom development. Odoo\'s out-of-the-box functionality covers 80%+ of standard business processes. Excessive customisation inflates costs and complicates future upgrades.',
+       '<strong>توازن التخصيص:</strong> قلّل التطوير المخصص. الوظائف الجاهزة في أودو تغطي 80%+ من العمليات التجارية القياسية. التخصيص المفرط يُضخّم التكاليف ويُعقّد الترقيات المستقبلية.'],
+    ];
+    document.querySelectorAll('.roi-report-challenge').forEach((ch, i) => {
+      if (!challengeData[i]) return;
+      const div = ch.querySelector('div');
+      if (div) div.innerHTML = AR ? challengeData[i][1] : challengeData[i][0];
+    });
+
+    // Conclusion box
+    const concBoxes = document.querySelectorAll('.roi-report-exec');
+    if (concBoxes[1]) {
+      const concH4 = concBoxes[1].querySelector('h4');
+      const concP  = concBoxes[1].querySelector('p');
+      if (concH4) concH4.textContent = AR ? '✅ الخلاصة والخطوة التالية' : '✅ Conclusion & Next Step';
+      if (concP)  concP.textContent  = AR
+        ? 'يُمثّل أودو ERP أحد أعلى استثمارات التكنولوجيا عائداً للشركات متوسطة الحجم اليوم. بتكاليف تطبيق أقل بـ 60–80% من SAP أو Oracle ومنصة موحّدة تحلّ محل عشرات البرامج المنفصلة، تبدو الحالة المالية مقنعة عبر كل القطاعات. قدّمت نيكسا تكنولوجي 79+ تطبيقاً ناجحاً بمعدل تحويل 80% من تحليل ROI إلى مشروع موقّع. نوصي بجدولة تقييم ROI مجاني لمدة 30 دقيقة لنُصمّم الأرقام المحددة لأعمالك.'
+        : 'Odoo ERP represents one of the highest-ROI technology investments available to mid-market businesses today. With implementation costs 60–80% lower than SAP or Oracle, and a unified platform replacing dozens of point solutions, the financial case is compelling across every industry vertical. The Nexa Solutions team has delivered 79+ successful implementations with an 80% project conversion rate from ROI Analysis to signed project. We recommend scheduling a complimentary 30-minute ROI assessment to model the specific numbers for your business.';
+    }
+
+    // Email CTA below conclusion
+    const emailCtaP = document.querySelector('#roi-report .roi-report-body > div:last-of-type > p');
+    if (emailCtaP) t(emailCtaP,
+      'Ready to share this analysis with your customer or management team?',
+      AR ? 'هل أنت مستعد لمشاركة هذا التحليل مع عميلك أو فريق الإدارة؟' : 'Ready to share this analysis with your customer or management team?');
+    const emailCtaBtn = document.querySelector('#roi-report .roi-report-body .btn-gold');
+    if (emailCtaBtn) t(emailCtaBtn, '📧 Email Full ROI Report to Customer', AR ? '📧 إرسال تقرير ROI الكامل للعميل' : '📧 Email Full ROI Report to Customer');
+
+    // Report footer
+    const rptFtrStrong = document.querySelector('.roi-report-footer-text strong');
+    if (rptFtrStrong) rptFtrStrong.textContent = AR
+      ? 'محمد عصام أبو عميرة · مدير تنفيذي ومؤسس مشارك، نيكسا تكنولوجي'
+      : 'Mohamed Essam Abu Emira · COO & Co-Founder, Nexa Solutions';
+    const rptFtrText = document.querySelector('.roi-report-footer-text');
+    if (rptFtrText) {
+      const textNode = [...rptFtrText.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+      if (textNode) textNode.textContent = AR
+        ? 'معتمد أودو 16·17·18 · معتمد إدارة المشاريع من جوجل · أفضل صوت ERP على لينكد إن · 79+ مشروع مُنجز'
+        : 'Odoo 16·17·18 Certified · Google PM Certified · LinkedIn Top ERP Voice · 79+ Projects Delivered';
+    }
+    const rptFtrBtns = document.querySelectorAll('.roi-report-footer-btns a');
+    if (rptFtrBtns[0]) t(rptFtrBtns[0], '📅 Book Free Consultation', AR ? '📅 احجز استشارة مجانية' : '📅 Book Free Consultation');
+    if (rptFtrBtns[1]) t(rptFtrBtns[1], '💬 WhatsApp', AR ? '💬 واتساب' : '💬 WhatsApp');
+
+    /* ── ROI EMAIL MODAL CONTENT ── */
+    const emailModalH3 = document.querySelector('.roi-email-modal-hdr h3');
+    if (emailModalH3) emailModalH3.textContent = AR ? '📧 إرسال تقرير ROI للعميل' : '📧 Email ROI Report to Customer';
+    const emailModalSubP = document.querySelector('.roi-email-modal-hdr p');
+    if (emailModalSubP) emailModalSubP.textContent = AR
+      ? 'أنشئ وأرسل تقرير ROI مخصصاً لأودو ERP عبر البريد الإلكتروني'
+      : 'Generate and send a personalised Odoo ERP ROI report via email';
+
+    const emailFields = document.querySelectorAll('.roi-email-field label');
+    [['Customer Name','اسم العميل'],['Customer Email','بريد العميل'],
+     ['Company Name','اسم الشركة'],['Industry / Sector','القطاع الصناعي'],
+     ['Personal Note (optional)','ملاحظة شخصية (اختيارية)']]
+      .forEach(([en,ar],i) => { if(emailFields[i]) t(emailFields[i], en, ar); });
+
+    const emailInputs = document.querySelectorAll('.roi-email-field input, .roi-email-field textarea');
+    [['e.g. Ahmed Al-Rashidi','مثال: أحمد الراشدي'],
+     ['customer@company.com','عميل@شركة.com'],
+     ['e.g. Al-Rashidi Trading LLC','مثال: شركة الراشدي للتجارة'],
+     ["e.g. 'Following our meeting today...'","مثال: 'بناءً على اجتماعنا اليوم...'"]]
+      .forEach(([en,ar],i) => { if(emailInputs[i]) tp(emailInputs[i], en, ar); });
+
+    const emailIndustrySel = document.getElementById('emailIndustry');
+    if (emailIndustrySel) {
+      const opts = emailIndustrySel.options;
+      [['General Business','أعمال عامة'],['Manufacturing','تصنيع'],
+       ['Trading & Distribution','تجارة وتوزيع'],['Food & Beverage','أغذية ومشروبات'],
+       ['Retail & E-Commerce','تجزئة وتجارة إلكترونية'],['Construction & Real Estate','مقاولات وعقارات'],
+       ['Healthcare & Pharma','رعاية صحية وصيدلة'],['Logistics & Transport','لوجستيات ونقل'],
+       ['Services & Consulting','خدمات واستشارات']]
+        .forEach(([en,ar],i) => { if(opts[i]) opts[i].text = AR ? ar : en; });
+    }
+
+    const previewToggle = document.querySelector('.roi-email-preview-toggle');
+    if (previewToggle) previewToggle.textContent = AR ? '👁 معاينة محتوى البريد' : '👁 Preview Email Content';
+    const emailSendBtn = document.getElementById('roiEmailSendBtn');
+    if (emailSendBtn && !emailSendBtn.disabled) t(emailSendBtn, '📧 Send ROI Report', AR ? '📧 إرسال تقرير ROI' : '📧 Send ROI Report');
+    const emailNote = document.querySelector('.roi-email-note');
+    if (emailNote) emailNote.textContent = AR
+      ? 'سيُرسَل التقرير عبر Formspree إلى عنوان بريد العميل. نسخة تُرسَل إلى abuemira@nexa-solutions.com.'
+      : 'The report will be sent via Formspree to the customer email address. A copy is forwarded to abuemira@nexa-solutions.com.';
+
+    const emailSuccessH4 = document.querySelector('.roi-email-success h4');
+    if (emailSuccessH4) emailSuccessH4.textContent = AR ? 'تم الإرسال بنجاح!' : 'Report Sent Successfully!';
+    const emailSuccessP = document.getElementById('roiEmailSuccessMsg');
+    if (emailSuccessP) emailSuccessP.textContent = AR ? 'تم إرسال تقرير ROI بالبريد الإلكتروني إلى عميلك.' : 'The ROI report has been emailed to your customer.';
+    const emailCloseBtn = document.querySelector('.roi-email-success button');
+    if (emailCloseBtn) emailCloseBtn.textContent = AR ? 'إغلاق' : 'Close';
+
   }
 
   if (savedLang !== 'en') { applyLang(savedLang); applyLangExtended(savedLang); }
