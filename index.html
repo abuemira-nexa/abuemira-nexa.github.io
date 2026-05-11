@@ -3185,6 +3185,9 @@ img{transition:opacity .3s ease}
             </div>
             <input type="range" class="roi-slider" id="roiImpl" min="5000" max="300000" value="35000" step="5000" oninput="roiCalc()">
             <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$5K</span><span>$300K</span></div>
+            <div id="roiImplHint" style="margin-top:8px;padding:8px 12px;background:rgba(1,126,132,.12);border:1px solid rgba(1,126,132,.25);border-radius:8px;font-size:11px;color:rgba(255,255,255,.65);line-height:1.5;">
+              💡 <strong style="color:var(--teal-mid)">Nexa Odoo Implementation:</strong> Typically <strong style="color:var(--gold)">$8K–$45K</strong> depending on scope &amp; modules — vs SAP $150K–$500K+
+            </div>
           </div>
           <div class="roi-input-group">
             <div class="roi-label-row">
@@ -3233,9 +3236,9 @@ img{transition:opacity .3s ease}
 
           <!-- Key metrics -->
           <div class="roi-breakdown">
-            <div class="roi-bk-row" style="background:rgba(212,168,67,.06);border-color:rgba(212,168,67,.2);">
-              <span class="roi-bk-lbl"><span class="roi-bk-icon">📅</span>Payback Period</span>
-              <span class="roi-bk-val" style="color:var(--gold)" id="bkPayback">—</span>
+            <div class="roi-bk-row" style="background:rgba(212,168,67,.1);border-color:rgba(212,168,67,.4);padding:14px;">
+              <span class="roi-bk-lbl" style="font-size:13px;font-weight:700;"><span class="roi-bk-icon">⏱️</span>Payback Period <span style="font-size:10px;color:rgba(255,255,255,.4);font-weight:400;">(CFO #1 question)</span></span>
+              <span class="roi-bk-val" style="color:var(--gold);font-size:18px;font-weight:800;" id="bkPayback">—</span>
             </div>
             <div class="roi-bk-row" style="background:rgba(1,126,132,.06);border-color:rgba(1,126,132,.2);">
               <span class="roi-bk-lbl"><span class="roi-bk-icon">📈</span>3-Year ROI</span>
@@ -3259,9 +3262,21 @@ img{transition:opacity .3s ease}
             </div>
           </div>
 
+          <!-- ERP COMPARISON -->
+          <div style="margin-bottom:18px;">
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">💡 Why Odoo vs Alternatives</div>
+            <div style="display:flex;flex-direction:column;gap:6px;" id="erpCompareChart">
+              <!-- injected by JS -->
+            </div>
+          </div>
+
+          <!-- PDF DOWNLOAD -->
           <div class="roi-cta-wrap">
             <a href="https://calendly.com/abuemira/30min" target="_blank" class="roi-cta-main">📅 Get My Free ERP ROI Assessment</a>
-            <button onclick="openRoiEmailModal()" class="roi-cta-main" style="background:var(--teal);color:#fff;margin-top:0;">📧 Email Full ROI Report to Customer</button>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:0;">
+              <button onclick="openRoiEmailModal()" class="roi-cta-main" style="background:var(--teal);color:#fff;margin-top:0;font-size:12px;">📧 Email Report</button>
+              <button onclick="downloadRoiPdf()" class="roi-cta-main" id="roiPdfBtn" style="background:rgba(212,168,67,.2);color:var(--gold);border:1px solid rgba(212,168,67,.4);margin-top:0;font-size:12px;">📄 Download PDF</button>
+            </div>
             <a href="https://wa.me/201005061349" target="_blank" class="roi-cta-sec">💬 Discuss Full Analysis on WhatsApp</a>
           </div>
           <p class="roi-disclaimer">* Methodology from Odoo's official ROI Analysis Template. Efficiency rates benchmarked across 79+ real implementations by Nexa Solutions. Results vary by scope and complexity.</p>
@@ -3993,7 +4008,8 @@ async function sendRoiEmail() {
     subject: subjectLine,
     from_name: 'Mohamed Abu Emira — Nexa Solutions',
     replyto: customerEmail,
-    to_email: customerEmail,
+    to: customerEmail,
+    cc: 'abuemira@nexa-solutions.com',
     name: customerName,
     email: customerEmail,
     company: company,
@@ -4092,6 +4108,256 @@ const SW_SAVINGS_RATIO = 0.7; // Odoo replaces ~70% of current software costs on
 let roiActiveTab = 1;
 let roiDeptSelection = { inventory: true, finance: true, sales: true, hr: true }; // defaults
 
+/* ══ ERP COMPARISON CHART ══ */
+function renderErpCompare(odooCost) {
+  const chart = document.getElementById('erpCompareChart');
+  if (!chart) return;
+  const erps = [
+    { name: 'SAP S/4HANA', cost: 350000, color: '#3b82f6' },
+    { name: 'Oracle NetSuite', cost: 180000, color: '#8b5cf6' },
+    { name: 'MS Dynamics', cost: 120000, color: '#06b6d4' },
+    { name: '⭐ Odoo ERP', cost: odooCost || 35000, color: '#d4a843', highlight: true },
+  ];
+  const max = Math.max(...erps.map(e => e.cost));
+  chart.innerHTML = erps.map(e => {
+    const pct = Math.max(6, Math.round((e.cost / max) * 100));
+    const fmt = e.cost >= 1000000 ? '$'+(e.cost/1000000).toFixed(1)+'M' : '$'+Math.round(e.cost/1000)+'K';
+    return `<div style="display:flex;align-items:center;gap:8px;">
+      <div style="width:115px;font-size:10px;font-weight:${e.highlight?'800':'500'};color:${e.highlight?'var(--gold)':'rgba(255,255,255,.55)'};flex-shrink:0;">${e.name}</div>
+      <div style="flex:1;background:rgba(255,255,255,.06);border-radius:4px;height:16px;overflow:hidden;">
+        <div style="width:${pct}%;height:100%;background:${e.color};opacity:${e.highlight?1:.5};border-radius:4px;transition:width .6s ease;"></div>
+      </div>
+      <div style="width:50px;text-align:right;font-size:10px;font-weight:700;color:${e.highlight?'var(--gold)':'rgba(255,255,255,.45)'};">${fmt}+</div>
+    </div>`;
+  }).join('');
+}
+
+/* ══ PDF DOWNLOAD — reads from roiLiveData (live calculated values) ══ */
+function downloadRoiPdf() {
+  const btn = document.getElementById('roiPdfBtn');
+  if (btn) { btn.innerHTML = '⏳ Generating...'; btn.disabled = true; }
+
+  const d = roiLiveData;
+  if (!d || !d.emp) {
+    alert('Please configure the calculator first.');
+    if (btn) { btn.innerHTML = '📄 Download PDF'; btn.disabled = false; }
+    return;
+  }
+
+  // Dept savings rows
+  const deptRows = (d.deptSavings || [])
+    .sort((a,b) => b.savings - a.savings)
+    .map(dept => `
+      <tr>
+        <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;font-size:12px;">${dept.icon} ${dept.name}</td>
+        <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#475569;">
+          ${Math.round(dept.eff*100)}% efficiency · ${Math.round(dept.scaledFTE)} FTEs
+        </td>
+        <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;color:#017E84;font-size:12px;">${fmtUSD(dept.savings)}/yr</td>
+      </tr>`).join('');
+
+  // Software row
+  const swRow = d.swSavings > 0 ? `
+    <tr style="background:#fffbeb;">
+      <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;font-size:12px;">💾 Software Replacement</td>
+      <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#475569;">~70% of legacy costs eliminated</td>
+      <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;color:#d97706;font-size:12px;">${fmtUSD(d.swSavings)}/yr</td>
+    </tr>` : '';
+
+  // 5-year table rows
+  const yr5Rows = (d.cashFlows || []).map((cf, i) => {
+    const cum = d.cumulative[i];
+    const isPos = cum >= 0;
+    return `<tr>
+      <td style="padding:6px 12px;border-bottom:1px solid #e2e8f0;font-size:11px;font-weight:600;">Year ${i+1}</td>
+      <td style="padding:6px 12px;border-bottom:1px solid #e2e8f0;font-size:11px;text-align:right;">${fmtUSD(cf)}</td>
+      <td style="padding:6px 12px;border-bottom:1px solid #e2e8f0;font-size:11px;text-align:right;font-weight:700;color:${isPos?'#059669':'#dc2626'}">${fmtUSD(cum)}</td>
+    </tr>`;
+  }).join('');
+
+  // ERP comparison — Odoo bar based on real impl cost
+  const maxCost = 350000;
+  const erpPct = (cost) => Math.max(5, Math.round((cost / maxCost) * 100));
+  const odooPct = erpPct(d.impl);
+
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+  <title>Odoo ROI Report — ${d.industry} · ${d.date}</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Segoe UI',Arial,sans-serif;color:#0f172a;background:#fff;font-size:13px;}
+    .page{max-width:820px;margin:0 auto;background:#fff;}
+
+    /* HEADER */
+    .hdr{background:linear-gradient(135deg,#0d1b2e 0%,#1a2f4a 100%);padding:36px 48px 32px;color:#fff;}
+    .hdr-logo{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:12px;}
+    .hdr h1{font-size:26px;font-weight:800;margin:0 0 6px;letter-spacing:-.3px;color:#fff;line-height:1.15;}
+    .hdr h1 span{color:#d4a843;}
+    .hdr-sub{font-size:11px;color:rgba(255,255,255,.55);margin-bottom:18px;line-height:1.6;}
+    .pills{display:flex;gap:6px;flex-wrap:wrap;}
+    .pill{font-size:9px;font-weight:700;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.75);}
+    .pill.gold{background:rgba(212,168,67,.15);border-color:rgba(212,168,67,.4);color:#d4a843;}
+
+    /* BODY */
+    .body{padding:32px 48px 24px;}
+
+    /* KPI GRID */
+    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;}
+    .kpi{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px 12px;text-align:center;border-top:3px solid #017E84;}
+    .kpi.gold{border-top-color:#d4a843;background:#fffbeb;}
+    .kpi.red{border-top-color:#ef4444;}
+    .kpi-n{font-size:20px;font-weight:800;color:#017E84;line-height:1;margin-bottom:4px;}
+    .kpi.gold .kpi-n{color:#d4a843;}
+    .kpi.red .kpi-n{color:#ef4444;}
+    .kpi-l{font-size:9px;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:.06em;line-height:1.3;}
+
+    /* PROFILE GRID */
+    .profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px;}
+    .profile-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 14px;}
+    .profile-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:3px;}
+    .profile-val{font-size:13px;font-weight:700;color:#0f172a;}
+
+    /* SECTION TITLE */
+    .sec-title{font-size:11px;font-weight:800;color:#0f172a;margin:22px 0 10px;padding-bottom:6px;border-bottom:2px solid #017E84;text-transform:uppercase;letter-spacing:.05em;}
+
+    /* TABLES */
+    table{width:100%;border-collapse:collapse;}
+    th{padding:7px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748b;background:#f8fafc;text-align:left;border-bottom:2px solid #e2e8f0;}
+    th:last-child{text-align:right;}
+
+    /* ERP COMPARE */
+    .compare{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+    .cr{display:flex;align-items:center;gap:10px;}
+    .cn{width:130px;font-size:10px;font-weight:600;color:#64748b;flex-shrink:0;}
+    .cn.odoo{color:#d4a843;font-weight:800;}
+    .cb{flex:1;background:#f1f5f9;border-radius:3px;height:16px;overflow:hidden;}
+    .cbf{height:100%;border-radius:3px;}
+    .cv{width:55px;text-align:right;font-size:10px;font-weight:700;color:#64748b;}
+    .cv.odoo{color:#d4a843;}
+
+    /* FOOTER */
+    .footer{background:#0d1b2e;padding:22px 48px;display:flex;justify-content:space-between;align-items:center;margin-top:4px;}
+    .fl{font-size:10px;color:rgba(255,255,255,.5);line-height:1.7;}
+    .fl strong{color:rgba(255,255,255,.85);display:block;font-size:11px;}
+    .fr{font-size:9px;color:rgba(255,255,255,.3);text-align:right;line-height:1.6;}
+    .disc{font-size:9px;color:#94a3b8;text-align:center;margin:16px 0 0;line-height:1.6;padding:0 20px;}
+
+    @media print{
+      @page{margin:0}
+      body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    }
+  </style></head><body><div class="page">
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="hdr-logo">📊 Odoo ERP ROI Analysis · Prepared by Nexa Solutions · Mohamed Abu Emira</div>
+    <h1>Odoo ERP <span>Return on Investment</span> Analysis</h1>
+    <div class="hdr-sub">
+      Industry: <strong style="color:#fff;">${d.industry}</strong> · 
+      ${d.emp} Employees · Annual Revenue ${d.fRev} · 
+      Industry Multiplier ×${d.industryMult.toFixed(2)}
+    </div>
+    <div class="pills">
+      <div class="pill gold">📅 ${d.date}</div>
+      <div class="pill">🏢 Based on 79+ Live Implementations</div>
+      <div class="pill">✅ Odoo Official Methodology</div>
+      <div class="pill">🌍 Egypt &amp; GCC</div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- KPI SUMMARY -->
+    <div class="kpi-grid">
+      <div class="kpi gold">
+        <div class="kpi-n">${d.fSavings}</div>
+        <div class="kpi-l">Annual Savings</div>
+      </div>
+      <div class="kpi gold">
+        <div class="kpi-n">${d.fPayback}</div>
+        <div class="kpi-l">⏱ Payback Period</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-n">${d.fRoi3}</div>
+        <div class="kpi-l">3-Year ROI</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-n">${d.fNet3}</div>
+        <div class="kpi-l">Net Value Y1–Y3</div>
+      </div>
+    </div>
+
+    <!-- BUSINESS PROFILE -->
+    <div class="sec-title">👤 Business Profile</div>
+    <div class="profile-grid">
+      <div class="profile-item"><div class="profile-lbl">Industry</div><div class="profile-val">${d.industry}</div></div>
+      <div class="profile-item"><div class="profile-lbl">Employees</div><div class="profile-val">${d.emp}</div></div>
+      <div class="profile-item"><div class="profile-lbl">Annual Revenue</div><div class="profile-val">${d.fRev}</div></div>
+      <div class="profile-item"><div class="profile-lbl">Avg. Salary / Employee</div><div class="profile-val">${d.fSal}</div></div>
+      <div class="profile-item"><div class="profile-lbl">Current Software Cost</div><div class="profile-val">${d.fSw}/yr</div></div>
+      <div class="profile-item"><div class="profile-lbl">Software Cost Saved</div><div class="profile-val" style="color:#059669;">${d.fSwSave}</div></div>
+    </div>
+
+    <!-- INVESTMENT SUMMARY -->
+    <div class="sec-title">📦 Investment Summary</div>
+    <table>
+      <tr><th>Item</th><th style="text-align:right;">Amount</th></tr>
+      <tr><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;">🔧 Implementation Budget</td><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;">${d.fImpl}</td></tr>
+      <tr><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;">📱 Annual Odoo Subscription</td><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;">${d.fSub}/yr</td></tr>
+      <tr><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;">🛠️ Annual Support / Consulting</td><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;">${d.fSupp}/yr</td></tr>
+      <tr><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;">🧑‍💼 Internal Staff Time</td><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;">${d.fStaff}</td></tr>
+      <tr style="background:#f0fdf4;"><td style="padding:7px 14px;font-weight:700;">💰 Total 3-Year Investment</td><td style="padding:7px 14px;text-align:right;font-weight:800;color:#059669;">${d.fInvest3}</td></tr>
+    </table>
+
+    <!-- DEPT SAVINGS -->
+    ${deptRows ? `<div class="sec-title">🏢 Savings by Department</div>
+    <table>
+      <tr><th>Department</th><th>Details</th><th style="text-align:right;">Annual Saving</th></tr>
+      ${deptRows}
+      ${swRow}
+      <tr style="background:#f0fdf4;"><td colspan="2" style="padding:7px 14px;font-weight:700;">Total Annual Savings</td><td style="padding:7px 14px;text-align:right;font-weight:800;color:#059669;font-size:13px;">${d.fSavings}</td></tr>
+    </table>` : ''}
+
+    <!-- 5-YEAR PROJECTION -->
+    <div class="sec-title">📈 5-Year Cash Flow Projection</div>
+    <table>
+      <tr><th>Year</th><th style="text-align:right;">Annual Net Cash Flow</th><th style="text-align:right;">Cumulative</th></tr>
+      ${yr5Rows}
+    </table>
+
+    <!-- ERP COMPARISON -->
+    <div class="sec-title">💡 Why Odoo vs Alternatives</div>
+    <div class="compare">
+      <div class="cr"><div class="cn">SAP S/4HANA</div><div class="cb"><div class="cbf" style="width:100%;background:#3b82f6;opacity:.5;"></div></div><div class="cv">$350K+</div></div>
+      <div class="cr"><div class="cn">Oracle NetSuite</div><div class="cb"><div class="cbf" style="width:51%;background:#8b5cf6;opacity:.5;"></div></div><div class="cv">$180K+</div></div>
+      <div class="cr"><div class="cn">MS Dynamics 365</div><div class="cb"><div class="cbf" style="width:34%;background:#06b6d4;opacity:.5;"></div></div><div class="cv">$120K+</div></div>
+      <div class="cr"><div class="cn odoo">⭐ Odoo ERP (Your Plan)</div><div class="cb"><div class="cbf" style="width:${odooPct}%;background:#d4a843;"></div></div><div class="cv odoo">${d.fImpl}</div></div>
+    </div>
+
+    <div class="disc">* Methodology based on Odoo's official ROI Analysis Template. Efficiency rates benchmarked across 79+ real implementations by Nexa Solutions (Egypt &amp; GCC). Results are indicative — contact Nexa Solutions for a precise assessment tailored to your business.</div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="fl">
+      <strong>Mohamed Essam Abu Emira — COO &amp; Co-Founder, Nexa Solutions</strong>
+      Odoo 16·17·18 Certified · Google PM Certified · LinkedIn Top ERP Voice · 79+ Projects<br>
+      📧 abuemira@nexa-solutions.com · 📱 +20 100 506 1349 · 🌐 nexa-solutions.com
+    </div>
+    <div class="fr">${d.date}<br>Confidential<br>Nexa Solutions</div>
+  </div>
+
+  </div>
+  <script>window.onload = function(){ window.print(); };<\/script>
+  </body></html>`;
+
+  const blob = new Blob([html], {type:'text/html'});
+  const url  = URL.createObjectURL(blob);
+  window.open(url, '_blank');
+  setTimeout(() => URL.revokeObjectURL(url), 20000);
+  if (btn) { btn.innerHTML = '📄 Download PDF'; btn.disabled = false; }
+}
+
+
 function roiSwitchTab(n) {
   roiActiveTab = n;
   [1,2,3].forEach(i => {
@@ -4156,6 +4422,9 @@ function roiSelectIndustry(btn) {
   if (multBadge) { multBadge.style.transform = 'scale(1.25)'; setTimeout(() => { multBadge.style.transform = 'scale(1)'; }, 200); }
   roiCalc();
 }
+
+// ══ LIVE ROI STATE — updated on every calc, read by PDF & Email ══
+let roiLiveData = {};
 
 function roiCalc() {
   const emp    = parseInt(document.getElementById('roiEmp').value);
@@ -4294,9 +4563,48 @@ function roiCalc() {
   const paybackText = paybackMonths
     ? (paybackMonths < 12 ? paybackMonths + ' months' : (paybackMonths/12).toFixed(1) + ' yrs')
     : null;
+  // ── STORE ALL LIVE VALUES ──
+  roiLiveData = {
+    // Inputs
+    emp, sal, rev, sw, impl, sub, supp, staff,
+    industry: document.querySelector('#roiIndustryPills .roi-ind-btn.active')?.textContent.trim() || '—',
+    industryMult: roiIndustryMult,
+    // Computed
+    totalSavings,
+    swSavings,
+    y1cost,
+    y1savings,
+    recurringCost,
+    net3,
+    roi3,
+    paybackMonths,
+    cashFlows,
+    cumulative,
+    deptSavings: [...deptSavings],
+    selectedDepts: [...selectedDepts],
+    // Formatted strings
+    fSavings:  totalSavings > 0 ? fmtUSD(totalSavings) + '/yr' : '—',
+    fPayback:  paybackMonths ? (paybackMonths < 12 ? paybackMonths + ' months' : (paybackMonths/12).toFixed(1) + ' years') : '—',
+    fRoi3:     roi3 > 0 ? roi3 + '%' : '—',
+    fNet3:     fmtUSD(net3),
+    fSwSave:   swSavings > 0 ? fmtUSD(swSavings) + '/yr' : '$0/yr',
+    fImpl:     fmtUSD(impl),
+    fSub:      fmtUSD(sub),
+    fSupp:     fmtUSD(supp),
+    fStaff:    fmtUSD(staff),
+    fRev:      fmtUSD(rev),
+    fSal:      '$' + (sal/1000).toFixed(0) + 'K',
+    fSw:       fmtUSD(sw),
+    fInvest3:  fmtUSD(impl + staff + (sub + supp) * 3),
+    date:      new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),
+  };
+
   if (typeof syncReportKpis === 'function') {
     syncReportKpis(totalSavings > 0 ? totalSavings : null, paybackText, roi3 > 0 ? roi3 : null, net3 !== 0 ? net3 : null);
   }
+  // Render ERP comparison chart with live Odoo cost
+  const implCost = parseInt(document.getElementById('roiImpl')?.value) || 35000;
+  if (typeof renderErpCompare === 'function') renderErpCompare(implCost);
 }
 
 // Init
@@ -4435,7 +4743,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* Add nav links for new sections */
   const navLinksDiv = document.querySelector('.nav-links');
   const ctaLink = navLinksDiv.querySelector('.nav-cta');
-  ['#roi:ROI Calc','#roi-report:ROI Report','#blog:Blog'].forEach(pair => {
+  ['#roi:ROI Calc','#blog:Blog'].forEach(pair => {
     const [href, txt] = pair.split(':');
     const a = document.createElement('a'); a.href = href; a.textContent = txt;
     navLinksDiv.insertBefore(a, ctaLink);
