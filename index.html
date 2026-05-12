@@ -3402,10 +3402,11 @@ img{transition:opacity .3s ease}
           </div>
           <div class="roi-input-group">
             <div class="roi-label-row">
-              <span class="roi-lbl">🛠️ Annual Support / Consulting</span>
+              <span class="roi-lbl" data-en="🛠️ Annual Support / Consulting" data-ar="🛠️ الدعم والاستشارة السنوية">🛠️ Annual Support / Consulting</span>
               <span style="display:flex;align-items:center;gap:6px;">
-                <span class="roi-val-badge" id="roiSuppVal">$10K</span><span style="margin-left:5px;font-size:9px;font-weight:700;color:var(--teal-mid);background:rgba(1,126,132,.15);border:1px solid rgba(1,126,132,.25);border-radius:5px;padding:1px 6px;white-space:nowrap;">↺/yr</span>
-                <span style="font-size:10px;font-weight:700;color:var(--teal-mid);background:rgba(1,126,132,.15);border:1px solid rgba(1,126,132,.3);border-radius:6px;padding:2px 7px;white-space:nowrap;">↺ /yr · Y1–Y5</span>
+                <span class="roi-val-badge" id="roiSuppVal">$10K</span>
+                <span style="margin-left:5px;font-size:9px;font-weight:700;color:var(--teal-mid);background:rgba(1,126,132,.15);border:1px solid rgba(1,126,132,.25);border-radius:5px;padding:1px 6px;white-space:nowrap;" data-en="↺/yr" data-ar="↺/سنة">↺/yr</span>
+                <span style="font-size:10px;font-weight:700;color:var(--teal-mid);background:rgba(1,126,132,.15);border:1px solid rgba(1,126,132,.3);border-radius:6px;padding:2px 7px;white-space:nowrap;" data-en="↺ /yr · Y1–Y5" data-ar="↺ /سنة · س1–س5">↺ /yr · Y1–Y5</span>
               </span>
             </div>
             <input type="range" class="roi-slider" id="roiSupp" min="0" max="100000" value="10000" step="5000" oninput="roiCalc()">
@@ -3414,17 +3415,18 @@ img{transition:opacity .3s ease}
           </div>
           <div class="roi-input-group">
             <div class="roi-label-row">
-              <span class="roi-lbl">🧑‍💼 Internal Staff Time (USD equiv.)</span>
+              <span class="roi-lbl" data-en="🧑‍💼 Internal Staff Time (USD equiv.)" data-ar="🧑‍💼 وقت الفريق الداخلي (ما يعادله بالدولار)">🧑‍💼 Internal Staff Time (USD equiv.)</span>
               <span style="display:flex;align-items:center;gap:6px;">
-                <span class="roi-val-badge" id="roiStaffVal">$50K</span><span style="margin-left:5px;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1px 6px;white-space:nowrap;">Y1</span>
-                <span style="font-size:10px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:2px 7px;white-space:nowrap;">Y1 only</span>
+                <span class="roi-val-badge" id="roiStaffVal">$50K</span>
+                <span style="margin-left:5px;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1px 6px;white-space:nowrap;" data-en="Y1" data-ar="س1">Y1</span>
+                <span style="font-size:10px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:2px 7px;white-space:nowrap;" data-en="Y1 only" data-ar="السنة الأولى فقط">Y1 only</span>
               </span>
             </div>
             <input type="range" class="roi-slider" id="roiStaff" min="0" max="200000" value="50000" step="10000" oninput="roiCalc()">
             <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$0</span><span>$200K</span></div>
             
           </div>
-          <button onclick="roiSwitchTab(1)" style="width:100%;margin-top:8px;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">← Back to Profile</button>
+          <button onclick="roiSwitchTab(1)" style="width:100%;margin-top:8px;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;" data-en="← Back to Profile" data-ar="→ رجوع للملف الشخصي">← Back to Profile</button>
         </div>
 
         <!-- ════════ PANEL 4 — ODOO SUBSCRIPTION CALCULATOR ════════ -->
@@ -4282,7 +4284,7 @@ const ROI_DEPTS = [
 ];
 
 let roiActiveTab = 1;
-let roiDeptSelection = { inventory: true, finance: true, sales: true, hr: true }; // defaults
+let roiDeptSelection = { inventory: true, purchase: true, finance: true, sales: true, hr: true }; // defaults
 
 /* ══ ERP COMPARISON CHART ══ */
 function renderErpCompare(odooCost) {
@@ -7566,7 +7568,7 @@ async function sendRoiEmail() {
   // ⚠️ استبدل القيم دي بـ credentials بتاعتك من emailjs.com
   const EMAILJS_SERVICE_ID  = 'service_y8ugz7e';
   const EMAILJS_TEMPLATE_ID = 'template_ws1g0p2';
-  const MY_EMAIL            = 'abuemira.nexa@gmail.com';
+  const MY_EMAIL            = 'abuemira@nexa-solutions.com';
 
   // نسخة CC للمدير (أنت)
   const ccSummary = `
@@ -7603,15 +7605,15 @@ async function sendRoiEmail() {
       message     : `Dear ${custName},\n\nPlease find your personalised Odoo ERP ROI Analysis below.\n\nIndustry: ${industry}\nAnnual Savings: ${d ? d.fSavings : '—'}\nPayback Period: ${d ? d.fPayback : '—'}\n3-Year ROI: ${d ? d.fRoi3 : '—'}\nNet Value Y1–Y3: ${d ? d.fNet3 : '—'}\n\nBest regards,\nMohamed Essam Abu Emira\nCOO & Co-Founder — Nexa Solutions\n+20 100 506 1349`,
     });
 
-    // إرسال 2: نسخة لك (CC)
+    // إرسال 2: نسخة لك — نفس الريبورت الكامل
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
       to_email    : MY_EMAIL,
       to_name     : 'Mohamed Abu Emira',
       from_name   : 'Nexa Solutions — ROI Tracker',
       reply_to    : custEmail,
-      subject     : `[ROI Sent] ${custName}${company ? ' — ' + company : ''} · ${industry}`,
-      html_body   : ccSummary,
-      message     : `ROI Report sent to ${custName} (${custEmail}) — ${industry} — Savings: ${d ? d.fSavings : '—'} — ROI: ${d ? d.fRoi3 : '—'}`,
+      subject     : `[نسخة] ROI Report — ${custName}${company ? ' — ' + company : ''} · ${industry}`,
+      html_body   : htmlBody,
+      message     : `[نسخة للمدير] ROI Report sent to ${custName} (${custEmail}) — ${industry} — Savings: ${d ? d.fSavings : '—'} — ROI: ${d ? d.fRoi3 : '—'}`,
     });
 
     // Show success
@@ -7620,7 +7622,7 @@ async function sendRoiEmail() {
     const msg     = document.getElementById('roiEmailSuccessMsg');
     if (bodyEl)  bodyEl.style.display   = 'none';
     if (success) success.style.display  = 'flex';
-    if (msg)     msg.textContent        = `✅ The ROI report has been emailed to ${custEmail}. A copy was sent to abuemira.nexa@gmail.com.`;
+    if (msg)     msg.textContent        = `✅ The ROI report has been emailed to ${custEmail}. A copy was sent to abuemira@nexa-solutions.com.`;
 
   } catch (err) {
     console.error('sendRoiEmail — EmailJS error:', err);
