@@ -341,6 +341,10 @@ img{display:block;max-width:100%}
 .roi-industry-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
 .roi-ind-btn{font-size:11px;font-weight:600;padding:5px 13px;border-radius:20px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:rgba(255,255,255,.65);cursor:pointer;transition:all .2s}
 .roi-ind-btn.active{border-color:var(--teal-mid);background:rgba(1,126,132,.2);color:var(--teal-mid)}
+@media(max-width:700px){
+  .roi-grid{grid-template-columns:1fr}
+  .roi-results{position:static;margin-top:28px}
+}
 @media(max-width:600px){.roi-inner{padding:0 20px}}
 
 /* ── TRUST BADGES BAR ── */
@@ -643,8 +647,7 @@ img{display:block;max-width:100%}
   .footer-logo-row{justify-content:center;text-align:center}
   .footer-links{justify-content:center;flex-wrap:wrap}
   .why-grid{grid-template-columns:1fr}
-  .roi-grid{grid-template-columns:1fr}
-  .roi-results{position:static}
+  /* roi-grid stays 2-col at 900px — see 700px override below */
   .cs2-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){
@@ -3296,6 +3299,7 @@ img{transition:opacity .3s ease}
           <div class="roi-step-tab active" id="roiTab1" onclick="roiSwitchTab(1)"><span>👤</span>Profile</div>
           <div class="roi-step-tab" id="roiTab2" onclick="roiSwitchTab(2)"><span>🏢</span>Departments</div>
           <div class="roi-step-tab" id="roiTab3" onclick="roiSwitchTab(3)"><span>📊</span>Investment</div>
+          <div class="roi-step-tab" id="roiTab4" onclick="roiSwitchTab(4)" style="background:linear-gradient(135deg,rgba(212,168,67,.18),rgba(212,168,67,.08));border-color:rgba(212,168,67,.35);"><span>🌍</span>Odoo Subscription</div>
         </div>
 
         <!-- TAB 1: PROFILE -->
@@ -3331,6 +3335,7 @@ img{transition:opacity .3s ease}
             </div>
             <input type="range" class="roi-slider" id="roiEmp" min="1" max="500" value="50" step="1" oninput="roiCalc()">
             <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>1</span><span>500+</span></div>
+            
           </div>
           <div class="roi-input-group">
             <div class="roi-label-row">
@@ -3339,6 +3344,7 @@ img{transition:opacity .3s ease}
             </div>
             <input type="range" class="roi-slider" id="roiSal" min="1000" max="150000" value="50000" step="1000" oninput="roiCalc()">
             <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$1K</span><span>$150K</span></div>
+            
           </div>
           <div class="roi-input-group">
             <div class="roi-label-row">
@@ -3347,6 +3353,7 @@ img{transition:opacity .3s ease}
             </div>
             <input type="range" class="roi-slider" id="roiRev" min="1000" max="50000000" value="5000000" step="1000" oninput="roiCalc()">
             <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$1K</span><span>$50M+</span></div>
+            
           </div>
           <div class="roi-input-group">
             <div class="roi-label-row">
@@ -3355,6 +3362,7 @@ img{transition:opacity .3s ease}
             </div>
             <input type="range" class="roi-slider" id="roiSw" min="0" max="500000" value="100000" step="10000" oninput="roiCalc()">
             <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$0</span><span>$500K</span></div>
+            
           </div>
           <button onclick="roiSwitchTab(2)" style="width:100%;margin-top:8px;padding:11px;border-radius:10px;border:1px solid rgba(1,126,132,.4);background:rgba(1,126,132,.15);color:var(--teal-mid);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">Next: Select Departments →</button>
         </div>
@@ -3373,72 +3381,447 @@ img{transition:opacity .3s ease}
           <div class="roi-input-group">
             <div class="roi-label-row">
               <span class="roi-lbl">🔧 Implementation Budget (USD)</span>
-              <span class="roi-val-badge" id="roiImplVal">$35K</span>
+              <span class="roi-val-badge" id="roiImplVal">$0</span>
             </div>
-            <input type="range" class="roi-slider" id="roiImpl" min="1000" max="300000" value="35000" step="1000" oninput="roiCalc()">
+            <input type="range" class="roi-slider" id="roiImpl" min="0" max="300000" value="0" step="1000" oninput="roiCalc()">
             <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$1K</span><span>$300K</span></div>
+            
             <div id="roiImplHint" style="margin-top:8px;padding:8px 12px;background:rgba(1,126,132,.12);border:1px solid rgba(1,126,132,.25);border-radius:8px;font-size:11px;color:rgba(255,255,255,.65);line-height:1.5;">
               💡 <strong style="color:var(--teal-mid)">Nexa Odoo Implementation:</strong> Typically <strong style="color:var(--gold)">$8K–$45K</strong> depending on scope &amp; modules — vs SAP $150K–$500K+
             </div>
           </div>
-          <!-- PLAN SELECTOR — replaces manual subscription slider -->
-          <div class="roi-input-group">
-            <div class="roi-label-row" style="margin-bottom:10px">
-              <span class="roi-lbl">📱 Odoo Plan</span>
-              <span class="roi-val-badge" id="roiSubVal">$14,940/yr</span>
-            </div>
-            <!-- Plan buttons -->
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px" id="roiPlanBtns">
-              <button type="button" class="roi-plan-btn" data-plan="free" data-price="0"
-                onclick="roiSelectPlan(this)"
-                style="flex:1;padding:8px 10px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;line-height:1.35;">
-                🆓 One App Free<br><span style="font-size:9px;opacity:.6">$0 &middot; 1 app &middot; unlimited users</span>
-              </button>
-              <button type="button" class="roi-plan-btn roi-plan-active" data-plan="standard" data-price="24.90"
-                onclick="roiSelectPlan(this)"
-                style="flex:1;padding:8px 10px;border-radius:9px;border:1px solid rgba(1,126,132,.5);background:rgba(1,126,132,.18);color:var(--teal-mid);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;line-height:1.35;">
-                &#11088; Standard<br><span style="font-size:9px;opacity:.8">$24.90/user/mo &middot; All apps</span>
-              </button>
-              <button type="button" class="roi-plan-btn" data-plan="custom" data-price="49"
-                onclick="roiSelectPlan(this)"
-                style="flex:1;padding:8px 10px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;line-height:1.35;">
-                &#128295; Custom<br><span style="font-size:9px;opacity:.6">$49/user/mo &middot; Studio + API</span>
-              </button>
-            </div>
-            <!-- Odoo Users (backend users, not all employees) -->
-            <div class="roi-label-row" style="margin-bottom:6px">
-              <span style="font-size:11px;color:rgba(255,255,255,.55)">&#128100; Odoo Backend Users</span>
-              <span class="roi-val-badge" id="roiUsersVal">50</span>
-            </div>
-            <input type="range" class="roi-slider" id="roiUsers" min="1" max="500" value="50" step="1" oninput="roiCalc()">
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>1</span><span>500</span></div>
-            <!-- Auto-calculated breakdown -->
-            <div id="roiSubBreakdown" style="margin-top:9px;padding:8px 12px;background:rgba(1,126,132,.1);border:1px solid rgba(1,126,132,.22);border-radius:8px;font-size:11px;color:rgba(255,255,255,.65);line-height:1.6;">
-              &#128161; <strong style="color:var(--teal-mid)" id="roiSubFormula">50 users &times; $24.90 &times; 12 = $14,940/yr</strong><br>
-              <span style="font-size:10px;opacity:.6">Based on official Odoo.com pricing (annual billing)</span>
+          <!-- Subscription pulled from Tab 4 — hidden sync input -->
+          <input type="hidden" id="roiSub" value="0">
+          <input type="hidden" id="roiSubY1" value="0"><!-- Y1 discounted subscription -->
+          <div style="padding:10px 14px;background:linear-gradient(135deg,rgba(212,168,67,.12),rgba(212,168,67,.06));border:1px solid rgba(212,168,67,.28);border-radius:10px;margin-bottom:6px;">
+            <div style="font-size:11px;font-weight:700;color:var(--gold);margin-bottom:3px;">📱 Odoo Subscription</div>
+            <div id="roiSubSyncInfo" style="font-size:11px;color:rgba(255,255,255,.6);line-height:1.6;">
+              Configure plan, users &amp; hosting in <strong style="color:var(--teal-mid)">Tab 4 → Odoo Subscription</strong>.<br>
+              <span id="roiSubSyncBadge" style="font-size:11px;color:var(--teal-mid);font-weight:700;">Subscription cost auto-synced ✓</span>
             </div>
           </div>
-          <!-- Hidden input holds calculated subscription value for roiCalc() -->
-          <input type="hidden" id="roiSub" value="14940">
           <div class="roi-input-group">
             <div class="roi-label-row">
               <span class="roi-lbl">🛠️ Annual Support / Consulting</span>
-              <span class="roi-val-badge" id="roiSuppVal">$10K</span>
+              <span style="display:flex;align-items:center;gap:6px;">
+                <span class="roi-val-badge" id="roiSuppVal">$10K</span><span style="margin-left:5px;font-size:9px;font-weight:700;color:var(--teal-mid);background:rgba(1,126,132,.15);border:1px solid rgba(1,126,132,.25);border-radius:5px;padding:1px 6px;white-space:nowrap;">↺/yr</span>
+                <span style="font-size:10px;font-weight:700;color:var(--teal-mid);background:rgba(1,126,132,.15);border:1px solid rgba(1,126,132,.3);border-radius:6px;padding:2px 7px;white-space:nowrap;">↺ /yr · Y1–Y5</span>
+              </span>
             </div>
             <input type="range" class="roi-slider" id="roiSupp" min="0" max="100000" value="10000" step="5000" oninput="roiCalc()">
             <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$0</span><span>$100K</span></div>
+            
           </div>
           <div class="roi-input-group">
             <div class="roi-label-row">
               <span class="roi-lbl">🧑‍💼 Internal Staff Time (USD equiv.)</span>
-              <span class="roi-val-badge" id="roiStaffVal">$50K</span>
+              <span style="display:flex;align-items:center;gap:6px;">
+                <span class="roi-val-badge" id="roiStaffVal">$50K</span><span style="margin-left:5px;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1px 6px;white-space:nowrap;">Y1</span>
+                <span style="font-size:10px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:2px 7px;white-space:nowrap;">Y1 only</span>
+              </span>
             </div>
             <input type="range" class="roi-slider" id="roiStaff" min="0" max="200000" value="50000" step="10000" oninput="roiCalc()">
             <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$0</span><span>$200K</span></div>
+            
           </div>
           <button onclick="roiSwitchTab(1)" style="width:100%;margin-top:8px;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">← Back to Profile</button>
         </div>
+
+        <!-- ════════ PANEL 4 — ODOO SUBSCRIPTION CALCULATOR ════════ -->
+        <div id="roiPanel4" style="display:none">
+          <!-- Header -->
+          <div style="padding:14px 16px;background:linear-gradient(135deg,rgba(212,168,67,.15),rgba(212,168,67,.06));border:1px solid rgba(212,168,67,.3);border-radius:14px;margin-bottom:18px;">
+            <div style="font-size:13px;font-weight:800;color:var(--gold);margin-bottom:3px;">🌍 Odoo Subscription &amp; Implementation Cost</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.55);line-height:1.5;">Official Odoo.com pricing · Country-adjusted · Hosting included · Success Packs</div>
+          </div>
+
+          <!-- COUNTRY SELECTOR -->
+          <div class="roi-input-group">
+            <div class="roi-label-row" style="margin-bottom:8px">
+              <span class="roi-lbl">🌐 Country / Region</span>
+              <span class="roi-val-badge" id="subCurrencyBadge">USD</span>
+            </div>
+            <select id="subCountry" onchange="subCalc()"
+              style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-size:13px;font-weight:600;cursor:pointer;outline:none;-webkit-appearance:none;appearance:none;">
+              <option value="EG">🇪🇬 Egypt (EGP)</option>
+              <option value="SA">🇸🇦 Saudi Arabia (SAR)</option>
+              <option value="AE">🇦🇪 UAE (AED)</option>
+              <option value="KW">🇰🇼 Kuwait (KWD)</option>
+              <option value="QA">🇶🇦 Qatar (QAR)</option>
+              <option value="BH">🇧🇭 Bahrain (BHD)</option>
+              <option value="OM">🇴🇲 Oman (OMR)</option>
+              <option value="JO">🇯🇴 Jordan (JOD)</option>
+              <option value="MA">🇲🇦 Morocco (MAD)</option>
+              <option value="US">🇺🇸 United States (USD)</option>
+              <option value="GB">🇬🇧 United Kingdom (GBP)</option>
+              <option value="EU">🇪🇺 Europe (EUR)</option>
+              <option value="OTHER">🌐 Other (USD)</option>
+            </select>
+            <div id="subCountryInfo" style="margin-top:8px;padding:8px 12px;background:rgba(1,126,132,.1);border:1px solid rgba(1,126,132,.22);border-radius:8px;font-size:11px;color:rgba(255,255,255,.65);line-height:1.6;"></div>
+          </div>
+
+          <!-- ODOO PLAN -->
+          <div class="roi-input-group">
+            <div class="roi-label-row" style="margin-bottom:8px">
+              <span class="roi-lbl">📦 Odoo Plan</span>
+              <span class="roi-val-badge" id="subPlanBadge">Standard</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;" id="subPlanBtns">
+              <button type="button" onclick="subSelectPlan('free',0)" id="subPlanFree"
+                style="padding:9px 6px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;line-height:1.4;text-align:center;">
+                🆓 Free<br><span style="font-size:9px;opacity:.6">1 App · Unlimited</span>
+              </button>
+              <button type="button" onclick="subSelectPlan('standard',0)" id="subPlanStd"
+                style="padding:9px 6px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;line-height:1.4;text-align:center;">
+                ⭐ Standard<br><span style="font-size:9px;opacity:.6">$8.95/user/mo</span>
+              </button>
+              <button type="button" onclick="subSelectPlan('custom',0)" id="subPlanCustom"
+                style="padding:9px 6px;border-radius:10px;border:1px solid rgba(1,126,132,.55);background:rgba(1,126,132,.2);color:var(--teal-mid);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;line-height:1.4;text-align:center;">
+                🔧 Custom<br><span style="font-size:9px;opacity:.8">$13.60/user/mo</span>
+              </button>
+            </div>
+            <div id="subPricelistNote" style="margin-top:6px;font-size:10px;color:rgba(255,255,255,.35);text-align:center;">📌 Middle East pricelist · source: oec.sh</div>
+          </div>
+
+          <!-- NUMBER OF USERS -->
+          <div class="roi-input-group">
+            <div class="roi-label-row" style="margin-bottom:6px">
+              <span class="roi-lbl">👥 Backend Users</span>
+              <span class="roi-val-badge" id="subUsersVal">10</span>
+            </div>
+            <input type="range" class="roi-slider" id="subUsers" min="1" max="200" value="10" step="1" oninput="subCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>1</span><span>200</span></div>
+            
+          </div>
+
+          <!-- FIRST YEAR DISCOUNT -->
+          <div class="roi-input-group">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+              <div>
+                <span class="roi-lbl" data-en="🎁 First Year Initial Discount" data-ar="🎁 خصم السنة الأولى">🎁 First Year Initial Discount</span>
+                <div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:2px;" data-en="Commercial discount — applied to Year 1 subscription only" data-ar="خصم تجاري — يُطبَّق على اشتراك السنة الأولى فقط">Commercial discount — applied to Year 1 subscription only</div>
+              </div>
+              <span style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+                <span style="font-size:9px;font-weight:700;color:#34d399;background:rgba(5,150,105,.15);border:1px solid rgba(5,150,105,.3);border-radius:5px;padding:1px 6px;white-space:nowrap;" data-en="Y1 only" data-ar="السنة 1 فقط">Y1 only</span>
+              </span>
+            </div>
+            <!-- Percentage input row -->
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+              <div style="flex:1;position:relative;">
+                <input type="number" id="subDiscount" value="19" min="0" max="100" step="0.5"
+                  oninput="subCalc()" onchange="subCalc()"
+                  style="width:100%;padding:10px 40px 10px 16px;border-radius:10px;border:1px solid rgba(5,150,105,.45);background:rgba(5,150,105,.1);color:#34d399;font-size:22px;font-weight:800;font-family:'Sora',sans-serif;outline:none;text-align:center;">
+                <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:18px;font-weight:800;color:rgba(52,211,153,.6);">%</span>
+              </div>
+              <div style="font-size:11px;color:rgba(255,255,255,.4);line-height:1.5;max-width:120px;" data-en="Enter 0 to disable discount" data-ar="أدخل 0 لإلغاء الخصم">Enter 0 to disable</div>
+            </div>
+            <!-- Discount breakdown card — always visible when discount > 0 -->
+            <div id="subDiscountCard" style="display:none;padding:12px 14px;background:linear-gradient(135deg,rgba(5,150,105,.12),rgba(5,150,105,.06));border:1px solid rgba(5,150,105,.3);border-radius:10px;">
+              <div style="font-size:10px;font-weight:700;color:#34d399;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;" data-en="💚 Year 1 Discount Applied" data-ar="💚 تم تطبيق خصم السنة الأولى">💚 Year 1 Discount Applied</div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+                <span style="font-size:11px;color:rgba(255,255,255,.55);" data-en="Full annual subscription" data-ar="الاشتراك السنوي الكامل">Full annual subscription</span>
+                <span id="subDiscountFullPrice" style="font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:line-through;">—</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <span style="font-size:11px;color:rgba(255,255,255,.55);" data-en="Discount amount" data-ar="قيمة الخصم">Discount amount</span>
+                <span id="subDiscountSaving" style="font-size:13px;font-weight:800;color:#34d399;">—</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid rgba(5,150,105,.2);">
+                <span style="font-size:12px;font-weight:700;color:#fff;" data-en="Year 1 subscription price" data-ar="سعر اشتراك السنة الأولى">Year 1 subscription price</span>
+                <span id="subDiscountY1Price" style="font-size:18px;font-weight:800;color:#34d399;font-family:'Sora',sans-serif;">—</span>
+              </div>
+              <div style="margin-top:6px;font-size:10px;color:rgba(255,255,255,.35);" data-en="↻ Years 2–5: full price resumes · affects ROI payback period" data-ar="↻ السنوات 2-5: يعود السعر الكامل · يؤثر على فترة الاسترداد">↻ Years 2–5: full price resumes · affects ROI payback period</div>
+            </div>
+          </div>
+
+          <!-- HOSTING TYPE -->
+          <div class="roi-input-group">
+            <div class="roi-label-row" style="margin-bottom:8px">
+              <span class="roi-lbl">☁️ Hosting Type</span>
+              <span class="roi-val-badge" id="subHostBadge">Odoo.sh</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;" id="subHostBtns">
+              <button type="button" onclick="subSelectHost('saas',0)" id="subHostSaas"
+                style="width:100%;padding:9px 14px;border-radius:10px;border:1px solid rgba(212,168,67,.45);background:rgba(212,168,67,.12);color:var(--gold);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;text-align:left;display:flex;justify-content:space-between;align-items:center;">
+                <span>🌐 Odoo.com SaaS — <em>Included in plan</em></span>
+                <span style="color:var(--teal-mid);font-weight:700;">$0/mo extra</span>
+              </button>
+              <button type="button" onclick="subSelectHost('sh',0)" id="subHostSh"
+                style="width:100%;padding:9px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.75);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;text-align:left;display:flex;justify-content:space-between;align-items:center;">
+                <span data-en="⚡ Odoo.sh — Cloud Platform" data-ar="⚡ Odoo.sh — المنصة السحابية">⚡ Odoo.sh — Cloud Platform</span>
+                <span id="subShTotalBadge" style="font-weight:700;">$82/mo</span>
+              </button>
+            </div>
+
+            <!-- ODOO.SH DETAIL PANEL (real pricing from odoo.com) -->
+            <div id="subShPanel" style="display:none;margin-top:10px;padding:14px;background:rgba(212,168,67,.06);border:1px solid rgba(212,168,67,.22);border-radius:12px;">
+              <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;">
+                <span data-en="⚡ Odoo.sh Official Pricing (odoo.com)" data-ar="⚡ تسعير Odoo.sh الرسمي">⚡ Odoo.sh Official Pricing</span>
+                <a href="https://www.odoo.com/odoo-sh" target="_blank" style="font-size:9px;color:var(--gold);opacity:.7;text-decoration:none;">odoo.com/odoo-sh ↗</a>
+              </div>
+              <!-- Workers -->
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <div style="flex-shrink:0;width:32px;height:32px;border-radius:8px;background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.25);display:flex;align-items:center;justify-content:center;">
+                  <input type="number" id="shWorkers" value="1" min="1" max="20" step="1"
+                    onchange="calcShCost()" oninput="calcShCost()"
+                    style="width:100%;background:none;border:none;color:var(--gold);font-size:13px;font-weight:800;text-align:center;outline:none;font-family:'Sora',sans-serif;">
+                </div>
+                <div style="flex:1;">
+                  <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.75);" data-en="Worker(s)" data-ar="عمال الخوادم">Worker(s)</div>
+                  <div style="font-size:10px;color:rgba(255,255,255,.35);">× $57.60 /month</div>
+                </div>
+                <span id="shWorkerCost" style="font-size:12px;font-weight:700;color:var(--gold);">$57.60</span>
+              </div>
+              <!-- Storage -->
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <div style="flex-shrink:0;width:32px;height:32px;border-radius:8px;background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.25);display:flex;align-items:center;justify-content:center;">
+                  <input type="number" id="shStorage" value="50" min="1" max="10000" step="10"
+                    onchange="calcShCost()" oninput="calcShCost()"
+                    style="width:100%;background:none;border:none;color:var(--gold);font-size:11px;font-weight:800;text-align:center;outline:none;font-family:'Sora',sans-serif;">
+                </div>
+                <div style="flex:1;">
+                  <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.75);" data-en="Storage (GB)" data-ar="التخزين (جيجابايت)">Storage (GB)</div>
+                  <div style="font-size:10px;color:rgba(255,255,255,.35);">× $0.20 /month</div>
+                </div>
+                <span id="shStorageCost" style="font-size:12px;font-weight:700;color:var(--gold);">$10.00</span>
+              </div>
+              <!-- Staging -->
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                <div style="flex-shrink:0;width:32px;height:32px;border-radius:8px;background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.25);display:flex;align-items:center;justify-content:center;">
+                  <input type="number" id="shStaging" value="1" min="0" max="10" step="1"
+                    onchange="calcShCost()" oninput="calcShCost()"
+                    style="width:100%;background:none;border:none;color:var(--gold);font-size:13px;font-weight:800;text-align:center;outline:none;font-family:'Sora',sans-serif;">
+                </div>
+                <div style="flex:1;">
+                  <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.75);" data-en="Staging Environment(s)" data-ar="بيئات الاختبار">Staging Environment(s)</div>
+                  <div style="font-size:10px;color:rgba(255,255,255,.35);">× $14.40 /month</div>
+                </div>
+                <span id="shStagingCost" style="font-size:12px;font-weight:700;color:var(--gold);">$14.40</span>
+              </div>
+              <!-- Total -->
+              <div style="display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid rgba(212,168,67,.2);">
+                <span style="font-size:12px;font-weight:700;color:rgba(255,255,255,.75);" data-en="Total Odoo.sh / month" data-ar="إجمالي Odoo.sh / شهر">Total Odoo.sh / month</span>
+                <span id="shTotalCost" style="font-size:18px;font-weight:800;color:var(--gold);font-family:'Sora',sans-serif;">$82.00</span>
+              </div>
+            </div>
+
+              <button type="button" onclick="subSelectHost('premise',0)" id="subHostPremise"
+                style="width:100%;padding:9px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.75);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;text-align:left;display:flex;justify-content:space-between;align-items:center;">
+                <span>🖥️ On-Premise — Your own server</span>
+                <span style="color:var(--teal-mid);font-weight:700;">Custom amount</span>
+              </button>
+
+            <!-- ON-PREMISE DETAIL PANEL -->
+            <div id="subPremisePanel" style="display:none;margin-top:10px;padding:14px;background:rgba(1,126,132,.08);border:1px solid rgba(1,126,132,.22);border-radius:12px;">
+              <div style="font-size:10px;font-weight:700;color:var(--teal-mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">🖥️ Server / Infrastructure Cost</div>
+
+              <!-- Purchase vs Monthly toggle -->
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px;">
+                <button type="button" id="premMonthlyBtn" onclick="subSetPremiseMode('monthly')"
+                  style="padding:8px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center;">
+                  📅 Monthly Rent<br><span style="font-size:9px;opacity:.6">Recurring cost</span>
+                </button>
+                <button type="button" id="premPurchaseBtn" onclick="subSetPremiseMode('purchase')"
+                  style="padding:8px;border-radius:9px;border:1px solid rgba(212,168,67,.5);background:rgba(212,168,67,.15);color:var(--gold);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;text-align:center;">
+                  🛒 Purchase<br><span style="font-size:9px;opacity:.8">Purchase = True</span>
+                </button>
+              </div>
+
+              <!-- Monthly mode input -->
+              <div id="premMonthlySection">
+                <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:6px;">Monthly server/cloud cost (no limit)</div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="color:var(--teal-mid);font-size:15px;font-weight:800;">$</span>
+                  <input type="number" id="subPremMonthly" value="0" min="0" step="10"
+                    oninput="subCalc()" onchange="subCalc()"
+                    style="flex:1;padding:8px 12px;border-radius:8px;border:1px solid rgba(1,126,132,.35);background:rgba(255,255,255,.06);color:#fff;font-size:16px;font-weight:700;font-family:'Sora',sans-serif;outline:none;text-align:right;">
+                  <span style="font-size:11px;color:rgba(255,255,255,.4);">/mo</span>
+                </div>
+              </div>
+
+              <!-- Purchase mode input -->
+              <div id="premPurchaseSection" style="display:none;">
+                <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:6px;">
+                  Server purchase amount — one-time <span style="background:rgba(212,168,67,.2);color:var(--gold);border-radius:4px;padding:1px 6px;font-size:10px;font-weight:700;">Purchase = True</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                  <span style="color:var(--gold);font-size:15px;font-weight:800;">$</span>
+                  <input type="number" id="subPremPurchase" value="0" min="0" step="100"
+                    oninput="subCalc()" onchange="subCalc()"
+                    style="flex:1;padding:8px 12px;border-radius:8px;border:1px solid rgba(212,168,67,.35);background:rgba(212,168,67,.06);color:#fff;font-size:16px;font-weight:700;font-family:'Sora',sans-serif;outline:none;text-align:right;">
+                  <span style="font-size:11px;color:rgba(255,255,255,.4);">one-time</span>
+                </div>
+                <!-- Installments -->
+                <div style="margin-top:8px;padding:10px 12px;background:rgba(255,255,255,.04);border-radius:8px;border:1px solid rgba(255,255,255,.08);">
+                  <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:11px;color:rgba(255,255,255,.65);margin-bottom:8px;">
+                    <input type="checkbox" id="premInstallCheck" onchange="subCalc()"
+                      style="width:14px;height:14px;accent-color:var(--gold);cursor:pointer;">
+                    Pay in installments
+                  </label>
+                  <div id="premInstallFields" style="display:none;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                    <span style="font-size:11px;color:rgba(255,255,255,.45);">Months:</span>
+                    <input type="number" id="premInstallMonths" value="12" min="1" max="60" step="1"
+                      onchange="subCalc()"
+                      style="width:55px;padding:4px 8px;border-radius:6px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-size:12px;font-weight:700;text-align:center;outline:none;">
+                    <span id="premInstallPerMonth" style="font-size:11px;color:var(--gold);font-weight:700;"></span>
+                  </div>
+                </div>
+                <div id="premPurchaseLocalEquiv" style="margin-top:6px;font-size:10px;color:rgba(255,255,255,.35);"></div>
+              </div>
+
+              <!-- /premise panel -->
+            </div>
+          </div>
+
+          <!-- IMPLEMENTATION SERVICE — Pack or Partner -->
+          <div class="roi-input-group">
+
+            <!-- Section Label -->
+            <div style="font-size:12px;font-weight:800;color:rgba(255,255,255,.85);margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+              🛠️ Implementation Service
+              <span style="font-size:10px;color:rgba(255,255,255,.35);font-weight:500;">Choose one</span>
+            </div>
+
+            <!-- MODE TOGGLE: Pack vs Partner -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+              <button type="button" id="implModePackBtn" onclick="subSelectImplMode('pack')"
+                style="padding:10px 8px;border-radius:10px;border:1px solid rgba(1,126,132,.55);background:rgba(1,126,132,.2);color:var(--teal-mid);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;text-align:center;line-height:1.4;">
+                🎯 Odoo Success Pack<br><span style="font-size:9px;opacity:.75;">Official Odoo implementation</span>
+              </button>
+              <button type="button" id="implModePartnerBtn" onclick="subSelectImplMode('partner')"
+                style="padding:10px 8px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center;line-height:1.4;">
+                🤝 With a Local Partner<br><span style="font-size:9px;opacity:.65;">Fixed lump-sum amount</span>
+              </button>
+            </div>
+
+            <!-- PACK SECTION (shown when mode = pack) -->
+            <div id="implPackSection">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <span style="font-size:11px;color:rgba(255,255,255,.55);">Select your Success Pack</span>
+                <a href="https://www.odoo.com/pricing-packs" target="_blank"
+                  style="font-size:10px;color:var(--teal-mid);text-decoration:none;font-weight:600;border:1px solid rgba(1,126,132,.35);padding:3px 8px;border-radius:6px;">odoo.com/pricing-packs ↗</a>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;" id="subPackBtns">
+                <button type="button" onclick="subSelectPack('starter',580,493,4)" id="subPackStarter"
+                  style="width:100%;padding:9px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:rgba(255,255,255,.75);font-size:11px;cursor:pointer;transition:all .2s;text-align:left;display:flex;justify-content:space-between;align-items:center;">
+                  <span><strong>Starter</strong> · 4 hrs consultant</span>
+                  <span style="font-size:10px;">$493<span style="opacity:.5">/new · $580 returning</span></span>
+                </button>
+                <button type="button" onclick="subSelectPack('basic',3600,3060,25)" id="subPackBasic"
+                  style="width:100%;padding:9px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:rgba(255,255,255,.75);font-size:11px;cursor:pointer;transition:all .2s;text-align:left;display:flex;justify-content:space-between;align-items:center;">
+                  <span><strong>Basic</strong> · 25 hrs consultant</span>
+                  <span style="font-size:10px;">$3,060<span style="opacity:.5">/new · $3,600 returning</span></span>
+                </button>
+                <button type="button" onclick="subSelectPack('standard_pack',7000,5950,50)" id="subPackStd"
+                  style="width:100%;padding:9px 12px;border-radius:10px;border:1px solid rgba(1,126,132,.5);background:rgba(1,126,132,.18);color:var(--teal-mid);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;text-align:left;display:flex;justify-content:space-between;align-items:center;">
+                  <span>⭐ <strong>Standard</strong> · 50 hrs consultant <em>(recommended)</em></span>
+                  <span style="font-size:10px;">$5,950<span style="opacity:.7">/new · $7,000 returning</span></span>
+                </button>
+                <button type="button" onclick="subSelectPack('custom_pack',12500,10625,100)" id="subPackCustom"
+                  style="width:100%;padding:9px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:rgba(255,255,255,.75);font-size:11px;cursor:pointer;transition:all .2s;text-align:left;display:flex;justify-content:space-between;align-items:center;">
+                  <span><strong>Custom</strong> · 100 hrs consultant</span>
+                  <span style="font-size:10px;">$10,625<span style="opacity:.5">/new · $12,500 returning</span></span>
+                </button>
+                <button type="button" onclick="subSelectPack('pro',25000,21250,200)" id="subPackPro"
+                  style="width:100%;padding:9px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:rgba(255,255,255,.75);font-size:11px;cursor:pointer;transition:all .2s;text-align:left;display:flex;justify-content:space-between;align-items:center;">
+                  <span><strong>Pro</strong> · 200 hrs consultant</span>
+                  <span style="font-size:10px;">$21,250<span style="opacity:.5">/new · $25,000 returning</span></span>
+                </button>
+              </div>
+              <label style="display:flex;align-items:center;gap:8px;margin-top:9px;cursor:pointer;font-size:11px;color:rgba(255,255,255,.65);">
+                <input type="checkbox" id="subNewCustomer" checked onchange="subCalc()"
+                  style="width:15px;height:15px;accent-color:var(--teal);cursor:pointer;">
+                New customer (15% off on Success Pack)
+              </label>
+            </div>
+
+            <!-- PARTNER SECTION (shown when mode = partner) -->
+            <div id="implPartnerSection" style="display:none;">
+              <div style="padding:12px 14px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.22);border-radius:10px;margin-bottom:10px;">
+                <div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">🤝 Local Partner Implementation Cost</div>
+                <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:10px;line-height:1.5;">Enter the agreed fixed amount with your Odoo partner. No maximum limit. Extra consulting hours can be added below.</div>
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <span style="font-size:16px;font-weight:800;color:var(--gold);">$</span>
+                  <input type="number" id="subPartnerAmount" value="0" min="0" step="100"
+                    oninput="subCalc()" onchange="subCalc()"
+                    placeholder="0"
+                    style="flex:1;padding:10px 14px;border-radius:10px;border:1px solid rgba(212,168,67,.4);background:rgba(212,168,67,.08);color:#fff;font-size:18px;font-weight:800;font-family:'Sora',sans-serif;outline:none;text-align:right;min-width:0;">
+                  <span style="font-size:12px;color:rgba(255,255,255,.4);white-space:nowrap;">USD one-time</span>
+                </div>
+                <div id="subPartnerLocalEquiv" style="margin-top:8px;font-size:11px;color:rgba(255,255,255,.45);display:none;"></div>
+              </div>
+              <div style="padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px;border:1px solid rgba(255,255,255,.08);font-size:10px;color:rgba(255,255,255,.4);line-height:1.5;">
+                💡 You can still combine with Extra Consulting Hours below. Success Pack is not available in this mode.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ADDITIONAL HOURS -->
+          <div class="roi-input-group">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <span class="roi-lbl">⏱️ Extra Consulting Hours</span>
+              <span class="roi-val-badge" id="subExtraHrsVal">0 hrs</span>
+            </div>
+            <input type="range" class="roi-slider" id="subExtraHrs" min="0" max="50000" value="0" step="50" oninput="subCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>0</span><span>50,000 hrs</span></div>
+            
+            <div style="display:flex;align-items:center;gap:8px;margin-top:8px;">
+              <span style="font-size:11px;color:rgba(255,255,255,.55);">💵 Hourly rate (USD)</span>
+              <input type="number" id="subHourlyRate" value="175" min="50" max="500" step="25" onchange="subCalc()"
+                style="width:90px;padding:5px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:12px;font-weight:700;text-align:center;outline:none;">
+            </div>
+          </div>
+
+          <!-- RESULT BOX -->
+          <div id="subResultBox" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:18px;margin-top:6px;">
+            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;">📋 Cost Breakdown</div>
+            <div id="subResultRows" style="display:flex;flex-direction:column;gap:7px;"></div>
+            <div style="height:1px;background:rgba(255,255,255,.08);margin:14px 0;"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+              <span style="font-size:13px;font-weight:700;color:rgba(255,255,255,.8);">Monthly Total</span>
+              <span id="subMonthlyTotal" style="font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:var(--gold);">—</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+              <span style="font-size:11px;color:rgba(255,255,255,.45);">Annual (subscription + hosting)</span>
+              <span id="subAnnualTotal" style="font-size:13px;font-weight:700;color:var(--teal-mid);">—</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+              <span style="font-size:11px;color:rgba(255,255,255,.45);" id="subImplLabel">Implementation (one-time)</span>
+              <span id="subPackCost" style="font-size:13px;font-weight:700;color:rgba(255,255,255,.7);">—</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+              <span style="font-size:11px;color:rgba(255,255,255,.45);">Extra hours cost (one-time)</span>
+              <span id="subExtraCost" style="font-size:13px;font-weight:700;color:rgba(255,255,255,.7);">—</span>
+            </div>
+            <div style="height:1px;background:rgba(212,168,67,.25);margin:10px 0;"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;font-weight:800;color:rgba(255,255,255,.9);">Total Year 1 Investment</span>
+              <span id="subYear1Total" style="font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:var(--gold);">—</span>
+            </div>
+            <div id="subLocalEquiv" style="margin-top:10px;padding:8px 12px;background:rgba(1,126,132,.1);border:1px solid rgba(1,126,132,.2);border-radius:8px;font-size:11px;color:rgba(255,255,255,.6);line-height:1.6;display:none;"></div>
+            <!-- ROI hint -->
+            <div id="subRoiHint" style="margin-top:10px;padding:10px 14px;background:linear-gradient(135deg,rgba(212,168,67,.12),rgba(212,168,67,.06));border:1px solid rgba(212,168,67,.25);border-radius:10px;font-size:11px;color:rgba(255,255,255,.7);line-height:1.6;display:none;"></div>
+          </div>
+
+          <!-- ACTIONS -->
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px;">
+            <a href="https://www.odoo.com/pricing" target="_blank"
+              style="display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(1,126,132,.2);color:var(--teal-mid);border:1px solid rgba(1,126,132,.4);font-size:12px;font-weight:700;padding:11px;border-radius:10px;text-decoration:none;transition:all .2s;">
+              📊 View Official Odoo Pricing ↗
+            </a>
+            <a href="https://www.odoo.com/pricing-packs" target="_blank"
+              style="display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(212,168,67,.12);color:var(--gold);border:1px solid rgba(212,168,67,.3);font-size:12px;font-weight:700;padding:11px;border-radius:10px;text-decoration:none;transition:all .2s;">
+              🎯 Explore Success Packs ↗
+            </a>
+            <button onclick="roiSwitchTab(3)"
+              style="width:100%;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">
+              ← Back to Investment
+            </button>
+          </div>
+        </div>
       </div>
+
 
       <!-- RIGHT: RESULTS -->
       <div class="roi-results">
@@ -3932,10 +4315,11 @@ function downloadRoiPdf() {
 
   const d = roiLiveData;
   if (!d || !d.emp) {
-    alert('Please configure the calculator first.');
+    alert('Please configure the ROI calculator first (Tab 1–3).');
     if (btn) { btn.innerHTML = '📄 Download PDF'; btn.disabled = false; }
     return;
   }
+  const s = window.subLiveData || null;  // Tab 4 subscription data
 
   // Dept savings rows
   const deptRows = (d.deptSavings || [])
@@ -4090,12 +4474,68 @@ function downloadRoiPdf() {
       <div class="profile-item"><div class="profile-lbl">Software Cost Saved</div><div class="profile-val" style="color:#059669;">${d.fSwSave}</div></div>
     </div>
 
+    <!-- ODOO SUBSCRIPTION DETAILS -->
+    ${s ? `
+    <div class="sec-title" style="border-bottom-color:#d4a843;">📦 Odoo Subscription & Implementation Details</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+      <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:14px;">
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#92400e;margin-bottom:8px;">📱 Subscription Plan</div>
+        <table style="width:100%;font-size:11px;">
+          <tr><td style="color:#64748b;padding:3px 0;">Country</td><td style="font-weight:700;text-align:right;">${s.countryName} (${s.currency})</td></tr>
+          <tr><td style="color:#64748b;padding:3px 0;">Odoo Plan</td><td style="font-weight:700;text-align:right;">${s.planLabel}</td></tr>
+          <tr><td style="color:#64748b;padding:3px 0;">Backend Users</td><td style="font-weight:700;text-align:right;">${s.users} users</td></tr>
+          <tr><td style="color:#64748b;padding:3px 0;">License (monthly)</td><td style="font-weight:700;text-align:right;color:#d97706;">$${Math.round(s.licenseMonthly).toLocaleString()}/mo</td></tr>
+        </table>
+      </div>
+      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:14px;">
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#065f46;margin-bottom:8px;">☁️ Hosting & Infrastructure</div>
+        <table style="width:100%;font-size:11px;">
+          <tr><td style="color:#64748b;padding:3px 0;">Hosting Type</td><td style="font-weight:700;text-align:right;">${s.hostLabel}</td></tr>
+          <tr><td style="color:#64748b;padding:3px 0;">Hosting Cost</td><td style="font-weight:700;text-align:right;color:#059669;">$${s.hostCost > 0 ? s.hostCost.toLocaleString() + '/mo' : '0 (Included)'}</td></tr>
+          <tr><td style="color:#64748b;padding:3px 0;">Total Monthly</td><td style="font-weight:800;text-align:right;color:#059669;font-size:13px;">$${Math.round(s.totalMonthly).toLocaleString()}/mo</td></tr>
+          <tr><td style="color:#64748b;padding:3px 0;">Annual Cost</td><td style="font-weight:800;text-align:right;color:#d97706;">$${Math.round(s.annualSub).toLocaleString()}/yr</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <table style="margin-bottom:16px;">
+      <tr><th colspan="3">🎯 Odoo Success Pack & Consulting Hours</th></tr>
+      ${s.implMode === 'pack' ? `
+      <tr>
+        <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;font-size:12px;">🎯 Success Pack — ${s.packLabel}</td>
+        <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#475569;">${s.packHours} consultant hours · ${s.isNew ? 'New customer (15% off)' : 'Returning customer'}</td>
+        <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;color:#d97706;">$${s.packCost.toLocaleString()}</td>
+      </tr>` : `
+      <tr>
+        <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;font-size:12px;">🤝 Local Partner Implementation</td>
+        <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#475569;">Fixed lump-sum amount${s.rate !== 1 ? ' · ' + s.symbol + Math.round(s.localImpl).toLocaleString() + ' ' + s.currency : ''}</td>
+        <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;color:#d97706;">$${Math.round(s.implCost).toLocaleString()}</td>
+      </tr>`}
+      ${s.extraHrs > 0 ? `<tr>
+        <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;font-size:12px;">⏱️ Extra Consulting Hours</td>
+        <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#475569;">${s.extraHrs.toLocaleString()} hrs × $${s.hourlyRate}/hr</td>
+        <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;color:#d97706;">$${Math.round(s.extraCost).toLocaleString()}</td>
+      </tr>` : ''}
+      <tr style="background:#fffbeb;">
+        <td colspan="2" style="padding:8px 14px;font-weight:800;font-size:12px;">💳 Year 1 Total (Subscription + Hosting + Implementation + Extra)</td>
+        <td style="padding:8px 14px;text-align:right;font-weight:800;color:#d97706;font-size:14px;">$${Math.round(s.year1).toLocaleString()}</td>
+      </tr>
+    </table>
+
+    ${s.rate !== 1 ? `<div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:11px;color:#0369a1;">
+      🔄 <strong>Local Currency Equivalent (${s.currency}):</strong> Monthly ${s.symbol}${s.localMonthly.toLocaleString()} · Annual ${s.symbol}${s.localAnnual.toLocaleString()} · Year 1 Total ${s.symbol}${s.localYear1.toLocaleString()}<br>
+      <span style="opacity:.7;font-size:10px;">Rate: 1 USD = ${s.rate} ${s.currency} · ${s.taxNote}</span>
+    </div>` : ''}
+    ` : ''}
+
     <!-- INVESTMENT SUMMARY -->
-    <div class="sec-title">📦 Investment Summary</div>
+    <div class="sec-title">💰 Investment Summary</div>
     <table>
       <tr><th>Item</th><th style="text-align:right;">Amount</th></tr>
       <tr><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;">🔧 Implementation Budget</td><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;">${d.fImpl}</td></tr>
-      <tr><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;">📱 Annual Odoo Subscription</td><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;">${d.fSub}/yr</td></tr>
+      <tr><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;">📱 Annual Subscription Y2–Y5${s ? ' (' + s.users + ' users · ' + s.planLabel + ')' : ''}</td><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;">${d.fSub}/yr</td></tr>
+      ${s && s.discountPct > 0 ? '<tr style="background:#f0fdf4;"><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;font-size:12px;">🎁 Year 1 Discount (' + s.discountPct.toFixed(0) + '% off subscription)</td><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;color:#059669;">$' + s.annualSubY1.toLocaleString() + '/yr · save $' + s.discountAmount.toLocaleString() + '</td></tr>' : ''}
+      ${s ? '<tr><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;">☁️ Hosting (' + s.hostLabel + ')</td><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;">$' + (s.hostCost > 0 ? s.hostCost + '/mo' : '0') + '</td></tr>' : ''}
       <tr><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;">🛠️ Annual Support / Consulting</td><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;">${d.fSupp}/yr</td></tr>
       <tr><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;">🧑‍💼 Internal Staff Time</td><td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;">${d.fStaff}</td></tr>
       <tr style="background:#f0fdf4;"><td style="padding:7px 14px;font-weight:700;">💰 Total 3-Year Investment</td><td style="padding:7px 14px;text-align:right;font-weight:800;color:#059669;">${d.fInvest3}</td></tr>
@@ -4153,11 +4593,14 @@ function downloadRoiPdf() {
 
 function roiSwitchTab(n) {
   roiActiveTab = n;
-  [1,2,3].forEach(i => {
-    document.getElementById('roiPanel' + i).style.display = i === n ? '' : 'none';
-    document.getElementById('roiTab' + i).classList.toggle('active', i === n);
+  [1,2,3,4].forEach(i => {
+    const p = document.getElementById('roiPanel' + i);
+    const t = document.getElementById('roiTab' + i);
+    if (p) p.style.display = i === n ? '' : 'none';
+    if (t) t.classList.toggle('active', i === n);
   });
-  roiCalc();
+  if (n !== 4) roiCalc();
+  else subCalc();
 }
 
 function roiBuildDeptGrid() {
@@ -4246,25 +4689,11 @@ function roiCalc() {
   const rev    = parseInt(document.getElementById('roiRev').value);
   const sw     = parseInt(document.getElementById('roiSw').value);        // current software cost
   const impl   = parseInt(document.getElementById('roiImpl').value);
-  // Subscription computed from plan price × users × 12 (official Odoo pricing)
-  const roiUsersEl = document.getElementById('roiUsers');
-  const odooUsers = roiUsersEl ? parseInt(roiUsersEl.value) : parseInt(document.getElementById('roiEmp').value);
-  const sub = Math.round(odooUsers * roiPlanPrice * 12);
-  // Update hidden input + display labels
-  const subHidden = document.getElementById('roiSub');
-  if (subHidden) subHidden.value = sub;
-  const usersValEl = document.getElementById('roiUsersVal');
-  if (usersValEl) usersValEl.textContent = odooUsers;
-  // Update formula display
-  const formulaEl = document.getElementById('roiSubFormula');
-  if (formulaEl) {
-    if (roiPlanPrice === 0) {
-      formulaEl.textContent = 'One App Free — $0/yr';
-    } else {
-      const planLabel = roiPlanPrice === 24.90 ? 'Standard' : 'Custom';
-      formulaEl.textContent = odooUsers + ' users × $' + roiPlanPrice.toFixed(2) + ' × 12 = $' + sub.toLocaleString() + '/yr (' + planLabel + ')';
-    }
-  }
+  // Subscription: full price for Y2+ (recurring), discounted for Y1
+  const subHidden  = document.getElementById('roiSub');
+  const sub        = subHidden ? (parseInt(subHidden.value) || 0) : 0;   // Y2+ recurring
+  const subY1Hidden = document.getElementById('roiSubY1');
+  const subY1      = subY1Hidden ? (parseInt(subY1Hidden.value) || sub) : sub;  // Y1 (may be discounted)
   const supp   = parseInt(document.getElementById('roiSupp').value);
   const staff  = parseInt(document.getElementById('roiStaff').value);
 
@@ -4274,8 +4703,8 @@ function roiCalc() {
   document.getElementById('roiRevVal').textContent  = fmtUSD(rev);
   document.getElementById('roiSwVal').textContent   = fmtUSD(sw);
   document.getElementById('roiImplVal').textContent = fmtUSD(impl);
-  document.getElementById('roiSubVal').textContent  = fmtUSD(sub) + '/yr';
-  document.getElementById('roiSuppVal').textContent = fmtUSD(supp);
+  // roiSubVal display now managed by Tab 4 subCalc()
+  document.getElementById('roiSuppVal').textContent = fmtUSD(supp) + '/yr';
   document.getElementById('roiStaffVal').textContent= fmtUSD(staff);
 
   // Total annual FTE cost pool (all employees)
@@ -4300,9 +4729,9 @@ function roiCalc() {
   const swSavings = Math.round(sw * SW_SAVINGS_RATIO);
   totalSavings += swSavings;
 
-  // Year 1 cost (implementation + first year subscription + support + staff)
-  const y1cost = impl + sub + supp + staff;
-  // Recurring annual cost (years 2+)
+  // Year 1 cost — uses DISCOUNTED subscription for Year 1
+  const y1cost = impl + subY1 + supp + staff;
+  // Recurring annual cost (years 2+) — full price
   const recurringCost = sub + supp;
   // Year 1 net (savings ramp up to 75% in Y1)
   const y1savings = Math.round(totalSavings * 0.75);
@@ -5310,6 +5739,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (roiTab1) roiTab1.innerHTML = AR ? '<span>👤</span>الملف' : '<span>👤</span>Profile';
     if (roiTab2) roiTab2.innerHTML = AR ? '<span>🏢</span>الأقسام' : '<span>🏢</span>Departments';
     if (roiTab3) roiTab3.innerHTML = AR ? '<span>📊</span>الاستثمار' : '<span>📊</span>Investment';
+    const roiTab4 = document.getElementById('roiTab4');
+    if (roiTab4) roiTab4.innerHTML = AR ? '<span>🌍</span>اشتراك أودو' : '<span>🌍</span>Odoo Subscription';
+    // Apply data-en / data-ar to all new Tab 4 elements
+    document.querySelectorAll('[data-en][data-ar]').forEach(el => {
+      el.textContent = AR ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+    });
+    // Update specific Tab 4 labels
+    const countryInfo = document.getElementById('subCountryInfo');
+    if (countryInfo && AR) countryInfo.setAttribute('dir','rtl');
 
     // Industry sector label
     const roiIndustryLbl = document.querySelector('#roiPanel1 .roi-input-group:first-child .roi-lbl');
@@ -7035,15 +7473,35 @@ async function sendRoiEmail() {
       </tr>
     </table>
 
+    <!-- SUBSCRIPTION DETAILS (from Tab 4) -->
+    ${window.subLiveData ? `
+    <div style="font-size:11px;font-weight:800;color:#0f172a;margin:0 0 10px;padding-bottom:6px;border-bottom:2px solid #d4a843;text-transform:uppercase;letter-spacing:.05em;">📦 Odoo Subscription & Implementation</div>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:8px;border:1px solid #fde68a;border-radius:10px;overflow:hidden;background:#fffbeb;">
+      <tr><td style="padding:8px 14px;border-bottom:1px solid #fde68a;font-size:12px;">🌍 Country</td><td style="padding:8px 14px;border-bottom:1px solid #fde68a;text-align:right;font-weight:700;">${window.subLiveData.countryName} (${window.subLiveData.currency})</td></tr>
+      <tr><td style="padding:8px 14px;border-bottom:1px solid #fde68a;font-size:12px;">📱 Odoo Plan</td><td style="padding:8px 14px;border-bottom:1px solid #fde68a;text-align:right;font-weight:700;">${window.subLiveData.planLabel} · ${window.subLiveData.users} users</td></tr>
+      <tr><td style="padding:8px 14px;border-bottom:1px solid #fde68a;font-size:12px;">☁️ Hosting</td><td style="padding:8px 14px;border-bottom:1px solid #fde68a;text-align:right;font-weight:700;">${window.subLiveData.hostLabel} · ${window.subLiveData.hostCost > 0 ? '$' + window.subLiveData.hostCost + '/mo' : 'Included'}</td></tr>
+      <tr><td style="padding:8px 14px;border-bottom:1px solid #fde68a;font-size:12px;">💳 Monthly Total</td><td style="padding:8px 14px;border-bottom:1px solid #fde68a;text-align:right;font-weight:800;color:#d97706;font-size:14px;">$${Math.round(window.subLiveData.totalMonthly).toLocaleString()}/mo</td></tr>
+      <tr><td style="padding:8px 14px;border-bottom:1px solid #fde68a;font-size:12px;">📅 Annual Subscription (Y2–Y5)</td><td style="padding:8px 14px;border-bottom:1px solid #fde68a;text-align:right;font-weight:800;color:#d97706;">$${Math.round(window.subLiveData.annualSub).toLocaleString()}/yr</td></tr>
+      ${window.subLiveData.discountPct > 0 ? `<tr style="background:rgba(5,150,105,.08);"><td style="padding:8px 14px;border-bottom:1px solid #fde68a;font-size:12px;">🎁 Year 1 Discount (${window.subLiveData.discountPct.toFixed(0)}% off subscription)</td><td style="padding:8px 14px;border-bottom:1px solid #fde68a;text-align:right;font-weight:700;color:#059669;">$${window.subLiveData.annualSubY1.toLocaleString()}/yr (save $${window.subLiveData.discountAmount.toLocaleString()})</td></tr>` : ''}
+      ${window.subLiveData.implMode === 'pack'
+        ? `<tr><td style="padding:8px 14px;border-bottom:1px solid #fde68a;font-size:12px;">🎯 Success Pack · ${window.subLiveData.packLabel} (${window.subLiveData.packHours} hrs${window.subLiveData.isNew ? ' · 15% off' : ''})</td><td style="padding:8px 14px;border-bottom:1px solid #fde68a;text-align:right;font-weight:700;">$${window.subLiveData.packCost.toLocaleString()}</td></tr>`
+        : `<tr><td style="padding:8px 14px;border-bottom:1px solid #fde68a;font-size:12px;">🤝 Local Partner Implementation${window.subLiveData.rate !== 1 ? ' (' + window.subLiveData.symbol + Math.round(window.subLiveData.localImpl).toLocaleString() + ' ' + window.subLiveData.currency + ')' : ''}</td><td style="padding:8px 14px;border-bottom:1px solid #fde68a;text-align:right;font-weight:700;">$${Math.round(window.subLiveData.implCost).toLocaleString()}</td></tr>`}
+      ${window.subLiveData.extraHrs > 0 ? `<tr><td style="padding:8px 14px;border-bottom:1px solid #fde68a;font-size:12px;">⏱️ Extra Hours · ${window.subLiveData.extraHrs.toLocaleString()} hrs × $${window.subLiveData.hourlyRate}/hr</td><td style="padding:8px 14px;border-bottom:1px solid #fde68a;text-align:right;font-weight:700;">$${Math.round(window.subLiveData.extraCost).toLocaleString()}</td></tr>` : ''}
+      <tr style="background:#fef3c7;"><td style="padding:9px 14px;font-weight:800;font-size:13px;">🏆 Year 1 Total</td><td style="padding:9px 14px;text-align:right;font-weight:800;color:#d97706;font-size:15px;">$${Math.round(window.subLiveData.year1).toLocaleString()}</td></tr>
+    </table>
+    ${window.subLiveData.rate !== 1 ? `<div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:9px 14px;margin-bottom:12px;font-size:11px;color:#0369a1;">🔄 <strong>${window.subLiveData.currency} Equivalent:</strong> Monthly ${window.subLiveData.symbol}${window.subLiveData.localMonthly.toLocaleString()} · Annual ${window.subLiveData.symbol}${window.subLiveData.localAnnual.toLocaleString()} · Year 1 ${window.subLiveData.symbol}${window.subLiveData.localYear1.toLocaleString()} · Rate: 1 USD = ${window.subLiveData.rate} ${window.subLiveData.currency}</div>` : ''}
+    ` : ''}
+
     <!-- INVESTMENT SUMMARY -->
-    <div style="font-size:11px;font-weight:800;color:#0f172a;margin:0 0 12px;padding-bottom:6px;border-bottom:2px solid #017E84;text-transform:uppercase;letter-spacing:.05em;">📦 Investment Summary</div>
+    <div style="font-size:11px;font-weight:800;color:#0f172a;margin:0 0 12px;padding-bottom:6px;border-bottom:2px solid #017E84;text-transform:uppercase;letter-spacing:.05em;">💰 Investment & Cost Breakdown</div>
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;">
       <tr style="background:#f8fafc;">
         <th style="padding:9px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748b;text-align:left;border-bottom:2px solid #e2e8f0;">Item</th>
         <th style="padding:9px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748b;text-align:right;border-bottom:2px solid #e2e8f0;">Amount</th>
       </tr>
       <tr><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;">🔧 Implementation Budget</td><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;font-size:13px;">${d ? d.fImpl : '—'}</td></tr>
-      <tr><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;">📱 Annual Odoo Subscription</td><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;font-size:13px;">${d ? d.fSub + '/yr' : '—'}</td></tr>
+      <tr><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;">📱 Annual Odoo Subscription${window.subLiveData ? ' (' + window.subLiveData.users + ' users · ' + window.subLiveData.planLabel + ')' : ''}</td><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;font-size:13px;">${d ? d.fSub + '/yr' : '—'}</td></tr>
+      ${window.subLiveData && window.subLiveData.hostCost > 0 ? `<tr><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;">☁️ Hosting (${window.subLiveData.hostLabel})</td><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;font-size:13px;">$${window.subLiveData.hostCost}/mo</td></tr>` : ''}
       <tr><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;">🛠️ Annual Support / Consulting</td><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;font-size:13px;">${d ? d.fSupp + '/yr' : '—'}</td></tr>
       <tr><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;">🧑‍💼 Internal Staff Time</td><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;font-size:13px;">${d ? d.fStaff : '—'}</td></tr>
       <tr style="background:#f0fdf4;"><td style="padding:9px 14px;font-weight:700;font-size:13px;">💰 Total 3-Year Investment</td><td style="padding:9px 14px;text-align:right;font-weight:800;color:#059669;font-size:14px;">${d ? d.fInvest3 : '—'}</td></tr>
@@ -7183,6 +7641,553 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('keydown', function(e){
   if (e.key === 'Escape') closeRoiEmailModal();
 });
+
+// ══════════════════════════════════════════════════════════════════════════
+// ODOO SUBSCRIPTION CALCULATOR — Tab 4
+// ══════════════════════════════════════════════════════════════════════════
+
+const SUB_COUNTRIES = {
+  EG: { name:'Egypt', currency:'EGP', symbol:'EGP', rate:50.5,   salaryNote:'Average IT salary ~EGP 25–60K/mo', taxNote:'No VAT on SaaS services (may apply)', color:'#017E84' },
+  SA: { name:'Saudi Arabia', currency:'SAR', symbol:'SAR', rate:3.75, salaryNote:'Average IT salary ~SAR 8–18K/mo', taxNote:'15% VAT applies on Odoo subscription', color:'#1d5091' },
+  AE: { name:'UAE', currency:'AED', symbol:'AED', rate:3.67, salaryNote:'Average IT salary ~AED 8–20K/mo', taxNote:'5% VAT may apply', color:'#714B67' },
+  KW: { name:'Kuwait', currency:'KWD', symbol:'KWD', rate:0.31, salaryNote:'Average IT salary ~KWD 700–1,800/mo', taxNote:'No VAT currently', color:'#d4a843' },
+  QA: { name:'Qatar', currency:'QAR', symbol:'QAR', rate:3.64, salaryNote:'Average IT salary ~QAR 6–18K/mo', taxNote:'No VAT currently', color:'#017E84' },
+  BH: { name:'Bahrain', currency:'BHD', symbol:'BHD', rate:0.376, salaryNote:'Average IT salary ~BHD 400–900/mo', taxNote:'10% VAT applies', color:'#1d5091' },
+  OM: { name:'Oman', currency:'OMR', symbol:'OMR', rate:0.384, salaryNote:'Average IT salary ~OMR 400–1,000/mo', taxNote:'5% VAT applies', color:'#017E84' },
+  JO: { name:'Jordan', currency:'JOD', symbol:'JOD', rate:0.709, salaryNote:'Average IT salary ~JOD 500–1,200/mo', taxNote:'16% GST may apply', color:'#714B67' },
+  MA: { name:'Morocco', currency:'MAD', symbol:'MAD', rate:10.2, salaryNote:'Average IT salary ~MAD 6–15K/mo', taxNote:'20% VAT applies', color:'#d4a843' },
+  US: { name:'United States', currency:'USD', symbol:'$', rate:1, salaryNote:'Average IT salary ~$70–130K/yr', taxNote:'State sales tax may apply', color:'#1d5091' },
+  GB: { name:'United Kingdom', currency:'GBP', symbol:'£', rate:0.79, salaryNote:'Average IT salary ~£35–80K/yr', taxNote:'20% VAT applies', color:'#017E84' },
+  EU: { name:'Europe', currency:'EUR', symbol:'€', rate:0.92, salaryNote:'Average IT salary ~€35–75K/yr', taxNote:'VAT varies by country (19–25%)', color:'#714B67' },
+  OTHER: { name:'Other Region', currency:'USD', symbol:'$', rate:1, salaryNote:'Consult local Odoo partner for pricing', taxNote:'Local taxes may apply', color:'#017E84' },
+};
+
+const SUB_PACKS = {
+  starter:      { label:'Starter',  hours:4,   returning:580,   newPrice:493 },
+  basic:        { label:'Basic',    hours:25,  returning:3600,  newPrice:3060 },
+  standard_pack:{ label:'Standard', hours:50,  returning:7000,  newPrice:5950 },
+  custom_pack:  { label:'Custom',   hours:100, returning:12500, newPrice:10625 },
+  pro:          { label:'Pro',      hours:200, returning:25000, newPrice:21250 },
+};
+
+// ── Odoo Official Pricing Per Country (source: oec.sh, verified May 2026) ──
+const ODOO_PRICES = {
+  // Middle East cheapest pricelist
+  EG: { std: 8.95,  cus: 13.60, label: 'Middle East pricelist' },
+  JO: { std: 8.95,  cus: 13.60, label: 'Middle East pricelist' },
+  MA: { std: 8.95,  cus: 13.60, label: 'Middle East / Africa pricelist' },
+  // GCC (SE Asia / Africa USD tier)
+  SA: { std: 16.90, cus: 25.50, label: 'GCC pricelist' },
+  AE: { std: 16.90, cus: 25.50, label: 'GCC pricelist' },
+  KW: { std: 16.90, cus: 25.50, label: 'GCC pricelist' },
+  QA: { std: 16.90, cus: 25.50, label: 'GCC pricelist' },
+  BH: { std: 16.90, cus: 25.50, label: 'GCC pricelist' },
+  OM: { std: 16.90, cus: 25.50, label: 'GCC pricelist' },
+  // Western
+  US:    { std: 31.10, cus: 61.00, label: 'USA pricelist' },
+  GB:    { std: 27.32, cus: 41.04, label: 'Europe W/N pricelist (€24.90/€37.40)' },
+  EU:    { std: 27.32, cus: 41.04, label: 'Europe W/N pricelist (€24.90/€37.40)' },
+  OTHER: { std: 31.10, cus: 61.00, label: 'Default (US pricelist)' },
+};
+
+function getOdooPrices(cc) {
+  return ODOO_PRICES[cc] || ODOO_PRICES['OTHER'];
+}
+
+function refreshPlanButtons() {
+  const p = getOdooPrices(subCountryCode);
+  const stdBtn = document.getElementById('subPlanStd');
+  const cusBtn = document.getElementById('subPlanCustom');
+  if (stdBtn) stdBtn.innerHTML = '⭐ Standard<br><span style="font-size:9px;opacity:.8">$' + p.std + '/user/mo · All apps</span>';
+  if (cusBtn) cusBtn.innerHTML = '🔧 Custom<br><span style="font-size:9px;opacity:.6">$' + p.cus + '/user/mo · Studio + API</span>';
+  // update price in state if plan already selected
+  if (subPlanKey === 'standard') subPlanPrice = p.std;
+  else if (subPlanKey === 'custom') subPlanPrice = p.cus;
+  // Show pricelist note
+  const noteEl = document.getElementById('subPricelistNote');
+  if (noteEl) noteEl.textContent = '📌 ' + p.label + ' · source: oec.sh';
+}
+
+// State
+let subCountryCode = 'EG';
+let subPlanKey     = 'custom';
+let subPlanPrice   = 13.60;  // EG default = Custom plan
+let subHostKey     = 'saas';
+let subHostCost    = 0;
+let subPackKey     = 'standard_pack';
+let subImplMode    = 'partner';  // 'pack' | 'partner'
+let subPremiseMode = 'monthly'; // 'monthly' | 'purchase'
+
+function subSetPremiseMode(mode) {
+  subPremiseMode = mode;
+  const mBtn = document.getElementById('premMonthlyBtn');
+  const pBtn = document.getElementById('premPurchaseBtn');
+  const mSec = document.getElementById('premMonthlySection');
+  const pSec = document.getElementById('premPurchaseSection');
+  if (mode === 'monthly') {
+    if (mBtn) { mBtn.style.borderColor='rgba(1,126,132,.5)'; mBtn.style.background='rgba(1,126,132,.18)'; mBtn.style.color='var(--teal-mid)'; mBtn.style.fontWeight='700'; }
+    if (pBtn) { pBtn.style.borderColor='rgba(255,255,255,.18)'; pBtn.style.background='rgba(255,255,255,.06)'; pBtn.style.color='rgba(255,255,255,.7)'; pBtn.style.fontWeight='600'; }
+    if (mSec) mSec.style.display = '';
+    if (pSec) pSec.style.display = 'none';
+  } else {
+    if (pBtn) { pBtn.style.borderColor='rgba(212,168,67,.5)'; pBtn.style.background='rgba(212,168,67,.15)'; pBtn.style.color='var(--gold)'; pBtn.style.fontWeight='700'; }
+    if (mBtn) { mBtn.style.borderColor='rgba(255,255,255,.18)'; mBtn.style.background='rgba(255,255,255,.06)'; mBtn.style.color='rgba(255,255,255,.7)'; mBtn.style.fontWeight='600'; }
+    if (pSec) pSec.style.display = '';
+    if (mSec) mSec.style.display = 'none';
+    // Show/hide installments
+    const ic = document.getElementById('premInstallCheck');
+    const iFields = document.getElementById('premInstallFields');
+    if (ic && iFields) iFields.style.display = ic.checked ? 'flex' : 'none';
+  }
+  subCalc();
+}
+
+// Show/hide installment fields when checkbox toggled
+document.addEventListener('change', function(e) {
+  if (e.target.id === 'premInstallCheck') {
+    const iFields = document.getElementById('premInstallFields');
+    if (iFields) iFields.style.display = e.target.checked ? 'flex' : 'none';
+    subCalc();
+  }
+});
+
+function subSelectImplMode(mode) {
+  subImplMode = mode;
+  const packBtn    = document.getElementById('implModePackBtn');
+  const partnerBtn = document.getElementById('implModePartnerBtn');
+  const packSec    = document.getElementById('implPackSection');
+  const partnerSec = document.getElementById('implPartnerSection');
+  if (mode === 'pack') {
+    packBtn.style.borderColor  = 'rgba(1,126,132,.55)';
+    packBtn.style.background   = 'rgba(1,126,132,.2)';
+    packBtn.style.color        = 'var(--teal-mid)';
+    packBtn.style.fontWeight   = '700';
+    partnerBtn.style.borderColor = 'rgba(255,255,255,.18)';
+    partnerBtn.style.background  = 'rgba(255,255,255,.06)';
+    partnerBtn.style.color       = 'rgba(255,255,255,.7)';
+    partnerBtn.style.fontWeight  = '600';
+    packSec.style.display    = '';
+    partnerSec.style.display = 'none';
+  } else {
+    partnerBtn.style.borderColor = 'rgba(212,168,67,.55)';
+    partnerBtn.style.background  = 'rgba(212,168,67,.15)';
+    partnerBtn.style.color       = 'var(--gold)';
+    partnerBtn.style.fontWeight  = '700';
+    packBtn.style.borderColor  = 'rgba(255,255,255,.18)';
+    packBtn.style.background   = 'rgba(255,255,255,.06)';
+    packBtn.style.color        = 'rgba(255,255,255,.7)';
+    packBtn.style.fontWeight   = '600';
+    partnerSec.style.display = '';
+    packSec.style.display    = 'none';
+  }
+  subCalc();
+}
+
+function fmtLocal(usd, country) {
+  const c = SUB_COUNTRIES[country];
+  const local = usd * c.rate;
+  if (c.currency === 'USD') return '$' + Math.round(usd).toLocaleString();
+  // Show both
+  return c.symbol + ' ' + Math.round(local).toLocaleString() + ' (' + '$' + Math.round(usd).toLocaleString() + ')';
+}
+
+function fmtUsdOnly(v) {
+  if (!v && v !== 0) return '—';
+  return '$' + Math.round(v).toLocaleString();
+}
+
+function subSelectPlan(key, price) {
+  subPlanKey = key;
+  // Always resolve price from country pricelist (ignore passed price for std/custom)
+  const p = getOdooPrices(subCountryCode);
+  if (key === 'free')     subPlanPrice = 0;
+  else if (key === 'standard') subPlanPrice = p.std;
+  else if (key === 'custom')   subPlanPrice = p.cus;
+  else subPlanPrice = price || 0;
+
+  ['Free','Std','Custom'].forEach(id => {
+    const el = document.getElementById('subPlan' + id);
+    if (!el) return;
+    el.style.borderColor = 'rgba(255,255,255,.18)';
+    el.style.background  = 'rgba(255,255,255,.06)';
+    el.style.color       = 'rgba(255,255,255,.7)';
+    el.style.fontWeight  = '600';
+  });
+  const map = {free:'Free', standard:'Std', custom:'Custom'};
+  const active = document.getElementById('subPlan' + map[key]);
+  if (active) {
+    active.style.borderColor = 'rgba(1,126,132,.55)';
+    active.style.background  = 'rgba(1,126,132,.2)';
+    active.style.color       = 'var(--teal-mid)';
+    active.style.fontWeight  = '700';
+  }
+  subCalc();
+}
+
+function calcShCost() {
+  const workers = parseInt(document.getElementById('shWorkers')?.value) || 1;
+  const storagGB = parseInt(document.getElementById('shStorage')?.value) || 50;
+  const staging = parseInt(document.getElementById('shStaging')?.value) || 1;
+  const wCost   = workers * 57.60;
+  const sCost   = storagGB * 0.20;
+  const stCost  = staging * 14.40;
+  const total   = wCost + sCost + stCost;
+
+  const fmt = v => '$' + v.toFixed(2);
+  const el = id => document.getElementById(id);
+  if (el('shWorkerCost'))  el('shWorkerCost').textContent  = fmt(wCost);
+  if (el('shStorageCost')) el('shStorageCost').textContent = fmt(sCost);
+  if (el('shStagingCost')) el('shStagingCost').textContent = fmt(stCost);
+  if (el('shTotalCost'))   el('shTotalCost').textContent   = fmt(total);
+  if (el('subShTotalBadge')) el('subShTotalBadge').textContent = '$' + Math.round(total) + '/mo';
+
+  // Update subHostCost and re-run calc
+  if (subHostKey === 'sh') {
+    subHostCost = total;
+    subCalc();
+  }
+}
+
+function subSelectHost(key, cost) {
+  subHostKey = key;
+  // For sh, compute from panel inputs; for others, use passed cost
+  if (key === 'sh') {
+    const w = parseFloat(document.getElementById('shWorkers')?.value) || 1;
+    const s = parseFloat(document.getElementById('shStorage')?.value) || 50;
+    const st= parseFloat(document.getElementById('shStaging')?.value) || 1;
+    subHostCost = w * 57.60 + s * 0.20 + st * 14.40;
+  } else {
+    subHostCost = cost;
+  }
+  ['Saas','Sh','Premise'].forEach(id => {
+    const el = document.getElementById('subHost' + id);
+    if (!el) return;
+    el.style.borderColor = 'rgba(255,255,255,.18)';
+    el.style.background  = 'rgba(255,255,255,.06)';
+    el.style.color       = 'rgba(255,255,255,.75)';
+    el.style.fontWeight  = '600';
+  });
+  const map = {saas:'Saas', sh:'Sh', premise:'Premise'};
+  const active = document.getElementById('subHost' + map[key]);
+  if (active) {
+    active.style.borderColor = 'rgba(212,168,67,.45)';
+    active.style.background  = 'rgba(212,168,67,.12)';
+    active.style.color       = 'var(--gold)';
+    active.style.fontWeight  = '700';
+  }
+  // Show/hide premise panel & sh panel
+  const premPanel = document.getElementById('subPremisePanel');
+  if (premPanel) premPanel.style.display = key === 'premise' ? '' : 'none';
+  const shPanel = document.getElementById('subShPanel');
+  if (shPanel) shPanel.style.display = key === 'sh' ? '' : 'none';
+  subCalc();
+}
+
+function subSelectPack(key, ret, newP, hrs) {
+  subPackKey = key;
+  // reset all
+  ['Starter','Basic','Std','Custom','Pro'].forEach(id => {
+    const el = document.getElementById('subPack' + id);
+    if (!el) return;
+    el.style.borderColor = 'rgba(255,255,255,.15)';
+    el.style.background  = 'rgba(255,255,255,.05)';
+    el.style.color       = 'rgba(255,255,255,.75)';
+  });
+  const map = {starter:'Starter', basic:'Basic', standard_pack:'Std', custom_pack:'Custom', pro:'Pro'};
+  const active = document.getElementById('subPack' + map[key]);
+  if (active) {
+    active.style.borderColor = 'rgba(1,126,132,.5)';
+    active.style.background  = 'rgba(1,126,132,.18)';
+    active.style.color       = 'var(--teal-mid)';
+  }
+  subCalc();
+}
+
+function subCalc() {
+  const countryEl = document.getElementById('subCountry');
+  if (!countryEl) return;
+  subCountryCode = countryEl.value;
+  const country  = SUB_COUNTRIES[subCountryCode] || SUB_COUNTRIES['OTHER'];
+  // Refresh plan button prices + update current plan price for this country
+  refreshPlanButtons();
+
+  const users      = parseInt(document.getElementById('subUsers').value) || 10;
+  const extraHrs   = parseInt(document.getElementById('subExtraHrs').value) || 0;
+  const hourlyRate = parseFloat(document.getElementById('subHourlyRate').value) || 175;
+  const isNew      = document.getElementById('subNewCustomer').checked;
+
+  // Update display labels
+  document.getElementById('subUsersVal').textContent = users;
+  document.getElementById('subExtraHrsVal').textContent = extraHrs + ' hrs';
+  document.getElementById('subCurrencyBadge').textContent = country.currency;
+  document.getElementById('subPlanBadge').textContent = subPlanKey === 'free' ? 'Free' : subPlanKey === 'standard' ? 'Standard' : 'Custom';
+  const AR7 = document.documentElement.getAttribute('data-lang') === 'ar';
+  document.getElementById('subHostBadge').textContent = subHostKey === 'saas'
+    ? (AR7 ? 'Odoo.com SaaS' : 'Odoo.com SaaS')
+    : subHostKey === 'sh'
+    ? 'Odoo.sh'
+    : (AR7 ? 'محلي' : 'On-Premise');
+
+  // Country info box
+  const infoEl = document.getElementById('subCountryInfo');
+  infoEl.innerHTML = '🏦 <strong style="color:var(--teal-mid)">' + country.name + '</strong> · ' + country.taxNote + '<br>💼 ' + country.salaryNote;
+
+  // On-Premise cost resolution
+  let hostingMonthly = subHostCost;
+  let premisePurchaseCost = 0;
+  let premiseIsMonthly = true;
+  let premiseInstallNote = '';
+  if (subHostKey === 'premise') {
+    premiseIsMonthly = (subPremiseMode === 'monthly');
+    if (premiseIsMonthly) {
+      hostingMonthly = parseFloat(document.getElementById('subPremMonthly')?.value) || 0;
+    } else {
+      hostingMonthly = 0;
+      premisePurchaseCost = parseFloat(document.getElementById('subPremPurchase')?.value) || 0;
+      // Installments
+      const installCheck = document.getElementById('premInstallCheck');
+      const installMonths = parseInt(document.getElementById('premInstallMonths')?.value) || 12;
+      if (installCheck && installCheck.checked && premisePurchaseCost > 0) {
+        const perMonth = premisePurchaseCost / installMonths;
+        premiseInstallNote = installMonths + ' installments × $' + Math.round(perMonth).toLocaleString() + '/mo';
+        const pmEl = document.getElementById('premInstallPerMonth');
+        if (pmEl) pmEl.textContent = '= $' + Math.round(perMonth).toLocaleString() + '/mo';
+      } else {
+        const pmEl = document.getElementById('premInstallPerMonth');
+        if (pmEl) pmEl.textContent = '';
+      }
+      // Local equiv for purchase
+      const plEl = document.getElementById('premPurchaseLocalEquiv');
+      if (plEl) {
+        plEl.textContent = premisePurchaseCost > 0 && country.rate !== 1
+          ? '≈ ' + country.symbol + ' ' + Math.round(premisePurchaseCost * country.rate).toLocaleString() + ' ' + country.currency
+          : '';
+      }
+    }
+  }
+
+  // Costs (USD)
+  const licenseMonthly  = subPlanPrice * users;
+  const totalMonthlyUSD = licenseMonthly + hostingMonthly;
+  const annualSubUSD    = totalMonthlyUSD * 12;
+
+  // First Year Initial Discount (applies to subscription only, Y1)
+  const discountPct     = parseFloat(document.getElementById('subDiscount')?.value) || 0;
+  const discountFactor  = 1 - discountPct / 100;
+  const annualSubY1     = Math.round(annualSubUSD * discountFactor); // discounted Year 1
+  const discountAmount  = Math.round(annualSubUSD - annualSubY1);
+
+  // Update discount badge & card
+  const discBadge = document.getElementById('subDiscountBadge');
+  if (discBadge) discBadge.textContent = discountPct.toFixed(0) + '%';
+  const discCard = document.getElementById('subDiscountCard');
+  if (discCard) discCard.style.display = discountPct > 0 ? '' : 'none';
+  const discFull  = document.getElementById('subDiscountFullPrice');
+  const discSave  = document.getElementById('subDiscountSaving');
+  const discY1    = document.getElementById('subDiscountY1Price');
+  if (discFull) discFull.textContent = '$' + Math.round(annualSubUSD).toLocaleString() + '/yr';
+  if (discSave) discSave.textContent = '− $' + discountAmount.toLocaleString() + ' (' + discountPct.toFixed(0) + '%)';
+  if (discY1)   discY1.textContent   = '$' + annualSubY1.toLocaleString() + '/yr';
+
+  // Implementation cost: Pack OR Partner (mutually exclusive)
+  let implCostUSD = 0;
+  let implLabel   = '';
+  let implIsPartner = (subImplMode === 'partner');
+  let pack = SUB_PACKS[subPackKey] || SUB_PACKS['standard_pack'];
+  let packCostUSD = 0;
+  let includedHrs = 0;
+  let partnerAmountUSD = 0;
+
+  if (subImplMode === 'pack') {
+    packCostUSD  = isNew ? pack.newPrice : pack.returning;
+    includedHrs  = pack.hours;
+    implCostUSD  = packCostUSD;
+    implLabel    = '🎯 Success Pack · ' + pack.label + ' (' + includedHrs + ' hrs)';
+  } else {
+    partnerAmountUSD = parseFloat(document.getElementById('subPartnerAmount')?.value) || 0;
+    implCostUSD = partnerAmountUSD;
+    implLabel   = '🤝 Local Partner Implementation';
+    // Show local equiv inside partner input
+    const plEl = document.getElementById('subPartnerLocalEquiv');
+    if (plEl) {
+      if (partnerAmountUSD > 0 && country.rate !== 1) {
+        plEl.style.display = '';
+        plEl.innerHTML = '≈ ' + country.symbol + ' ' + Math.round(partnerAmountUSD * country.rate).toLocaleString() + ' ' + country.currency;
+      } else {
+        plEl.style.display = 'none';
+      }
+    }
+  }
+
+  // Extra hours (works with BOTH modes)
+  const extraCostUSD = extraHrs * hourlyRate;
+
+  // Year 1 total — uses DISCOUNTED subscription for Y1
+  const year1USD = annualSubY1 + implCostUSD + extraCostUSD + premisePurchaseCost;
+
+  // Format
+  const fmtU = v => '$' + Math.round(v).toLocaleString();
+
+  // Update impl label in result box
+  const implLabelEl = document.getElementById('subImplLabel');
+  if (implLabelEl) implLabelEl.textContent = subImplMode === 'pack' ? 'Implementation · Success Pack (one-time)' : 'Implementation · Local Partner (one-time)';
+
+  // Result rows
+  const rows = [
+    { label: '📱 License (' + users + ' users × $' + subPlanPrice.toFixed(2) + ')', value: licenseMonthly > 0 ? fmtU(licenseMonthly) + '/mo' : '$0 (Free)', color: 'var(--teal-mid)' },
+    { label: '☁️ Hosting (' + (subHostKey === 'saas' ? 'Included in plan' : subHostKey === 'sh' ? 'Odoo.sh' : premiseIsMonthly ? 'On-Premise monthly' : 'On-Premise · Purchase=True') + ')',
+      value: subHostKey === 'premise' && !premiseIsMonthly
+        ? (premisePurchaseCost > 0 ? fmtU(premisePurchaseCost) + (premiseInstallNote ? ' (' + premiseInstallNote + ')' : ' one-time') : '$0')
+        : (hostingMonthly > 0 ? fmtU(hostingMonthly) + '/mo' : '$0/mo'),
+      color: (subHostKey === 'premise' && !premiseIsMonthly) ? 'var(--gold)' : hostingMonthly > 0 ? 'var(--gold)' : 'var(--teal-mid)' },
+    { label: implLabel + (subImplMode === 'pack' && extraHrs > 0 ? ' + ' + extraHrs.toLocaleString() + ' extra hrs' : ''),
+      value: implCostUSD > 0 ? fmtU(implCostUSD) + ' one-time' : '$0',
+      color: 'rgba(255,255,255,.75)' },
+  ];
+  if (extraHrs > 0) {
+    rows.push({ label: '⏱️ Extra Hours · ' + extraHrs.toLocaleString() + ' × $' + hourlyRate + '/hr', value: fmtU(extraCostUSD) + ' one-time', color: 'rgba(255,255,255,.75)' });
+  }
+
+  const rowsEl = document.getElementById('subResultRows');
+  rowsEl.innerHTML = rows.map(r => `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);">
+      <span style="font-size:11px;color:rgba(255,255,255,.55);">${r.label}</span>
+      <span style="font-size:12px;font-weight:700;color:${r.color};">${r.value}</span>
+    </div>`).join('');
+
+  // Totals
+  document.getElementById('subMonthlyTotal').textContent = fmtU(totalMonthlyUSD) + '/mo';
+  document.getElementById('subAnnualTotal').textContent  = fmtU(annualSubUSD) + '/yr';
+  document.getElementById('subPackCost').textContent     = fmtU(implCostUSD);
+  document.getElementById('subExtraCost').textContent    = extraHrs > 0 ? fmtU(extraCostUSD) : '$0';
+  document.getElementById('subYear1Total').textContent   = fmtU(year1USD);
+
+  // Local currency equivalent
+  const localEl = document.getElementById('subLocalEquiv');
+  if (country.rate !== 1) {
+    localEl.style.display = '';
+    localEl.innerHTML = '🔄 <strong style="color:var(--teal-mid)">Local Equivalent (' + country.currency + ')</strong><br>' +
+      'Monthly: <strong>' + country.symbol + ' ' + Math.round(totalMonthlyUSD * country.rate).toLocaleString() + '</strong> · ' +
+      'Annual subscription: <strong>' + country.symbol + ' ' + Math.round(annualSubUSD * country.rate).toLocaleString() + '</strong> · ' +
+      'Year 1 total: <strong>' + country.symbol + ' ' + Math.round(year1USD * country.rate).toLocaleString() + '</strong><br>' +
+      '<span style="opacity:.6;font-size:10px;">Approx. rate: 1 USD = ' + country.rate + ' ' + country.currency + ' · Verify with your bank</span>';
+  } else {
+    localEl.style.display = 'none';
+  }
+
+  // ROI hint — sync with main ROI calculator
+  const hintEl = document.getElementById('subRoiHint');
+  const roiSavingsEl = document.getElementById('roiSavings');
+  if (roiSavingsEl) {
+    hintEl.style.display = '';
+    hintEl.innerHTML = '💡 <strong style="color:var(--gold)">ROI Insight:</strong> Your Year 1 investment of <strong>' + fmtU(year1USD) + '</strong> · ' +
+      'Add your ROI calculation in Tab 1–3 to see exact payback period. Typical payback for this setup: <strong>' +
+      (year1USD < 30000 ? '6–14 months' : year1USD < 80000 ? '12–24 months' : '18–36 months') + '</strong>.';
+  }
+
+  // Sync subscription annual cost → roiSub (Y2+ original) + roiSubY1 (Y1 discounted)
+  const roiSubEl = document.getElementById('roiSub');
+  if (roiSubEl) roiSubEl.value = Math.round(annualSubUSD);  // Y2+ full price
+  const roiSubY1El = document.getElementById('roiSubY1');
+  if (roiSubY1El) roiSubY1El.value = Math.round(annualSubY1);  // Y1 discounted
+  // Update sync badge
+  const syncBadge = document.getElementById('roiSubSyncBadge');
+  if (syncBadge) {
+    const planName = subPlanKey === 'free' ? 'Free' : subPlanKey === 'standard' ? 'Standard' : 'Custom';
+    const hostLabel = subHostKey === 'saas' ? 'SaaS' : subHostKey === 'sh' ? 'Odoo.sh' : 'On-Premise';
+    syncBadge.textContent = users + ' users · ' + planName + ' · ' + hostLabel + ' · $' + Math.round(annualSubUSD).toLocaleString() + '/yr' + (discountPct > 0 ? ' · Y1: $' + annualSubY1.toLocaleString() + ' (' + discountPct.toFixed(0) + '% off)' : '') + ' ✓';
+  }
+  // Sync implementation cost → roiImpl
+  const implEl = document.getElementById('roiImpl');
+  if (implEl && !implEl.dataset.manualOverride) {
+    implEl.value = Math.round(implCostUSD + extraCostUSD);
+    const implValEl = document.getElementById('roiImplVal');
+    if (implValEl) {
+      const total = implCostUSD + extraCostUSD;
+      implValEl.textContent = total >= 1000 ? '$' + Math.round(total/1000).toFixed(0) + 'K' : '$' + Math.round(total);
+    }
+  }
+  // Store sub data globally for PDF/Email
+  window.subLiveData = {
+    country: subCountryCode,
+    countryName: country.name,
+    currency: country.currency,
+    symbol: country.symbol,
+    rate: country.rate,
+    planKey: subPlanKey,
+    planLabel: subPlanKey === 'free' ? 'One App Free' : subPlanKey === 'standard' ? 'Standard' : 'Custom',
+    planPrice: subPlanPrice,
+    users,
+    hostKey: subHostKey,
+    hostLabel: subHostKey === 'saas' ? 'Odoo.com SaaS' : subHostKey === 'sh' ? 'Odoo.sh' : 'On-Premise',
+    hostCost: hostingMonthly,
+    shWorkers: parseInt(document.getElementById('shWorkers')?.value) || 1,
+    shStorage: parseInt(document.getElementById('shStorage')?.value) || 50,
+    shStaging: parseInt(document.getElementById('shStaging')?.value) || 1,
+    premiseMode: subPremiseMode,
+    premisePurchase: premisePurchaseCost,
+    premiseInstallNote,
+    premiseIsMonthly,
+    // Implementation mode
+    implMode: subImplMode,
+    implLabel: subImplMode === 'pack' ? 'Odoo Success Pack' : 'Local Partner',
+    implCost: implCostUSD,
+    // Pack details (if mode = pack)
+    packKey: subPackKey,
+    packLabel: pack.label,
+    packHours: includedHrs,
+    packCost: packCostUSD,
+    isNew,
+    // Partner details (if mode = partner)
+    partnerAmount: partnerAmountUSD,
+    // Discount
+    discountPct,
+    discountAmount,
+    annualSubY1,
+    // Extra hours (both modes)
+    extraHrs,
+    hourlyRate,
+    extraCost: extraCostUSD,
+    licenseMonthly,
+    hostingMonthly,
+    totalMonthly: totalMonthlyUSD,
+    annualSub: annualSubUSD,
+    year1: year1USD,
+    localMonthly: Math.round(totalMonthlyUSD * country.rate),
+    localAnnual: Math.round(annualSubUSD * country.rate),
+    localYear1: Math.round(year1USD * country.rate),
+    localImpl: Math.round(implCostUSD * country.rate),
+    taxNote: country.taxNote,
+  };
+}
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', function() {
+  refreshPlanButtons();
+  calcShCost();
+
+  // ── DEFAULT VALUES ──────────────────────────────────────────
+  // 1. Odoo Plan = Custom
+  subSelectPlan('custom', 0);
+
+  // 2. Hosting = Odoo.com SaaS (no extra hosting cost)
+  subSelectHost('saas', 0);
+
+  // 3. Implementation Service = Local Partner
+  subSelectImplMode('partner');
+
+  // 4. Success Pack stays selected for when user switches to Pack mode
+  subSelectPack('standard_pack', 7000, 5950, 50);
+
+  // 5. On-Premise mode = Purchase = True
+  subSetPremiseMode('purchase');
+
+  // 6. Discount = 19% (already set in HTML value="19")
+  // 7. Implementation Budget = $0 (already set in slider value="0")
+  // ────────────────────────────────────────────────────────────
+  subCalc();
+});
+
 </script>
 </body>
 </html>
