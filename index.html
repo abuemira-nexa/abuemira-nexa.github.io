@@ -6791,55 +6791,316 @@ async function sendRoiEmail() {
   const noteEl    = document.getElementById('emailNote');
   const btn       = document.getElementById('roiEmailSendBtn');
 
-  const name    = nameEl    ? nameEl.value.trim()    : '';
-  const email   = emailEl   ? emailEl.value.trim()   : '';
-  const company = companyEl ? companyEl.value.trim() : '';
-  const industry= indEl     ? indEl.value            : 'General Business';
-  const note    = noteEl    ? noteEl.value.trim()    : '';
+  const custName  = nameEl    ? nameEl.value.trim()    : '';
+  const custEmail = emailEl   ? emailEl.value.trim()   : '';
+  const company   = companyEl ? companyEl.value.trim() : '';
+  const formInd   = indEl     ? indEl.value            : 'General Business';
+  const note      = noteEl    ? noteEl.value.trim()    : '';
 
-  if (!name)  { alert('Please enter the customer name.');  return; }
-  if (!email) { alert('Please enter the customer email.'); return; }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (!custName)  { alert('Please enter the customer name.');  return; }
+  if (!custEmail) { alert('Please enter the customer email.'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(custEmail)) {
     alert('Please enter a valid email address.'); return;
   }
 
-  const roiEl  = document.getElementById('roiResultNum') || document.querySelector('.roi-result-num');
-  const roiVal = roiEl ? roiEl.textContent.trim() : 'N/A';
-
   if (btn) { btn.disabled = true; btn.textContent = '⏳ Sending...'; }
 
-  // ── WEB3FORMS ─────────────────────────────────────────────────────────────
-  const WEB3FORMS_KEY = '44d65de7-def8-4eaa-a67e-c303a9f539f4';
+  // ── BUILD RICH HTML EMAIL BODY (mirrors the PDF) ──────────────────────────
+  const d = (typeof roiLiveData !== 'undefined' && roiLiveData && roiLiveData.emp) ? roiLiveData : null;
 
-  const payload = {
-    access_key   : WEB3FORMS_KEY,
-    subject      : 'Odoo ROI Report for ' + name + (company ? ' — ' + company : ''),
-    from_name    : 'Nexa Solutions — ROI Report',
-    replyto      : email,
-    customerName : name,
-    customerEmail: email,
-    companyName  : company  || '—',
-    industry     : industry,
-    personalNote : note     || '—',
-    estimatedROI : roiVal + '%',
+  const fmtU = (n) => {
+    if (!n && n !== 0) return '—';
+    const abs = Math.abs(n);
+    if (abs >= 1e6) return (n < 0 ? '-' : '') + '$' + (abs/1e6).toFixed(1) + 'M';
+    if (abs >= 1e3) return (n < 0 ? '-' : '') + '$' + Math.round(abs/1e3) + 'K';
+    return (n < 0 ? '-$' : '$') + abs.toLocaleString();
   };
 
+  const deptRowsHtml = d ? (d.deptSavings || [])
+    .sort((a,b) => b.savings - a.savings)
+    .map(dept => `
+      <tr>
+        <td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;">${dept.icon || ''} ${dept.name}</td>
+        <td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:12px;color:#475569;">
+          ${Math.round((dept.eff||0)*100)}% efficiency · ${Math.round(dept.scaledFTE||0)} FTEs
+        </td>
+        <td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;color:#017E84;font-size:13px;">${fmtU(dept.savings)}/yr</td>
+      </tr>`).join('') : '';
+
+  const swRowHtml = (d && d.swSavings > 0) ? `
+    <tr style="background:#fffbeb;">
+      <td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;">💾 Software Replacement</td>
+      <td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:12px;color:#475569;">~70% of legacy costs eliminated</td>
+      <td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;color:#d97706;font-size:13px;">${fmtU(d.swSavings)}/yr</td>
+    </tr>` : '';
+
+  const yr5Html = d ? (d.cashFlows || []).map((cf, i) => {
+    const cum = d.cumulative[i];
+    return `<tr>
+      <td style="padding:8px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;font-weight:600;">Year ${i+1}</td>
+      <td style="padding:8px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;text-align:right;">${fmtU(cf)}</td>
+      <td style="padding:8px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;text-align:right;font-weight:700;color:${cum>=0?'#059669':'#dc2626'}">${fmtU(cum)}</td>
+    </tr>`;
+  }).join('') : '';
+
+  const maxCost = 350000;
+  const odooPct = d ? Math.max(5, Math.round((d.impl / maxCost) * 100)) : 10;
+
+  const today = new Date().toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'});
+  const industry = d ? d.industry : formInd;
+
+  const htmlBody = `<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Odoo ROI Report</title></head>
+<body style="margin:0;padding:0;background:#f1f5f9;font-family:'Segoe UI',Arial,sans-serif;">
+<div style="max-width:680px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.10);">
+
+  <!-- HEADER -->
+  <div style="background:linear-gradient(135deg,#0d1b2e 0%,#1a2f4a 100%);padding:36px 40px 28px;">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px;">
+      📊 Odoo ERP ROI Analysis · Prepared by Nexa Solutions · Mohamed Abu Emira
+    </div>
+    <h1 style="margin:0 0 6px;font-size:26px;font-weight:800;color:#fff;line-height:1.2;">
+      Odoo ERP <span style="color:#d4a843;">Return on Investment</span> Analysis
+    </h1>
+    <p style="margin:0 0 18px;font-size:12px;color:rgba(255,255,255,.55);">
+      Industry: <strong style="color:#fff;">${industry}</strong>${d ? ` · ${d.emp} Employees · Annual Revenue ${d.fRev} · Industry Multiplier ×${d.industryMult.toFixed(2)}` : ''}
+    </p>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      <span style="font-size:10px;font-weight:700;padding:3px 11px;border-radius:20px;background:rgba(212,168,67,.15);border:1px solid rgba(212,168,67,.4);color:#d4a843;">📅 ${today}</span>
+      <span style="font-size:10px;font-weight:700;padding:3px 11px;border-radius:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.75);">🏢 Based on 79+ Live Implementations</span>
+      <span style="font-size:10px;font-weight:700;padding:3px 11px;border-radius:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.75);">✅ Odoo Official Methodology</span>
+      <span style="font-size:10px;font-weight:700;padding:3px 11px;border-radius:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.75);">🌍 Egypt &amp; GCC</span>
+    </div>
+  </div>
+
+  <div style="padding:32px 40px;">
+
+    ${note ? `<!-- PERSONAL NOTE -->
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:16px 20px;margin-bottom:28px;">
+      <div style="font-size:11px;font-weight:700;color:#059669;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">📝 Personal Note</div>
+      <p style="margin:0;font-size:14px;color:#1e293b;line-height:1.7;">${note}</p>
+    </div>` : ''}
+
+    <!-- KPI SUMMARY -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+      <tr>
+        <td width="25%" style="padding-right:8px;">
+          <div style="background:#fffbeb;border:1px solid #fde68a;border-top:3px solid #d4a843;border-radius:10px;padding:16px 12px;text-align:center;">
+            <div style="font-size:22px;font-weight:800;color:#d4a843;line-height:1;margin-bottom:4px;">${d ? d.fSavings : '—'}</div>
+            <div style="font-size:10px;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:.06em;">Annual Savings</div>
+          </div>
+        </td>
+        <td width="25%" style="padding-right:8px;">
+          <div style="background:#fffbeb;border:1px solid #fde68a;border-top:3px solid #d4a843;border-radius:10px;padding:16px 12px;text-align:center;">
+            <div style="font-size:22px;font-weight:800;color:#d4a843;line-height:1;margin-bottom:4px;">${d ? d.fPayback : '—'}</div>
+            <div style="font-size:10px;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:.06em;">⏱ Payback Period</div>
+          </div>
+        </td>
+        <td width="25%" style="padding-right:8px;">
+          <div style="background:#f0f9ff;border:1px solid #bae6fd;border-top:3px solid #017E84;border-radius:10px;padding:16px 12px;text-align:center;">
+            <div style="font-size:22px;font-weight:800;color:#017E84;line-height:1;margin-bottom:4px;">${d ? d.fRoi3 : '—'}</div>
+            <div style="font-size:10px;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:.06em;">3-Year ROI</div>
+          </div>
+        </td>
+        <td width="25%">
+          <div style="background:#f0f9ff;border:1px solid #bae6fd;border-top:3px solid #017E84;border-radius:10px;padding:16px 12px;text-align:center;">
+            <div style="font-size:22px;font-weight:800;color:#017E84;line-height:1;margin-bottom:4px;">${d ? d.fNet3 : '—'}</div>
+            <div style="font-size:10px;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:.06em;">Net Value Y1–Y3</div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <!-- BUSINESS PROFILE -->
+    <div style="font-size:11px;font-weight:800;color:#0f172a;margin:0 0 12px;padding-bottom:6px;border-bottom:2px solid #017E84;text-transform:uppercase;letter-spacing:.05em;">👤 Business Profile</div>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+      <tr>
+        <td width="33%" style="padding:0 8px 8px 0;">
+          <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 14px;">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:3px;">Industry</div>
+            <div style="font-size:14px;font-weight:700;color:#0f172a;">${industry}</div>
+          </div>
+        </td>
+        <td width="33%" style="padding:0 8px 8px 0;">
+          <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 14px;">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:3px;">Employees</div>
+            <div style="font-size:14px;font-weight:700;color:#0f172a;">${d ? d.emp : '—'}</div>
+          </div>
+        </td>
+        <td width="33%" style="padding:0 0 8px 0;">
+          <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 14px;">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:3px;">Annual Revenue</div>
+            <div style="font-size:14px;font-weight:700;color:#0f172a;">${d ? d.fRev : '—'}</div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="33%" style="padding:0 8px 0 0;">
+          <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 14px;">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:3px;">Avg. Salary / Employee</div>
+            <div style="font-size:14px;font-weight:700;color:#0f172a;">${d ? d.fSal : '—'}</div>
+          </div>
+        </td>
+        <td width="33%" style="padding:0 8px 0 0;">
+          <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 14px;">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:3px;">Current Software Cost</div>
+            <div style="font-size:14px;font-weight:700;color:#0f172a;">${d ? d.fSw + '/yr' : '—'}</div>
+          </div>
+        </td>
+        <td width="33%">
+          <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 14px;">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:3px;">Software Cost Saved</div>
+            <div style="font-size:14px;font-weight:700;color:#059669;">${d ? d.fSwSave : '—'}</div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <!-- INVESTMENT SUMMARY -->
+    <div style="font-size:11px;font-weight:800;color:#0f172a;margin:0 0 12px;padding-bottom:6px;border-bottom:2px solid #017E84;text-transform:uppercase;letter-spacing:.05em;">📦 Investment Summary</div>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;">
+      <tr style="background:#f8fafc;">
+        <th style="padding:9px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748b;text-align:left;border-bottom:2px solid #e2e8f0;">Item</th>
+        <th style="padding:9px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748b;text-align:right;border-bottom:2px solid #e2e8f0;">Amount</th>
+      </tr>
+      <tr><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;">🔧 Implementation Budget</td><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;font-size:13px;">${d ? d.fImpl : '—'}</td></tr>
+      <tr><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;">📱 Annual Odoo Subscription</td><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;font-size:13px;">${d ? d.fSub + '/yr' : '—'}</td></tr>
+      <tr><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;">🛠️ Annual Support / Consulting</td><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;font-size:13px;">${d ? d.fSupp + '/yr' : '—'}</td></tr>
+      <tr><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;">🧑‍💼 Internal Staff Time</td><td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;font-size:13px;">${d ? d.fStaff : '—'}</td></tr>
+      <tr style="background:#f0fdf4;"><td style="padding:9px 14px;font-weight:700;font-size:13px;">💰 Total 3-Year Investment</td><td style="padding:9px 14px;text-align:right;font-weight:800;color:#059669;font-size:14px;">${d ? d.fInvest3 : '—'}</td></tr>
+    </table>
+
+    ${deptRowsHtml ? `<!-- DEPT SAVINGS -->
+    <div style="font-size:11px;font-weight:800;color:#0f172a;margin:0 0 12px;padding-bottom:6px;border-bottom:2px solid #017E84;text-transform:uppercase;letter-spacing:.05em;">🏢 Savings by Department</div>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;">
+      <tr style="background:#f8fafc;">
+        <th style="padding:9px 14px;font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;text-align:left;border-bottom:2px solid #e2e8f0;">Department</th>
+        <th style="padding:9px 14px;font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;text-align:left;border-bottom:2px solid #e2e8f0;">Details</th>
+        <th style="padding:9px 14px;font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;text-align:right;border-bottom:2px solid #e2e8f0;">Annual Saving</th>
+      </tr>
+      ${deptRowsHtml}
+      ${swRowHtml}
+      <tr style="background:#f0fdf4;"><td colspan="2" style="padding:9px 14px;font-weight:700;font-size:13px;">Total Annual Savings</td><td style="padding:9px 14px;text-align:right;font-weight:800;color:#059669;font-size:14px;">${d ? d.fSavings : '—'}</td></tr>
+    </table>` : ''}
+
+    <!-- 5-YEAR PROJECTION -->
+    <div style="font-size:11px;font-weight:800;color:#0f172a;margin:0 0 12px;padding-bottom:6px;border-bottom:2px solid #017E84;text-transform:uppercase;letter-spacing:.05em;">📈 5-Year Cash Flow Projection</div>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;">
+      <tr style="background:#f8fafc;">
+        <th style="padding:9px 14px;font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;text-align:left;border-bottom:2px solid #e2e8f0;">Year</th>
+        <th style="padding:9px 14px;font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;text-align:right;border-bottom:2px solid #e2e8f0;">Annual Net Cash Flow</th>
+        <th style="padding:9px 14px;font-size:10px;font-weight:700;text-transform:uppercase;color:#64748b;text-align:right;border-bottom:2px solid #e2e8f0;">Cumulative</th>
+      </tr>
+      ${yr5Html}
+    </table>
+
+    <!-- ERP COMPARISON -->
+    <div style="font-size:11px;font-weight:800;color:#0f172a;margin:0 0 14px;padding-bottom:6px;border-bottom:2px solid #017E84;text-transform:uppercase;letter-spacing:.05em;">💡 Why Odoo vs Alternatives</div>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:10px;">
+      <tr><td style="width:130px;padding:5px 10px 5px 0;font-size:11px;font-weight:600;color:#64748b;">SAP S/4HANA</td><td style="padding:5px 10px 5px 0;"><div style="background:#f1f5f9;border-radius:3px;height:16px;overflow:hidden;"><div style="width:100%;height:100%;background:#3b82f6;opacity:.5;border-radius:3px;"></div></div></td><td style="width:60px;text-align:right;font-size:11px;font-weight:700;color:#64748b;padding:5px 0;">$350K+</td></tr>
+      <tr><td style="width:130px;padding:5px 10px 5px 0;font-size:11px;font-weight:600;color:#64748b;">Oracle NetSuite</td><td style="padding:5px 10px 5px 0;"><div style="background:#f1f5f9;border-radius:3px;height:16px;overflow:hidden;"><div style="width:51%;height:100%;background:#8b5cf6;opacity:.5;border-radius:3px;"></div></div></td><td style="width:60px;text-align:right;font-size:11px;font-weight:700;color:#64748b;padding:5px 0;">$180K+</td></tr>
+      <tr><td style="width:130px;padding:5px 10px 5px 0;font-size:11px;font-weight:600;color:#64748b;">MS Dynamics 365</td><td style="padding:5px 10px 5px 0;"><div style="background:#f1f5f9;border-radius:3px;height:16px;overflow:hidden;"><div style="width:34%;height:100%;background:#06b6d4;opacity:.5;border-radius:3px;"></div></div></td><td style="width:60px;text-align:right;font-size:11px;font-weight:700;color:#64748b;padding:5px 0;">$120K+</td></tr>
+      <tr><td style="width:130px;padding:5px 10px 5px 0;font-size:12px;font-weight:800;color:#d4a843;">⭐ Odoo (Your Plan)</td><td style="padding:5px 10px 5px 0;"><div style="background:#f1f5f9;border-radius:3px;height:16px;overflow:hidden;"><div style="width:${odooPct}%;height:100%;background:#d4a843;border-radius:3px;"></div></div></td><td style="width:60px;text-align:right;font-size:12px;font-weight:800;color:#d4a843;padding:5px 0;">${d ? d.fImpl : '—'}</td></tr>
+    </table>
+
+    <!-- DISCLAIMER -->
+    <p style="font-size:10px;color:#94a3b8;text-align:center;margin:20px 0 0;line-height:1.6;padding:0 10px;">
+      * Methodology based on Odoo's official ROI Analysis Template. Efficiency rates benchmarked across 79+ real implementations by Nexa Solutions (Egypt &amp; GCC). Results are indicative — contact Nexa Solutions for a precise assessment tailored to your business.
+    </p>
+
+  </div><!-- /body padding -->
+
+  <!-- FOOTER -->
+  <div style="background:#0d1b2e;padding:22px 40px;display:flex;justify-content:space-between;align-items:center;">
+    <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.8;">
+      <strong style="color:rgba(255,255,255,.85);display:block;font-size:12px;">Mohamed Essam Abu Emira — COO &amp; Co-Founder, Nexa Solutions</strong>
+      Odoo 16·17·18 Certified · Google PM Certified · LinkedIn Top ERP Voice · 79+ Projects<br>
+      abuemira@nexa-solutions.com · +20 100 506 1349
+    </div>
+    <div style="font-size:10px;color:rgba(255,255,255,.3);text-align:right;line-height:1.6;">
+      ${today}<br>Confidential<br>Nexa Solutions
+    </div>
+  </div>
+
+</div><!-- /page -->
+</body></html>`;
+
+  // ── WEB3FORMS — إرسال للعميل ──────────────────────────────────────────────
+  const WEB3FORMS_KEY = '44d65de7-def8-4eaa-a67e-c303a9f539f4';
+
   try {
-    const res = await fetch('https://api.web3forms.com/submit', {
+    // إرسال 1: للعميل
+    const res1 = await fetch('https://api.web3forms.com/submit', {
       method : 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body   : JSON.stringify(payload),
+      body   : JSON.stringify({
+        access_key : WEB3FORMS_KEY,
+        subject    : `Your Personalised Odoo ERP ROI Report — Nexa Solutions`,
+        from_name  : 'Mohamed Abu Emira — Nexa Solutions',
+        to         : custEmail,
+        replyto    : 'abuemira@nexa-solutions.com',
+        html       : htmlBody,
+        // fallback plain text
+        message    : `Dear ${custName},
+
+Please find your personalised Odoo ERP ROI Analysis below.
+
+Industry: ${industry}
+Annual Savings: ${d ? d.fSavings : '—'}
+Payback Period: ${d ? d.fPayback : '—'}
+3-Year ROI: ${d ? d.fRoi3 : '—'}
+Net Value Y1–Y3: ${d ? d.fNet3 : '—'}
+
+Best regards,
+Mohamed Essam Abu Emira
+COO & Co-Founder — Nexa Solutions
++20 100 506 1349`,
+      }),
     });
-    const data = await res.json();
-    if (!res.ok || data.success === false) throw new Error(data.message || 'Web3Forms error ' + res.status);
+    const data1 = await res1.json();
+    if (!res1.ok || data1.success === false) throw new Error(data1.message || 'Send to customer failed');
+
+    // إرسال 2: نسخة لك
+    const res2 = await fetch('https://api.web3forms.com/submit', {
+      method : 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body   : JSON.stringify({
+        access_key   : WEB3FORMS_KEY,
+        subject      : `[ROI Report Sent] ${custName}${company ? ' — ' + company : ''} · ${industry}`,
+        from_name    : 'Nexa Solutions — ROI Report',
+        replyto      : custEmail,
+        html         : `<div style="font-family:Arial,sans-serif;padding:20px;max-width:600px;margin:0 auto;">
+          <div style="background:#017E84;color:#fff;padding:16px 20px;border-radius:8px 8px 0 0;">
+            <strong style="font-size:15px;">✅ ROI Report Sent to Customer</strong>
+          </div>
+          <div style="border:1px solid #e2e8f0;border-top:none;padding:20px;border-radius:0 0 8px 8px;">
+            <table style="width:100%;font-size:13px;line-height:2;">
+              <tr><td style="color:#64748b;width:140px;">Customer Name</td><td><strong>${custName}</strong></td></tr>
+              <tr><td style="color:#64748b;">Customer Email</td><td><a href="mailto:${custEmail}" style="color:#017E84;">${custEmail}</a></td></tr>
+              <tr><td style="color:#64748b;">Company</td><td>${company || '—'}</td></tr>
+              <tr><td style="color:#64748b;">Industry</td><td>${industry}</td></tr>
+              <tr><td style="color:#64748b;">Annual Savings</td><td><strong style="color:#017E84;">${d ? d.fSavings : '—'}</strong></td></tr>
+              <tr><td style="color:#64748b;">3-Year ROI</td><td><strong style="color:#017E84;">${d ? d.fRoi3 : '—'}</strong></td></tr>
+              <tr><td style="color:#64748b;">Net Value Y1–Y3</td><td><strong>${d ? d.fNet3 : '—'}</strong></td></tr>
+              <tr><td style="color:#64748b;">Payback Period</td><td>${d ? d.fPayback : '—'}</td></tr>
+              ${note ? `<tr><td style="color:#64748b;">Personal Note</td><td style="font-style:italic;">"${note}"</td></tr>` : ''}
+              <tr><td style="color:#64748b;">Sent At</td><td>${today}</td></tr>
+            </table>
+          </div>
+        </div>`,
+        message: `ROI Report sent to ${custName} (${custEmail}) — ${industry} — Savings: ${d ? d.fSavings : '—'} — ROI: ${d ? d.fRoi3 : '—'}`,
+      }),
+    });
+    // نتجاهل لو النسخة التانية فشلت عشان الرسالة الأساسية اتبعتت
 
     // Show success
-    const body    = document.getElementById('roiEmailModalBody');
+    const bodyEl  = document.getElementById('roiEmailModalBody');
     const success = document.getElementById('roiEmailSuccess');
     const msg     = document.getElementById('roiEmailSuccessMsg');
-    if (body)    body.style.display    = 'none';
-    if (success) success.style.display = 'flex';
-    if (msg)     msg.textContent       = 'The ROI report has been emailed to ' + email + '.';
+    if (bodyEl)  bodyEl.style.display   = 'none';
+    if (success) success.style.display  = 'flex';
+    if (msg)     msg.textContent        = `The ROI report has been emailed to ${custEmail}. A copy was sent to abuemira@nexa-solutions.com.`;
 
   } catch (err) {
     console.error('sendRoiEmail:', err);
