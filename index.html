@@ -3312,7 +3312,8 @@ img{transition:opacity .3s ease}
               <span style="font-size:10px;color:rgba(255,255,255,.35)">affects efficiency multiplier</span>
             </div>
             <div class="roi-industry-row" id="roiIndustryPills">
-              <button class="roi-ind-btn active" data-ind="manufacturing"    data-mult="1.15" onclick="roiSelectIndustry(this)">🏭 Manufacturing</button>
+              <button class="roi-ind-btn active" data-ind="general_business" data-mult="1.00" onclick="roiSelectIndustry(this)">🏢 General Business</button>
+              <button class="roi-ind-btn"         data-ind="manufacturing"    data-mult="1.15" onclick="roiSelectIndustry(this)">🏭 Manufacturing</button>
               <button class="roi-ind-btn"         data-ind="construction"    data-mult="1.10" onclick="roiSelectIndustry(this)">🏗️ Construction</button>
               <button class="roi-ind-btn"         data-ind="retail_fnb"      data-mult="1.12" onclick="roiSelectIndustry(this)">🛍️ Retail &amp; F&amp;B</button>
               <button class="roi-ind-btn"         data-ind="logistics"       data-mult="1.08" onclick="roiSelectIndustry(this)">🚛 Logistics</button>
@@ -3323,8 +3324,8 @@ img{transition:opacity .3s ease}
             </div>
             <div id="roiIndustryBadge" style="margin-top:10px;display:flex;align-items:center;gap:8px">
               <span style="font-size:10px;color:rgba(255,255,255,.35)">Efficiency multiplier:</span>
-              <span id="roiIndustryMultBadge" style="font-size:12px;font-weight:800;color:var(--gold);background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.28);border-radius:8px;padding:2px 10px;">×1.15</span>
-              <span id="roiIndustryDesc" style="font-size:10px;color:rgba(255,255,255,.38);font-style:italic;">Higher complexity → greater Odoo gains</span>
+              <span id="roiIndustryMultBadge" style="font-size:12px;font-weight:800;color:var(--gold);background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.28);border-radius:8px;padding:2px 10px;">×1.00</span>
+              <span id="roiIndustryDesc" style="font-size:10px;color:rgba(255,255,255,.38);font-style:italic;">Standard Odoo ROI baseline</span>
             </div>
           </div>
 
@@ -3387,17 +3388,17 @@ img{transition:opacity .3s ease}
             <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$1K</span><span>$300K</span></div>
             
             <div id="roiImplHint" style="margin-top:8px;padding:8px 12px;background:rgba(1,126,132,.12);border:1px solid rgba(1,126,132,.25);border-radius:8px;font-size:11px;color:rgba(255,255,255,.65);line-height:1.5;">
-              💡 <strong style="color:var(--teal-mid)" data-en="Nexa Odoo Implementation:" data-ar="تطبيق نكسا لـ Odoo:">Nexa Odoo Implementation:</strong> <span data-en="Typically" data-ar="عادةً">Typically</span> <strong style="color:var(--gold)">$8K–$45K</strong> <span data-en="depending on scope &amp; modules — vs SAP $150K–$500K+" data-ar="حسب النطاق والوحدات — مقارنةً بـ SAP: $150K–$500K+">depending on scope &amp; modules — vs SAP $150K–+$500K</span>
+              💡 <strong style="color:var(--teal-mid)">Nexa Odoo Implementation:</strong> Typically <strong style="color:var(--gold)">$8K–$45K</strong> depending on scope &amp; modules — vs SAP $150K–$500K+
             </div>
           </div>
           <!-- Subscription pulled from Tab 4 — hidden sync input -->
           <input type="hidden" id="roiSub" value="0">
           <input type="hidden" id="roiSubY1" value="0"><!-- Y1 discounted subscription -->
           <div style="padding:10px 14px;background:linear-gradient(135deg,rgba(212,168,67,.12),rgba(212,168,67,.06));border:1px solid rgba(212,168,67,.28);border-radius:10px;margin-bottom:6px;">
-            <div style="font-size:11px;font-weight:700;color:var(--gold);margin-bottom:3px;" data-en="📱 Odoo Subscription" data-ar="📱 اشتراك أودو">📱 Odoo Subscription</div>
+            <div style="font-size:11px;font-weight:700;color:var(--gold);margin-bottom:3px;">📱 Odoo Subscription</div>
             <div id="roiSubSyncInfo" style="font-size:11px;color:rgba(255,255,255,.6);line-height:1.6;">
-              <span data-en="Configure plan, users &amp; hosting in" data-ar="اضبط الخطة والمستخدمين والاستضافة في">Configure plan, users &amp; hosting in</span> <strong style="color:var(--teal-mid)" data-en="Tab 4 → Odoo Subscription" data-ar="التبويب 4 ← اشتراك أودو">Tab 4 → Odoo Subscription</strong>.<br>
-              <span id="roiSubSyncBadge" style="font-size:11px;color:var(--teal-mid);font-weight:700;" data-en="Subscription cost auto-synced ✓" data-ar="تكلفة الاشتراك مزامنة تلقائياً ✓">Subscription cost auto-synced ✓</span>
+              Configure plan, users &amp; hosting in <strong style="color:var(--teal-mid)">Tab 4 → Odoo Subscription</strong>.<br>
+              <span id="roiSubSyncBadge" style="font-size:11px;color:var(--teal-mid);font-weight:700;">Subscription cost auto-synced ✓</span>
             </div>
           </div>
           <div class="roi-input-group">
@@ -3537,14 +3538,14 @@ img{transition:opacity .3s ease}
           <!-- HOSTING TYPE -->
           <div class="roi-input-group">
             <div class="roi-label-row" style="margin-bottom:8px">
-              <span class="roi-lbl" data-en="☁️ Hosting Type" data-ar="☁️ نوع الاستضافة">☁️ Hosting Type</span>
+              <span class="roi-lbl">☁️ Hosting Type</span>
               <span class="roi-val-badge" id="subHostBadge">Odoo.sh</span>
             </div>
             <div style="display:flex;flex-direction:column;gap:6px;" id="subHostBtns">
               <button type="button" onclick="subSelectHost('saas',0)" id="subHostSaas"
                 style="width:100%;padding:9px 14px;border-radius:10px;border:1px solid rgba(212,168,67,.45);background:rgba(212,168,67,.12);color:var(--gold);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;text-align:left;display:flex;justify-content:space-between;align-items:center;">
-                <span data-en="🌐 Odoo.com SaaS — Included in plan" data-ar="🌐 Odoo.com SaaS — مشمول في الخطة">🌐 Odoo.com SaaS — <em>Included in plan</em></span>
-                <span style="color:var(--teal-mid);font-weight:700;" data-en="$0/mo extra" data-ar="إضافي $0/شهر">$0/mo extra</span>
+                <span>🌐 Odoo.com SaaS — <em>Included in plan</em></span>
+                <span style="color:var(--teal-mid);font-weight:700;">$0/mo extra</span>
               </button>
               <button type="button" onclick="subSelectHost('sh',0)" id="subHostSh"
                 style="width:100%;padding:9px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.75);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;text-align:left;display:flex;justify-content:space-between;align-items:center;">
@@ -3607,29 +3608,29 @@ img{transition:opacity .3s ease}
 
               <button type="button" onclick="subSelectHost('premise',0)" id="subHostPremise"
                 style="width:100%;padding:9px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.75);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;text-align:left;display:flex;justify-content:space-between;align-items:center;">
-                <span data-en="🖥️ On-Premise — Your own server" data-ar="🖥️ خادم محلي — على بنيتك الخاصة">🖥️ On-Premise — Your own server</span>
-                <span style="color:var(--teal-mid);font-weight:700;" data-en="Custom amount" data-ar="مبلغ مخصص">Custom amount</span>
+                <span>🖥️ On-Premise — Your own server</span>
+                <span style="color:var(--teal-mid);font-weight:700;">Custom amount</span>
               </button>
 
             <!-- ON-PREMISE DETAIL PANEL -->
             <div id="subPremisePanel" style="display:none;margin-top:10px;padding:14px;background:rgba(1,126,132,.08);border:1px solid rgba(1,126,132,.22);border-radius:12px;">
-              <div style="font-size:10px;font-weight:700;color:var(--teal-mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;" data-en="🖥️ Server / Infrastructure Cost" data-ar="🖥️ تكلفة الخادم / البنية التحتية">🖥️ Server / Infrastructure Cost</div>
+              <div style="font-size:10px;font-weight:700;color:var(--teal-mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">🖥️ Server / Infrastructure Cost</div>
 
               <!-- Purchase vs Monthly toggle -->
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px;">
                 <button type="button" id="premMonthlyBtn" onclick="subSetPremiseMode('monthly')"
                   style="padding:8px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center;">
-                  <span data-en="📅 Monthly Rent" data-ar="📅 إيجار شهري">📅 Monthly Rent</span><br><span style="font-size:9px;opacity:.6" data-en="Recurring cost" data-ar="تكلفة متكررة">Recurring cost</span>
+                  📅 Monthly Rent<br><span style="font-size:9px;opacity:.6">Recurring cost</span>
                 </button>
                 <button type="button" id="premPurchaseBtn" onclick="subSetPremiseMode('purchase')"
                   style="padding:8px;border-radius:9px;border:1px solid rgba(212,168,67,.5);background:rgba(212,168,67,.15);color:var(--gold);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;text-align:center;">
-                  <span data-en="🛒 Purchase" data-ar="🛒 شراء">🛒 Purchase</span><br><span style="font-size:9px;opacity:.8" data-en="Purchase = True" data-ar="شراء = نعم">Purchase = True</span>
+                  🛒 Purchase<br><span style="font-size:9px;opacity:.8">Purchase = True</span>
                 </button>
               </div>
 
               <!-- Monthly mode input -->
               <div id="premMonthlySection">
-                <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:6px;" data-en="Monthly server/cloud cost (no limit)" data-ar="تكلفة الخادم/السحابة الشهرية (بلا حد أقصى)">Monthly server/cloud cost (no limit)</div>
+                <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:6px;">Monthly server/cloud cost (no limit)</div>
                 <div style="display:flex;align-items:center;gap:8px;">
                   <span style="color:var(--teal-mid);font-size:15px;font-weight:800;">$</span>
                   <input type="number" id="subPremMonthly" value="0" min="0" step="10"
@@ -3642,7 +3643,7 @@ img{transition:opacity .3s ease}
               <!-- Purchase mode input -->
               <div id="premPurchaseSection" style="display:none;">
                 <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:6px;">
-                  <span data-en="Server purchase amount — one-time" data-ar="مبلغ شراء الخادم — مرة واحدة">Server purchase amount — one-time</span> <span style="background:rgba(212,168,67,.2);color:var(--gold);border-radius:4px;padding:1px 6px;font-size:10px;font-weight:700;" data-en="Purchase = True" data-ar="شراء = نعم">Purchase = True</span>
+                  Server purchase amount — one-time <span style="background:rgba(212,168,67,.2);color:var(--gold);border-radius:4px;padding:1px 6px;font-size:10px;font-weight:700;">Purchase = True</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
                   <span style="color:var(--gold);font-size:15px;font-weight:800;">$</span>
@@ -3656,10 +3657,10 @@ img{transition:opacity .3s ease}
                   <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:11px;color:rgba(255,255,255,.65);margin-bottom:8px;">
                     <input type="checkbox" id="premInstallCheck" onchange="subCalc()"
                       style="width:14px;height:14px;accent-color:var(--gold);cursor:pointer;">
-                    <span data-en="Pay in installments" data-ar="الدفع بالأقساط">Pay in installments</span>
+                    Pay in installments
                   </label>
                   <div id="premInstallFields" style="display:none;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-                    <span style="font-size:11px;color:rgba(255,255,255,.45);" data-en="Months:" data-ar="أشهر:">Months:</span>
+                    <span style="font-size:11px;color:rgba(255,255,255,.45);">Months:</span>
                     <input type="number" id="premInstallMonths" value="12" min="1" max="60" step="1"
                       onchange="subCalc()"
                       style="width:55px;padding:4px 8px;border-radius:6px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-size:12px;font-weight:700;text-align:center;outline:none;">
@@ -3678,19 +3679,19 @@ img{transition:opacity .3s ease}
 
             <!-- Section Label -->
             <div style="font-size:12px;font-weight:800;color:rgba(255,255,255,.85);margin-bottom:10px;display:flex;align-items:center;gap:8px;">
-              <span data-en="🛠️ Implementation Service" data-ar="🛠️ خدمة التطبيق">🛠️ Implementation Service</span>
-              <span style="font-size:10px;color:rgba(255,255,255,.35);font-weight:500;" data-en="Choose one" data-ar="اختر واحدة">Choose one</span>
+              🛠️ Implementation Service
+              <span style="font-size:10px;color:rgba(255,255,255,.35);font-weight:500;">Choose one</span>
             </div>
 
             <!-- MODE TOGGLE: Pack vs Partner -->
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
               <button type="button" id="implModePackBtn" onclick="subSelectImplMode('pack')"
                 style="padding:10px 8px;border-radius:10px;border:1px solid rgba(1,126,132,.55);background:rgba(1,126,132,.2);color:var(--teal-mid);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;text-align:center;line-height:1.4;">
-                <span data-en="🎯 Odoo Success Pack" data-ar="🎯 باقة Odoo للنجاح">🎯 Odoo Success Pack</span><br><span style="font-size:9px;opacity:.75;" data-en="Official Odoo implementation" data-ar="تطبيق أودو الرسمي">Official Odoo implementation</span>
+                🎯 Odoo Success Pack<br><span style="font-size:9px;opacity:.75;">Official Odoo implementation</span>
               </button>
               <button type="button" id="implModePartnerBtn" onclick="subSelectImplMode('partner')"
                 style="padding:10px 8px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center;line-height:1.4;">
-                <span data-en="🤝 With a Local Partner" data-ar="🤝 مع شريك محلي">🤝 With a Local Partner</span><br><span style="font-size:9px;opacity:.65;" data-en="Fixed lump-sum amount" data-ar="مبلغ ثابت إجمالي">Fixed lump-sum amount</span>
+                🤝 With a Local Partner<br><span style="font-size:9px;opacity:.65;">Fixed lump-sum amount</span>
               </button>
             </div>
 
@@ -3738,21 +3739,21 @@ img{transition:opacity .3s ease}
             <!-- PARTNER SECTION (shown when mode = partner) -->
             <div id="implPartnerSection" style="display:none;">
               <div style="padding:12px 14px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.22);border-radius:10px;margin-bottom:10px;">
-                <div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;" data-en="🤝 Local Partner Implementation Cost" data-ar="🤝 تكلفة التطبيق مع شريك محلي">🤝 Local Partner Implementation Cost</div>
-                <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:10px;line-height:1.5;" data-en="Enter the agreed fixed amount with your Odoo partner. No maximum limit. Extra consulting hours can be added below." data-ar="أدخل المبلغ الثابت المتفق عليه مع شريكك. بلا حد أقصى. ساعات استشارية إضافية يمكن إضافتها أدناه.">Enter the agreed fixed amount with your Odoo partner. No maximum limit. Extra consulting hours can be added below.</div>
+                <div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">🤝 Local Partner Implementation Cost</div>
+                <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:10px;line-height:1.5;">Enter the agreed fixed amount with your Odoo partner. No maximum limit. Extra consulting hours can be added below.</div>
                 <div style="display:flex;align-items:center;gap:10px;">
                   <span style="font-size:16px;font-weight:800;color:var(--gold);">$</span>
                   <input type="number" id="subPartnerAmount" value="0" min="0" step="100"
                     oninput="subCalc()" onchange="subCalc()"
                     placeholder="0"
                     style="flex:1;padding:10px 14px;border-radius:10px;border:1px solid rgba(212,168,67,.4);background:rgba(212,168,67,.08);color:#fff;font-size:18px;font-weight:800;font-family:'Sora',sans-serif;outline:none;text-align:right;min-width:0;">
-                  <span style="font-size:12px;color:rgba(255,255,255,.4);white-space:nowrap;" data-en="USD one-time" data-ar="دولار — مرة واحدة">USD one-time</span>
+                  <span style="font-size:12px;color:rgba(255,255,255,.4);white-space:nowrap;">USD one-time</span>
                 </div>
                 <div id="subPartnerLocalEquiv" style="margin-top:8px;font-size:11px;color:rgba(255,255,255,.45);display:none;"></div>
               </div>
-                <div style="padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px;border:1px solid rgba(255,255,255,.08);font-size:10px;color:rgba(255,255,255,.4);line-height:1.5;" data-en="💡 You can still combine with Extra Consulting Hours below. Success Pack is not available in this mode." data-ar="💡 يمكنك الجمع مع ساعات استشارية إضافية. باقة النجاح غير متاحة في هذا الوضع.">
-                  💡 You can still combine with Extra Consulting Hours below. Success Pack is not available in this mode.
-                </div>
+              <div style="padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px;border:1px solid rgba(255,255,255,.08);font-size:10px;color:rgba(255,255,255,.4);line-height:1.5;">
+                💡 You can still combine with Extra Consulting Hours below. Success Pack is not available in this mode.
+              </div>
             </div>
 
           </div>
@@ -3760,14 +3761,14 @@ img{transition:opacity .3s ease}
           <!-- ADDITIONAL HOURS -->
           <div class="roi-input-group">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-              <span class="roi-lbl" data-en="⏱️ Extra Consulting Hours" data-ar="⏱️ ساعات استشارية إضافية">⏱️ Extra Consulting Hours</span>
+              <span class="roi-lbl">⏱️ Extra Consulting Hours</span>
               <span class="roi-val-badge" id="subExtraHrsVal">0 hrs</span>
             </div>
             <input type="range" class="roi-slider" id="subExtraHrs" min="0" max="50000" value="0" step="50" oninput="subCalc()">
             <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>0</span><span>50,000 hrs</span></div>
             
             <div style="display:flex;align-items:center;gap:8px;margin-top:8px;">
-              <span style="font-size:11px;color:rgba(255,255,255,.55);" data-en="💵 Hourly rate (USD)" data-ar="💵 السعر بالساعة (دولار)">💵 Hourly rate (USD)</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.55);">💵 Hourly rate (USD)</span>
               <input type="number" id="subHourlyRate" value="175" min="50" max="500" step="25" onchange="subCalc()"
                 style="width:90px;padding:5px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:12px;font-weight:700;text-align:center;outline:none;">
             </div>
@@ -3775,15 +3776,15 @@ img{transition:opacity .3s ease}
 
           <!-- RESULT BOX -->
           <div id="subResultBox" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:18px;margin-top:6px;">
-            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;" data-en="📋 Cost Breakdown" data-ar="📋 تفصيل التكلفة">📋 Cost Breakdown</div>
+            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;">📋 Cost Breakdown</div>
             <div id="subResultRows" style="display:flex;flex-direction:column;gap:7px;"></div>
             <div style="height:1px;background:rgba(255,255,255,.08);margin:14px 0;"></div>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-              <span style="font-size:13px;font-weight:700;color:rgba(255,255,255,.8);" data-en="Monthly Total" data-ar="الإجمالي الشهري">Monthly Total</span>
+              <span style="font-size:13px;font-weight:700;color:rgba(255,255,255,.8);">Monthly Total</span>
               <span id="subMonthlyTotal" style="font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:var(--gold);">—</span>
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-              <span style="font-size:11px;color:rgba(255,255,255,.45);" data-en="Annual (subscription + hosting)" data-ar="سنوي (الاشتراك + الاستضافة)">Annual (subscription + hosting)</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.45);">Annual (subscription + hosting)</span>
               <span id="subAnnualTotal" style="font-size:13px;font-weight:700;color:var(--teal-mid);">—</span>
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
@@ -3791,12 +3792,12 @@ img{transition:opacity .3s ease}
               <span id="subPackCost" style="font-size:13px;font-weight:700;color:rgba(255,255,255,.7);">—</span>
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-              <span style="font-size:11px;color:rgba(255,255,255,.45);" data-en="Extra hours cost (one-time)" data-ar="تكلفة الساعات الإضافية (مرة واحدة)">Extra hours cost (one-time)</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.45);">Extra hours cost (one-time)</span>
               <span id="subExtraCost" style="font-size:13px;font-weight:700;color:rgba(255,255,255,.7);">—</span>
             </div>
             <div style="height:1px;background:rgba(212,168,67,.25);margin:10px 0;"></div>
             <div style="display:flex;justify-content:space-between;align-items:center;">
-              <span style="font-size:12px;font-weight:800;color:rgba(255,255,255,.9);" data-en="Total Year 1 Investment" data-ar="إجمالي استثمار السنة الأولى">Total Year 1 Investment</span>
+              <span style="font-size:12px;font-weight:800;color:rgba(255,255,255,.9);">Total Year 1 Investment</span>
               <span id="subYear1Total" style="font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:var(--gold);">—</span>
             </div>
             <div id="subLocalEquiv" style="margin-top:10px;padding:8px 12px;background:rgba(1,126,132,.1);border:1px solid rgba(1,126,132,.2);border-radius:8px;font-size:11px;color:rgba(255,255,255,.6);line-height:1.6;display:none;"></div>
@@ -3807,18 +3808,15 @@ img{transition:opacity .3s ease}
           <!-- ACTIONS -->
           <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px;">
             <a href="https://www.odoo.com/pricing" target="_blank"
-              style="display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(1,126,132,.2);color:var(--teal-mid);border:1px solid rgba(1,126,132,.4);font-size:12px;font-weight:700;padding:11px;border-radius:10px;text-decoration:none;transition:all .2s;"
-              data-en="📊 View Official Odoo Pricing ↗" data-ar="📊 عرض أسعار أودو الرسمية ↗">
+              style="display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(1,126,132,.2);color:var(--teal-mid);border:1px solid rgba(1,126,132,.4);font-size:12px;font-weight:700;padding:11px;border-radius:10px;text-decoration:none;transition:all .2s;">
               📊 View Official Odoo Pricing ↗
             </a>
             <a href="https://www.odoo.com/pricing-packs" target="_blank"
-              style="display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(212,168,67,.12);color:var(--gold);border:1px solid rgba(212,168,67,.3);font-size:12px;font-weight:700;padding:11px;border-radius:10px;text-decoration:none;transition:all .2s;"
-              data-en="🎯 Explore Success Packs ↗" data-ar="🎯 استعرض باقات النجاح ↗">
+              style="display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(212,168,67,.12);color:var(--gold);border:1px solid rgba(212,168,67,.3);font-size:12px;font-weight:700;padding:11px;border-radius:10px;text-decoration:none;transition:all .2s;">
               🎯 Explore Success Packs ↗
             </a>
             <button onclick="roiSwitchTab(3)"
-              style="width:100%;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;"
-              data-en="← Back to Investment" data-ar="→ رجوع للاستثمار">
+              style="width:100%;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">
               ← Back to Investment
             </button>
           </div>
@@ -4637,27 +4635,29 @@ function fmtUSD(n) {
 
 // ── INDUSTRY MULTIPLIER ──
 const ROI_INDUSTRY_META = {
-  manufacturing: { mult: 1.15, desc: 'Complex ops → higher Odoo gains' },
-  construction:  { mult: 1.10, desc: 'Project tracking & cost control gains' },
-  retail_fnb:    { mult: 1.12, desc: 'POS + inventory + waste reduction' },
-  logistics:     { mult: 1.08, desc: 'Route & delivery optimisation gains' },
-  services:      { mult: 1.05, desc: 'Billing & project automation gains' },
-  real_estate:   { mult: 1.07, desc: 'Property & contract management gains' },
-  trading:       { mult: 1.09, desc: 'Purchase-to-sale cycle compression' },
-  healthcare:    { mult: 1.06, desc: 'Compliance & scheduling automation' },
+  general_business: { mult: 1.00, desc: 'Standard Odoo ROI baseline',                  descAr: 'خط الأساس القياسي لعائد الاستثمار من أودو' },
+  manufacturing: { mult: 1.15, desc: 'Complex ops → higher Odoo gains',                descAr: 'عمليات معقدة → مكاسب أكبر من أودو' },
+  construction:  { mult: 1.10, desc: 'Project tracking & cost control gains',           descAr: 'مكاسب تتبع المشاريع والتحكم بالتكاليف' },
+  retail_fnb:    { mult: 1.12, desc: 'POS + inventory + waste reduction',               descAr: 'نقاط البيع + المخزون + تقليل الهدر' },
+  logistics:     { mult: 1.08, desc: 'Route & delivery optimisation gains',             descAr: 'مكاسب تحسين المسارات والتوصيل' },
+  services:      { mult: 1.05, desc: 'Billing & project automation gains',              descAr: 'مكاسب أتمتة الفواتير والمشاريع' },
+  real_estate:   { mult: 1.07, desc: 'Property & contract management gains',            descAr: 'مكاسب إدارة العقارات والعقود' },
+  trading:       { mult: 1.09, desc: 'Purchase-to-sale cycle compression',              descAr: 'تسريع دورة الشراء والبيع' },
+  healthcare:    { mult: 1.06, desc: 'Compliance & scheduling automation',              descAr: 'أتمتة الامتثال والجدولة' },
 };
-let roiIndustryMult = 1.15; // default: Manufacturing
+let roiIndustryMult = 1.00; // default: General Business
 
 function roiSelectIndustry(btn) {
   document.querySelectorAll('#roiIndustryPills .roi-ind-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   const ind = btn.dataset.ind;
-  const meta = ROI_INDUSTRY_META[ind] || { mult: 1.0, desc: '' };
+  const meta = ROI_INDUSTRY_META[ind] || { mult: 1.0, desc: '', descAr: '' };
   roiIndustryMult = meta.mult;
   const multBadge = document.getElementById('roiIndustryMultBadge');
   const descEl = document.getElementById('roiIndustryDesc');
   if (multBadge) multBadge.textContent = '×' + meta.mult.toFixed(2);
-  if (descEl) descEl.textContent = meta.desc;
+  const AR = document.documentElement.getAttribute('data-lang') === 'ar';
+  if (descEl) descEl.textContent = AR && meta.descAr ? meta.descAr : meta.desc;
   // Flash the multiplier badge
   if (multBadge) { multBadge.style.transform = 'scale(1.25)'; setTimeout(() => { multBadge.style.transform = 'scale(1)'; }, 200); }
   roiCalc();
@@ -5762,6 +5762,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Industry pills
     const indPillMap = {
+      '🏢 General Business':'🏢 أعمال عامة',
       '🏭 Manufacturing':'🏭 التصنيع',
       '🏗️ Construction':'🏗️ البناء',
       '🛍️ Retail & F&B':'🛍️ التجزئة والمطاعم',
@@ -5784,7 +5785,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const effSpan = document.querySelector('#roiIndustryBadge span:first-child');
     if (effSpan) effSpan.textContent = AR ? 'معامل الكفاءة:' : 'Efficiency multiplier:';
     const effDesc = document.getElementById('roiIndustryDesc');
-    if (effDesc) effDesc.textContent = AR ? 'تعقيد أعلى → مكاسب أكبر من أودو' : 'Higher complexity → greater Odoo gains';
+    if (effDesc) effDesc.textContent = AR ? 'خط الأساس القياسي لعائد الاستثمار من أودو' : 'Standard Odoo ROI baseline';
 
     // Profile input labels
     const roiLbls = document.querySelectorAll('.roi-lbl');
@@ -6267,6 +6268,189 @@ document.addEventListener("DOMContentLoaded", () => {
     if (emailSuccessP) emailSuccessP.textContent = AR ? 'تم إرسال تقرير ROI بالبريد الإلكتروني إلى عميلك.' : 'The ROI report has been emailed to your customer.';
     const emailCloseBtn = document.querySelector('.roi-email-success button');
     if (emailCloseBtn) emailCloseBtn.textContent = AR ? 'إغلاق' : 'Close';
+
+    /* ── TAB 4: ODOO SUBSCRIPTION ── */
+    // Panel header
+    const subPanelHeader = document.querySelector('#roiPanel4 > div:first-child div:first-child');
+    if (subPanelHeader && (subPanelHeader.textContent.includes('Odoo Subscription') || subPanelHeader.textContent.includes('اشتراك أودو')))
+      subPanelHeader.textContent = AR ? '🌍 اشتراك أودو وتكلفة التطبيق' : '🌍 Odoo Subscription & Implementation Cost';
+    const subPanelSub = document.querySelector('#roiPanel4 > div:first-child div:last-child');
+    if (subPanelSub && (subPanelSub.textContent.includes('Official') || subPanelSub.textContent.includes('رسمي')))
+      subPanelSub.textContent = AR ? 'تسعير Odoo.com الرسمي · حسب الدولة · الاستضافة مشمولة · باقات النجاح' : 'Official Odoo.com pricing · Country-adjusted · Hosting included · Success Packs';
+
+    // Country / Region label
+    const subCountryLbl = document.querySelector('#subCountry')?.closest('.roi-input-group')?.querySelector('.roi-lbl');
+    if (subCountryLbl) subCountryLbl.textContent = AR ? '🌐 الدولة / المنطقة' : '🌐 Country / Region';
+
+    // Country dropdown options
+    const subCountryEl = document.getElementById('subCountry');
+    if (subCountryEl) {
+      const countryMap = [
+        ['EG','🇪🇬 Egypt (EGP)','🇪🇬 مصر (جنيه مصري)'],
+        ['SA','🇸🇦 Saudi Arabia (SAR)','🇸🇦 السعودية (ريال)'],
+        ['AE','🇦🇪 UAE (AED)','🇦🇪 الإمارات (درهم)'],
+        ['KW','🇰🇼 Kuwait (KWD)','🇰🇼 الكويت (دينار)'],
+        ['QA','🇶🇦 Qatar (QAR)','🇶🇦 قطر (ريال)'],
+        ['BH','🇧🇭 Bahrain (BHD)','🇧🇭 البحرين (دينار)'],
+        ['OM','🇴🇲 Oman (OMR)','🇴🇲 عُمان (ريال)'],
+        ['JO','🇯🇴 Jordan (JOD)','🇯🇴 الأردن (دينار)'],
+        ['MA','🇲🇦 Morocco (MAD)','🇲🇦 المغرب (درهم)'],
+        ['US','🇺🇸 United States (USD)','🇺🇸 الولايات المتحدة (دولار)'],
+        ['GB','🇬🇧 United Kingdom (GBP)','🇬🇧 المملكة المتحدة (جنيه)'],
+        ['EU','🇪🇺 Europe (EUR)','🇪🇺 أوروبا (يورو)'],
+        ['OTHER','🌐 Other (USD)','🌐 منطقة أخرى (دولار)'],
+      ];
+      Array.from(subCountryEl.options).forEach(opt => {
+        const row = countryMap.find(r => r[0] === opt.value);
+        if (row) opt.text = AR ? row[2] : row[1];
+      });
+    }
+
+    // Odoo Plan label
+    const subPlanLbl = document.querySelector('#subPlanBtns')?.closest('.roi-input-group')?.querySelector('.roi-lbl');
+    if (subPlanLbl) subPlanLbl.textContent = AR ? '📦 خطة أودو' : '📦 Odoo Plan';
+
+    // Plan buttons
+    const subPlanFreeBtn = document.getElementById('subPlanFree');
+    if (subPlanFreeBtn) subPlanFreeBtn.innerHTML = AR ? '🆓 مجانية<br><span style="font-size:9px;opacity:.6">تطبيق واحد · غير محدود</span>' : '🆓 Free<br><span style="font-size:9px;opacity:.6">1 App · Unlimited</span>';
+    const subPlanStdBtn = document.getElementById('subPlanStd');
+    if (subPlanStdBtn) { const priceSpan = subPlanStdBtn.querySelector('span'); if (priceSpan) { subPlanStdBtn.childNodes[0].textContent = AR ? '⭐ ستاندرد' : '⭐ Standard'; } }
+    const subPlanCusBtn = document.getElementById('subPlanCustom');
+    if (subPlanCusBtn) { const priceSpan = subPlanCusBtn.querySelector('span'); if (priceSpan) { subPlanCusBtn.childNodes[0].textContent = AR ? '🔧 مخصص' : '🔧 Custom'; } }
+
+    // Middle East pricelist note
+    const subPricelistNote = document.getElementById('subPricelistNote');
+    if (subPricelistNote) subPricelistNote.textContent = AR ? '📌 قائمة أسعار الشرق الأوسط · المصدر: oec.sh' : '📌 Middle East pricelist · source: oec.sh';
+
+    // Backend Users label
+    const subUsersLbl = document.querySelector('#subUsers')?.closest('.roi-input-group')?.querySelector('.roi-lbl');
+    if (subUsersLbl) subUsersLbl.textContent = AR ? '👥 المستخدمون' : '👥 Backend Users';
+
+    // Nexa impl hint (Tab 3)
+    const roiImplHint = document.getElementById('roiImplHint');
+    if (roiImplHint) roiImplHint.innerHTML = AR
+      ? '💡 <strong style="color:var(--teal-mid)">تطبيق نيكسا أودو:</strong> عادةً <strong style="color:var(--gold)">8K–45K دولار</strong> حسب النطاق والوحدات — مقابل SAP بـ 150K–500K دولار+'
+      : '💡 <strong style="color:var(--teal-mid)">Nexa Odoo Implementation:</strong> Typically <strong style="color:var(--gold)">$8K–$45K</strong> depending on scope &amp; modules — vs SAP $150K–$500K+';
+
+    // Subscription sync box (Tab 3)
+    const roiSubSyncInfo = document.getElementById('roiSubSyncInfo');
+    if (roiSubSyncInfo) {
+      const syncBadge = document.getElementById('roiSubSyncBadge');
+      const syncText = roiSubSyncInfo.childNodes[0];
+      if (syncText && syncText.nodeType === 3)
+        roiSubSyncInfo.childNodes[0].textContent = AR
+          ? 'اضبط الخطة والمستخدمين والاستضافة في '
+          : 'Configure plan, users & hosting in ';
+      const syncStrong = roiSubSyncInfo.querySelector('strong');
+      if (syncStrong) syncStrong.textContent = AR ? 'التبويب 4 ← اشتراك أودو' : 'Tab 4 → Odoo Subscription';
+      if (syncBadge) syncBadge.textContent = AR ? 'تكلفة الاشتراك محدَّثة تلقائياً ✓' : 'Subscription cost auto-synced ✓';
+    }
+    const roiSubLabel = document.querySelector('#roiPanel3 div[style*="gold"] div:first-child');
+    if (roiSubLabel && (roiSubLabel.textContent.includes('Odoo Subscription') || roiSubLabel.textContent.includes('اشتراك أودو')))
+      roiSubLabel.textContent = AR ? '📱 اشتراك أودو' : '📱 Odoo Subscription';
+
+    // Hosting Type label
+    const subHostLbl = document.querySelector('#subHostBtns')?.closest('.roi-input-group')?.querySelector('.roi-lbl');
+    if (subHostLbl) subHostLbl.textContent = AR ? '☁️ نوع الاستضافة' : '☁️ Hosting Type';
+
+    // SaaS button
+    const subHostSaas = document.getElementById('subHostSaas');
+    if (subHostSaas) {
+      const saasSpan = subHostSaas.querySelector('span:first-child');
+      if (saasSpan) saasSpan.innerHTML = AR ? '🌐 Odoo.com SaaS — <em>مشمول في الخطة</em>' : '🌐 Odoo.com SaaS — <em>Included in plan</em>';
+      const saasBadge = subHostSaas.querySelector('span:last-child');
+      if (saasBadge) saasBadge.textContent = AR ? 'إضافي $/0/شهر' : '$0/mo extra';
+    }
+
+    // Odoo.sh button
+    const subHostSh = document.getElementById('subHostSh');
+    if (subHostSh) {
+      const shSpan = subHostSh.querySelector('[data-en]') || subHostSh.querySelector('span:first-child');
+      if (shSpan) shSpan.textContent = AR ? '⚡ Odoo.sh — المنصة السحابية' : '⚡ Odoo.sh — Cloud Platform';
+    }
+
+    // On-Premise button
+    const subHostPremise = document.getElementById('subHostPremise');
+    if (subHostPremise) {
+      const premSpan = subHostPremise.querySelector('span:first-child');
+      if (premSpan) premSpan.textContent = AR ? '🖥️ محلي — خادمك الخاص' : '🖥️ On-Premise — Your own server';
+      const premBadge = subHostPremise.querySelector('span:last-child');
+      if (premBadge) premBadge.textContent = AR ? 'مبلغ مخصص' : 'Custom amount';
+    }
+
+    // Implementation Service label
+    const implServiceLbl = document.querySelector('#implModePackBtn')?.closest('.roi-input-group')?.querySelector('div[style*="font-size:12px"]');
+    if (implServiceLbl) implServiceLbl.innerHTML = AR
+      ? '🛠️ خدمة التطبيق <span style="font-size:10px;color:rgba(255,255,255,.35);font-weight:500;">اختر واحدة</span>'
+      : '🛠️ Implementation Service <span style="font-size:10px;color:rgba(255,255,255,.35);font-weight:500;">Choose one</span>';
+
+    // Pack / Partner toggle buttons
+    const implPackBtn = document.getElementById('implModePackBtn');
+    if (implPackBtn) implPackBtn.innerHTML = AR
+      ? '🎯 باقة أودو<br><span style="font-size:9px;opacity:.75;">تطبيق رسمي من أودو</span>'
+      : '🎯 Odoo Success Pack<br><span style="font-size:9px;opacity:.75;">Official Odoo implementation</span>';
+    const implPartnerBtn = document.getElementById('implModePartnerBtn');
+    if (implPartnerBtn) implPartnerBtn.innerHTML = AR
+      ? '🤝 مع شريك محلي<br><span style="font-size:9px;opacity:.65;">مبلغ إجمالي ثابت</span>'
+      : '🤝 With a Local Partner<br><span style="font-size:9px;opacity:.65;">Fixed lump-sum amount</span>';
+
+    // Partner section labels
+    const partnerTitle = document.querySelector('#implPartnerSection .roi-input-group, #implPartnerSection')?.querySelector('div[style*="gold"]');
+    const partnerTitleEl = document.querySelector('#implPartnerSection div[style*="color:var(--gold)"]');
+    if (partnerTitleEl) partnerTitleEl.textContent = AR ? '🤝 تكلفة تطبيق الشريك المحلي' : '🤝 Local Partner Implementation Cost';
+    const partnerDesc = document.querySelector('#implPartnerSection div[style*="rgba(255,255,255,.5)"]');
+    if (partnerDesc) partnerDesc.textContent = AR
+      ? 'أدخل المبلغ الثابت المتفق عليه مع شريك أودو. لا حد أقصى. يمكن إضافة ساعات استشارية إضافية أدناه.'
+      : 'Enter the agreed fixed amount with your Odoo partner. No maximum limit. Extra consulting hours can be added below.';
+    const partnerUsdLabel = document.querySelector('#implPartnerSection span[style*="white-space:nowrap"]');
+    if (partnerUsdLabel) partnerUsdLabel.textContent = AR ? 'دولار لمرة واحدة' : 'USD one-time';
+    const partnerHint = document.querySelector('#implPartnerSection div[style*="rgba(255,255,255,.04)"]');
+    if (partnerHint) partnerHint.textContent = AR
+      ? '💡 يمكنك الدمج مع ساعات استشارية إضافية أدناه. باقة النجاح غير متاحة في هذا الوضع.'
+      : '💡 You can still combine with Extra Consulting Hours below. Success Pack is not available in this mode.';
+
+    // Extra Consulting Hours
+    const subExtraLbl = document.querySelector('#subExtraHrs')?.closest('.roi-input-group')?.querySelector('.roi-lbl');
+    if (subExtraLbl) subExtraLbl.textContent = AR ? '⏱️ ساعات استشارية إضافية' : '⏱️ Extra Consulting Hours';
+    const subHourlyLbl = document.querySelector('span[style*="rgba(255,255,255,.55)"]');
+    if (subHourlyLbl && (subHourlyLbl.textContent.includes('Hourly') || subHourlyLbl.textContent.includes('ساعة')))
+      subHourlyLbl.textContent = AR ? '💵 سعر الساعة (USD)' : '💵 Hourly rate (USD)';
+
+    // Cost Breakdown box
+    const subCostBreakdownLbl = document.querySelector('#subResultBox div[style*="letter-spacing"]');
+    if (subCostBreakdownLbl) subCostBreakdownLbl.textContent = AR ? '📋 تفاصيل التكلفة' : '📋 Cost Breakdown';
+    const subMonthlyLbl = document.querySelector('#subResultBox span[style*="font-size:13px"]');
+    if (subMonthlyLbl && (subMonthlyLbl.textContent.includes('Monthly') || subMonthlyLbl.textContent.includes('الشهري')))
+      subMonthlyLbl.textContent = AR ? 'الإجمالي الشهري' : 'Monthly Total';
+    const subAnnualLbl = document.querySelector('#subResultBox span[style*="rgba(255,255,255,.45)"]:first-of-type');
+    if (subAnnualLbl && (subAnnualLbl.textContent.includes('Annual') || subAnnualLbl.textContent.includes('سنوي')))
+      subAnnualLbl.textContent = AR ? 'الاشتراك السنوي (شامل الاستضافة)' : 'Annual (subscription + hosting)';
+    // Extra hours label
+    const subExtraCostLbl = document.querySelector('span[id="subExtraCost"]')?.previousElementSibling;
+    if (subExtraCostLbl && (subExtraCostLbl.textContent.includes('Extra hours') || subExtraCostLbl.textContent.includes('ساعات إضافية')))
+      subExtraCostLbl.textContent = AR ? 'تكلفة ساعات إضافية (مرة واحدة)' : 'Extra hours cost (one-time)';
+    // Total Year 1
+    const subY1Lbl = document.querySelector('span[style*="font-size:12px;font-weight:800;color:rgba(255,255,255,.9)"]');
+    if (subY1Lbl && (subY1Lbl.textContent.includes('Total Year') || subY1Lbl.textContent.includes('إجمالي السنة')))
+      subY1Lbl.textContent = AR ? 'إجمالي الاستثمار في السنة الأولى' : 'Total Year 1 Investment';
+
+    // Action buttons
+    const subViewPricingBtn = document.querySelector('a[href*="odoo.com/pricing"]:not([href*="packs"])');
+    if (subViewPricingBtn && subViewPricingBtn.closest('#subResultBox') === null)
+      subViewPricingBtn.textContent = AR ? '📊 عرض تسعير أودو الرسمي ↗' : '📊 View Official Odoo Pricing ↗';
+    const subExplorePacksBtn = document.querySelector('a[href*="pricing-packs"]');
+    if (subExplorePacksBtn) subExplorePacksBtn.textContent = AR ? '🎯 استعراض باقات النجاح ↗' : '🎯 Explore Success Packs ↗';
+    const subBackBtn = document.querySelector('button[onclick*="roiSwitchTab(3)"]');
+    if (subBackBtn) subBackBtn.textContent = AR ? '→ العودة للاستثمار' : '← Back to Investment';
+
+    // Pack section labels
+    const subNewCustLabel = document.querySelector('#subNewCustomer')?.closest('label');
+    if (subNewCustLabel) {
+      const txt = subNewCustLabel.childNodes[subNewCustLabel.childNodes.length - 1];
+      if (txt && txt.nodeType === 3) txt.textContent = AR ? ' عميل جديد (خصم 15% على باقة النجاح)' : ' New customer (15% off on Success Pack)';
+    }
+    const subSelectPackLbl = document.querySelector('#implPackSection span[style*="rgba(255,255,255,.55)"]');
+    if (subSelectPackLbl) subSelectPackLbl.textContent = AR ? 'اختر باقة النجاح' : 'Select your Success Pack';
 
   }
 
@@ -7259,6 +7443,29 @@ function openRoiEmailModal() {
   // Reset button state
   const btn = document.getElementById('roiEmailSendBtn');
   if (btn) { btn.disabled = false; btn.textContent = '📧 Send ROI Report'; }
+
+  // ── Auto-sync Industry from active ROI pill ──
+  const indEl = document.getElementById('emailIndustry');
+  if (indEl) {
+    const activeBtn = document.querySelector('#roiIndustryPills .roi-ind-btn.active');
+    if (activeBtn) {
+      const ind = activeBtn.getAttribute('data-ind') || '';
+      const indMap = {
+        manufacturing: 'Manufacturing',
+        construction:  'Construction & Real Estate',
+        retail_fnb:    'Food & Beverage',
+        logistics:     'Logistics & Transport',
+        services:      'Services & Consulting',
+        real_estate:   'Construction & Real Estate',
+        trading:       'Trading & Distribution',
+        healthcare:    'Healthcare & Pharma',
+      };
+      const mapped = indMap[ind] || 'General Business';
+      for (let i = 0; i < indEl.options.length; i++) {
+        if (indEl.options[i].value === mapped) { indEl.selectedIndex = i; break; }
+      }
+    }
+  }
 }
 
 function closeRoiEmailModal() {
@@ -7650,19 +7857,19 @@ document.addEventListener('keydown', function(e){
 // ══════════════════════════════════════════════════════════════════════════
 
 const SUB_COUNTRIES = {
-  EG: { name:'Egypt', currency:'EGP', symbol:'EGP', rate:50.5,   salaryNote:'Average IT salary ~EGP 25–60K/mo', taxNote:'No VAT on SaaS services (may apply)', color:'#017E84' },
-  SA: { name:'Saudi Arabia', currency:'SAR', symbol:'SAR', rate:3.75, salaryNote:'Average IT salary ~SAR 8–18K/mo', taxNote:'15% VAT applies on Odoo subscription', color:'#1d5091' },
-  AE: { name:'UAE', currency:'AED', symbol:'AED', rate:3.67, salaryNote:'Average IT salary ~AED 8–20K/mo', taxNote:'5% VAT may apply', color:'#714B67' },
-  KW: { name:'Kuwait', currency:'KWD', symbol:'KWD', rate:0.31, salaryNote:'Average IT salary ~KWD 700–1,800/mo', taxNote:'No VAT currently', color:'#d4a843' },
-  QA: { name:'Qatar', currency:'QAR', symbol:'QAR', rate:3.64, salaryNote:'Average IT salary ~QAR 6–18K/mo', taxNote:'No VAT currently', color:'#017E84' },
-  BH: { name:'Bahrain', currency:'BHD', symbol:'BHD', rate:0.376, salaryNote:'Average IT salary ~BHD 400–900/mo', taxNote:'10% VAT applies', color:'#1d5091' },
-  OM: { name:'Oman', currency:'OMR', symbol:'OMR', rate:0.384, salaryNote:'Average IT salary ~OMR 400–1,000/mo', taxNote:'5% VAT applies', color:'#017E84' },
-  JO: { name:'Jordan', currency:'JOD', symbol:'JOD', rate:0.709, salaryNote:'Average IT salary ~JOD 500–1,200/mo', taxNote:'16% GST may apply', color:'#714B67' },
-  MA: { name:'Morocco', currency:'MAD', symbol:'MAD', rate:10.2, salaryNote:'Average IT salary ~MAD 6–15K/mo', taxNote:'20% VAT applies', color:'#d4a843' },
-  US: { name:'United States', currency:'USD', symbol:'$', rate:1, salaryNote:'Average IT salary ~$70–130K/yr', taxNote:'State sales tax may apply', color:'#1d5091' },
-  GB: { name:'United Kingdom', currency:'GBP', symbol:'£', rate:0.79, salaryNote:'Average IT salary ~£35–80K/yr', taxNote:'20% VAT applies', color:'#017E84' },
-  EU: { name:'Europe', currency:'EUR', symbol:'€', rate:0.92, salaryNote:'Average IT salary ~€35–75K/yr', taxNote:'VAT varies by country (19–25%)', color:'#714B67' },
-  OTHER: { name:'Other Region', currency:'USD', symbol:'$', rate:1, salaryNote:'Consult local Odoo partner for pricing', taxNote:'Local taxes may apply', color:'#017E84' },
+  EG: { name:'Egypt',         nameAr:'مصر',           currency:'EGP', symbol:'EGP', rate:50.5,   salaryNote:'Average IT salary ~EGP 25–60K/mo',        salaryNoteAr:'متوسط راتب IT ~25–60 ألف جنيه/شهر',  taxNote:'No VAT on SaaS services (may apply)',              taxNoteAr:'لا ضريبة VAT على خدمات SaaS (قد تُطبق)', color:'#017E84' },
+  SA: { name:'Saudi Arabia',  nameAr:'السعودية',      currency:'SAR', symbol:'SAR', rate:3.75,  salaryNote:'Average IT salary ~SAR 8–18K/mo',          salaryNoteAr:'متوسط راتب IT ~8–18 ألف ريال/شهر',   taxNote:'15% VAT applies on Odoo subscription',             taxNoteAr:'ضريبة VAT 15% على اشتراك أودو',          color:'#1d5091' },
+  AE: { name:'UAE',           nameAr:'الإمارات',      currency:'AED', symbol:'AED', rate:3.67,  salaryNote:'Average IT salary ~AED 8–20K/mo',          salaryNoteAr:'متوسط راتب IT ~8–20 ألف درهم/شهر',   taxNote:'5% VAT may apply',                                 taxNoteAr:'ضريبة VAT 5% قد تُطبق',                  color:'#714B67' },
+  KW: { name:'Kuwait',        nameAr:'الكويت',        currency:'KWD', symbol:'KWD', rate:0.31,  salaryNote:'Average IT salary ~KWD 700–1,800/mo',      salaryNoteAr:'متوسط راتب IT ~700–1800 دينار/شهر',  taxNote:'No VAT currently',                                 taxNoteAr:'لا ضريبة VAT حالياً',                    color:'#d4a843' },
+  QA: { name:'Qatar',         nameAr:'قطر',           currency:'QAR', symbol:'QAR', rate:3.64,  salaryNote:'Average IT salary ~QAR 6–18K/mo',          salaryNoteAr:'متوسط راتب IT ~6–18 ألف ريال/شهر',   taxNote:'No VAT currently',                                 taxNoteAr:'لا ضريبة VAT حالياً',                    color:'#017E84' },
+  BH: { name:'Bahrain',       nameAr:'البحرين',       currency:'BHD', symbol:'BHD', rate:0.376, salaryNote:'Average IT salary ~BHD 400–900/mo',        salaryNoteAr:'متوسط راتب IT ~400–900 دينار/شهر',   taxNote:'10% VAT applies',                                  taxNoteAr:'ضريبة VAT 10% مطبقة',                    color:'#1d5091' },
+  OM: { name:'Oman',          nameAr:'عُمان',          currency:'OMR', symbol:'OMR', rate:0.384, salaryNote:'Average IT salary ~OMR 400–1,000/mo',      salaryNoteAr:'متوسط راتب IT ~400–1000 ريال/شهر',   taxNote:'5% VAT applies',                                   taxNoteAr:'ضريبة VAT 5% مطبقة',                     color:'#017E84' },
+  JO: { name:'Jordan',        nameAr:'الأردن',         currency:'JOD', symbol:'JOD', rate:0.709, salaryNote:'Average IT salary ~JOD 500–1,200/mo',      salaryNoteAr:'متوسط راتب IT ~500–1200 دينار/شهر',  taxNote:'16% GST may apply',                                taxNoteAr:'ضريبة مبيعات 16% قد تُطبق',              color:'#714B67' },
+  MA: { name:'Morocco',       nameAr:'المغرب',         currency:'MAD', symbol:'MAD', rate:10.2,  salaryNote:'Average IT salary ~MAD 6–15K/mo',          salaryNoteAr:'متوسط راتب IT ~6–15 ألف درهم/شهر',   taxNote:'20% VAT applies',                                  taxNoteAr:'ضريبة VAT 20% مطبقة',                    color:'#d4a843' },
+  US: { name:'United States', nameAr:'الولايات المتحدة', currency:'USD', symbol:'$', rate:1,   salaryNote:'Average IT salary ~$70–130K/yr',           salaryNoteAr:'متوسط راتب IT ~70–130 ألف دولار/سنة',taxNote:'State sales tax may apply',                        taxNoteAr:'ضريبة مبيعات حسب الولاية',               color:'#1d5091' },
+  GB: { name:'United Kingdom',nameAr:'المملكة المتحدة', currency:'GBP', symbol:'£',  rate:0.79,  salaryNote:'Average IT salary ~£35–80K/yr',            salaryNoteAr:'متوسط راتب IT ~35–80 ألف جنيه/سنة',  taxNote:'20% VAT applies',                                  taxNoteAr:'ضريبة VAT 20% مطبقة',                    color:'#017E84' },
+  EU: { name:'Europe',        nameAr:'أوروبا',         currency:'EUR', symbol:'€',   rate:0.92,  salaryNote:'Average IT salary ~€35–75K/yr',            salaryNoteAr:'متوسط راتب IT ~35–75 ألف يورو/سنة',  taxNote:'VAT varies by country (19–25%)',                    taxNoteAr:'الضريبة تتفاوت حسب الدولة (19–25%)',      color:'#714B67' },
+  OTHER: { name:'Other Region',nameAr:'منطقة أخرى',   currency:'USD', symbol:'$',   rate:1,      salaryNote:'Consult local Odoo partner for pricing',   salaryNoteAr:'تواصل مع شريك أودو المحلي للتسعير',  taxNote:'Local taxes may apply',                            taxNoteAr:'قد تُطبق ضرائب محلية',                   color:'#017E84' },
 };
 
 const SUB_PACKS = {
@@ -7708,7 +7915,8 @@ function refreshPlanButtons() {
   else if (subPlanKey === 'custom') subPlanPrice = p.cus;
   // Show pricelist note
   const noteEl = document.getElementById('subPricelistNote');
-  if (noteEl) noteEl.textContent = '📌 ' + p.label + ' · source: oec.sh';
+  const AR7pl = document.documentElement.getAttribute('data-lang') === 'ar';
+  if (noteEl) noteEl.textContent = '📌 ' + p.label + (AR7pl ? ' · المصدر: oec.sh' : ' · source: oec.sh');
 }
 
 // State
@@ -7923,7 +8131,9 @@ function subCalc() {
   document.getElementById('subUsersVal').textContent = users;
   document.getElementById('subExtraHrsVal').textContent = extraHrs + ' hrs';
   document.getElementById('subCurrencyBadge').textContent = country.currency;
-  document.getElementById('subPlanBadge').textContent = subPlanKey === 'free' ? 'Free' : subPlanKey === 'standard' ? 'Standard' : 'Custom';
+  document.getElementById('subPlanBadge').textContent = AR7
+    ? (subPlanKey === 'free' ? 'مجانية' : subPlanKey === 'standard' ? 'ستاندرد' : 'مخصص')
+    : (subPlanKey === 'free' ? 'Free' : subPlanKey === 'standard' ? 'Standard' : 'Custom');
   const AR7 = document.documentElement.getAttribute('data-lang') === 'ar';
   document.getElementById('subHostBadge').textContent = subHostKey === 'saas'
     ? (AR7 ? 'Odoo.com SaaS' : 'Odoo.com SaaS')
@@ -7933,7 +8143,7 @@ function subCalc() {
 
   // Country info box
   const infoEl = document.getElementById('subCountryInfo');
-  infoEl.innerHTML = '🏦 <strong style="color:var(--teal-mid)">' + country.name + '</strong> · ' + country.taxNote + '<br>💼 ' + country.salaryNote;
+  infoEl.innerHTML = '🏦 <strong style="color:var(--teal-mid)">' + (AR7 && country.nameAr ? country.nameAr : country.name) + '</strong> · ' + (AR7 && country.taxNoteAr ? country.taxNoteAr : country.taxNote) + '<br>💼 ' + (AR7 && country.salaryNoteAr ? country.salaryNoteAr : country.salaryNote);
 
   // On-Premise cost resolution
   let hostingMonthly = subHostCost;
@@ -8033,22 +8243,32 @@ function subCalc() {
 
   // Update impl label in result box
   const implLabelEl = document.getElementById('subImplLabel');
-  if (implLabelEl) implLabelEl.textContent = subImplMode === 'pack' ? 'Implementation · Success Pack (one-time)' : 'Implementation · Local Partner (one-time)';
+  if (implLabelEl) implLabelEl.textContent = AR7
+    ? (subImplMode === 'pack' ? 'التطبيق · باقة النجاح (مرة واحدة)' : 'التطبيق · شريك محلي (مرة واحدة)')
+    : (subImplMode === 'pack' ? 'Implementation · Success Pack (one-time)' : 'Implementation · Local Partner (one-time)');
 
   // Result rows
   const rows = [
-    { label: '📱 License (' + users + ' users × $' + subPlanPrice.toFixed(2) + ')', value: licenseMonthly > 0 ? fmtU(licenseMonthly) + '/mo' : '$0 (Free)', color: 'var(--teal-mid)' },
-    { label: '☁️ Hosting (' + (subHostKey === 'saas' ? 'Included in plan' : subHostKey === 'sh' ? 'Odoo.sh' : premiseIsMonthly ? 'On-Premise monthly' : 'On-Premise · Purchase=True') + ')',
+    { label: AR7
+        ? ('📱 الترخيص (' + users + ' مستخدم × $' + subPlanPrice.toFixed(2) + ')')
+        : ('📱 License (' + users + ' users × $' + subPlanPrice.toFixed(2) + ')'),
+      value: licenseMonthly > 0 ? fmtU(licenseMonthly) + '/mo' : '$0 (Free)', color: 'var(--teal-mid)' },
+    { label: AR7
+        ? ('☁️ الاستضافة (' + (subHostKey === 'saas' ? 'مشمولة في الخطة' : subHostKey === 'sh' ? 'Odoo.sh' : premiseIsMonthly ? 'محلي شهري' : 'محلي · شراء') + ')')
+        : ('☁️ Hosting (' + (subHostKey === 'saas' ? 'Included in plan' : subHostKey === 'sh' ? 'Odoo.sh' : premiseIsMonthly ? 'On-Premise monthly' : 'On-Premise · Purchase=True') + ')'),
       value: subHostKey === 'premise' && !premiseIsMonthly
-        ? (premisePurchaseCost > 0 ? fmtU(premisePurchaseCost) + (premiseInstallNote ? ' (' + premiseInstallNote + ')' : ' one-time') : '$0')
+        ? (premisePurchaseCost > 0 ? fmtU(premisePurchaseCost) + (premiseInstallNote ? ' (' + premiseInstallNote + ')' : (AR7 ? ' لمرة واحدة' : ' one-time')) : '$0')
         : (hostingMonthly > 0 ? fmtU(hostingMonthly) + '/mo' : '$0/mo'),
       color: (subHostKey === 'premise' && !premiseIsMonthly) ? 'var(--gold)' : hostingMonthly > 0 ? 'var(--gold)' : 'var(--teal-mid)' },
-    { label: implLabel + (subImplMode === 'pack' && extraHrs > 0 ? ' + ' + extraHrs.toLocaleString() + ' extra hrs' : ''),
-      value: implCostUSD > 0 ? fmtU(implCostUSD) + ' one-time' : '$0',
+    { label: implLabel + (subImplMode === 'pack' && extraHrs > 0 ? ' + ' + extraHrs.toLocaleString() + (AR7 ? ' ساعة إضافية' : ' extra hrs') : ''),
+      value: implCostUSD > 0 ? fmtU(implCostUSD) + (AR7 ? ' لمرة واحدة' : ' one-time') : '$0',
       color: 'rgba(255,255,255,.75)' },
   ];
   if (extraHrs > 0) {
-    rows.push({ label: '⏱️ Extra Hours · ' + extraHrs.toLocaleString() + ' × $' + hourlyRate + '/hr', value: fmtU(extraCostUSD) + ' one-time', color: 'rgba(255,255,255,.75)' });
+    rows.push({ label: AR7
+      ? ('⏱️ ساعات إضافية · ' + extraHrs.toLocaleString() + ' × $' + hourlyRate + '/ساعة')
+      : ('⏱️ Extra Hours · ' + extraHrs.toLocaleString() + ' × $' + hourlyRate + '/hr'),
+      value: fmtU(extraCostUSD) + (AR7 ? ' لمرة واحدة' : ' one-time'), color: 'rgba(255,255,255,.75)' });
   }
 
   const rowsEl = document.getElementById('subResultRows');
@@ -8067,20 +8287,19 @@ function subCalc() {
 
   // Local currency equivalent
   const localEl = document.getElementById('subLocalEquiv');
-  const AR_sub = document.documentElement.getAttribute('data-lang') === 'ar';
   if (country.rate !== 1) {
     localEl.style.display = '';
-    localEl.innerHTML = AR_sub
-      ? '🔄 <strong style="color:var(--teal-mid)">المكافئ المحلي (' + country.currency + ')</strong><br>' +
-        'شهرياً: <strong>' + country.symbol + ' ' + Math.round(totalMonthlyUSD * country.rate).toLocaleString() + '</strong> · ' +
-        'الاشتراك السنوي: <strong>' + country.symbol + ' ' + Math.round(annualSubUSD * country.rate).toLocaleString() + '</strong> · ' +
-        'إجمالي السنة الأولى: <strong>' + country.symbol + ' ' + Math.round(year1USD * country.rate).toLocaleString() + '</strong><br>' +
-        '<span style="opacity:.6;font-size:10px;">سعر تقريبي: 1 USD = ' + country.rate + ' ' + country.currency + ' · تحقق مع بنكك</span>'
-      : '🔄 <strong style="color:var(--teal-mid)">Local Equivalent (' + country.currency + ')</strong><br>' +
-        'Monthly: <strong>' + country.symbol + ' ' + Math.round(totalMonthlyUSD * country.rate).toLocaleString() + '</strong> · ' +
-        'Annual subscription: <strong>' + country.symbol + ' ' + Math.round(annualSubUSD * country.rate).toLocaleString() + '</strong> · ' +
-        'Year 1 total: <strong>' + country.symbol + ' ' + Math.round(year1USD * country.rate).toLocaleString() + '</strong><br>' +
-        '<span style="opacity:.6;font-size:10px;">Approx. rate: 1 USD = ' + country.rate + ' ' + country.currency + ' · Verify with your bank</span>';
+    localEl.innerHTML = AR7
+      ? ('🔄 <strong style="color:var(--teal-mid)">المكافئ المحلي (' + country.currency + ')</strong><br>' +
+         'الشهري: <strong>' + country.symbol + ' ' + Math.round(totalMonthlyUSD * country.rate).toLocaleString() + '</strong> · ' +
+         'الاشتراك السنوي: <strong>' + country.symbol + ' ' + Math.round(annualSubUSD * country.rate).toLocaleString() + '</strong> · ' +
+         'إجمالي السنة الأولى: <strong>' + country.symbol + ' ' + Math.round(year1USD * country.rate).toLocaleString() + '</strong><br>' +
+         '<span style="opacity:.6;font-size:10px;">السعر التقريبي: 1 USD = ' + country.rate + ' ' + country.currency + ' · تحقق مع بنكك</span>')
+      : ('🔄 <strong style="color:var(--teal-mid)">Local Equivalent (' + country.currency + ')</strong><br>' +
+         'Monthly: <strong>' + country.symbol + ' ' + Math.round(totalMonthlyUSD * country.rate).toLocaleString() + '</strong> · ' +
+         'Annual subscription: <strong>' + country.symbol + ' ' + Math.round(annualSubUSD * country.rate).toLocaleString() + '</strong> · ' +
+         'Year 1 total: <strong>' + country.symbol + ' ' + Math.round(year1USD * country.rate).toLocaleString() + '</strong><br>' +
+         '<span style="opacity:.6;font-size:10px;">Approx. rate: 1 USD = ' + country.rate + ' ' + country.currency + ' · Verify with your bank</span>');
   } else {
     localEl.style.display = 'none';
   }
@@ -8090,12 +8309,13 @@ function subCalc() {
   const roiSavingsEl = document.getElementById('roiSavings');
   if (roiSavingsEl) {
     hintEl.style.display = '';
-    const paybackLabel = year1USD < 30000 ? (AR_sub ? '6–14 شهراً' : '6–14 months') : year1USD < 80000 ? (AR_sub ? '12–24 شهراً' : '12–24 months') : (AR_sub ? '18–36 شهراً' : '18–36 months');
-    hintEl.innerHTML = AR_sub
-      ? '💡 <strong style="color:var(--gold)">رؤية العائد على الاستثمار:</strong> استثمارك في السنة الأولى <strong>' + fmtU(year1USD) + '</strong> · ' +
-        'أضف حساب العائد في التبويبات 1-3 لمعرفة فترة الاسترداد الدقيقة. فترة استرداد نموذجية لهذا الإعداد: <strong>' + paybackLabel + '</strong>.'
-      : '💡 <strong style="color:var(--gold)">ROI Insight:</strong> Your Year 1 investment of <strong>' + fmtU(year1USD) + '</strong> · ' +
-        'Add your ROI calculation in Tab 1–3 to see exact payback period. Typical payback for this setup: <strong>' + paybackLabel + '</strong>.';
+    hintEl.innerHTML = AR7
+      ? ('💡 <strong style="color:var(--gold)">نظرة ROI:</strong> استثمارك في السنة الأولى <strong>' + fmtU(year1USD) + '</strong> · ' +
+         'أضف حسابات ROI في التبويبات 1–3 لمعرفة فترة الاسترداد الدقيقة. الاسترداد المعتاد لهذا الإعداد: <strong>' +
+         (year1USD < 30000 ? '6–14 شهراً' : year1USD < 80000 ? '12–24 شهراً' : '18–36 شهراً') + '</strong>.')
+      : ('💡 <strong style="color:var(--gold)">ROI Insight:</strong> Your Year 1 investment of <strong>' + fmtU(year1USD) + '</strong> · ' +
+         'Add your ROI calculation in Tab 1–3 to see exact payback period. Typical payback for this setup: <strong>' +
+         (year1USD < 30000 ? '6–14 months' : year1USD < 80000 ? '12–24 months' : '18–36 months') + '</strong>.');
   }
 
   // Sync subscription annual cost → roiSub (Y2+ original) + roiSubY1 (Y1 discounted)
