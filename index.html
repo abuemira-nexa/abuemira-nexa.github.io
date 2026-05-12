@@ -6722,6 +6722,144 @@ function closeRecModal() {
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeRecModal(); });
+
+/* ══════════════════════════════════════════
+   EMAIL ROI REPORT — Modal Functions
+   ══════════════════════════════════════════ */
+
+function openRoiEmailModal() {
+  const modal = document.getElementById('roiEmailModal');
+  if (!modal) return;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Reset to form view
+  const success = document.getElementById('roiEmailSuccess');
+  const body    = document.getElementById('roiEmailModalBody');
+  if (success) success.style.display = 'none';
+  if (body)    body.style.display    = '';
+  // Reset button state
+  const btn = document.getElementById('roiEmailSendBtn');
+  if (btn) { btn.disabled = false; btn.textContent = '📧 Send ROI Report'; }
+}
+
+function closeRoiEmailModal() {
+  const modal = document.getElementById('roiEmailModal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function toggleEmailPreview(btn) {
+  const box = document.getElementById('roiEmailPreviewBox');
+  if (!box) return;
+  const isOpen = box.style.display === 'block';
+  if (isOpen) {
+    box.style.display = 'none';
+    btn.textContent = '👁 Preview Email Content';
+  } else {
+    box.style.display = 'block';
+    btn.textContent = '🔼 Hide Preview';
+    const name    = (document.getElementById('emailCustomerName')  || {}).value || '(Customer Name)';
+    const company = (document.getElementById('emailCompanyName')   || {}).value || '';
+    const industry= (document.getElementById('emailIndustry')      || {}).value || 'General Business';
+    const note    = (document.getElementById('emailNote')          || {}).value || '';
+    const roiEl   = document.getElementById('roiResultNum') || document.querySelector('.roi-result-num');
+    const roiVal  = roiEl ? roiEl.textContent.trim() : 'N/A';
+
+    box.innerHTML = `
+      <div style="font-size:13px;line-height:1.8;color:var(--gray-600);background:#f8fafc;border:1px solid var(--gray-200);border-radius:10px;padding:18px;margin-top:8px;">
+        <strong>To:</strong> ${name}${company ? ' — ' + company : ''}<br>
+        <strong>Subject:</strong> Your Personalised Odoo ERP ROI Report — Nexa Solutions<br><br>
+        Dear ${name},<br><br>
+        ${note ? note + '<br><br>' : ''}
+        Based on your <strong>${industry}</strong> profile, we have prepared a tailored ROI analysis for your Odoo ERP implementation.<br><br>
+        📊 <strong>Estimated ROI: ${roiVal}%</strong><br><br>
+        This analysis is based on 79+ real implementations across Egypt &amp; GCC.<br><br>
+        Best regards,<br>
+        <strong>Mohamed Essam Abu Emira</strong><br>
+        COO &amp; Co-Founder — Nexa Solutions<br>
+        📞 +20 1111 282 228
+      </div>`;
+  }
+}
+
+async function sendRoiEmail() {
+  const nameEl    = document.getElementById('emailCustomerName');
+  const emailEl   = document.getElementById('emailCustomerEmail');
+  const companyEl = document.getElementById('emailCompanyName');
+  const indEl     = document.getElementById('emailIndustry');
+  const noteEl    = document.getElementById('emailNote');
+  const btn       = document.getElementById('roiEmailSendBtn');
+
+  const name    = nameEl    ? nameEl.value.trim()    : '';
+  const email   = emailEl   ? emailEl.value.trim()   : '';
+  const company = companyEl ? companyEl.value.trim() : '';
+  const industry= indEl     ? indEl.value            : 'General Business';
+  const note    = noteEl    ? noteEl.value.trim()    : '';
+
+  if (!name)  { alert('Please enter the customer name.');  return; }
+  if (!email) { alert('Please enter the customer email.'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert('Please enter a valid email address.'); return;
+  }
+
+  const roiEl  = document.getElementById('roiResultNum') || document.querySelector('.roi-result-num');
+  const roiVal = roiEl ? roiEl.textContent.trim() : 'N/A';
+
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Sending...'; }
+
+  // ── WEB3FORMS ─────────────────────────────────────────────────────────────
+  const WEB3FORMS_KEY = '44d65de7-def8-4eaa-a67e-c303a9f539f4';
+
+  const payload = {
+    access_key   : WEB3FORMS_KEY,
+    subject      : 'Odoo ROI Report for ' + name + (company ? ' — ' + company : ''),
+    from_name    : 'Nexa Solutions — ROI Report',
+    replyto      : email,
+    customerName : name,
+    customerEmail: email,
+    companyName  : company  || '—',
+    industry     : industry,
+    personalNote : note     || '—',
+    estimatedROI : roiVal + '%',
+  };
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method : 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body   : JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (!res.ok || data.success === false) throw new Error(data.message || 'Web3Forms error ' + res.status);
+
+    // Show success
+    const body    = document.getElementById('roiEmailModalBody');
+    const success = document.getElementById('roiEmailSuccess');
+    const msg     = document.getElementById('roiEmailSuccessMsg');
+    if (body)    body.style.display    = 'none';
+    if (success) success.style.display = 'flex';
+    if (msg)     msg.textContent       = 'The ROI report has been emailed to ' + email + '.';
+
+  } catch (err) {
+    console.error('sendRoiEmail:', err);
+    if (btn) { btn.disabled = false; btn.textContent = '📧 Send ROI Report'; }
+    alert('Failed to send the report. Please try again.\n\n' + err.message);
+  }
+}
+
+// Close email modal on overlay click or Escape
+document.addEventListener('DOMContentLoaded', function() {
+  const overlay = document.getElementById('roiEmailModal');
+  if (overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeRoiEmailModal();
+    });
+  }
+});
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeRoiEmailModal();
+});
 </script>
 </body>
 </html>
