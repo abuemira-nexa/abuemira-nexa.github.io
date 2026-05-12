@@ -31,6 +31,15 @@
 <meta name="twitter:description" content="Odoo 16·17·18 Certified · 79+ ERP Projects Delivered · Egypt & GCC">
 <meta name="twitter:image" content="https://abuemira-nexa.github.io/assets/img/abu-emira.jpg">
 
+<!-- ══ EMAILJS SDK ══ -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ⚠️ استبدل القيم دي بـ credentials بتاعتك من emailjs.com
+  (function(){
+    emailjs.init({ publicKey: '25vlRu4_NX8nqhixM' });
+  })();
+</script>
+
 <!-- ══ GOOGLE ANALYTICS GA4 ══ -->
 <!-- Google Analytics GA4 — G-SDDL0C7ST3 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SDDL0C7ST3"></script>
@@ -7026,73 +7035,57 @@ async function sendRoiEmail() {
 </div><!-- /page -->
 </body></html>`;
 
-  // ── WEB3FORMS — إرسال للعميل ──────────────────────────────────────────────
-  const WEB3FORMS_KEY = '44d65de7-def8-4eaa-a67e-c303a9f539f4';
+  // ── EMAILJS — إرسال للعميل + نسخة لك ──────────────────────────────────────
+  // ⚠️ استبدل القيم دي بـ credentials بتاعتك من emailjs.com
+  const EMAILJS_SERVICE_ID  = 'service_y8ugz7e';
+  const EMAILJS_TEMPLATE_ID = 'template_ws1g0p2';
+  const MY_EMAIL            = 'abuemira.nexa@gmail.com';
+
+  // نسخة CC للمدير (أنت)
+  const ccSummary = `
+    <div style="font-family:Arial,sans-serif;padding:20px;max-width:600px;margin:0 auto;">
+      <div style="background:#017E84;color:#fff;padding:16px 20px;border-radius:8px 8px 0 0;">
+        <strong style="font-size:15px;">✅ ROI Report Sent to Customer</strong>
+      </div>
+      <div style="border:1px solid #e2e8f0;border-top:none;padding:20px;border-radius:0 0 8px 8px;">
+        <table style="width:100%;font-size:13px;line-height:2;">
+          <tr><td style="color:#64748b;width:140px;">Customer Name</td><td><strong>${custName}</strong></td></tr>
+          <tr><td style="color:#64748b;">Customer Email</td><td>${custEmail}</td></tr>
+          <tr><td style="color:#64748b;">Company</td><td>${company || '—'}</td></tr>
+          <tr><td style="color:#64748b;">Industry</td><td>${industry}</td></tr>
+          <tr><td style="color:#64748b;">Annual Savings</td><td><strong style="color:#017E84;">${d ? d.fSavings : '—'}</strong></td></tr>
+          <tr><td style="color:#64748b;">3-Year ROI</td><td><strong style="color:#017E84;">${d ? d.fRoi3 : '—'}</strong></td></tr>
+          <tr><td style="color:#64748b;">Net Value Y1–Y3</td><td><strong>${d ? d.fNet3 : '—'}</strong></td></tr>
+          <tr><td style="color:#64748b;">Payback Period</td><td>${d ? d.fPayback : '—'}</td></tr>
+          ${note ? `<tr><td style="color:#64748b;">Personal Note</td><td style="font-style:italic;">"${note}"</td></tr>` : ''}
+          <tr><td style="color:#64748b;">Sent At</td><td>${today}</td></tr>
+        </table>
+      </div>
+    </div>`;
 
   try {
-    // إرسال 1: للعميل
-    const res1 = await fetch('https://api.web3forms.com/submit', {
-      method : 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body   : JSON.stringify({
-        access_key : WEB3FORMS_KEY,
-        subject    : `Your Personalised Odoo ERP ROI Report — Nexa Solutions`,
-        from_name  : 'Mohamed Abu Emira — Nexa Solutions',
-        to         : custEmail,
-        replyto    : 'abuemira@nexa-solutions.com',
-        html       : htmlBody,
-        // fallback plain text
-        message    : `Dear ${custName},
-
-Please find your personalised Odoo ERP ROI Analysis below.
-
-Industry: ${industry}
-Annual Savings: ${d ? d.fSavings : '—'}
-Payback Period: ${d ? d.fPayback : '—'}
-3-Year ROI: ${d ? d.fRoi3 : '—'}
-Net Value Y1–Y3: ${d ? d.fNet3 : '—'}
-
-Best regards,
-Mohamed Essam Abu Emira
-COO & Co-Founder — Nexa Solutions
-+20 100 506 1349`,
-      }),
+    // إرسال 1: للعميل — الريبورت الكامل
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email    : custEmail,
+      to_name     : custName,
+      from_name   : 'Mohamed Abu Emira — Nexa Solutions',
+      reply_to    : MY_EMAIL,
+      subject     : `Your Personalised Odoo ERP ROI Report — Nexa Solutions`,
+      html_body   : htmlBody,
+      // Plain text fallback
+      message     : `Dear ${custName},\n\nPlease find your personalised Odoo ERP ROI Analysis below.\n\nIndustry: ${industry}\nAnnual Savings: ${d ? d.fSavings : '—'}\nPayback Period: ${d ? d.fPayback : '—'}\n3-Year ROI: ${d ? d.fRoi3 : '—'}\nNet Value Y1–Y3: ${d ? d.fNet3 : '—'}\n\nBest regards,\nMohamed Essam Abu Emira\nCOO & Co-Founder — Nexa Solutions\n+20 100 506 1349`,
     });
-    const data1 = await res1.json();
-    if (!res1.ok || data1.success === false) throw new Error(data1.message || 'Send to customer failed');
 
-    // إرسال 2: نسخة لك
-    const res2 = await fetch('https://api.web3forms.com/submit', {
-      method : 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body   : JSON.stringify({
-        access_key   : WEB3FORMS_KEY,
-        subject      : `[ROI Report Sent] ${custName}${company ? ' — ' + company : ''} · ${industry}`,
-        from_name    : 'Nexa Solutions — ROI Report',
-        replyto      : custEmail,
-        html         : `<div style="font-family:Arial,sans-serif;padding:20px;max-width:600px;margin:0 auto;">
-          <div style="background:#017E84;color:#fff;padding:16px 20px;border-radius:8px 8px 0 0;">
-            <strong style="font-size:15px;">✅ ROI Report Sent to Customer</strong>
-          </div>
-          <div style="border:1px solid #e2e8f0;border-top:none;padding:20px;border-radius:0 0 8px 8px;">
-            <table style="width:100%;font-size:13px;line-height:2;">
-              <tr><td style="color:#64748b;width:140px;">Customer Name</td><td><strong>${custName}</strong></td></tr>
-              <tr><td style="color:#64748b;">Customer Email</td><td><a href="mailto:${custEmail}" style="color:#017E84;">${custEmail}</a></td></tr>
-              <tr><td style="color:#64748b;">Company</td><td>${company || '—'}</td></tr>
-              <tr><td style="color:#64748b;">Industry</td><td>${industry}</td></tr>
-              <tr><td style="color:#64748b;">Annual Savings</td><td><strong style="color:#017E84;">${d ? d.fSavings : '—'}</strong></td></tr>
-              <tr><td style="color:#64748b;">3-Year ROI</td><td><strong style="color:#017E84;">${d ? d.fRoi3 : '—'}</strong></td></tr>
-              <tr><td style="color:#64748b;">Net Value Y1–Y3</td><td><strong>${d ? d.fNet3 : '—'}</strong></td></tr>
-              <tr><td style="color:#64748b;">Payback Period</td><td>${d ? d.fPayback : '—'}</td></tr>
-              ${note ? `<tr><td style="color:#64748b;">Personal Note</td><td style="font-style:italic;">"${note}"</td></tr>` : ''}
-              <tr><td style="color:#64748b;">Sent At</td><td>${today}</td></tr>
-            </table>
-          </div>
-        </div>`,
-        message: `ROI Report sent to ${custName} (${custEmail}) — ${industry} — Savings: ${d ? d.fSavings : '—'} — ROI: ${d ? d.fRoi3 : '—'}`,
-      }),
+    // إرسال 2: نسخة لك (CC)
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email    : MY_EMAIL,
+      to_name     : 'Mohamed Abu Emira',
+      from_name   : 'Nexa Solutions — ROI Tracker',
+      reply_to    : custEmail,
+      subject     : `[ROI Sent] ${custName}${company ? ' — ' + company : ''} · ${industry}`,
+      html_body   : ccSummary,
+      message     : `ROI Report sent to ${custName} (${custEmail}) — ${industry} — Savings: ${d ? d.fSavings : '—'} — ROI: ${d ? d.fRoi3 : '—'}`,
     });
-    // نتجاهل لو النسخة التانية فشلت عشان الرسالة الأساسية اتبعتت
 
     // Show success
     const bodyEl  = document.getElementById('roiEmailModalBody');
@@ -7100,12 +7093,12 @@ COO & Co-Founder — Nexa Solutions
     const msg     = document.getElementById('roiEmailSuccessMsg');
     if (bodyEl)  bodyEl.style.display   = 'none';
     if (success) success.style.display  = 'flex';
-    if (msg)     msg.textContent        = `The ROI report has been emailed to ${custEmail}. A copy was sent to abuemira@nexa-solutions.com.`;
+    if (msg)     msg.textContent        = `✅ The ROI report has been emailed to ${custEmail}. A copy was sent to abuemira.nexa@gmail.com.`;
 
   } catch (err) {
-    console.error('sendRoiEmail:', err);
+    console.error('sendRoiEmail — EmailJS error:', err);
     if (btn) { btn.disabled = false; btn.textContent = '📧 Send ROI Report'; }
-    alert('Failed to send the report. Please try again.\n\n' + err.message);
+    alert('Failed to send the report. Please try again.\n\nError: ' + (err.text || err.message || JSON.stringify(err)));
   }
 }
 
