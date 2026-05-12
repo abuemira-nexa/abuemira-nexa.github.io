@@ -3381,14 +3381,45 @@ img{transition:opacity .3s ease}
               💡 <strong style="color:var(--teal-mid)">Nexa Odoo Implementation:</strong> Typically <strong style="color:var(--gold)">$8K–$45K</strong> depending on scope &amp; modules — vs SAP $150K–$500K+
             </div>
           </div>
+          <!-- PLAN SELECTOR — replaces manual subscription slider -->
           <div class="roi-input-group">
-            <div class="roi-label-row">
-              <span class="roi-lbl">📱 Odoo Subscription / Year</span>
-              <span class="roi-val-badge" id="roiSubVal">$40K</span>
+            <div class="roi-label-row" style="margin-bottom:10px">
+              <span class="roi-lbl">📱 Odoo Plan</span>
+              <span class="roi-val-badge" id="roiSubVal">$14,940/yr</span>
             </div>
-            <input type="range" class="roi-slider" id="roiSub" min="1000" max="200000" value="40000" step="1000" oninput="roiCalc()">
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$1K</span><span>$200K</span></div>
+            <!-- Plan buttons -->
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px" id="roiPlanBtns">
+              <button type="button" class="roi-plan-btn" data-plan="free" data-price="0"
+                onclick="roiSelectPlan(this)"
+                style="flex:1;padding:8px 10px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;line-height:1.35;">
+                🆓 One App Free<br><span style="font-size:9px;opacity:.6">$0 &middot; 1 app &middot; unlimited users</span>
+              </button>
+              <button type="button" class="roi-plan-btn roi-plan-active" data-plan="standard" data-price="24.90"
+                onclick="roiSelectPlan(this)"
+                style="flex:1;padding:8px 10px;border-radius:9px;border:1px solid rgba(1,126,132,.5);background:rgba(1,126,132,.18);color:var(--teal-mid);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;line-height:1.35;">
+                &#11088; Standard<br><span style="font-size:9px;opacity:.8">$24.90/user/mo &middot; All apps</span>
+              </button>
+              <button type="button" class="roi-plan-btn" data-plan="custom" data-price="49"
+                onclick="roiSelectPlan(this)"
+                style="flex:1;padding:8px 10px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;line-height:1.35;">
+                &#128295; Custom<br><span style="font-size:9px;opacity:.6">$49/user/mo &middot; Studio + API</span>
+              </button>
+            </div>
+            <!-- Odoo Users (backend users, not all employees) -->
+            <div class="roi-label-row" style="margin-bottom:6px">
+              <span style="font-size:11px;color:rgba(255,255,255,.55)">&#128100; Odoo Backend Users</span>
+              <span class="roi-val-badge" id="roiUsersVal">50</span>
+            </div>
+            <input type="range" class="roi-slider" id="roiUsers" min="1" max="500" value="50" step="1" oninput="roiCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>1</span><span>500</span></div>
+            <!-- Auto-calculated breakdown -->
+            <div id="roiSubBreakdown" style="margin-top:9px;padding:8px 12px;background:rgba(1,126,132,.1);border:1px solid rgba(1,126,132,.22);border-radius:8px;font-size:11px;color:rgba(255,255,255,.65);line-height:1.6;">
+              &#128161; <strong style="color:var(--teal-mid)" id="roiSubFormula">50 users &times; $24.90 &times; 12 = $14,940/yr</strong><br>
+              <span style="font-size:10px;opacity:.6">Based on official Odoo.com pricing (annual billing)</span>
+            </div>
           </div>
+          <!-- Hidden input holds calculated subscription value for roiCalc() -->
+          <input type="hidden" id="roiSub" value="14940">
           <div class="roi-input-group">
             <div class="roi-label-row">
               <span class="roi-lbl">🛠️ Annual Support / Consulting</span>
@@ -3853,7 +3884,7 @@ img{transition:opacity .3s ease}
 <script>
 
 /* Software subscription savings basis */
-const SW_SAVINGS_RATIO = 0.7; // Odoo replaces ~70% of current software costs on average
+const SW_SAVINGS_RATIO = 0.50; // Odoo replaces ~50% of current software costs on average (realistic benchmark)
 
 /* ══ DEPARTMENT DATA — Odoo benchmark efficiency rates ══ */
 const ROI_DEPTS = [
@@ -3922,7 +3953,7 @@ function downloadRoiPdf() {
   const swRow = d.swSavings > 0 ? `
     <tr style="background:#fffbeb;">
       <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;font-size:12px;">💾 Software Replacement</td>
-      <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#475569;">~70% of legacy costs eliminated</td>
+      <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#475569;">~50% of legacy software costs eliminated</td>
       <td style="padding:7px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;color:#d97706;font-size:12px;">${fmtUSD(d.swSavings)}/yr</td>
     </tr>` : '';
 
@@ -4186,6 +4217,26 @@ function roiSelectIndustry(btn) {
   roiCalc();
 }
 
+
+// ── PLAN SELECTOR — Odoo Official Pricing ──────────────────────────────────
+let roiPlanPrice = 24.90; // default: Standard
+
+function roiSelectPlan(btn) {
+  // Update button styles
+  document.querySelectorAll('#roiPlanBtns .roi-plan-btn').forEach(b => {
+    b.style.border = '1px solid rgba(255,255,255,.18)';
+    b.style.background = 'rgba(255,255,255,.06)';
+    b.style.color = 'rgba(255,255,255,.7)';
+    b.style.fontWeight = '600';
+  });
+  btn.style.border = '1px solid rgba(1,126,132,.5)';
+  btn.style.background = 'rgba(1,126,132,.18)';
+  btn.style.color = 'var(--teal-mid)';
+  btn.style.fontWeight = '700';
+  roiPlanPrice = parseFloat(btn.dataset.price);
+  roiCalc();
+}
+
 // ══ LIVE ROI STATE — updated on every calc, read by PDF & Email ══
 let roiLiveData = {};
 
@@ -4195,7 +4246,25 @@ function roiCalc() {
   const rev    = parseInt(document.getElementById('roiRev').value);
   const sw     = parseInt(document.getElementById('roiSw').value);        // current software cost
   const impl   = parseInt(document.getElementById('roiImpl').value);
-  const sub    = parseInt(document.getElementById('roiSub').value);       // odoo subscription/yr
+  // Subscription computed from plan price × users × 12 (official Odoo pricing)
+  const roiUsersEl = document.getElementById('roiUsers');
+  const odooUsers = roiUsersEl ? parseInt(roiUsersEl.value) : parseInt(document.getElementById('roiEmp').value);
+  const sub = Math.round(odooUsers * roiPlanPrice * 12);
+  // Update hidden input + display labels
+  const subHidden = document.getElementById('roiSub');
+  if (subHidden) subHidden.value = sub;
+  const usersValEl = document.getElementById('roiUsersVal');
+  if (usersValEl) usersValEl.textContent = odooUsers;
+  // Update formula display
+  const formulaEl = document.getElementById('roiSubFormula');
+  if (formulaEl) {
+    if (roiPlanPrice === 0) {
+      formulaEl.textContent = 'One App Free — $0/yr';
+    } else {
+      const planLabel = roiPlanPrice === 24.90 ? 'Standard' : 'Custom';
+      formulaEl.textContent = odooUsers + ' users × $' + roiPlanPrice.toFixed(2) + ' × 12 = $' + sub.toLocaleString() + '/yr (' + planLabel + ')';
+    }
+  }
   const supp   = parseInt(document.getElementById('roiSupp').value);
   const staff  = parseInt(document.getElementById('roiStaff').value);
 
@@ -4205,7 +4274,7 @@ function roiCalc() {
   document.getElementById('roiRevVal').textContent  = fmtUSD(rev);
   document.getElementById('roiSwVal').textContent   = fmtUSD(sw);
   document.getElementById('roiImplVal').textContent = fmtUSD(impl);
-  document.getElementById('roiSubVal').textContent  = fmtUSD(sub);
+  document.getElementById('roiSubVal').textContent  = fmtUSD(sub) + '/yr';
   document.getElementById('roiSuppVal').textContent = fmtUSD(supp);
   document.getElementById('roiStaffVal').textContent= fmtUSD(staff);
 
@@ -5283,7 +5352,7 @@ document.addEventListener("DOMContentLoaded", () => {
      ['📦 Annual Revenue (USD)','📦 الإيرادات السنوية (USD)'],
      ['💾 Current Software Annual Cost','💾 التكلفة السنوية للبرمجيات الحالية'],
      ['🔧 Implementation Budget (USD)','🔧 ميزانية التطبيق (USD)'],
-     ['📱 Odoo Subscription / Year','📱 اشتراك أودو / سنة'],
+     ['📱 Odoo Plan (Auto-Calculated)','📱 خطة أودو (محسوبة تلقائياً)'],
      ['🛠️ Annual Support / Consulting','🛠️ الدعم والاستشارة السنوية'],
      ['🧑‍💼 Internal Staff Time (USD equiv.)','🧑‍💼 وقت الفريق الداخلي (مكافئ USD)'],
     ].forEach(([en,ar]) => {
@@ -6839,7 +6908,7 @@ async function sendRoiEmail() {
   const swRowHtml = (d && d.swSavings > 0) ? `
     <tr style="background:#fffbeb;">
       <td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:13px;">💾 Software Replacement</td>
-      <td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:12px;color:#475569;">~70% of legacy costs eliminated</td>
+      <td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;font-size:12px;color:#475569;">~50% of legacy software costs eliminated</td>
       <td style="padding:9px 14px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;color:#d97706;font-size:13px;">${fmtU(d.swSavings)}/yr</td>
     </tr>` : '';
 
