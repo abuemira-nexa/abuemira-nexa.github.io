@@ -332,7 +332,6 @@ img{display:block;max-width:100%}
 .roi-industry-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
 .roi-ind-btn{font-size:11px;font-weight:600;padding:5px 13px;border-radius:20px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:rgba(255,255,255,.65);cursor:pointer;transition:all .2s}
 .roi-ind-btn.active{border-color:var(--teal-mid);background:rgba(1,126,132,.2);color:var(--teal-mid)}
-@media(max-width:900px){.roi-grid{grid-template-columns:1fr}.roi-results{position:static}}
 @media(max-width:600px){.roi-inner{padding:0 20px}}
 
 /* ── TRUST BADGES BAR ── */
@@ -497,6 +496,8 @@ img{display:block;max-width:100%}
 .logo-item img{width:100%;height:100%;object-fit:contain;object-position:center;filter:grayscale(30%);transition:filter .3s;display:block}
 .logo-item:hover img{filter:grayscale(0%)}
 
+[data-lang="ar"] .why-card{flex-direction:row-reverse;text-align:right}
+[data-lang="ar"] .why-grid{direction:rtl}
 /* ── WHY WORK WITH ME ── */
 .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
 .why-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--rl);padding:24px;display:flex;align-items:flex-start;gap:16px;box-shadow:0 2px 10px rgba(0,0,0,.04);transition:all .22s}
@@ -632,13 +633,33 @@ img{display:block;max-width:100%}
   .footer-inner{flex-direction:column;gap:12px}
   .footer-logo-row{justify-content:center;text-align:center}
   .footer-links{justify-content:center;flex-wrap:wrap}
+  .why-grid{grid-template-columns:1fr}
+  .roi-grid{grid-template-columns:1fr}
+  .roi-results{position:static}
+  .cs2-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){
   .hero-name{font-size:28px}
-  .svc-grid,.proj-grid,.cert-hl-grid{grid-template-columns:1fr}
+  .svc-grid,.proj-grid,.cert-hl-grid,.why-grid{grid-template-columns:1fr}
   .industries-grid{grid-template-columns:repeat(2,1fr)}
   .stats-inner{grid-template-columns:repeat(2,1fr)}
   .kpi-row{flex-direction:column}
+  .why-card{padding:16px;gap:12px}
+  .why-ico{width:40px;height:40px;font-size:18px}
+  .roi-step-tabs{gap:4px}
+  .roi-step-tab{padding:8px 4px;font-size:10px}
+  .roi-dept-grid{grid-template-columns:1fr}
+  .roi-5yr-chart{gap:4px}
+  .roi-yr-val{font-size:9px}
+  .cs-kpis{grid-template-columns:1fr 1fr}
+  .test-card-mq{width:280px}
+  .hero-phone-box{padding:10px 14px}
+  .hero-phone-num{font-size:15px}
+  .stat{padding:14px 8px}
+  .stat-n{font-size:22px}
+  .section{padding:36px 0}
+  .container{padding-left:16px;padding-right:16px}
+  .hero{padding:36px 16px}
 }
 
 /* ── ACTIVE NAV LINK ── */
@@ -861,6 +882,24 @@ img{transition:opacity .3s ease}
   .roi-report-yr{flex:calc(50% - 6px);border-right:1px solid var(--gray-200);border-radius:var(--r);margin-bottom:6px}
   .roi-report-body,.roi-report-header{padding:24px 20px}
   .roi-report-footer{padding:20px}
+}
+@media(max-width:480px){
+  .why-card{flex-direction:column;gap:10px}
+  .nav-controls{gap:4px}
+  .ntb{font-size:10px;padding:4px 9px}
+  .hero-btns{flex-direction:column;align-items:center}
+  .hero-btns a{width:100%;justify-content:center;text-align:center}
+  .cert-hl-grid{grid-template-columns:1fr}
+  .roi-result-num{font-size:36px!important}
+  .roi-report-kpi-row{grid-template-columns:1fr}
+  .roi-dept-grid{grid-template-columns:1fr}
+  .full-modal-body{padding:20px 16px}
+  .full-modal-hdr{padding:20px 16px}
+  .mob-cta-bar a{font-size:12px;padding:10px 8px;gap:5px}
+  .roi-inner{padding:0 14px}
+  .hero-phone-box{flex-wrap:wrap;justify-content:center}
+  .roi-step-tabs{gap:3px}
+  .roi-step-tab{font-size:10px;padding:8px 3px}
 }
 
 /* ROI Email Modal */
@@ -3234,7 +3273,7 @@ img{transition:opacity .3s ease}
 <section class="roi-section" id="roi">
   <div class="roi-inner">
     <div class="roi-header">
-      <div class="roi-tag">💰 Odoo ROI Calculator · مبني على بيانات 79+ مشروع حقيقي</div>
+      <div class="roi-tag">💰 Odoo ROI Calculator · Based on 79+ Real Projects</div>
       <h2 class="roi-title">Calculate Your <span>Real Odoo ROI</span></h2>
       <p class="roi-sub">Based on Odoo's official ROI Analysis methodology — the same tool used with real clients. Select your departments and business profile to get an accurate projection.</p>
     </div>
@@ -3374,7 +3413,7 @@ img{transition:opacity .3s ease}
           <div style="margin-bottom:16px">
             <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">Savings by Department</div>
             <div class="roi-dept-savings-list" id="roiDeptSavingsList">
-              <div style="font-size:11px;color:rgba(255,255,255,.3);text-align:center;padding:16px;">Select departments in Tab 2</div>
+              <div id="roiDeptSavingsPlaceholder" style="font-size:11px;color:rgba(255,255,255,.3);text-align:center;padding:16px;">Select departments in Tab 2</div>
             </div>
           </div>
 
@@ -3548,8 +3587,8 @@ img{transition:opacity .3s ease}
 
         <!-- EXECUTIVE SUMMARY -->
         <div class="roi-report-exec">
-          <h4>📋 Executive Summary</h4>
-          <p>Odoo ERP delivers measurable, compounding ROI by consolidating fragmented systems into a single integrated platform. Across 79+ implementations managed by Nexa Solutions, clients in manufacturing, trading, retail, construction, and services have achieved <strong>15%–60% efficiency gains</strong> per department within the first year. The average payback period is <strong>12–18 months</strong>, with a 3-year ROI ranging from <strong>180% to 420%</strong> depending on company size, number of users, and modules deployed. Odoo's open-source foundation eliminates per-module licensing fees, drastically reducing total cost of ownership versus legacy ERP platforms.</p>
+          <h4 id="execSummaryH4">📋 Executive Summary</h4>
+          <p id="execSummaryP">Odoo ERP delivers measurable, compounding ROI by consolidating fragmented systems into a single integrated platform. Across 79+ implementations managed by Nexa Solutions, clients in manufacturing, trading, retail, construction, and services have achieved <strong>15%–60% efficiency gains</strong> per department within the first year. The average payback period is <strong>12–18 months</strong>, with a 3-year ROI ranging from <strong>180% to 420%</strong> depending on company size, number of users, and modules deployed. Odoo's open-source foundation eliminates per-module licensing fees, drastically reducing total cost of ownership versus legacy ERP platforms.</p>
         </div>
 
         <!-- KEY METRICS (dynamic from calculator) -->
@@ -3806,6 +3845,18 @@ img{transition:opacity .3s ease}
 
 /* Software subscription savings basis */
 const SW_SAVINGS_RATIO = 0.7; // Odoo replaces ~70% of current software costs on average
+
+/* ══ DEPARTMENT DATA — Odoo benchmark efficiency rates ══ */
+const ROI_DEPTS = [
+  { id:'inventory',   icon:'📦', name:'Inventory',        nameAr:'المخزون',                  eff:0.21, fte:8,  desc:'Stock control, valuation & reordering',         descAr:'مراقبة المخزون والتقييم وإعادة الطلب' },
+  { id:'manufacturing',icon:'🏭',name:'Manufacturing',     nameAr:'التصنيع',                  eff:0.18, fte:12, desc:'Production planning, BOM & work orders',         descAr:'تخطيط الإنتاج وقوائم المواد وأوامر العمل' },
+  { id:'purchase',    icon:'🛒', name:'Purchase',          nameAr:'المشتريات',                eff:0.16, fte:4,  desc:'Purchase orders, vendor management & RFQ',       descAr:'أوامر الشراء وإدارة الموردين والطلبات' },
+  { id:'finance',     icon:'💰', name:'Finance',           nameAr:'المالية',                  eff:0.24, fte:6,  desc:'Accounting, AP/AR, reporting & compliance',      descAr:'المحاسبة والذمم والتقارير والامتثال' },
+  { id:'sales',       icon:'📈', name:'Sales & CRM',       nameAr:'المبيعات وإدارة العلاقات', eff:0.17, fte:10, desc:'CRM, pipeline, quotations & invoicing',           descAr:'إدارة العلاقات والعروض والفواتير' },
+  { id:'hr',          icon:'👥', name:'Human Resources',   nameAr:'الموارد البشرية',          eff:0.15, fte:4,  desc:'Payroll, leave, recruitment & attendance',       descAr:'الرواتب والإجازات والتوظيف والحضور' },
+  { id:'services',    icon:'🔧', name:'Services',          nameAr:'الخدمات',                  eff:0.14, fte:6,  desc:'Field service, timesheets & project billing',    descAr:'الخدمات الميدانية والجداول الزمنية والفوترة' },
+  { id:'marketing',   icon:'📣', name:'Marketing',         nameAr:'التسويق',                  eff:0.12, fte:3,  desc:'Campaigns, email automation & lead generation',  descAr:'الحملات وأتمتة البريد وتوليد العملاء' },
+];
 
 let roiActiveTab = 1;
 let roiDeptSelection = { inventory: true, finance: true, sales: true, hr: true }; // defaults
@@ -4071,12 +4122,13 @@ function roiSwitchTab(n) {
 
 function roiBuildDeptGrid() {
   const grid = document.getElementById('roiDeptGrid');
+  const AR = document.documentElement.getAttribute('data-lang') === 'ar';
   grid.innerHTML = ROI_DEPTS.map(d => `
     <div class="roi-dept-card ${roiDeptSelection[d.id] ? 'active' : ''}" id="dc_${d.id}" onclick="roiToggleDept('${d.id}')">
       <input type="checkbox" ${roiDeptSelection[d.id] ? 'checked' : ''} onclick="event.stopPropagation();roiToggleDept('${d.id}')">
-      <div class="roi-dept-name">${d.icon} ${d.name}</div>
-      <div class="roi-dept-eff">Efficiency gain: <strong>${Math.round(d.eff*100)}%</strong></div>
-      <div style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;line-height:1.3">${d.desc}</div>
+      <div class="roi-dept-name">${d.icon} ${AR ? d.nameAr : d.name}</div>
+      <div class="roi-dept-eff">${AR ? 'كفاءة أعلى:' : 'Efficiency gain:'} <strong>${Math.round(d.eff*100)}%</strong></div>
+      <div style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;line-height:1.3">${AR ? d.descAr : d.desc}</div>
     </div>`).join('');
 }
 
@@ -4209,14 +4261,23 @@ function roiCalc() {
   const roi3 = invest3 > 0 ? Math.round((net3 / invest3) * 100) : 0;
 
   // ── UPDATE DOM ──
+  const AR = document.documentElement.getAttribute('data-lang') === 'ar';
   document.getElementById('roiSavings').innerHTML = fmtUSD(totalSavings) + '<span class="roi-result-unit">/yr</span>';
-  document.getElementById('roiSubline').textContent =
-    selectedDepts.length + ' dept' + (selectedDepts.length !== 1 ? 's' : '') + ' · ' +
-    emp + ' employees · ' + Math.round(totalSavings / (emp * sal) * 100) + '% FTE efficiency gain' +
-    (roiIndustryMult && roiIndustryMult !== 1 ? ' · ×' + roiIndustryMult.toFixed(2) + ' industry boost' : '');
+  if (selectedDepts.length === 0) {
+    document.getElementById('roiSubline').textContent = AR ? 'اختر الأقسام للحساب' : 'Select departments to calculate';
+  } else {
+    document.getElementById('roiSubline').textContent = AR
+      ? selectedDepts.length + ' قسم · ' + emp + ' موظف · ' + Math.round(totalSavings / Math.max(emp * sal, 1) * 100) + '% كفاءة' +
+        (roiIndustryMult && roiIndustryMult !== 1 ? ' · ×' + roiIndustryMult.toFixed(2) + ' دفعة قطاع' : '')
+      : selectedDepts.length + ' dept' + (selectedDepts.length !== 1 ? 's' : '') + ' · ' +
+        emp + ' employees · ' + Math.round(totalSavings / Math.max(emp * sal, 1) * 100) + '% FTE efficiency gain' +
+        (roiIndustryMult && roiIndustryMult !== 1 ? ' · ×' + roiIndustryMult.toFixed(2) + ' industry boost' : '');
+  }
 
   document.getElementById('bkPayback').textContent = paybackMonths
-    ? (paybackMonths < 12 ? paybackMonths + ' months' : (paybackMonths/12).toFixed(1) + ' years')
+    ? AR
+      ? (paybackMonths < 12 ? paybackMonths + ' شهر' : (paybackMonths/12).toFixed(1) + ' سنوات')
+      : (paybackMonths < 12 ? paybackMonths + ' months' : (paybackMonths/12).toFixed(1) + ' years')
     : '—';
   document.getElementById('bkRoi3').textContent = roi3 > 0 ? roi3 + '%' : '—';
   document.getElementById('bkNet3').textContent = fmtUSD(net3);
@@ -4225,15 +4286,15 @@ function roiCalc() {
   // ── DEPT SAVINGS LIST ──
   const list = document.getElementById('roiDeptSavingsList');
   if (deptSavings.length === 0) {
-    list.innerHTML = '<div style="font-size:11px;color:rgba(255,255,255,.3);text-align:center;padding:16px;">Select departments in Tab 2</div>';
+    list.innerHTML = '<div style="font-size:11px;color:rgba(255,255,255,.3);text-align:center;padding:16px;">' + (AR ? 'اختر الأقسام في التبويب 2' : 'Select departments in Tab 2') + '</div>';
   } else {
     const maxS = Math.max(...deptSavings.map(d => d.savings));
     list.innerHTML = [...deptSavings]
       .sort((a,b) => b.savings - a.savings)
       .map(d => `
         <div class="roi-dept-savings-row">
-          <span class="roi-dept-savings-name">${d.icon} ${d.name}
-            <span class="roi-dept-eff-badge">${Math.round(d.eff*100)}% eff.</span>
+          <span class="roi-dept-savings-name">${d.icon} ${AR ? d.nameAr : d.name}
+            <span class="roi-dept-eff-badge">${Math.round(d.eff*100)}% ${AR ? 'كفاءة' : 'eff.'}</span>
           </span>
           <span class="roi-dept-savings-val">${fmtUSD(d.savings)}</span>
         </div>
@@ -4241,7 +4302,7 @@ function roiCalc() {
       `).join('') +
       (swSavings > 0 ? `
         <div class="roi-dept-savings-row" style="border-color:rgba(212,168,67,.2)">
-          <span class="roi-dept-savings-name">💾 Software Replacement</span>
+          <span class="roi-dept-savings-name">💾 ${AR ? 'توفير البرمجيات' : 'Software Replacement'}</span>
           <span class="roi-dept-savings-val" style="color:var(--gold)">${fmtUSD(swSavings)}</span>
         </div>` : '');
   }
@@ -4257,7 +4318,7 @@ function roiCalc() {
       <div class="roi-yr-bar-outer">
         <div class="${isNeg ? 'roi-yr-bar-neg' : 'roi-yr-bar-pos'}" style="height:${pct}%"></div>
       </div>
-      <div class="roi-yr-label">Year ${i+1}</div>
+      <div class="roi-yr-label">${AR ? 'س' + (i+1) : 'Year ' + (i+1)}</div>
     </div>`;
   }).join('');
 
@@ -4712,7 +4773,47 @@ document.addEventListener("DOMContentLoaded", () => {
      ['Recommendations','توصية مهنية']]
       .forEach(([en,ar],i) => t(statLbls[i], en, ar));
 
-    /* ── ABOUT HIGHLIGHTS ── */
+    /* ── WHY WORK WITH ME ── */
+    const whySec = document.getElementById('why-work');
+    if (whySec) {
+      const whyTag = whySec.querySelector('.sec-tag');
+      const whyTitle = whySec.querySelector('.sec-title');
+      const whySub = whySec.querySelector('p[style]');
+      if (whyTag) whyTag.textContent = AR ? 'مميزاتي' : 'Differentiators';
+      if (whyTitle) whyTitle.innerHTML = AR ? 'لماذا <span>أنا؟</span>' : 'Why Work <span>With Me</span>';
+      if (whySub) whySub.textContent = AR
+        ? 'ما يميّز أسلوب عملي — بعيداً عن الشهادات وعدد المشاريع.'
+        : 'What sets my approach apart — beyond the certifications and the project count.';
+      const whyCards = whySec.querySelectorAll('.why-card');
+      [
+        ['Deep Regional Expertise','خبرة إقليمية عميقة',
+         '10+ years across Egypt, Saudi Arabia, UAE, and GCC — understanding local business cultures, regulatory environments (VAT, Zakat, e-invoicing), and operational realities that generic ERP firms miss.',
+         '10+ سنوات في مصر والسعودية والإمارات والخليج — فهم عميق لثقافات الأعمال المحلية والبيئات التنظيمية (ضريبة القيمة المضافة، الزكاة، الفوترة الإلكترونية) والواقع التشغيلي الذي تفتقده شركات ERP الدولية.'],
+        ['Bilingual Delivery','تسليم ثنائي اللغة',
+         'Fully fluent in Arabic and English — conducting discovery workshops, writing functional specs, and training end-users in either language without any loss of precision or context.',
+         'طلاقة تامة في العربية والإنجليزية — أُجري ورش استكشاف وأكتب مواصفات وظيفية وأُدرّب مستخدمين بكلتا اللغتين دون أي فقد في الدقة أو السياق.'],
+        ['Certified Technical Depth','عمق تقني معتمد',
+         'Odoo certified across v16, v17 & v18 with hands-on mastery of accounting, manufacturing, supply chain, HR, CRM, POS, and Studio customization — backed by 50+ professional credentials.',
+         'معتمد من أودو عبر الإصدارات 16 و17 و18 مع إتقان عملي للمحاسبة والتصنيع وسلسلة التوريد والموارد البشرية وإدارة العلاقات ونقاط البيع وتخصيصات ستوديو — بدعم 50+ شهادة مهنية.'],
+        ['Business-First Approach','منهج يضع الأعمال أولاً',
+         'Every ERP decision anchored in financial impact and operational efficiency — not just technical correctness. Your ROI and business outcome is always the metric that matters most.',
+         'كل قرار في ERP مرتكز على الأثر المالي والكفاءة التشغيلية — لا على الصحة التقنية فحسب. عائدك على الاستثمار ونتيجة أعمالك هي المقياس الأهم دائماً.'],
+        ['Post-Go-Live Commitment','التزام ما بعد التشغيل',
+         "I don't disappear after delivery. Extended hypercare, user adoption support, and system health checks are a standard part of every engagement — not an upsell.",
+         'أنا لا أختفي بعد التسليم. الرعاية الموسّعة ودعم تبني المستخدمين وفحوصات صحة النظام جزء أساسي من كل مشروع — وليس خدمة إضافية مدفوعة.'],
+        ['COO-Level Business Lens','رؤية المدير التنفيذي',
+         'As COO of Nexa Solutions, I bridge the gap between C-suite strategy and technical execution — translating boardroom priorities into ERP configurations your team will actually use.',
+         'بصفتي مديراً تنفيذياً لنيكسا تكنولوجي، أربط بين استراتيجية C-suite والتنفيذ التقني — أحوّل أولويات مجلس الإدارة إلى تهيئات ERP يستخدمها فريقك فعلاً.'],
+      ].forEach(([enT, arT, enD, arD], i) => {
+        if (!whyCards[i]) return;
+        const title = whyCards[i].querySelector('.why-title');
+        const desc  = whyCards[i].querySelector('.why-desc');
+        if (title) title.textContent = AR ? arT : enT;
+        if (desc)  desc.textContent  = AR ? arD : enD;
+      });
+    }
+
+    /* ── ABOUT SECTION SUBTITLE ── */
     const hlSpans = document.querySelectorAll('.hl-body span');
     [['Scaled an Official Odoo Partner from inception — defining strategy, service portfolio, and go-to-market positioning. Led 30+ projects across Egypt and Saudi Arabia since 2024.',
       'بناء شراكة أودو الرسمية من الصفر — تحديد الاستراتيجية وحقيبة الخدمات والتموضع في السوق. قيادة 30+ مشروعاً في مصر والسعودية منذ 2024.'],
@@ -5206,31 +5307,31 @@ document.addEventListener("DOMContentLoaded", () => {
     if (roiSavLbl) roiSavLbl.textContent = AR ? 'التوفير السنوي المتوقع' : 'Estimated Annual Savings';
 
     const roiSublineEl = document.getElementById('roiSubline');
-    if (roiSublineEl && roiSublineEl.textContent === 'Select departments to calculate')
-      roiSublineEl.textContent = AR ? 'اختر الأقسام للحساب' : 'Select departments to calculate';
+    if (roiSublineEl) {
+      const txt = roiSublineEl.textContent.trim();
+      if (txt === 'Select departments to calculate' || txt === 'اختر الأقسام للحساب')
+        roiSublineEl.textContent = AR ? 'اختر الأقسام للحساب' : 'Select departments to calculate';
+    }
+    const roiDeptPlaceholder = document.getElementById('roiDeptSavingsPlaceholder');
+    if (roiDeptPlaceholder) roiDeptPlaceholder.textContent = AR ? 'اختر الأقسام في التبويب 2' : 'Select departments in Tab 2';
 
     // Savings by department label
-    const deptSavHdr = document.querySelector('.roi-result-card > div:nth-child(2) > div:first-child');
-    if (deptSavHdr && (deptSavHdr.textContent.includes('Savings by') || deptSavHdr.textContent.includes('التوفير حسب')))
-      deptSavHdr.textContent = AR ? 'التوفير حسب القسم' : 'Savings by Department';
-
-    // Key metrics labels
-    const bkRows = document.querySelectorAll('.roi-bk-lbl');
-    [['📅Payback Period','📅فترة الاسترداد'],
-     ['📈3-Year ROI','📈عائد الاستثمار 3 سنوات'],
-     ['💰Net Value (Y1–Y3)','💰صافي القيمة (س1–س3)'],
-     ['🔄Software Cost Savings','🔄توفير تكلفة البرمجيات'],
-    ].forEach(([en, ar]) => {
-      bkRows.forEach(row => {
-        const cleanText = row.textContent.replace(/\s+/g,'').replace(/[📅📈💰🔄]/g,'');
-        const cleanEn = en.replace(/[📅📈💰🔄]/g,'').trim();
-        const cleanAr = ar.replace(/[📅📈💰🔄]/g,'').trim();
-        if (row.textContent.includes(cleanEn) && AR) {
-          const icon = row.querySelector('.roi-bk-icon');
-          if (icon) { const ic = icon.textContent; icon.textContent = ic; row.lastChild.textContent = ar.replace(/[📅📈💰🔄]/g,'').trim(); }
-        }
-      });
+    document.querySelectorAll('.roi-result-card [style*="uppercase"]').forEach(el => {
+      if (el.textContent.includes('Savings by') || el.textContent.includes('التوفير حسب'))
+        el.textContent = AR ? 'التوفير حسب القسم' : 'Savings by Department';
     });
+
+    // Key metrics labels — rebuild innerHTML cleanly to avoid partial-text matching bugs
+    const bkPaybackRow = document.querySelector('.roi-bk-row:nth-child(1) .roi-bk-lbl');
+    const bkRoi3Row    = document.querySelector('.roi-bk-row:nth-child(2) .roi-bk-lbl');
+    const bkNet3Row    = document.querySelector('.roi-bk-row:nth-child(3) .roi-bk-lbl');
+    const bkSwRow      = document.querySelector('.roi-bk-row:nth-child(4) .roi-bk-lbl');
+    if (bkPaybackRow) bkPaybackRow.innerHTML = AR
+      ? '<span class="roi-bk-icon">⏱️</span>فترة الاسترداد <span style="font-size:10px;color:rgba(255,255,255,.4);font-weight:400;">(سؤال المدير المالي الأول)</span>'
+      : '<span class="roi-bk-icon">⏱️</span>Payback Period <span style="font-size:10px;color:rgba(255,255,255,.4);font-weight:400;">(CFO #1 question)</span>';
+    if (bkRoi3Row)    bkRoi3Row.innerHTML    = AR ? '<span class="roi-bk-icon">📈</span>عائد الاستثمار 3 سنوات' : '<span class="roi-bk-icon">📈</span>3-Year ROI';
+    if (bkNet3Row)    bkNet3Row.innerHTML    = AR ? '<span class="roi-bk-icon">💰</span>صافي القيمة (س1–س3)' : '<span class="roi-bk-icon">💰</span>Net Value (Y1–Y3)';
+    if (bkSwRow)      bkSwRow.innerHTML      = AR ? '<span class="roi-bk-icon">🔄</span>توفير تكلفة البرمجيات' : '<span class="roi-bk-icon">🔄</span>Software Cost Savings';
 
     // 5-year chart label
     const chart5yrLbl = document.querySelector('.roi-result-card > div:nth-child(4) > div:first-child');
@@ -5255,31 +5356,9 @@ document.addEventListener("DOMContentLoaded", () => {
       ? '* المنهجية مستندة إلى قالب تحليل ROI الرسمي من أودو. معدلات الكفاءة مقاسة عبر 79+ تطبيق حقيقي من نيكسا تكنولوجي. النتائج تتفاوت بحسب النطاق والتعقيد.'
       : '* Methodology from Odoo\'s official ROI Analysis Template. Efficiency rates benchmarked across 79+ real implementations by Nexa Solutions. Results vary by scope and complexity.';
 
-    /* ── ROI DEPARTMENT NAMES (dynamically built) ── */
-    const roiDeptNameMap = {
-      'Inventory':'المخزون','Manufacturing':'التصنيع','Purchase':'المشتريات',
-      'Finance':'المالية','Sales & CRM':'المبيعات وإدارة العلاقات','Human Resources':'الموارد البشرية',
-      'Services':'الخدمات','Marketing':'التسويق',
-    };
-    document.querySelectorAll('.roi-dept-name').forEach(el => {
-      const emoji = el.textContent.trim().split(' ')[0];
-      const name = el.textContent.trim().replace(emoji,'').trim();
-      if (AR && roiDeptNameMap[name]) el.textContent = emoji + ' ' + roiDeptNameMap[name];
-      else if (!AR) {
-        const rev = Object.fromEntries(Object.entries(roiDeptNameMap).map(([k,v])=>[v,k]));
-        if (rev[name]) el.textContent = emoji + ' ' + rev[name];
-      }
-    });
-    const deptEffLabel = document.querySelectorAll('.roi-dept-eff');
-    deptEffLabel.forEach(el => {
-      if (el.textContent.includes('Efficiency gain:')) {
-        const pct = el.querySelector('strong') ? el.querySelector('strong').textContent : '';
-        el.innerHTML = AR ? `كفاءة أعلى: <strong>${pct}</strong>` : `Efficiency gain: <strong>${pct}</strong>`;
-      } else if (el.textContent.includes('كفاءة أعلى:') && !AR) {
-        const pct = el.querySelector('strong') ? el.querySelector('strong').textContent : '';
-        el.innerHTML = `Efficiency gain: <strong>${pct}</strong>`;
-      }
-    });
+    /* ── ROI DEPARTMENT GRID — rebuild with correct language ── */
+    if (typeof roiBuildDeptGrid === 'function') roiBuildDeptGrid();
+    if (typeof roiCalc === 'function') roiCalc();
 
     /* ── RECOMMENDATIONS MODAL ── */
     const recModalTitle = document.querySelector('#recModal .full-modal-title');
@@ -5440,15 +5519,13 @@ document.addEventListener("DOMContentLoaded", () => {
       else if (txt.includes('Odoo Official')) pill.innerHTML = AR ? '✅ المنهجية الرسمية لأودو' : '✅ Odoo Official Methodology';
     });
 
-    // Executive summary
-    const execH4 = document.querySelector('.roi-report-exec h4');
-    if (execH4 && (execH4.textContent.includes('Executive') || execH4.textContent.includes('الملخص')))
-      execH4.textContent = AR ? '📋 الملخص التنفيذي' : '📋 Executive Summary';
-    const execP = document.querySelector('.roi-report-exec p');
-    if (execP && (execP.textContent.includes('Odoo ERP delivers') || execP.textContent.includes('أودو ERP يحقق')))
-      execP.innerHTML = AR
-        ? 'يحقق أودو ERP عائداً متراكماً وقابلاً للقياس بتوحيد الأنظمة المتفرقة في منصة واحدة متكاملة. عبر 79+ تطبيقاً أدارتها نيكسا تكنولوجي، حقق العملاء في التصنيع والتجارة والتجزئة والمقاولات والخدمات <strong>مكاسب كفاءة بين 15%–60%</strong> لكل قسم خلال السنة الأولى. متوسط فترة الاسترداد <strong>12–18 شهراً</strong>، مع عائد استثمار لثلاث سنوات يتراوح بين <strong>180% و420%</strong> تبعاً لحجم الشركة وعدد المستخدمين والوحدات المُطبَّقة. الطبيعة مفتوحة المصدر لأودو تُلغي رسوم الترخيص لكل وحدة، مما يُقلّص تكلفة الملكية الإجمالية بشكل جذري مقارنة بمنصات ERP التقليدية.'
-        : 'Odoo ERP delivers measurable, compounding ROI by consolidating fragmented systems into a single integrated platform. Across 79+ implementations managed by Nexa Solutions, clients in manufacturing, trading, retail, construction, and services have achieved <strong>15%–60% efficiency gains</strong> per department within the first year. The average payback period is <strong>12–18 months</strong>, with a 3-year ROI ranging from <strong>180% to 420%</strong> depending on company size, number of users, and modules deployed. Odoo\'s open-source foundation eliminates per-module licensing fees, drastically reducing total cost of ownership versus legacy ERP platforms.';
+    // Executive summary — use IDs for reliability
+    const execH4 = document.getElementById('execSummaryH4');
+    if (execH4) execH4.textContent = AR ? '📋 الملخص التنفيذي' : '📋 Executive Summary';
+    const execP = document.getElementById('execSummaryP');
+    if (execP) execP.innerHTML = AR
+      ? 'يحقق أودو ERP عائداً متراكماً وقابلاً للقياس بتوحيد الأنظمة المتفرقة في منصة واحدة متكاملة. عبر 79+ تطبيقاً أدارتها نيكسا تكنولوجي، حقق العملاء في التصنيع والتجارة والتجزئة والمقاولات والخدمات <strong>مكاسب كفاءة بين 15%–60%</strong> لكل قسم خلال السنة الأولى. متوسط فترة الاسترداد <strong>12–18 شهراً</strong>، مع عائد استثمار لثلاث سنوات يتراوح بين <strong>180% و420%</strong> تبعاً لحجم الشركة وعدد المستخدمين والوحدات المُطبَّقة. الطبيعة مفتوحة المصدر لأودو تُلغي رسوم الترخيص لكل وحدة، مما يُقلّص تكلفة الملكية الإجمالية بشكل جذري مقارنة بمنصات ERP التقليدية.'
+      : 'Odoo ERP delivers measurable, compounding ROI by consolidating fragmented systems into a single integrated platform. Across 79+ implementations managed by Nexa Solutions, clients in manufacturing, trading, retail, construction, and services have achieved <strong>15%–60% efficiency gains</strong> per department within the first year. The average payback period is <strong>12–18 months</strong>, with a 3-year ROI ranging from <strong>180% to 420%</strong> depending on company size, number of users, and modules deployed. Odoo\'s open-source foundation eliminates per-module licensing fees, drastically reducing total cost of ownership versus legacy ERP platforms.';
 
     // KPI snapshot title
     const kpiSnapTitle = document.querySelector('.roi-report-section-title');
