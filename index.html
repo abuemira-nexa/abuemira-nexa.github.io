@@ -3387,26 +3387,25 @@ img{transition:opacity .3s ease}
             <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$1K</span><span>$300K</span></div>
             
             <div id="roiImplHint" style="margin-top:8px;padding:8px 12px;background:rgba(1,126,132,.12);border:1px solid rgba(1,126,132,.25);border-radius:8px;font-size:11px;color:rgba(255,255,255,.65);line-height:1.5;">
-              💡 <strong style="color:var(--teal-mid)">Nexa Odoo Implementation:</strong> Typically <strong style="color:var(--gold)">$8K–$45K</strong> depending on scope &amp; modules — vs SAP $150K–$500K+
+              💡 <strong style="color:var(--teal-mid)" data-en="Nexa Odoo Implementation:" data-ar="تطبيق نكسا لـ Odoo:">Nexa Odoo Implementation:</strong> <span data-en="Typically" data-ar="عادةً">Typically</span> <strong style="color:var(--gold)">$8K–$45K</strong> <span data-en="depending on scope &amp; modules — vs SAP $150K–$500K+" data-ar="حسب النطاق والوحدات — مقارنةً بـ SAP: $150K–$500K+">depending on scope &amp; modules — vs SAP $150K–+$500K</span>
             </div>
           </div>
           <!-- Subscription pulled from Tab 4 — hidden sync input -->
           <input type="hidden" id="roiSub" value="0">
           <input type="hidden" id="roiSubY1" value="0"><!-- Y1 discounted subscription -->
           <div style="padding:10px 14px;background:linear-gradient(135deg,rgba(212,168,67,.12),rgba(212,168,67,.06));border:1px solid rgba(212,168,67,.28);border-radius:10px;margin-bottom:6px;">
-            <div style="font-size:11px;font-weight:700;color:var(--gold);margin-bottom:3px;">📱 Odoo Subscription</div>
+            <div style="font-size:11px;font-weight:700;color:var(--gold);margin-bottom:3px;" data-en="📱 Odoo Subscription" data-ar="📱 اشتراك أودو">📱 Odoo Subscription</div>
             <div id="roiSubSyncInfo" style="font-size:11px;color:rgba(255,255,255,.6);line-height:1.6;">
-              Configure plan, users &amp; hosting in <strong style="color:var(--teal-mid)">Tab 4 → Odoo Subscription</strong>.<br>
-              <span id="roiSubSyncBadge" style="font-size:11px;color:var(--teal-mid);font-weight:700;">Subscription cost auto-synced ✓</span>
+              <span data-en="Configure plan, users &amp; hosting in" data-ar="اضبط الخطة والمستخدمين والاستضافة في">Configure plan, users &amp; hosting in</span> <strong style="color:var(--teal-mid)" data-en="Tab 4 → Odoo Subscription" data-ar="التبويب 4 ← اشتراك أودو">Tab 4 → Odoo Subscription</strong>.<br>
+              <span id="roiSubSyncBadge" style="font-size:11px;color:var(--teal-mid);font-weight:700;" data-en="Subscription cost auto-synced ✓" data-ar="تكلفة الاشتراك مزامنة تلقائياً ✓">Subscription cost auto-synced ✓</span>
             </div>
           </div>
           <div class="roi-input-group">
             <div class="roi-label-row">
-              <span class="roi-lbl" data-en="🛠️ Annual Support / Consulting" data-ar="🛠️ الدعم والاستشارة السنوية">🛠️ Annual Support / Consulting</span>
+              <span class="roi-lbl">🛠️ Annual Support / Consulting</span>
               <span style="display:flex;align-items:center;gap:6px;">
-                <span class="roi-val-badge" id="roiSuppVal">$10K</span>
-                <span style="margin-left:5px;font-size:9px;font-weight:700;color:var(--teal-mid);background:rgba(1,126,132,.15);border:1px solid rgba(1,126,132,.25);border-radius:5px;padding:1px 6px;white-space:nowrap;" data-en="↺/yr" data-ar="↺/سنة">↺/yr</span>
-                <span style="font-size:10px;font-weight:700;color:var(--teal-mid);background:rgba(1,126,132,.15);border:1px solid rgba(1,126,132,.3);border-radius:6px;padding:2px 7px;white-space:nowrap;" data-en="↺ /yr · Y1–Y5" data-ar="↺ /سنة · س1–س5">↺ /yr · Y1–Y5</span>
+                <span class="roi-val-badge" id="roiSuppVal">$10K</span><span style="margin-left:5px;font-size:9px;font-weight:700;color:var(--teal-mid);background:rgba(1,126,132,.15);border:1px solid rgba(1,126,132,.25);border-radius:5px;padding:1px 6px;white-space:nowrap;">↺/yr</span>
+                <span style="font-size:10px;font-weight:700;color:var(--teal-mid);background:rgba(1,126,132,.15);border:1px solid rgba(1,126,132,.3);border-radius:6px;padding:2px 7px;white-space:nowrap;">↺ /yr · Y1–Y5</span>
               </span>
             </div>
             <input type="range" class="roi-slider" id="roiSupp" min="0" max="100000" value="10000" step="5000" oninput="roiCalc()">
@@ -3415,18 +3414,17 @@ img{transition:opacity .3s ease}
           </div>
           <div class="roi-input-group">
             <div class="roi-label-row">
-              <span class="roi-lbl" data-en="🧑‍💼 Internal Staff Time (USD equiv.)" data-ar="🧑‍💼 وقت الفريق الداخلي (ما يعادله بالدولار)">🧑‍💼 Internal Staff Time (USD equiv.)</span>
+              <span class="roi-lbl">🧑‍💼 Internal Staff Time (USD equiv.)</span>
               <span style="display:flex;align-items:center;gap:6px;">
-                <span class="roi-val-badge" id="roiStaffVal">$50K</span>
-                <span style="margin-left:5px;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1px 6px;white-space:nowrap;" data-en="Y1" data-ar="س1">Y1</span>
-                <span style="font-size:10px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:2px 7px;white-space:nowrap;" data-en="Y1 only" data-ar="السنة الأولى فقط">Y1 only</span>
+                <span class="roi-val-badge" id="roiStaffVal">$50K</span><span style="margin-left:5px;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1px 6px;white-space:nowrap;">Y1</span>
+                <span style="font-size:10px;font-weight:700;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:2px 7px;white-space:nowrap;">Y1 only</span>
               </span>
             </div>
             <input type="range" class="roi-slider" id="roiStaff" min="0" max="200000" value="50000" step="10000" oninput="roiCalc()">
             <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>$0</span><span>$200K</span></div>
             
           </div>
-          <button onclick="roiSwitchTab(1)" style="width:100%;margin-top:8px;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;" data-en="← Back to Profile" data-ar="→ رجوع للملف الشخصي">← Back to Profile</button>
+          <button onclick="roiSwitchTab(1)" style="width:100%;margin-top:8px;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">← Back to Profile</button>
         </div>
 
         <!-- ════════ PANEL 4 — ODOO SUBSCRIPTION CALCULATOR ════════ -->
@@ -3539,14 +3537,14 @@ img{transition:opacity .3s ease}
           <!-- HOSTING TYPE -->
           <div class="roi-input-group">
             <div class="roi-label-row" style="margin-bottom:8px">
-              <span class="roi-lbl">☁️ Hosting Type</span>
+              <span class="roi-lbl" data-en="☁️ Hosting Type" data-ar="☁️ نوع الاستضافة">☁️ Hosting Type</span>
               <span class="roi-val-badge" id="subHostBadge">Odoo.sh</span>
             </div>
             <div style="display:flex;flex-direction:column;gap:6px;" id="subHostBtns">
               <button type="button" onclick="subSelectHost('saas',0)" id="subHostSaas"
                 style="width:100%;padding:9px 14px;border-radius:10px;border:1px solid rgba(212,168,67,.45);background:rgba(212,168,67,.12);color:var(--gold);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;text-align:left;display:flex;justify-content:space-between;align-items:center;">
-                <span>🌐 Odoo.com SaaS — <em>Included in plan</em></span>
-                <span style="color:var(--teal-mid);font-weight:700;">$0/mo extra</span>
+                <span data-en="🌐 Odoo.com SaaS — Included in plan" data-ar="🌐 Odoo.com SaaS — مشمول في الخطة">🌐 Odoo.com SaaS — <em>Included in plan</em></span>
+                <span style="color:var(--teal-mid);font-weight:700;" data-en="$0/mo extra" data-ar="إضافي $0/شهر">$0/mo extra</span>
               </button>
               <button type="button" onclick="subSelectHost('sh',0)" id="subHostSh"
                 style="width:100%;padding:9px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.75);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;text-align:left;display:flex;justify-content:space-between;align-items:center;">
@@ -3609,29 +3607,29 @@ img{transition:opacity .3s ease}
 
               <button type="button" onclick="subSelectHost('premise',0)" id="subHostPremise"
                 style="width:100%;padding:9px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.75);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;text-align:left;display:flex;justify-content:space-between;align-items:center;">
-                <span>🖥️ On-Premise — Your own server</span>
-                <span style="color:var(--teal-mid);font-weight:700;">Custom amount</span>
+                <span data-en="🖥️ On-Premise — Your own server" data-ar="🖥️ خادم محلي — على بنيتك الخاصة">🖥️ On-Premise — Your own server</span>
+                <span style="color:var(--teal-mid);font-weight:700;" data-en="Custom amount" data-ar="مبلغ مخصص">Custom amount</span>
               </button>
 
             <!-- ON-PREMISE DETAIL PANEL -->
             <div id="subPremisePanel" style="display:none;margin-top:10px;padding:14px;background:rgba(1,126,132,.08);border:1px solid rgba(1,126,132,.22);border-radius:12px;">
-              <div style="font-size:10px;font-weight:700;color:var(--teal-mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">🖥️ Server / Infrastructure Cost</div>
+              <div style="font-size:10px;font-weight:700;color:var(--teal-mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;" data-en="🖥️ Server / Infrastructure Cost" data-ar="🖥️ تكلفة الخادم / البنية التحتية">🖥️ Server / Infrastructure Cost</div>
 
               <!-- Purchase vs Monthly toggle -->
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px;">
                 <button type="button" id="premMonthlyBtn" onclick="subSetPremiseMode('monthly')"
                   style="padding:8px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center;">
-                  📅 Monthly Rent<br><span style="font-size:9px;opacity:.6">Recurring cost</span>
+                  <span data-en="📅 Monthly Rent" data-ar="📅 إيجار شهري">📅 Monthly Rent</span><br><span style="font-size:9px;opacity:.6" data-en="Recurring cost" data-ar="تكلفة متكررة">Recurring cost</span>
                 </button>
                 <button type="button" id="premPurchaseBtn" onclick="subSetPremiseMode('purchase')"
                   style="padding:8px;border-radius:9px;border:1px solid rgba(212,168,67,.5);background:rgba(212,168,67,.15);color:var(--gold);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;text-align:center;">
-                  🛒 Purchase<br><span style="font-size:9px;opacity:.8">Purchase = True</span>
+                  <span data-en="🛒 Purchase" data-ar="🛒 شراء">🛒 Purchase</span><br><span style="font-size:9px;opacity:.8" data-en="Purchase = True" data-ar="شراء = نعم">Purchase = True</span>
                 </button>
               </div>
 
               <!-- Monthly mode input -->
               <div id="premMonthlySection">
-                <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:6px;">Monthly server/cloud cost (no limit)</div>
+                <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:6px;" data-en="Monthly server/cloud cost (no limit)" data-ar="تكلفة الخادم/السحابة الشهرية (بلا حد أقصى)">Monthly server/cloud cost (no limit)</div>
                 <div style="display:flex;align-items:center;gap:8px;">
                   <span style="color:var(--teal-mid);font-size:15px;font-weight:800;">$</span>
                   <input type="number" id="subPremMonthly" value="0" min="0" step="10"
@@ -3644,7 +3642,7 @@ img{transition:opacity .3s ease}
               <!-- Purchase mode input -->
               <div id="premPurchaseSection" style="display:none;">
                 <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:6px;">
-                  Server purchase amount — one-time <span style="background:rgba(212,168,67,.2);color:var(--gold);border-radius:4px;padding:1px 6px;font-size:10px;font-weight:700;">Purchase = True</span>
+                  <span data-en="Server purchase amount — one-time" data-ar="مبلغ شراء الخادم — مرة واحدة">Server purchase amount — one-time</span> <span style="background:rgba(212,168,67,.2);color:var(--gold);border-radius:4px;padding:1px 6px;font-size:10px;font-weight:700;" data-en="Purchase = True" data-ar="شراء = نعم">Purchase = True</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
                   <span style="color:var(--gold);font-size:15px;font-weight:800;">$</span>
@@ -3658,10 +3656,10 @@ img{transition:opacity .3s ease}
                   <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:11px;color:rgba(255,255,255,.65);margin-bottom:8px;">
                     <input type="checkbox" id="premInstallCheck" onchange="subCalc()"
                       style="width:14px;height:14px;accent-color:var(--gold);cursor:pointer;">
-                    Pay in installments
+                    <span data-en="Pay in installments" data-ar="الدفع بالأقساط">Pay in installments</span>
                   </label>
                   <div id="premInstallFields" style="display:none;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-                    <span style="font-size:11px;color:rgba(255,255,255,.45);">Months:</span>
+                    <span style="font-size:11px;color:rgba(255,255,255,.45);" data-en="Months:" data-ar="أشهر:">Months:</span>
                     <input type="number" id="premInstallMonths" value="12" min="1" max="60" step="1"
                       onchange="subCalc()"
                       style="width:55px;padding:4px 8px;border-radius:6px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-size:12px;font-weight:700;text-align:center;outline:none;">
@@ -3680,19 +3678,19 @@ img{transition:opacity .3s ease}
 
             <!-- Section Label -->
             <div style="font-size:12px;font-weight:800;color:rgba(255,255,255,.85);margin-bottom:10px;display:flex;align-items:center;gap:8px;">
-              🛠️ Implementation Service
-              <span style="font-size:10px;color:rgba(255,255,255,.35);font-weight:500;">Choose one</span>
+              <span data-en="🛠️ Implementation Service" data-ar="🛠️ خدمة التطبيق">🛠️ Implementation Service</span>
+              <span style="font-size:10px;color:rgba(255,255,255,.35);font-weight:500;" data-en="Choose one" data-ar="اختر واحدة">Choose one</span>
             </div>
 
             <!-- MODE TOGGLE: Pack vs Partner -->
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
               <button type="button" id="implModePackBtn" onclick="subSelectImplMode('pack')"
                 style="padding:10px 8px;border-radius:10px;border:1px solid rgba(1,126,132,.55);background:rgba(1,126,132,.2);color:var(--teal-mid);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;text-align:center;line-height:1.4;">
-                🎯 Odoo Success Pack<br><span style="font-size:9px;opacity:.75;">Official Odoo implementation</span>
+                <span data-en="🎯 Odoo Success Pack" data-ar="🎯 باقة Odoo للنجاح">🎯 Odoo Success Pack</span><br><span style="font-size:9px;opacity:.75;" data-en="Official Odoo implementation" data-ar="تطبيق أودو الرسمي">Official Odoo implementation</span>
               </button>
               <button type="button" id="implModePartnerBtn" onclick="subSelectImplMode('partner')"
                 style="padding:10px 8px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center;line-height:1.4;">
-                🤝 With a Local Partner<br><span style="font-size:9px;opacity:.65;">Fixed lump-sum amount</span>
+                <span data-en="🤝 With a Local Partner" data-ar="🤝 مع شريك محلي">🤝 With a Local Partner</span><br><span style="font-size:9px;opacity:.65;" data-en="Fixed lump-sum amount" data-ar="مبلغ ثابت إجمالي">Fixed lump-sum amount</span>
               </button>
             </div>
 
@@ -3740,21 +3738,21 @@ img{transition:opacity .3s ease}
             <!-- PARTNER SECTION (shown when mode = partner) -->
             <div id="implPartnerSection" style="display:none;">
               <div style="padding:12px 14px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.22);border-radius:10px;margin-bottom:10px;">
-                <div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">🤝 Local Partner Implementation Cost</div>
-                <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:10px;line-height:1.5;">Enter the agreed fixed amount with your Odoo partner. No maximum limit. Extra consulting hours can be added below.</div>
+                <div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;" data-en="🤝 Local Partner Implementation Cost" data-ar="🤝 تكلفة التطبيق مع شريك محلي">🤝 Local Partner Implementation Cost</div>
+                <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:10px;line-height:1.5;" data-en="Enter the agreed fixed amount with your Odoo partner. No maximum limit. Extra consulting hours can be added below." data-ar="أدخل المبلغ الثابت المتفق عليه مع شريكك. بلا حد أقصى. ساعات استشارية إضافية يمكن إضافتها أدناه.">Enter the agreed fixed amount with your Odoo partner. No maximum limit. Extra consulting hours can be added below.</div>
                 <div style="display:flex;align-items:center;gap:10px;">
                   <span style="font-size:16px;font-weight:800;color:var(--gold);">$</span>
                   <input type="number" id="subPartnerAmount" value="0" min="0" step="100"
                     oninput="subCalc()" onchange="subCalc()"
                     placeholder="0"
                     style="flex:1;padding:10px 14px;border-radius:10px;border:1px solid rgba(212,168,67,.4);background:rgba(212,168,67,.08);color:#fff;font-size:18px;font-weight:800;font-family:'Sora',sans-serif;outline:none;text-align:right;min-width:0;">
-                  <span style="font-size:12px;color:rgba(255,255,255,.4);white-space:nowrap;">USD one-time</span>
+                  <span style="font-size:12px;color:rgba(255,255,255,.4);white-space:nowrap;" data-en="USD one-time" data-ar="دولار — مرة واحدة">USD one-time</span>
                 </div>
                 <div id="subPartnerLocalEquiv" style="margin-top:8px;font-size:11px;color:rgba(255,255,255,.45);display:none;"></div>
               </div>
-              <div style="padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px;border:1px solid rgba(255,255,255,.08);font-size:10px;color:rgba(255,255,255,.4);line-height:1.5;">
-                💡 You can still combine with Extra Consulting Hours below. Success Pack is not available in this mode.
-              </div>
+                <div style="padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px;border:1px solid rgba(255,255,255,.08);font-size:10px;color:rgba(255,255,255,.4);line-height:1.5;" data-en="💡 You can still combine with Extra Consulting Hours below. Success Pack is not available in this mode." data-ar="💡 يمكنك الجمع مع ساعات استشارية إضافية. باقة النجاح غير متاحة في هذا الوضع.">
+                  💡 You can still combine with Extra Consulting Hours below. Success Pack is not available in this mode.
+                </div>
             </div>
 
           </div>
@@ -3762,14 +3760,14 @@ img{transition:opacity .3s ease}
           <!-- ADDITIONAL HOURS -->
           <div class="roi-input-group">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-              <span class="roi-lbl">⏱️ Extra Consulting Hours</span>
+              <span class="roi-lbl" data-en="⏱️ Extra Consulting Hours" data-ar="⏱️ ساعات استشارية إضافية">⏱️ Extra Consulting Hours</span>
               <span class="roi-val-badge" id="subExtraHrsVal">0 hrs</span>
             </div>
             <input type="range" class="roi-slider" id="subExtraHrs" min="0" max="50000" value="0" step="50" oninput="subCalc()">
             <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.3);margin-top:4px"><span>0</span><span>50,000 hrs</span></div>
             
             <div style="display:flex;align-items:center;gap:8px;margin-top:8px;">
-              <span style="font-size:11px;color:rgba(255,255,255,.55);">💵 Hourly rate (USD)</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.55);" data-en="💵 Hourly rate (USD)" data-ar="💵 السعر بالساعة (دولار)">💵 Hourly rate (USD)</span>
               <input type="number" id="subHourlyRate" value="175" min="50" max="500" step="25" onchange="subCalc()"
                 style="width:90px;padding:5px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:12px;font-weight:700;text-align:center;outline:none;">
             </div>
@@ -3777,15 +3775,15 @@ img{transition:opacity .3s ease}
 
           <!-- RESULT BOX -->
           <div id="subResultBox" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:18px;margin-top:6px;">
-            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;">📋 Cost Breakdown</div>
+            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;" data-en="📋 Cost Breakdown" data-ar="📋 تفصيل التكلفة">📋 Cost Breakdown</div>
             <div id="subResultRows" style="display:flex;flex-direction:column;gap:7px;"></div>
             <div style="height:1px;background:rgba(255,255,255,.08);margin:14px 0;"></div>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-              <span style="font-size:13px;font-weight:700;color:rgba(255,255,255,.8);">Monthly Total</span>
+              <span style="font-size:13px;font-weight:700;color:rgba(255,255,255,.8);" data-en="Monthly Total" data-ar="الإجمالي الشهري">Monthly Total</span>
               <span id="subMonthlyTotal" style="font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:var(--gold);">—</span>
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-              <span style="font-size:11px;color:rgba(255,255,255,.45);">Annual (subscription + hosting)</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.45);" data-en="Annual (subscription + hosting)" data-ar="سنوي (الاشتراك + الاستضافة)">Annual (subscription + hosting)</span>
               <span id="subAnnualTotal" style="font-size:13px;font-weight:700;color:var(--teal-mid);">—</span>
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
@@ -3793,12 +3791,12 @@ img{transition:opacity .3s ease}
               <span id="subPackCost" style="font-size:13px;font-weight:700;color:rgba(255,255,255,.7);">—</span>
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-              <span style="font-size:11px;color:rgba(255,255,255,.45);">Extra hours cost (one-time)</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.45);" data-en="Extra hours cost (one-time)" data-ar="تكلفة الساعات الإضافية (مرة واحدة)">Extra hours cost (one-time)</span>
               <span id="subExtraCost" style="font-size:13px;font-weight:700;color:rgba(255,255,255,.7);">—</span>
             </div>
             <div style="height:1px;background:rgba(212,168,67,.25);margin:10px 0;"></div>
             <div style="display:flex;justify-content:space-between;align-items:center;">
-              <span style="font-size:12px;font-weight:800;color:rgba(255,255,255,.9);">Total Year 1 Investment</span>
+              <span style="font-size:12px;font-weight:800;color:rgba(255,255,255,.9);" data-en="Total Year 1 Investment" data-ar="إجمالي استثمار السنة الأولى">Total Year 1 Investment</span>
               <span id="subYear1Total" style="font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:var(--gold);">—</span>
             </div>
             <div id="subLocalEquiv" style="margin-top:10px;padding:8px 12px;background:rgba(1,126,132,.1);border:1px solid rgba(1,126,132,.2);border-radius:8px;font-size:11px;color:rgba(255,255,255,.6);line-height:1.6;display:none;"></div>
@@ -3809,15 +3807,18 @@ img{transition:opacity .3s ease}
           <!-- ACTIONS -->
           <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px;">
             <a href="https://www.odoo.com/pricing" target="_blank"
-              style="display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(1,126,132,.2);color:var(--teal-mid);border:1px solid rgba(1,126,132,.4);font-size:12px;font-weight:700;padding:11px;border-radius:10px;text-decoration:none;transition:all .2s;">
+              style="display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(1,126,132,.2);color:var(--teal-mid);border:1px solid rgba(1,126,132,.4);font-size:12px;font-weight:700;padding:11px;border-radius:10px;text-decoration:none;transition:all .2s;"
+              data-en="📊 View Official Odoo Pricing ↗" data-ar="📊 عرض أسعار أودو الرسمية ↗">
               📊 View Official Odoo Pricing ↗
             </a>
             <a href="https://www.odoo.com/pricing-packs" target="_blank"
-              style="display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(212,168,67,.12);color:var(--gold);border:1px solid rgba(212,168,67,.3);font-size:12px;font-weight:700;padding:11px;border-radius:10px;text-decoration:none;transition:all .2s;">
+              style="display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(212,168,67,.12);color:var(--gold);border:1px solid rgba(212,168,67,.3);font-size:12px;font-weight:700;padding:11px;border-radius:10px;text-decoration:none;transition:all .2s;"
+              data-en="🎯 Explore Success Packs ↗" data-ar="🎯 استعرض باقات النجاح ↗">
               🎯 Explore Success Packs ↗
             </a>
             <button onclick="roiSwitchTab(3)"
-              style="width:100%;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;">
+              style="width:100%;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;"
+              data-en="← Back to Investment" data-ar="→ رجوع للاستثمار">
               ← Back to Investment
             </button>
           </div>
@@ -4284,7 +4285,7 @@ const ROI_DEPTS = [
 ];
 
 let roiActiveTab = 1;
-let roiDeptSelection = { inventory: true, purchase: true, finance: true, sales: true, hr: true }; // defaults
+let roiDeptSelection = { inventory: true, finance: true, sales: true, hr: true }; // defaults
 
 /* ══ ERP COMPARISON CHART ══ */
 function renderErpCompare(odooCost) {
@@ -7568,7 +7569,7 @@ async function sendRoiEmail() {
   // ⚠️ استبدل القيم دي بـ credentials بتاعتك من emailjs.com
   const EMAILJS_SERVICE_ID  = 'service_y8ugz7e';
   const EMAILJS_TEMPLATE_ID = 'template_ws1g0p2';
-  const MY_EMAIL            = 'abuemira@nexa-solutions.com';
+  const MY_EMAIL            = 'abuemira.nexa@gmail.com';
 
   // نسخة CC للمدير (أنت)
   const ccSummary = `
@@ -7605,15 +7606,15 @@ async function sendRoiEmail() {
       message     : `Dear ${custName},\n\nPlease find your personalised Odoo ERP ROI Analysis below.\n\nIndustry: ${industry}\nAnnual Savings: ${d ? d.fSavings : '—'}\nPayback Period: ${d ? d.fPayback : '—'}\n3-Year ROI: ${d ? d.fRoi3 : '—'}\nNet Value Y1–Y3: ${d ? d.fNet3 : '—'}\n\nBest regards,\nMohamed Essam Abu Emira\nCOO & Co-Founder — Nexa Solutions\n+20 100 506 1349`,
     });
 
-    // إرسال 2: نسخة لك — نفس الريبورت الكامل
+    // إرسال 2: نسخة لك (CC)
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
       to_email    : MY_EMAIL,
       to_name     : 'Mohamed Abu Emira',
       from_name   : 'Nexa Solutions — ROI Tracker',
       reply_to    : custEmail,
-      subject     : `[نسخة] ROI Report — ${custName}${company ? ' — ' + company : ''} · ${industry}`,
-      html_body   : htmlBody,
-      message     : `[نسخة للمدير] ROI Report sent to ${custName} (${custEmail}) — ${industry} — Savings: ${d ? d.fSavings : '—'} — ROI: ${d ? d.fRoi3 : '—'}`,
+      subject     : `[ROI Sent] ${custName}${company ? ' — ' + company : ''} · ${industry}`,
+      html_body   : ccSummary,
+      message     : `ROI Report sent to ${custName} (${custEmail}) — ${industry} — Savings: ${d ? d.fSavings : '—'} — ROI: ${d ? d.fRoi3 : '—'}`,
     });
 
     // Show success
@@ -7622,7 +7623,7 @@ async function sendRoiEmail() {
     const msg     = document.getElementById('roiEmailSuccessMsg');
     if (bodyEl)  bodyEl.style.display   = 'none';
     if (success) success.style.display  = 'flex';
-    if (msg)     msg.textContent        = `✅ The ROI report has been emailed to ${custEmail}. A copy was sent to abuemira@nexa-solutions.com.`;
+    if (msg)     msg.textContent        = `✅ The ROI report has been emailed to ${custEmail}. A copy was sent to abuemira.nexa@gmail.com.`;
 
   } catch (err) {
     console.error('sendRoiEmail — EmailJS error:', err);
@@ -8066,13 +8067,20 @@ function subCalc() {
 
   // Local currency equivalent
   const localEl = document.getElementById('subLocalEquiv');
+  const AR_sub = document.documentElement.getAttribute('data-lang') === 'ar';
   if (country.rate !== 1) {
     localEl.style.display = '';
-    localEl.innerHTML = '🔄 <strong style="color:var(--teal-mid)">Local Equivalent (' + country.currency + ')</strong><br>' +
-      'Monthly: <strong>' + country.symbol + ' ' + Math.round(totalMonthlyUSD * country.rate).toLocaleString() + '</strong> · ' +
-      'Annual subscription: <strong>' + country.symbol + ' ' + Math.round(annualSubUSD * country.rate).toLocaleString() + '</strong> · ' +
-      'Year 1 total: <strong>' + country.symbol + ' ' + Math.round(year1USD * country.rate).toLocaleString() + '</strong><br>' +
-      '<span style="opacity:.6;font-size:10px;">Approx. rate: 1 USD = ' + country.rate + ' ' + country.currency + ' · Verify with your bank</span>';
+    localEl.innerHTML = AR_sub
+      ? '🔄 <strong style="color:var(--teal-mid)">المكافئ المحلي (' + country.currency + ')</strong><br>' +
+        'شهرياً: <strong>' + country.symbol + ' ' + Math.round(totalMonthlyUSD * country.rate).toLocaleString() + '</strong> · ' +
+        'الاشتراك السنوي: <strong>' + country.symbol + ' ' + Math.round(annualSubUSD * country.rate).toLocaleString() + '</strong> · ' +
+        'إجمالي السنة الأولى: <strong>' + country.symbol + ' ' + Math.round(year1USD * country.rate).toLocaleString() + '</strong><br>' +
+        '<span style="opacity:.6;font-size:10px;">سعر تقريبي: 1 USD = ' + country.rate + ' ' + country.currency + ' · تحقق مع بنكك</span>'
+      : '🔄 <strong style="color:var(--teal-mid)">Local Equivalent (' + country.currency + ')</strong><br>' +
+        'Monthly: <strong>' + country.symbol + ' ' + Math.round(totalMonthlyUSD * country.rate).toLocaleString() + '</strong> · ' +
+        'Annual subscription: <strong>' + country.symbol + ' ' + Math.round(annualSubUSD * country.rate).toLocaleString() + '</strong> · ' +
+        'Year 1 total: <strong>' + country.symbol + ' ' + Math.round(year1USD * country.rate).toLocaleString() + '</strong><br>' +
+        '<span style="opacity:.6;font-size:10px;">Approx. rate: 1 USD = ' + country.rate + ' ' + country.currency + ' · Verify with your bank</span>';
   } else {
     localEl.style.display = 'none';
   }
@@ -8082,9 +8090,12 @@ function subCalc() {
   const roiSavingsEl = document.getElementById('roiSavings');
   if (roiSavingsEl) {
     hintEl.style.display = '';
-    hintEl.innerHTML = '💡 <strong style="color:var(--gold)">ROI Insight:</strong> Your Year 1 investment of <strong>' + fmtU(year1USD) + '</strong> · ' +
-      'Add your ROI calculation in Tab 1–3 to see exact payback period. Typical payback for this setup: <strong>' +
-      (year1USD < 30000 ? '6–14 months' : year1USD < 80000 ? '12–24 months' : '18–36 months') + '</strong>.';
+    const paybackLabel = year1USD < 30000 ? (AR_sub ? '6–14 شهراً' : '6–14 months') : year1USD < 80000 ? (AR_sub ? '12–24 شهراً' : '12–24 months') : (AR_sub ? '18–36 شهراً' : '18–36 months');
+    hintEl.innerHTML = AR_sub
+      ? '💡 <strong style="color:var(--gold)">رؤية العائد على الاستثمار:</strong> استثمارك في السنة الأولى <strong>' + fmtU(year1USD) + '</strong> · ' +
+        'أضف حساب العائد في التبويبات 1-3 لمعرفة فترة الاسترداد الدقيقة. فترة استرداد نموذجية لهذا الإعداد: <strong>' + paybackLabel + '</strong>.'
+      : '💡 <strong style="color:var(--gold)">ROI Insight:</strong> Your Year 1 investment of <strong>' + fmtU(year1USD) + '</strong> · ' +
+        'Add your ROI calculation in Tab 1–3 to see exact payback period. Typical payback for this setup: <strong>' + paybackLabel + '</strong>.';
   }
 
   // Sync subscription annual cost → roiSub (Y2+ original) + roiSubY1 (Y1 discounted)
