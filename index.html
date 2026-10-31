@@ -176,6 +176,11 @@ img{display:block;max-width:100%}
 .hero-name{font-size:40px;font-weight:800;color:#fff;letter-spacing:-.6px;margin-bottom:7px;line-height:1.15}
 .hero-name span{color:var(--gold)}
 .hero-subtitle{font-size:15px;color:rgba(255,255,255,.65);margin-bottom:18px;font-weight:400;line-height:1.55}
+.hero-h1{margin:0 0 12px}
+.hero-h1 .hero-name{display:block}
+.hero-headline{display:block;font-family:Sora,sans-serif;font-size:clamp(20px,2.3vw,27px);font-weight:700;color:#fff;line-height:1.3;letter-spacing:-.2px;max-width:620px}
+.hero-lede{font-size:15px;line-height:1.7;color:rgba(255,255,255,.78);max-width:600px;margin:0 0 20px}
+@media(max-width:768px){.hero-headline,.hero-lede{margin-left:auto;margin-right:auto}}
 .hero-roles{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
 .role-pill{font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;background:rgba(1,126,132,.15);color:rgba(255,255,255,.88);border:1px solid rgba(1,126,132,.35)}
 .role-pill.gold{background:rgba(212,168,67,.13);color:var(--gold-lt);border-color:rgba(212,168,67,.35)}
@@ -213,7 +218,9 @@ img{display:block;max-width:100%}
 /* ── ABOUT ── */
 .about-grid{display:grid;grid-template-columns:3fr 2fr;gap:40px;align-items:start}
 .about-text p{font-size:14px;color:var(--gray-600);line-height:1.88}
-.about-text p+p{margin-top:14px}
+.about-text p+p,.about-more p{margin-top:14px}
+.about-more summary{cursor:pointer;margin-top:14px;font-size:13px;font-weight:700;color:var(--teal);width:fit-content}
+.about-more summary:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:4px}
 .kpi-row{display:flex;gap:12px;margin:24px 0}
 .kpi{flex:1;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r);padding:16px;text-align:center;border-top:3px solid var(--teal);box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .kpi-n{font-family:"Sora",sans-serif;font-size:24px;font-weight:800;color:var(--teal)}
@@ -286,6 +293,7 @@ img{display:block;max-width:100%}
 
 /* ── SERVICES ── */
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.svc-cta{display:flex;justify-content:center;margin-top:28px}
 .svc-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--rl);padding:26px;transition:all .22s;box-shadow:0 2px 10px rgba(0,0,0,.04)}
 .svc-card:hover{border-color:var(--teal);transform:translateY(-3px);box-shadow:var(--sh-lg)}
 .svc-icon{width:48px;height:48px;border-radius:12px;background:var(--teal-light);border:1px solid rgba(1,126,132,.22);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
@@ -348,6 +356,9 @@ img{display:block;max-width:100%}
 @media(max-width:600px){.roi-inner{padding:0 20px}}
 
 /* ── TRUST BADGES BAR ── */
+.proof-line{background:var(--white);border-bottom:1px solid var(--gray-200);margin:0;padding:14px 20px;text-align:center;font-size:12.5px;font-weight:600;color:var(--gray-600);line-height:1.8}
+.proof-line span{white-space:nowrap}
+.proof-line span+span::before{content:"·";margin:0 10px;color:var(--gray-400)}
 .trust-bar{background:var(--white);border-bottom:1px solid var(--gray-200);padding:18px 0;overflow:hidden}
 .trust-bar-inner{max-width:1100px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center}
 .trust-item{display:flex;align-items:center;gap:9px;padding:6px 22px;border-right:1px solid var(--gray-200);font-size:12px;font-weight:700;color:var(--gray-600)}
@@ -619,6 +630,7 @@ img{display:block;max-width:100%}
 .footer{background:var(--navy);padding:28px 40px}
 .footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
 .footer-text{font-size:12px;color:rgba(255,255,255,.4)}
+.contact-note{font-size:12px;opacity:.75;margin-top:10px}
 .footer-links{display:flex;gap:18px}
 .footer-links a{font-size:11px;color:rgba(255,255,255,.4);transition:color .18s}
 .footer-links a:hover{color:var(--gold)}
@@ -1081,38 +1093,17 @@ img{transition:opacity .3s ease}
       </div>
     </div>
     <div>
-      <h1 class="hero-name">Mohamed Essam <span>Abu Emira</span></h1>
+      <h1 class="hero-h1"><span class="hero-name">Mohamed Essam <span>Abu Emira</span></span><span class="hero-headline">Odoo ERP your finance and operations teams can trust</span></h1>
       <p class="hero-subtitle">COO &amp; Co-Founder, Nexa Solutions · Odoo Project Manager</p>
-      <div class="hero-roles">
-        <span class="role-pill gold">COO &amp; Co-Founder</span>
-        <span class="role-pill gold">Odoo Project Manager</span>
-        <span class="role-pill">ERP Operations Manager</span>
-        <span class="role-pill">Financial Manager</span>
-        <span class="role-pill">Product Owner</span>
-      </div>
-      <div class="hero-badges">
-        <span class="hbadge gold">Odoo 16 · 17 · 18 Certified</span>
-        <span class="hbadge gold">LinkedIn Top ERP Voice</span>
-        <span class="hbadge">Google PM Certified</span>
-        <span class="hbadge">IBM IT Project Manager</span>
-        <span class="hbadge">McKinsey Forward</span>
-        <span class="hbadge">Strategic Leadership · Dartmouth</span>
-        <span class="hbadge">500+ Connections</span>
-        <span class="hbadge">SAP Technology Consultant</span>
-        <span class="hbadge">Certified Financial Analyst</span>
-      </div>
+      <p class="hero-lede">I started my career in accounting, so I build Odoo around how your numbers, stock and people actually work: 79+ ERP projects across Egypt, Saudi Arabia and the GCC. Today I am COO of Nexa Solutions, an Odoo Official Partner.</p>
       <div class="hero-meta">
         <span class="hm">📍  Giza, Egypt</span>
-        <span class="hm">🕐 7+ Years in ERP</span>
         <span class="hm">📞 <a href="tel:+201005061349">+20 100 506 1349</a></span>
         <span class="hm">✉️ <a href="mailto:abuemira@nexa-solutions.com">abuemira@nexa-solutions.com</a></span>
-        <!-- TODO: mohamedabuemira.github.io is a separate, older portfolio with a different title ("Odoo Expert & ERP Operations Manager"). Keep, redirect to this site, or remove? -->
-        <span class="hm"><a href="https://mohamedabuemira.github.io" target="_blank">mohamedabuemira.github.io ↗</a></span>
       </div>
       <div class="hero-btns">
-        <a href="https://calendly.com/abuemira/30min" target="_blank" class="btn-gold" onclick="gtag && gtag('event','cta_click',{event_category:'hero',event_label:'schedule_meeting'})">📅 Schedule a Free Meeting</a>
-        <!-- TODO: CV PDF disagrees with the site (8+ years vs 12+/7+, 60+ vs 79+ projects, COO from Sep 2024 vs Mar 2024, email mohamed.abuemira@gmail.com). Update the Google Doc, then upload it as assets/docs/Mohamed-Abu-Emira-CV.pdf and link it here with a download attribute. -->
-        <a href="https://docs.google.com/document/d/1pFqMZtFKdO56YsMjaGyXCmbf8v3tBTKlD0ALGYXX1_Q/export?format=pdf" target="_blank" class="btn-ghost">↓ Download CV</a>
+        <a href="https://calendly.com/abuemira/30min" target="_blank" class="btn-gold" onclick="gtag && gtag('event','cta_click',{event_category:'hero',event_label:'schedule_meeting'})">Book a free 30-min call</a>
+        <a href="#projects" class="btn-ghost">See client projects</a>
       </div>
     </div>
 </div>
@@ -1129,60 +1120,8 @@ img{transition:opacity .3s ease}
   </div>
 </div>
 
-<!-- TRUST BADGES BAR -->
-<div class="trust-bar">
-  <div class="trust-bar-inner">
-    <div class="trust-item">
-      <div class="trust-item-ico">🟣</div>
-      <div>
-        <div>Odoo Official Partner</div>
-        <div class="trust-item-sub">Certified Implementation Partner</div>
-      </div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-item-ico">🎓</div>
-      <div>
-        <div>Odoo 16 · 17 · 18 Certified</div>
-        <div class="trust-item-sub">Functional Certification · Active</div>
-      </div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-item-ico">📋</div>
-      <div>
-        <div>Google PM Certified</div>
-        <div class="trust-item-sub">Project Management Professional</div>
-      </div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-item-ico">🔵</div>
-      <div>
-        <div>IBM IT Project Manager</div>
-        <div class="trust-item-sub">IT & Technology Leadership</div>
-      </div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-item-ico">🏦</div>
-      <div>
-        <div>McKinsey Forward</div>
-        <div class="trust-item-sub">Executive Leadership Program</div>
-      </div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-item-ico">📊</div>
-      <div>
-        <div>Certified Financial Analyst</div>
-        <div class="trust-item-sub">Finance & ERP Accounting</div>
-      </div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-item-ico">⭐</div>
-      <div>
-        <div>LinkedIn Top ERP Voice</div>
-        <div class="trust-item-sub">500+ Professional Network</div>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- PROOF LINE -->
+<p class="proof-line"><span>Odoo Official Partner (Nexa Solutions)</span> <span>Odoo 16 · 17 · 18 Certified</span> <span>Google Project Management</span> <span>IBM IT Project Manager</span> <span>LinkedIn Top ERP Voice</span></p>
 
 <!-- ABOUT -->
 <section class="section" id="about">
@@ -1192,9 +1131,13 @@ img{transition:opacity .3s ease}
     <div class="about-grid">
       <div>
         <div class="about-text">
-          <p>Odoo Project Manager with <strong>12+ years</strong> of experience: a start in finance and accounting, then <strong>7+ years</strong> in end-to-end ERP deployment, configuration, and optimization. Co-Founded <strong>Nexa Solutions</strong> as COO, building it into a recognized Odoo Official Partner with a growing presence across Egypt, Saudi Arabia, and the GCC region.</p>
-          <p>Proven ability to translate complex business and financial objectives into scalable Odoo solutions. Successfully led <strong>79+ ERP engagements</strong> across Construction, Manufacturing, Food & Beverage, Retail, Government, and Real Estate sectors — with deep expertise in business requirements gathering, GAP analysis, process reengineering, data migration, multi-company/multi-currency configuration, and post-go-live support.</p>
-          <p>Fluent in Arabic and English. Based in Egypt — actively serving clients across Egypt, Saudi Arabia, UAE and the wider GCC market.</p>
+          <p>I started as an accountant, closing the books and preparing financial statements for a manufacturer. Since 2019 I have implemented ERP systems, and in 2024 I co-founded <strong>Nexa Solutions</strong>, an Odoo Official Partner, where I am COO. Why it matters to you: I design Odoo from the general ledger outward, so finance, inventory, manufacturing and HR agree from day one. <strong>79+ projects</strong> across Egypt, Saudi Arabia, UAE and the GCC, in Arabic and English.</p>
+          <details class="about-more">
+            <summary>Read the full story</summary>
+            <p>Odoo Project Manager with <strong>12+ years</strong> of experience: a start in finance and accounting, then <strong>7+ years</strong> in end-to-end ERP deployment, configuration, and optimization. Co-Founded <strong>Nexa Solutions</strong> as COO, building it into a recognized Odoo Official Partner with a growing presence across Egypt, Saudi Arabia, and the GCC region.</p>
+            <p>Proven ability to translate complex business and financial objectives into scalable Odoo solutions. Successfully led <strong>79+ ERP engagements</strong> across Construction, Manufacturing, Food & Beverage, Retail, Government, and Real Estate sectors — with deep expertise in business requirements gathering, GAP analysis, process reengineering, data migration, multi-company/multi-currency configuration, and post-go-live support.</p>
+            <p>Fluent in Arabic and English. Based in Egypt — actively serving clients across Egypt, Saudi Arabia, UAE and the wider GCC market.</p>
+          </details>
         </div>
         <div class="kpi-row">
           <div class="kpi"><div class="kpi-n">70%</div><div class="kpi-l">Avg. Performance Gain</div></div>
@@ -1342,16 +1285,14 @@ img{transition:opacity .3s ease}
     <div class="sec-tag">What I Do</div>
     <h2 class="sec-title">Professional <span>Services</span></h2>
     <div class="svc-grid">
-      <div class="svc-card"><div class="svc-icon">⚙️</div><div class="svc-title">ERP Operations Management</div><div class="svc-desc">Full operational management of ERP projects — planning, team coordination, scope control, UAT, go-live, and ongoing support. Aligned with business goals.</div><a href="https://calendly.com/abuemira/30min" target="_blank" class="svc-link">Book Consultation →</a></div>
-      <div class="svc-card"><div class="svc-icon">🔧</div><div class="svc-title">Odoo ERP Consulting</div><div class="svc-desc">Deployment, configuration, and GAP analysis across Odoo v12–v19. From requirements gathering to functional specs and go-live delivery.</div><a href="https://calendly.com/abuemira/30min" target="_blank" class="svc-link">Book Consultation →</a></div>
-      <div class="svc-card"><div class="svc-icon">💰</div><div class="svc-title">Financial Management</div><div class="svc-desc">Full-cycle financial planning, budgeting, and reporting. Balance Sheet, P&L, and Cash Flow integrated with Odoo Accounting module.</div><a href="https://calendly.com/abuemira/30min" target="_blank" class="svc-link">Book Consultation →</a></div>
-      <div class="svc-card"><div class="svc-icon">🔗</div><div class="svc-title">ERP Customization & Integration</div><div class="svc-desc">Odoo Studio customizations and third-party integrations — Shopify, eZee PMS, payment gateways, and custom module development.</div><a href="https://calendly.com/abuemira/30min" target="_blank" class="svc-link">Book Consultation →</a></div>
-      <div class="svc-card"><div class="svc-icon">📦</div><div class="svc-title">Data Migration</div><div class="svc-desc">Secure and accurate migration from SAP, ONYX PRO, OpenCart, and legacy systems to Odoo. Full data integrity guaranteed throughout.</div><a href="https://calendly.com/abuemira/30min" target="_blank" class="svc-link">Book Consultation →</a></div>
-      <div class="svc-card"><div class="svc-icon">🎓</div><div class="svc-title">Training & Support</div><div class="svc-desc">Comprehensive end-user and admin training, system documentation, and ongoing technical support after go-live.</div><a href="https://calendly.com/abuemira/30min" target="_blank" class="svc-link">Book Consultation →</a></div>
-      <div class="svc-card"><div class="svc-icon">📊</div><div class="svc-title">Financial Reporting & Audit</div><div class="svc-desc">Internal and external audit support, compliance checks, and custom KPI dashboards built directly inside Odoo.</div><a href="https://calendly.com/abuemira/30min" target="_blank" class="svc-link">Book Consultation →</a></div>
-      <div class="svc-card"><div class="svc-icon">🏭</div><div class="svc-title">Business Process Optimization</div><div class="svc-desc">Process mapping, reengineering, and Odoo best practices — measurable cost reduction and operational efficiency gains.</div><a href="https://calendly.com/abuemira/30min" target="_blank" class="svc-link">Book Consultation →</a></div>
-      <div class="svc-card"><div class="svc-icon">🧾</div><div class="svc-title">Bookkeeping & Tax Services</div><div class="svc-desc">Daily journal entries, bank reconciliation, payroll, and tax compliance — all integrated within Odoo Accounting for clean financials.</div><a href="https://calendly.com/abuemira/30min" target="_blank" class="svc-link">Book Consultation →</a></div>
+      <div class="svc-card"><div class="svc-icon">🚀</div><div class="svc-title">Odoo live on schedule</div><div class="svc-desc">End-to-end implementation, from requirements and GAP analysis to configuration, UAT and go-live, on Odoo v12–v19 with one accountable project lead.</div></div>
+      <div class="svc-card"><div class="svc-icon">💰</div><div class="svc-title">Finance you can close and audit</div><div class="svc-desc">Chart of accounts, VAT, Zakat and e-invoicing set-up, budgets, P&amp;L and cash-flow reports, KPI dashboards, audit support, and ongoing bookkeeping if you need it, all in Odoo Accounting.</div></div>
+      <div class="svc-card"><div class="svc-icon">🔗</div><div class="svc-title">Odoo connected to the tools you use</div><div class="svc-desc">Shopify, eZee PMS, payment gateways and online stores integrated with Odoo, plus Studio changes and custom modules where configuration is not enough.</div></div>
+      <div class="svc-card"><div class="svc-icon">📦</div><div class="svc-title">Your data moved over intact</div><div class="svc-desc">Migration from SAP, ONYX PRO, OpenCart and legacy systems, and upgrades between Odoo versions, reconciled before go-live.</div></div>
+      <div class="svc-card"><div class="svc-icon">🏭</div><div class="svc-title">Simpler processes, fewer manual steps</div><div class="svc-desc">Process mapping and redesign built on Odoo best practices, so approvals, stock moves and reporting stop depending on spreadsheets.</div></div>
+      <div class="svc-card"><div class="svc-icon">🎓</div><div class="svc-title">A team that uses the system from day one</div><div class="svc-desc">Hands-on training for users and admins in Arabic and English, clear documentation, and support after go-live.</div></div>
     </div>
+    <div class="svc-cta"><a href="https://calendly.com/abuemira/30min" target="_blank" class="btn-gold">Book a free 30-min call</a></div>
   </div>
 </section>
 
@@ -3128,9 +3069,7 @@ img{transition:opacity .3s ease}
         <h2 class="sec-title" style="margin-bottom:12px">What Clients &amp; Colleagues <span>Say</span></h2>
         <div style="display:flex;align-items:center;gap:16px;margin-top:4px;flex-wrap:wrap;">
           <div class="test-badge">
-            <span class="test-badge-star">★★★★★</span>
-            <span class="test-badge-score">5.0</span>
-            <span class="test-badge-count" id="testCount">· 30+ LinkedIn Recommendations</span>
+            <span class="test-badge-count" id="testCount">30+ LinkedIn Recommendations</span>
           </div>
           <div style="font-size:12px;color:var(--gray-600);">Verified on <a href="https://www.linkedin.com/in/abuemira" target="_blank" style="color:var(--teal);font-weight:700;">LinkedIn ↗</a></div>
         </div>
@@ -3152,8 +3091,7 @@ img{transition:opacity .3s ease}
         <h2 class="full-modal-title">All LinkedIn <span>Recommendations</span></h2>
         <div style="display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap;">
           <div style="display:flex;align-items:center;gap:6px;background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.3);border-radius:40px;padding:6px 14px;">
-            <span style="color:var(--gold);">★★★★★</span>
-            <span style="font-size:.8rem;font-weight:700;color:var(--gold);">5.0 · All Verified on LinkedIn</span>
+            <span style="font-size:.8rem;font-weight:700;color:var(--gold);">All from LinkedIn</span>
           </div>
           <a href="https://www.linkedin.com/in/abuemira" target="_blank" style="font-size:.78rem;color:var(--teal);font-weight:700;">View Profile on LinkedIn ↗</a>
         </div>
@@ -3208,8 +3146,10 @@ img{transition:opacity .3s ease}
           <div><div class="c-lbl">LinkedIn</div><div class="c-val"><a href="https://linkedin.com/in/abuemira" target="_blank">linkedin.com/in/abuemira</a></div></div>
         </div>
 
+        <!-- TODO: mohamedabuemira.github.io is a separate, older portfolio with a different title ("Odoo Expert & ERP Operations Manager"). Keep, redirect to this site, or remove? -->
         <div class="c-row"><div class="c-ico">🌐</div><div><div class="c-lbl">Portfolio</div><div class="c-val"><a href="https://mohamedabuemira.github.io" target="_blank">mohamedabuemira.github.io</a></div></div></div>
-        <div class="c-row"><div class="c-ico">🗓</div><div><div class="c-lbl">Book a Meeting</div><div class="c-val"><a href="https://calendly.com/abuemira/30min" target="_blank">calendly.com/abuemira/30min</a></div></div></div>
+        <!-- TODO: point this at the hosted CV PDF once the CV matches the site (see the TODO in the hero history). -->
+        <div class="c-row"><div class="c-ico">📄</div><div><div class="c-lbl">CV</div><div class="c-val"><a href="https://docs.google.com/document/d/1pFqMZtFKdO56YsMjaGyXCmbf8v3tBTKlD0ALGYXX1_Q/export?format=pdf" target="_blank">Download CV (PDF)</a></div></div></div>
 
         <div class="c-row">
           <div class="c-ico">
@@ -3235,21 +3175,12 @@ img{transition:opacity .3s ease}
 
       <div class="contact-cta">
         <div>
-          <h3>Available For</h3>
-          <p>Open to consulting engagements, full-time ERP roles, and freelance projects — across Egypt, Saudi Arabia, and the GCC region.</p>
-          <ul class="avail-list">
-            <li>Odoo ERP Full Implementations</li>
-            <li>ERP Operations Management</li>
-            <li>Financial Management Consulting</li>
-            <li>ERP Customization & Integration</li>
-            <li>Data Migration & Upgrade Projects</li>
-            <li>Training & Post-Go-Live Support</li>
-            <li>Business Process Optimization</li>
-            <li>Remote & On-site Engagements</li>
-          </ul>
+          <h3>Let's talk about your Odoo project</h3>
+          <p>Planning a rollout, rescuing one that stalled, or moving from another ERP? Book a free 30-minute call and leave with a clear next step, whether or not we work together.</p>
+          <p class="contact-note">Also open to full-time ERP leadership roles across Egypt, Saudi Arabia and the GCC.</p>
         </div>
         <div>
-          <a href="https://calendly.com/abuemira/30min" target="_blank" class="btn-gold" style="width:100%;justify-content:center;margin-bottom:14px;">📅 Book a Free 30-Min Consultation</a>
+          <a href="https://calendly.com/abuemira/30min" target="_blank" class="btn-gold" style="width:100%;justify-content:center;margin-bottom:14px;">Book a free 30-min call</a>
           <div class="soc-row">
             <!-- FIX 2: Replaced base64 PNG icons in soc-btn with clean inline SVGs -->
             <a href="https://linkedin.com/in/abuemira" target="_blank" class="soc-btn">
@@ -5164,12 +5095,26 @@ document.addEventListener("DOMContentLoaded", () => {
       'COO & Co-Founder, Nexa Solutions · Odoo Project Manager',
       'الرئيس التنفيذي للعمليات ومؤسس مشارك، نيكسا تكنولوجي · مدير مشاريع أودو');
     const hBtns = document.querySelectorAll('.hero-btns a');
-    t(hBtns[0], '📅 Schedule a Meeting', '📅 احجز استشارة مجانية');
-    t(hBtns[1], '↓ Download CV',         '↓ حمّل ملفي المهني');
+    t(hBtns[0], 'Book a free 30-min call', 'احجز مكالمة مجانية لمدة 30 دقيقة');
+    t(hBtns[1], 'See client projects',     'شاهد مشاريع العملاء');
+    t(document.querySelector('.hero-headline'), 'Odoo ERP your finance and operations teams can trust', 'نظام أودو تثق به إدارتك المالية والتشغيلية');
+    t(document.querySelector('.hero-lede'),
+      'I started my career in accounting, so I build Odoo around how your numbers, stock and people actually work: 79+ ERP projects across Egypt, Saudi Arabia and the GCC. Today I am COO of Nexa Solutions, an Odoo Official Partner.',
+      'بدأتُ مسيرتي في المحاسبة، لذلك أبني أودو على طريقة عمل أرقامك ومخزونك وفريقك فعلاً: أكثر من 79 مشروع ERP في مصر والسعودية والخليج. وأعمل اليوم الرئيس التنفيذي للعمليات في نيكسا تكنولوجي، شريك أودو الرسمي.');
+    const proofEls = document.querySelectorAll('.proof-line span');
+    [['Odoo Official Partner (Nexa Solutions)','شريك أودو الرسمي (نيكسا تكنولوجي)'],
+     ['Odoo 16 · 17 · 18 Certified','معتمد أودو 16 · 17 · 18'],
+     ['Google Project Management','إدارة المشاريع من جوجل'],
+     ['IBM IT Project Manager','مدير مشاريع تقنية المعلومات من IBM'],
+     ['LinkedIn Top ERP Voice','أفضل صوت ERP على لينكد إن']]
+      .forEach(([en,ar],i) => t(proofEls[i], en, ar));
 
     /* ── ABOUT — paragraphs ── */
     const aboutPs = document.querySelectorAll('.about-text p');
-    [['Odoo Project Manager with <strong>12+ years</strong> of experience: a start in finance and accounting, then <strong>7+ years</strong> in end-to-end ERP deployment, configuration, and optimization. Co-Founded <strong>Nexa Solutions</strong> as COO, building it into a recognized Odoo Official Partner with a growing presence across Egypt, Saudi Arabia, and the GCC region.',
+    t(document.querySelector('.about-more summary'), 'Read the full story', 'اقرأ القصة كاملة');
+    [['I started as an accountant, closing the books and preparing financial statements for a manufacturer. Since 2019 I have implemented ERP systems, and in 2024 I co-founded <strong>Nexa Solutions</strong>, an Odoo Official Partner, where I am COO. Why it matters to you: I design Odoo from the general ledger outward, so finance, inventory, manufacturing and HR agree from day one. <strong>79+ projects</strong> across Egypt, Saudi Arabia, UAE and the GCC, in Arabic and English.',
+      'بدأتُ محاسباً، أُقفل الدفاتر وأُعدّ القوائم المالية لشركة صناعية. ومنذ 2019 أعمل في تطبيق أنظمة ERP، وفي 2024 شاركتُ في تأسيس <strong>نيكسا تكنولوجي</strong>، شريك أودو الرسمي، وأتولى فيها منصب الرئيس التنفيذي للعمليات. ما يعنيه ذلك لك: أصمّم أودو انطلاقاً من دفتر الأستاذ العام، فتتطابق أرقام المالية والمخزون والتصنيع والموارد البشرية من اليوم الأول. <strong>أكثر من 79 مشروعاً</strong> في مصر والسعودية والإمارات والخليج، بالعربية والإنجليزية.'],
+     ['Odoo Project Manager with <strong>12+ years</strong> of experience: a start in finance and accounting, then <strong>7+ years</strong> in end-to-end ERP deployment, configuration, and optimization. Co-Founded <strong>Nexa Solutions</strong> as COO, building it into a recognized Odoo Official Partner with a growing presence across Egypt, Saudi Arabia, and the GCC region.',
       'مدير مشاريع أودو بخبرة تتجاوز <strong>12 عاماً</strong>: بدأتُ في المالية والمحاسبة، ثم <strong>أكثر من 7 سنوات</strong> في تطبيق أنظمة ERP وتهيئتها وتحسينها. أحد مؤسسي <strong>نيكسا تكنولوجي</strong> بصفة الرئيس التنفيذي للعمليات، وطوّرتها لتصبح شريكاً رسمياً معتمداً لأودو بحضور متنامٍ في مصر والمملكة العربية السعودية ومنطقة الخليج.'],
      ['Proven ability to translate complex business and financial objectives into scalable Odoo solutions. Successfully led <strong>79+ ERP engagements</strong> across Construction, Manufacturing, Food &amp; Beverage, Retail, Government, and Real Estate sectors — with deep expertise in business requirements gathering, GAP analysis, process reengineering, data migration, multi-company/multi-currency configuration, and post-go-live support.',
       'قدرة مثبتة على ترجمة الأهداف التجارية والمالية المعقدة إلى حلول أودو قابلة للتطوير. قدت بنجاح <strong>79+ مشروع ERP</strong> في قطاعات المقاولات والتصنيع والغذاء والمشروبات والتجزئة والحكومة والعقارات — بخبرة عميقة في جمع المتطلبات وتحليل الفجوات وإعادة هندسة العمليات وترحيل البيانات وإعداد بيئات متعددة الشركات والعملات والدعم بعد التشغيل.'],
@@ -5236,66 +5181,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ── SERVICES ── */
     const svcD = [
-      ['ERP Operations Management','إدارة عمليات ERP',
-       'Full operational management of ERP projects — planning, team coordination, scope control, UAT, go-live, and ongoing support. Aligned with business goals.',
-       'أتولى الإشراف الكامل على مشروع نظام ERP من أول يوم حتى ما بعد التشغيل — حتى يعمل فريقك بلا أخطاء وبلا توقف.'],
-      ['Odoo ERP Consulting','استشارات أودو ERP',
-       'Deployment, configuration, and GAP analysis across Odoo v12–v19. From requirements gathering to functional specs and go-live delivery.',
-       'نشر وتهيئة وتحليل فجوات أودو v12–v19. من جمع المتطلبات إلى المواصفات الوظيفية والتسليم النهائي.'],
-      ['Financial Management','الإدارة المالية',
-       'Full-cycle financial planning, budgeting, and reporting. Balance Sheet, P&L, and Cash Flow integrated with Odoo Accounting module.',
-       'تخطيط مالي متكامل، ميزانية وتقارير. ميزانية عمومية، أرباح وخسائر وتدفق نقدي مدمج مع محاسبة أودو.'],
-      ['ERP Customization & Integration','تخصيص وتكامل ERP',
-       'Odoo Studio customizations and third-party integrations — Shopify, eZee PMS, payment gateways, and custom module development.',
-       'تخصيصات أودو ستوديو وتكاملات — شوبيفاي، eZee PMS، بوابات الدفع وتطوير وحدات مخصصة.'],
-      ['Data Migration','ترحيل البيانات',
-       'Secure and accurate migration from SAP, ONYX PRO, OpenCart, and legacy systems to Odoo. Full data integrity guaranteed throughout.',
-       'تاريخ شركتك وبياناتها تنتقل إلى أودو بدون فقد ولا أخطاء — ولا توقف في العمل أثناء الانتقال.'],
-      ['Training & Support','التدريب والدعم',
-       'Comprehensive end-user and admin training, system documentation, and ongoing technical support after go-live.',
-       'فريقك يعمل باحتراف على النظام من اليوم الأول — تدريب عملي، توثيق واضح، ودعم مستمر بعد التشغيل.'],
-      ['Financial Reporting & Audit','التقارير المالية والمراجعة',
-       'Internal and external audit support, compliance checks, and custom KPI dashboards built directly inside Odoo.',
-       'دعم التدقيق الداخلي والخارجي، فحوصات الامتثال، ولوحات KPI مخصصة مبنية مباشرة داخل أودو.'],
-      ['Business Process Optimization','تحسين العمليات التجارية',
-       'Process mapping, reengineering, and Odoo best practices — measurable cost reduction and operational efficiency gains.',
-       'نحلل طريقة عمل شركتك ونُعيد تصميمها لتكون أسرع وأقل تكلفة — مع توثيق كامل وأفضل ممارسات أودو.'],
-      ['Bookkeeping & Tax Services','المحاسبة والخدمات الضريبية',
-       'Daily journal entries, bank reconciliation, payroll, and tax compliance — all integrated within Odoo Accounting for clean financials.',
-       'قيود يومية، مطابقة بنكية، رواتب وامتثال ضريبي — كل ذلك مدمج داخل محاسبة أودو.'],
+      ['Odoo live on schedule','تشغيل أودو في موعده',
+       'End-to-end implementation, from requirements and GAP analysis to configuration, UAT and go-live, on Odoo v12–v19 with one accountable project lead.',
+       'تطبيق متكامل من جمع المتطلبات وتحليل الفجوات إلى التهيئة واختبارات القبول والتشغيل، على إصدارات أودو من 12 إلى 19، بقيادة مدير مشروع واحد مسؤول عن النتيجة.'],
+      ['Finance you can close and audit','حسابات تُقفَل وتُراجَع بثقة',
+       'Chart of accounts, VAT, Zakat and e-invoicing set-up, budgets, P&L and cash-flow reports, KPI dashboards, audit support, and ongoing bookkeeping if you need it, all in Odoo Accounting.',
+       'دليل الحسابات، وإعداد ضريبة القيمة المضافة والزكاة والفوترة الإلكترونية، والموازنات، وتقارير الأرباح والخسائر والتدفقات النقدية، ولوحات المؤشرات، ودعم المراجعة، ومسك الدفاتر عند الحاجة، كلها داخل محاسبة أودو.'],
+      ['Odoo connected to the tools you use','أودو مرتبط بالأدوات التي تعمل بها',
+       'Shopify, eZee PMS, payment gateways and online stores integrated with Odoo, plus Studio changes and custom modules where configuration is not enough.',
+       'ربط شوبيفاي وeZee PMS وبوابات الدفع والمتاجر الإلكترونية بأودو، مع تعديلات ستوديو ووحدات مخصّصة حين لا تكفي التهيئة.'],
+      ['Your data moved over intact','بياناتك تنتقل كاملة وسليمة',
+       'Migration from SAP, ONYX PRO, OpenCart and legacy systems, and upgrades between Odoo versions, reconciled before go-live.',
+       'ترحيل البيانات من SAP وONYX PRO وOpenCart والأنظمة القديمة، وترقية إصدارات أودو، مع مطابقة كل شيء قبل التشغيل.'],
+      ['Simpler processes, fewer manual steps','عمليات أبسط وخطوات يدوية أقل',
+       'Process mapping and redesign built on Odoo best practices, so approvals, stock moves and reporting stop depending on spreadsheets.',
+       'رسم العمليات وإعادة تصميمها وفق أفضل ممارسات أودو، لتتوقف الموافقات وحركات المخزون والتقارير عن الاعتماد على جداول Excel.'],
+      ['A team that uses the system from day one','فريق يعمل على النظام من اليوم الأول',
+       'Hands-on training for users and admins in Arabic and English, clear documentation, and support after go-live.',
+       'تدريب عملي للمستخدمين ومديري النظام بالعربية والإنجليزية، وتوثيق واضح، ودعم بعد التشغيل.'],
     ];
     document.querySelectorAll('.svc-card').forEach((card,i) => {
       if (!svcD[i]) return;
       t(card.querySelector('.svc-title'), svcD[i][0], svcD[i][1]);
       t(card.querySelector('.svc-desc'),  svcD[i][2], svcD[i][3]);
-      t(card.querySelector('.svc-link'),  'Book Consultation →', '← ابدأ مشروعك معي');
     });
+    t(document.querySelector('.svc-cta a'), 'Book a free 30-min call', 'احجز مكالمة مجانية لمدة 30 دقيقة');
 
     /* ── CONTACT INFO ── */
     t(document.querySelector('.contact-info > div:first-child'), 'Contact Information', 'وسائل التواصل معي');
     t(document.querySelector('.phone-hl > div > div:first-child'), 'Phone / WhatsApp', 'الهاتف / واتساب');
     const cLbl = document.querySelectorAll('.c-lbl');
     [['Email (Personal)','البريد الشخصي'],['Email (Nexa)','بريد نيكسا'],['Location','الموقع'],
-     ['LinkedIn','لينكد إن'],['Portfolio','الملف المهني'],['Book a Meeting','احجز موعداً'],
+     ['LinkedIn','لينكد إن'],['Portfolio','الملف المهني'],['CV','السيرة الذاتية'],
      ['Upwork','Upwork'],['Mostaql — مستقل','مستقل'],['خمسات — Khamsat','خمسات']]
       .forEach(([en,ar],i) => t(cLbl[i], en, ar));
 
     /* ── CONTACT CTA ── */
-    t(document.querySelector('.contact-cta h3'), 'Available For', 'أستطيع مساعدتك في');
+    t(document.querySelector('.contact-cta h3'), "Let's talk about your Odoo project", 'لنتحدث عن مشروع أودو الخاص بك');
     t(document.querySelector('.contact-cta > div > p'),
-      'Open to consulting engagements, full-time ERP roles, and freelance projects — across Egypt, Saudi Arabia, and the GCC region.',
-      'سواء كنت تحتاج تطبيق نظام ERP كامل، أو استشارة لتحسين نظامك الحالي، أو دعم مالي متخصص — أنا هنا لك في مصر والخليج.');
-    const avL = document.querySelectorAll('.avail-list li');
-    [['Odoo ERP Full Implementations','تطبيق أودو ERP بشكل كامل'],
-     ['ERP Operations Management','إدارة عمليات نظام ERP'],
-     ['Financial Management Consulting','استشارات الإدارة المالية'],
-     ['ERP Customization & Integration','تخصيص وتكامل نظام ERP'],
-     ['Data Migration & Upgrade Projects','ترحيل البيانات وترقية الأنظمة'],
-     ['Training & Post-Go-Live Support','التدريب والدعم بعد التشغيل الفعلي'],
-     ['Business Process Optimization','تحسين وإعادة هندسة العمليات'],
-     ['Remote & On-site Engagements','عمل عن بُعد أو حضوري حسب الحاجة']]
-      .forEach(([en,ar],i) => t(avL[i], en, ar));
-    t(document.querySelector('.contact-cta .btn-gold'), '📅 Book a Free 30-Min Consultation', '📅 احجز استشارة مجانية — 30 دقيقة');
+      'Planning a rollout, rescuing one that stalled, or moving from another ERP? Book a free 30-minute call and leave with a clear next step, whether or not we work together.',
+      'تخطط لتطبيق أودو، أو تريد إنقاذ مشروع متعثر، أو الانتقال من نظام ERP آخر؟ احجز مكالمة مجانية مدتها 30 دقيقة واخرج منها بخطوة تالية واضحة، سواء عملنا معاً أم لا.');
+    t(document.querySelector('.contact-note'),
+      'Also open to full-time ERP leadership roles across Egypt, Saudi Arabia and the GCC.',
+      'متاح أيضاً لأدوار قيادية بدوام كامل في مجال ERP في مصر والسعودية والخليج.');
+    t(document.querySelector('.contact-cta .btn-gold'), 'Book a free 30-min call', 'احجز مكالمة مجانية لمدة 30 دقيقة');
 
     /* ── CONTACT FORM ── */
     t(document.getElementById('cf-title'), 'Send a Message', 'أرسل رسالة');
@@ -5664,28 +5593,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!m.querySelector('a')) t(m, '🕐 7+ Years in ERP', AR ? '🕐 أكثر من 7 سنوات في ERP' : '🕐 7+ Years in ERP');
       }
     });
-
-    /* ── HERO ROLE PILLS ── */
-    const rolePills = document.querySelectorAll('.role-pill');
-    [['COO & Co-Founder','الرئيس التنفيذي للعمليات ومؤسس مشارك'],
-     ['Odoo Project Manager','مدير مشاريع أودو'],
-     ['ERP Operations Manager','مدير المشاريع ERP'],
-     ['Financial Manager','مدير مالي'],
-     ['Product Owner','مدير المنتج']]
-      .forEach(([en,ar],i) => { if(rolePills[i]) t(rolePills[i], en, ar); });
-
-    /* ── HERO BADGES ── */
-    const hBadges = document.querySelectorAll('.hbadge');
-    [['Odoo 16 · 17 · 18 Certified','معتمد أودو 16 · 17 · 18'],
-     ['LinkedIn Top ERP Voice','أفضل صوت ERP على لينكد إن'],
-     ['Google PM Certified','معتمد إدارة مشاريع جوجل'],
-     ['IBM IT Project Manager','مدير مشاريع تقنية IBM'],
-     ['McKinsey Forward','برنامج ماكنزي Forward'],
-     ['Strategic Leadership · Dartmouth','القيادة الاستراتيجية · دارتموث'],
-     ['500+ Connections','500+ اتصال'],
-     ['SAP Technology Consultant','استشاري تقنية SAP'],
-     ['Certified Financial Analyst','محلل مالي معتمد']]
-      .forEach(([en,ar],i) => { if(hBadges[i]) t(hBadges[i], en, ar); });
 
     /* ── CONTACT INFO UPWORK/MOSTAQL VALS ── */
     const upworkEl = document.querySelector('.c-val a[href*="upwork"]');
@@ -6875,6 +6782,9 @@ document.addEventListener("DOMContentLoaded", () => {
   broadReveal.forEach(el => { el.classList.add('section-reveal'); broadObs.observe(el); });
 
   /* ══ CASE STUDY MODAL ══ */
+  // TODO: add role:'…' / roleAr:'…' (my role on the project) to each case study; the modal shows it when present.
+  // TODO: these case studies show adjective results ("Live", "Full", "Real-time"…) instead of a measurable figure: konafa, shahbandar, villamisk, batec, shararco, kinglib, tarahem, arabian, makkiyoon, officers, onevision.
+  // TODO: the generic p01–p49 entries reuse one templated challenge/solution per sector; replace with each client's real story or trim them.
   const csData = {
     visionplast: {
       cat: 'Manufacturing · Saudi Arabia',
@@ -7276,6 +7186,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ch    = AR && d.challengeAr ? d.challengeAr : d.challenge;
     const sol   = AR && d.solutionAr  ? d.solutionAr  : d.solution;
     const out   = AR && d.outcomeAr   ? d.outcomeAr   : d.outcome;
+    const role  = AR && d.roleAr ? d.roleAr : d.role;
     const scope = AR && d.scopeAr  ? d.scopeAr  : d.scope;
     const kpis  = AR && d.kpisAr   ? d.kpisAr   : d.kpis;
     const scopeChips = scope.map(s => `<span class="cs-scope-chip">${s}</span>`).join('');
@@ -7286,14 +7197,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }).join('');
     const kpiCards = kpis.map(k => `<div class="cs-modal-kpi"><div class="cs-modal-kpi-n">${k[0]}</div><div class="cs-modal-kpi-l">${k[1]}</div></div>`).join('');
     const labels = AR
-      ? {ch:'🔴 التحدي', sol:'🟢 الحل', scope:'⚙️ نطاق العمل', hl:'✨ أبرز التطبيق', res:'📊 النتائج والأثر', out:'💡 الخلاصة', discuss:'📅 ناقش مشروعاً مماثلاً', wa:'💬 واتساب'}
-      : {ch:'🔴 The Challenge', sol:'🟢 The Solution', scope:'⚙️ Scope of Work', hl:'✨ Implementation Highlights', res:'📊 Results & Impact', out:'💡 Outcome', discuss:'📅 Discuss a Similar Project', wa:'💬 WhatsApp'};
+      ? {role:'دوري', ch:'🔴 التحدي', sol:'🟢 الحل', scope:'⚙️ نطاق العمل', hl:'✨ أبرز التطبيق', res:'📊 النتائج والأثر', out:'💡 الخلاصة', discuss:'📅 ناقش مشروعاً مماثلاً', wa:'💬 واتساب'}
+      : {role:'My Role', ch:'🔴 The Challenge', sol:'🟢 The Solution', scope:'⚙️ Scope of Work', hl:'✨ Implementation Highlights', res:'📊 Results & Impact', out:'💡 Outcome', discuss:'📅 Discuss a Similar Project', wa:'💬 WhatsApp'};
     document.getElementById('csModalCat').textContent   = cat;
     document.getElementById('csModalTitle').textContent = title;
     document.getElementById('csModalSub').textContent   = sub;
     const modal = document.getElementById('csModal');
     if (AR) { modal.setAttribute('dir','rtl'); } else { modal.removeAttribute('dir'); }
     document.getElementById('csModalBody').innerHTML = `
+      ${role ? `<div class="cs-section"><div class="cs-section-title">${labels.role}</div><p>${role}</p></div>` : ''}
       <div class="cs-section"><div class="cs-section-title">${labels.ch}</div><p>${ch}</p></div>
       <div class="cs-section"><div class="cs-section-title">${labels.sol}</div><p>${sol}</p></div>
       <div class="cs-section"><div class="cs-section-title">${labels.scope}</div><div class="cs-scope-list">${scopeChips}</div></div>
@@ -7340,7 +7252,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const all = [...TESTIMONIALS, ...TESTIMONIALS];
     track.innerHTML = all.map(t=>`
       <div class="test-card-mq">
-        <div class="test-stars-mq">★★★★★</div>
         <p class="test-q-mq">"${t.q}"</p>
         <div class="test-author-mq">
           <img src="${t.img}" alt="${t.name}" class="test-av-mq" loading="lazy" onerror="this.style.opacity='0'">
@@ -7352,7 +7263,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>`).join('');
     const countEl = document.getElementById('testCount');
-    if(countEl) countEl.textContent = `· ${TESTIMONIALS.length}+ LinkedIn Recommendations`;
+    if(countEl) countEl.textContent = `${TESTIMONIALS.length}+ LinkedIn Recommendations`;
   })();
 
   /* ══ 6. MEDIUM BLOG PREVIEW (RSS via rss2json) ══ */
@@ -7392,11 +7303,15 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
 /* ── TESTIMONIALS DATA ── */
 const TESTIMONIALS = [
+  {name:"Mohammad Nasab",role:"Regional Partner Manager @Odoo | ERP Growth Strategist",img:"./assets/img/recommendations/MohammadNasab.jpeg",linkedin:"https://www.linkedin.com/in/mohammad-nasab97/",q:"One of the most dedicated technical guys that I worked with before, your deep understanding of what you're doing, reflects in the success of your projects."},
+  {name:"Faical Hafiane",role:"CEO @ FAMFOOD | Expert in International Trade & Market Expansion",img:"./assets/img/recommendations/Faical.jpeg",linkedin:"https://www.linkedin.com/in/faical-hafiane/",q:"Excellent and professional."},
+  {name:"Ahmed Malik",role:"CFO",img:"./assets/img/recommendations/ahmed_malik.jpeg",linkedin:"https://www.linkedin.com/in/ahmed-malik-a4462a143/",q:"Mohamed Essam is one of the hardworking individuals. I worked with him personally, and he knows what he is doing according to professional principles. I wish you success, my friend."},
+  {name:"Mohamed Khalil",role:"Founder & CEO @PlatFarm | Digitizing Agriculture Sector in MENA",img:"./assets/img/recommendations/MohamedKhalil.jpeg",linkedin:"https://www.linkedin.com/in/mohamed-khalil-a0ba2515/",q:"We had a great experience working with Mohamed on the implementation of our company's ERP system. His strong technical expertise combined with solid accounting knowledge allowed him to deliver a seamless and tailored Odoo solution that fully met our requirements. We highly recommend Mohamed for any organization seeking a smooth and professional Odoo implementation."},
   {name:"Hesham Elmahdy",role:"Co-Founder @OdooTec",img:"./assets/img/recommendations/hesham.jpeg",linkedin:"https://www.linkedin.com/in/hesham-elmahdy/",q:"Mohammad was my go-to colleague when I wanted finance and accounting related consulting. He's precise, professional, time sensitive and dependable. Most importantly, I fully trust him. I'd love to work with him again anytime."},
   {name:"Ahmed Hassan Algammal",role:"Vice President of Sales @ Absolute ERP | Market Knowledge, Business Transformation",img:"./assets/img/recommendations/ahmedhassan.jpeg",linkedin:"#",q:"Mohamed has been an integral part of my team as a senior Odoo Implementer for the past five years. He has consistently demonstrated a deep technical understanding of the Odoo ecosystem and a unique ability to translate complex business requirements into functional, scalable solutions. His dedication and consistency over the years make him a rare find in the ERP space."},
+  {name:"Aya Mohsen",role:"Strategy & Corporate Development Senior Manager",img:"./assets/img/recommendations/aya.jpeg",linkedin:"https://www.linkedin.com/in/aya-mohsen-cma-fmva-3919a875/",q:"Essam is a very hard-working person, he is also very dedicated and ambitious. I enjoyed teaching him."},
+  {name:"Yasser A. AL Samhouri",role:"Finance Manager | Budgeting & Forecasting",img:"./assets/img/recommendations/Yasser.jpg",linkedin:"https://www.linkedin.com/in/yasser-arafat-al-samhouri/",q:"Mohamed Essam Abu Emira is a very dedicated person to his work and his customers. His professionalism and expertise were evident throughout our collaboration."},
   {name:"Ahmed Galal, PMP®, PBA®",role:"Business Consultant & Project Manager | Expert in Odoo ERP Implementations",img:"./assets/img/recommendations/galal.jpeg",linkedin:"https://www.linkedin.com/in/ahmed-galal-pmp%C2%AE-pba%C2%AE-29b170169/",q:"I was consistently impressed by his strong technical skills and deep understanding of ERP systems, particularly Odoo. Mohamed's expertise in financial accounting and supply chain management was invaluable to our team. His strong problem-solving skills and attention to detail ensured that projects were completed on time and within budget."},
-  {name:"Mohamed Khalil",role:"Founder & CEO @PlatFarm | Digitizing Agriculture Sector in MENA",img:"./assets/img/recommendations/MohamedKhalil.jpeg",linkedin:"https://www.linkedin.com/in/mohamed-khalil-a0ba2515/",q:"We had a great experience working with Mohamed on the implementation of our company's ERP system. His strong technical expertise combined with solid accounting knowledge allowed him to deliver a seamless and tailored Odoo solution that fully met our requirements. We highly recommend Mohamed for any organization seeking a smooth and professional Odoo implementation."},
-  {name:"Mohammad Nasab",role:"Regional Partner Manager @Odoo | ERP Growth Strategist",img:"./assets/img/recommendations/MohammadNasab.jpeg",linkedin:"https://www.linkedin.com/in/mohammad-nasab97/",q:"One of the most dedicated technical guys that I worked with before, your deep understanding of what you're doing, reflects in the success of your projects."},
   {name:"Ahmed Abdelhak",role:"SAP FI/CO/SD | Admin Odoo ERP Consultant | Business Analyst | Odoo Project Manager",img:"./assets/img/recommendations/abdelhak.jpeg",linkedin:"https://www.linkedin.com/in/ahmed-abdelhak-23855566/",q:"Mohamed demonstrated an exceptional ability to analyze business processes, design effective solutions, and successfully implement Odoo ERP projects. He stands out with his strong analytical skills, deep understanding of business needs, and ability to optimize operations using Odoo systems. I highly recommend working with Mohamed for anyone seeking an ERP expert with experience in process optimization and efficient Odoo solutions implementation."},
   {name:"Mohsen DIFALLAH",role:"Python / Odoo Developer",img:"./assets/img/recommendations/difallah.jpeg",linkedin:"https://www.linkedin.com/in/mohsen-difallah-496b35a4/",q:"He has exceptional analytical skills, a talent for solving complex challenges, and profound expertise in ERP systems, especially Odoo, with a focus on accounting and financial implementation. Mohamed is not only technically brilliant but also a great team player who consistently delivers results. He would be an invaluable asset to any organization."},
   {name:"Muhammad Mahmoud",role:"Sr. Accountant | Sr. Odoo Functional Consultant | Certified v15,v16 | Project Manager",img:"./assets/img/recommendations/muhammad_mahmoud.jpeg",linkedin:"https://www.linkedin.com/in/muhammad-m-abod/",q:"I have worked with Muhammad Abu Amira for nearly two years, and I recommend him to any company that needs a reliable person who has experience as a functional consultant, systems analyst, problem solver, multi-skilled, works under pressure, and also an expert in accounting."},
@@ -7405,10 +7320,6 @@ const TESTIMONIALS = [
   {name:"Nourhan Hazim",role:"Software Testing Engineer at Celfocus | Advansys",img:"./assets/img/recommendations/nourhan_hazim.jpeg",linkedin:"https://www.linkedin.com/in/nourhan-hazim/",q:"One of the best functional consultants I've ever worked with. Great co-worker and mentor."},
   {name:"Ayman Tobbala",role:"Senior Odoo Functional Consultant",img:"./assets/img/recommendations/ayman_tobbala.jpeg",linkedin:"https://www.linkedin.com/in/aymantobbala/",q:"Abu Emira is specialized in Accounting, performed Odoo implementation, support, and training for end users. He worked for clients in Egypt, Saudi Arabia, and Canada."},
   {name:"Ahmed Rashad",role:"ERP / Odoo Project Manager",img:"./assets/img/recommendations/rashed.jpeg",linkedin:"https://www.linkedin.com/in/ahmedrashad11/",q:"Mohamed is very talented — he is a professional accountant & Odoo implementer, has the ability to handle customers well by building great relationships with them that will help the project. He is eager to learn and develop multiple skills."},
-  {name:"Yasser A. AL Samhouri",role:"Finance Manager | Budgeting & Forecasting",img:"./assets/img/recommendations/Yasser.jpg",linkedin:"https://www.linkedin.com/in/yasser-arafat-al-samhouri/",q:"Mohamed Essam Abu Emira is a very dedicated person to his work and his customers. His professionalism and expertise were evident throughout our collaboration."},
-  {name:"Faical Hafiane",role:"CEO @ FAMFOOD | Expert in International Trade & Market Expansion",img:"./assets/img/recommendations/Faical.jpeg",linkedin:"https://www.linkedin.com/in/faical-hafiane/",q:"Excellent and professional."},
-  {name:"Aya Mohsen",role:"Strategy & Corporate Development Senior Manager",img:"./assets/img/recommendations/aya.jpeg",linkedin:"https://www.linkedin.com/in/aya-mohsen-cma-fmva-3919a875/",q:"Essam is a very hard-working person, he is also very dedicated and ambitious. I enjoyed teaching him."},
-  {name:"Ahmed Malik",role:"CFO",img:"./assets/img/recommendations/ahmed_malik.jpeg",linkedin:"https://www.linkedin.com/in/ahmed-malik-a4462a143/",q:"Mohamed Essam is one of the hardworking individuals. I worked with him personally, and he knows what he is doing according to professional principles. I wish you success, my friend."},
   {name:"Ahmed Saeed",role:"Python Developer | Backend | AWS Cloud | Odoo Technical Consultant",img:"./assets/img/recommendations/ahmed_saeed.jpeg",linkedin:"https://www.linkedin.com/in/ahmed-saeed-75a2938b/",q:"Mohamed was one of the colleagues who helped me understand Odoo and business practices in general, and he is also one of the most dedicated coworkers."},
   {name:"Bassant Hossam",role:"SAI and Automation Engineer",img:"./assets/img/recommendations/bassant_hossam.jpeg",linkedin:"https://www.linkedin.com/in/bassant-hossam-366403208/",q:"I highly recommend Mohamed Essam Abu Emira as an exceptional Odoo Functional Consultant. His expertise in Odoo, ability to analyze complex requirements, and bridge the gap between functional and technical aspects make him a valuable asset."},
   {name:"Muhammed Abdelfatah",role:"AI Track Supervisor at ITI",img:"./assets/img/recommendations/muhammed_abdelfatah.jpeg",linkedin:"https://www.linkedin.com/in/muhammed-abdelfatah-a45ab9104/",q:"During the time we worked together, Mohamed was highly professional, efficient, and an excellent Odoo consultant. He always aspired to improve himself in all aspects and went beyond expectations."},
@@ -7436,9 +7347,9 @@ const REC_CATEGORIES = {
 let REC_ANNOTATED = null;
 function buildRecAnnotated() {
   const cats = [
-    "odoo","odoo","pm","client","odoo","odoo","odoo","odoo",
-    "finance","odoo","odoo","odoo","pm","client","client","pm",
-    "finance","odoo","odoo","odoo","odoo","odoo","finance","pm",
+    "odoo","client","finance","client","odoo","odoo","pm","client",
+    "pm","odoo","odoo","odoo","finance","odoo","odoo","odoo",
+    "pm","odoo","odoo","odoo","odoo","odoo","finance","pm",
     "odoo","client","odoo","odoo","finance","finance"
   ];
   return TESTIMONIALS.map((t, i) => ({ cat: cats[i] || "odoo", ...t }));
@@ -7485,7 +7396,6 @@ function renderRecsGrid() {
   setTimeout(() => {
     grid.innerHTML = list.map((r, i) => `
       <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--rl);padding:22px;display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(16px);transition:opacity .35s ${i*30}ms ease, transform .35s ${i*30}ms ease;" class="rec-card-anim">
-        <div style="color:#D97706;font-size:1rem;">★★★★★</div>
         <p style="font-size:.84rem;color:var(--gray-600);line-height:1.7;font-style:italic;flex:1;">"${r.q}"</p>
         <div style="display:flex;align-items:center;gap:12px;padding-top:10px;border-top:1px solid var(--gray-200);">
           <img src="${r.img}" alt="${r.name}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid rgba(1,126,132,.2);" onerror="this.style.opacity='0'">
